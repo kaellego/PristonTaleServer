@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Arquivos de Origem">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Cabeçalho">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Recurso">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Config">
+      <UniqueIdentifier>{994bf2dc-53b8-4728-a274-85bf4ecc21d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Database">
+      <UniqueIdentifier>{1dac9442-9969-4ffc-a900-4adc79f5698b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\GameLogic">
+      <UniqueIdentifier>{59ee3f7b-a260-4c84-a4d7-28f34d56d7dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Network">
+      <UniqueIdentifier>{e5e7f4b9-0e16-422a-a2d4-402cabf13181}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Shared">
+      <UniqueIdentifier>{1c679784-4b63-4a47-8447-0cc9d3e786c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\GameLogic\Handlers">
+      <UniqueIdentifier>{ed4eb9dd-05cf-43f4-ba55-bd9ca2cbaf04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Utils">
+      <UniqueIdentifier>{02de2add-8c3a-4241-b859-2e73e3678572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\Logging">
+      <UniqueIdentifier>{418205ac-69aa-42ab-b8cd-0a05ad24c13d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Arquivos de Origem\GameLogic\Services">
+      <UniqueIdentifier>{68dd2979-05bb-4aab-99c8-4da910a5fa5a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Config\ServerConfig.h">
+      <Filter>Arquivos de Origem\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\DatabaseManager.h">
+      <Filter>Arquivos de Origem\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\PlayerRepository.h">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\ItemRepository.h">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\ClientSession.h">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\GlobalState.h">
+      <Filter>Arquivos de Origem\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Arquivos de Origem</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\datatypes.h">
+      <Filter>Arquivos de Origem\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="Database\SQLConnection.h">
+      <Filter>Arquivos de Origem\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\Handlers\PingHandler.h">
+      <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Dice.h">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\ini.h">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\INIReader.h">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Server.h">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Packet.h">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\PacketDispatcher.h">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\Services\AccountService.h">
+      <Filter>Arquivos de Origem\GameLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="Logging\LogEvents.h">
+      <Filter>Arquivos de Origem\Logging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Config\ServerConfig.cpp">
+      <Filter>Arquivos de Origem\Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\DatabaseManager.cpp">
+      <Filter>Arquivos de Origem\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\PlayerRepository.cpp">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\ItemRepository.cpp">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\ClientSession.cpp">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\GlobalState.cpp">
+      <Filter>Arquivos de Origem\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Shared\datatypes.cpp">
+      <Filter>Arquivos de Origem\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="Database\SQLConnection.cpp">
+      <Filter>Arquivos de Origem\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\Handlers\PingHandler.cpp">
+      <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\INIReader.cpp">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Server.cpp">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\ini.c">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Packet.cpp">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\PacketDispatcher.cpp">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\Services\AccountService.cpp">
+      <Filter>Arquivos de Origem\GameLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\LogEvents.cpp">
+      <Filter>Arquivos de Origem\Logging</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Database\SQLConnection.tpp">
+      <Filter>Arquivos de Origem\Database</Filter>
+    </None>
+  </ItemGroup>
+</Project>

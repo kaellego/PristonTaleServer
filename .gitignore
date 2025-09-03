@@ -1,0 +1,12 @@
+.vs/
+.git/
+x64/
+src/Core/x64/
+src/GameServer/x64/
+extern/boost/
+
+*.obj
+*.exe
+*.lib
+*.pdb
+*.ilk
