@@ -1,90 +1,88 @@
 #pragma once
 
 #include <string>
-#include <vector>
 #include <queue>
 #include <thread>
 #include <mutex>
 #include <condition_variable>
-#include "Shared/datatypes.h" // Para as structs de dados
+#include <memory>
+#include <atomic>
+#include <optional> // Para std::optional
+
+#include "Shared/datatypes.h" // Para structs como PacketLoginUser e SQLUser
 #include "Logging/LogEvents.h"   // Para os enums de log
 
 // Forward declarations para as dependências que serão injetadas
 class DatabaseManager;
-class LogService;
 class CharacterService;
 class UserService;
+class LogService;
 class ClientSession;
 
-// Uma struct para representar uma requisição de login na fila
+// Uma struct para representar uma requisição de login na fila de processamento
 struct LoginRequest {
     std::shared_ptr<ClientSession> session;
-    std::string accountName;
-    std::string password;
+    PacketLoginUser packet;
     std::string ipAddress;
-    std::string macAddress;
-    std::string pcName;
-    std::string serialHD;
-    std::string hardwareID;
-    std::string videoName;
-    std::string widthScreen;
-    std::string heightScreen;
-    std::string systemOS;
-
 };
 
 class AccountService {
 public:
     // Construtor com Injeção de Dependência
-    AccountService(DatabaseManager& dbManager, LogService& logService, CharacterService& charService, UserService& userService);
+    explicit AccountService(DatabaseManager& dbManager, CharacterService& charService, UserService& userService, LogService& logService);
     ~AccountService();
 
-    // Desabilita cópia para evitar problemas com a thread
+    // Desabilita cópia/movimentação para garantir o gerenciamento correto da thread
     AccountService(const AccountService&) = delete;
     AccountService& operator=(const AccountService&) = delete;
 
     /**
-     * @brief Adiciona uma nova requisição de login à fila para processamento assíncrono.
-     * @param request A requisição de login a ser processada.
+     * @brief Adiciona uma nova requisição de login à fila para ser processada pela thread de trabalho.
+     * @param session A sessão do cliente que está tentando logar.
+     * @param packet O pacote de login recebido do cliente.
      */
-    void queueLoginRequest(LoginRequest request);
+    void queueLoginRequest(std::shared_ptr<ClientSession> session, const PacketLoginUser& packet);
 
-    /**
-     * @brief Manipula a seleção de um personagem por um usuário já autenticado.
-     * @param session A sessão do cliente.
-     * @param charName O nome do personagem selecionado.
-     */
-    void handleSelectCharacter(std::shared_ptr<ClientSession> session, const std::string& charName);
-
-    // ... outros métodos públicos que o AccountService precisa expor ...
+    // Adicione outros métodos públicos aqui, como para deletar ou selecionar personagens
+    // void handleDeleteCharacter(...)
 
 private:
     /**
-     * @brief O loop principal da thread de trabalho que processa a fila de logins.
+     * @brief O loop principal da thread de trabalho que consome a fila de logins.
      */
-    void processLoginQueue();
+    void workerLoop();
 
     /**
-     * @brief A lógica principal que processa uma única requisição de login.
-     * @param request A requisição a ser processada.
+     * @brief Processa uma única requisição de login, realizando todas as validações.
+     * @param request A requisição de login a ser processada.
      */
-    void processSingleLogin(LoginRequest& request);
+    void processLogin(LoginRequest& request);
 
-    // Funções auxiliares para quebrar a lógica complexa de login
-    Log::LoginResult checkAccountStatus(const LoginRequest& request);
-    bool validatePassword(const std::string& plainPassword, const std::string& hashedPassword);
-    // ... outras funções de verificação (bans, manutenção, etc.)
+    /**
+     * @brief Busca as informações de um usuário no banco de dados.
+     * @param accountName O nome da conta a ser buscada.
+     * @return std::optional<SQLUser> contendo os dados do usuário, ou vazio se não encontrado.
+     */
+    std::optional<SQLUser> getSqlUserInfo(const std::string& accountName);
+
+    /**
+     * @brief Envia um pacote de resposta de login para o cliente.
+     * @param session A sessão do cliente.
+     * @param code O código de resultado do login.
+     * @param message Uma mensagem opcional (para banimentos temporários).
+     */
+    void sendLoginResult(std::shared_ptr<ClientSession> session, Log::LoginResult code, const std::string& message = "");
 
     // --- Dependências Injetadas ---
     DatabaseManager& m_dbManager;
-    LogService& m_logService;
     CharacterService& m_characterService;
     UserService& m_userService;
+    LogService& m_logService;
 
-    // --- Lógica da Fila de Login ---
+    // --- Lógica da Fila de Login Thread-Safe ---
     std::queue<LoginRequest> m_loginQueue;
     std::mutex m_queueMutex;
     std::condition_variable m_condition;
     std::thread m_workerThread;
-    bool m_isStopping = false;
+    std::atomic<bool> m_isStopping{ false };
 };

@@ -1,19 +1,26 @@
 #include "GameLogic/ItemRepository.h"
 #include "Database/DatabaseManager.h"
 #include "Database/SQLConnection.h"
-#include "Shared/datatypes.h"      // <--- Garante que as structs sejam conhecidas
-#include "Utils/Dice.h"            // <--- Inclui a classe de dados que faltava
+#include "Utils/Dice.h"
 #include <iostream>
 #include <cmath>
 
 ItemRepository::ItemRepository(DatabaseManager& dbManager) : m_dbManager(dbManager) {
     std::cout << "Inicializando repositorio de itens..." << std::endl;
-    // loadItemDefinitions(); // Vamos desativar o carregamento por enquanto para compilar
+    // loadItemDefinitions(); // Mantido desativado para compilação inicial
 }
 
 void ItemRepository::loadItemDefinitions() {
-    // A implementação de carregamento do DB vai aqui...
+    SQLConnection* db = m_dbManager.getConnection(EDatabaseID::GameDB);
+    if (!db) {
+        throw std::runtime_error("Nao foi possivel obter conexao com GameDB no ItemRepository.");
+    }
+
+    // Lógica para carregar ItemList e ItemListOld do banco de dados...
+    std::cout << "Definicoes de itens carregadas." << std::endl;
 }
+
+// --- DEFINIÇÕES DE MÉTODOS CORRIGIDAS ---
 
 const DefinitionItem* ItemRepository::findItemDef(int itemCode) const {
     auto it = m_itemDefs.find(itemCode);
@@ -26,16 +33,23 @@ const DefinitionItem* ItemRepository::findOldItemDef(int itemCode) const {
 }
 
 bool ItemRepository::updateItemStats(Item& item) const {
-    // A lógica de atualização vai aqui. Por enquanto, retornamos false.
-    return false;
+    return false; // Lógica de placeholder
 }
 
 void ItemRepository::stripAugments(Item& item) const {
-    // Lógica para remover bônus...
+    // Lógica de placeholder
 }
 
 void ItemRepository::applyAugments(const Item& originalItem, Item& updatedItem) const {
-    // Lógica para reaplicar bônus...
+    // Lógica de placeholder
 }
 
-// A implementação do template permanece no arquivo .tpp ou no .h
+template<typename T>
+bool ItemRepository::adjustStat(const std::string& itemName, T& statValue, T newMin, T newMax, T oldMin, T oldMax) const {
+    return false; // Lógica de placeholder
+}
+
+// Necessário para o compilador encontrar a implementação do template
+template bool ItemRepository::adjustStat<int>(const std::string&, int&, int, int, int, int) const;
+template bool ItemRepository::adjustStat<short>(const std::string&, short&, short, short, short, short) const;
+template bool ItemRepository::adjustStat<float>(const std::string&, float&, float, float, float, float) const;

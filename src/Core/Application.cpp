@@ -21,6 +21,7 @@ void Application::buildServices() {
     // 1. Configuração e Estado Global (não têm dependências)
     m_config = std::make_unique<ServerConfig>("server.ini");
     m_globalState = std::make_unique<GlobalState>();
+    m_logService = std::make_unique<LogService>("ServerLog.txt", *m_globalState);
     m_globalState->isGameServer = m_config->getThisServerInfo().isGameServer;
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
 
@@ -39,7 +40,7 @@ void Application::buildServices() {
 
     // O Servidor de Rede precisa do io_context e do dispatcher
     const auto& serverInfo = m_config->getThisServerInfo();
-    m_networkServer = std::make_unique<Server>(m_io_context, serverInfo.port, *m_packetDispatcher);
+    m_networkServer = std::make_unique<Server>(m_io_context, serverInfo.port, *m_packetDispatcher, *m_logService);
 }
 
 void Application::run() {

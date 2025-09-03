@@ -6,6 +6,7 @@
 // --- Inclusões Completas dos Serviços ---
 #include "Config/ServerConfig.h"
 #include "Shared/GlobalState.h"
+#include "Logging/LogService.h"
 #include "Database/DatabaseManager.h"
 #include "GameLogic/ItemRepository.h"
 #include "GameLogic/PlayerRepository.h"
@@ -28,6 +29,7 @@ private:
     // --- Serviços do Servidor ---
     std::unique_ptr<ServerConfig> m_config;
     std::unique_ptr<GlobalState> m_globalState;
+    std::unique_ptr<LogService> m_logService;
     std::unique_ptr<DatabaseManager> m_dbManager;
     std::unique_ptr<ItemRepository> m_itemRepository;
     std::unique_ptr<PlayerRepository> m_playerRepository;

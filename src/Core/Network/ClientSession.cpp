@@ -1,9 +1,10 @@
 #include "Network/ClientSession.h"
-#include "Network/PacketDispatcher.h" // A implementação precisa da definição completa
+#include "Network/PacketDispatcher.h"
+#include "Logging/LogService.h"
 #include <iostream>
 
-ClientSession::ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher)
-    : m_socket(std::move(socket)), m_packet_dispatcher(dispatcher) {}
+ClientSession::ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher, LogService& logService)
+    : m_socket(std::move(socket)), m_packet_dispatcher(dispatcher), m_logService(logService) {}
 
 ClientSession::~ClientSession() {
     // Log para depuração, para sabermos quando uma sessão é destruída.
@@ -33,30 +34,40 @@ void ClientSession::start() {
 }
 
 void ClientSession::do_read_header() {
-    // Usamos shared_from_this() para garantir que o objeto ClientSession
-    // permaneça vivo enquanto a operação assíncrona estiver pendente.
     auto self = shared_from_this();
     boost::asio::async_read(m_socket,
         boost::asio::buffer(&m_read_header, sizeof(PacketHeader)),
-        [this, self](boost::system::error_code ec, std::size_t /*length*/) {
+        [this, self](boost::system::error_code ec, std::size_t length) {
             if (!ec) {
-                // TODO: Descriptografar o cabeçalho se necessário.
+                // --- NOSSO NOVO CÓDIGO DE DEBUG COMEÇA AQUI ---
+                if (length > 0) {
+                    std::stringstream hex_stream;
+                    hex_stream << std::hex << std::setfill('0');
 
-                // Valida o tamanho do pacote para evitar ataques de buffer overflow.
+                    const uint8_t* data = reinterpret_cast<const uint8_t*>(&m_read_header);
+                    for (size_t i = 0; i < length; ++i) {
+                        hex_stream << std::setw(2) << static_cast<int>(data[i]) << " ";
+                    }
+
+                    // Usa o nível 'packet' do nosso LogService para registrar os dados brutos
+                    m_logService.packet("Recebido cabecalho bruto ({} bytes): {}", length, hex_stream.str());
+                }
+                // --- FIM DO CÓDIGO DE DEBUG ---
+
+                // A lógica original de validação continua aqui
                 if (m_read_header.length >= sizeof(PacketHeader) && m_read_header.length < 8192) {
                     uint16_t body_length = m_read_header.length - sizeof(PacketHeader);
                     do_read_body(body_length);
                 }
                 else {
-                    std::cerr << "Erro: Tamanho de pacote invalido (" << m_read_header.length << "). Desconectando." << std::endl;
+                    // Agora usamos o logService para registrar o erro de forma mais clara
+                    m_logService.error("Tamanho de pacote invalido ({}). Desconectando cliente {}.", m_read_header.length, socket().remote_endpoint().address().to_string());
                     close();
                 }
             }
             else {
-                // Erros comuns aqui são 'connection reset' ou 'end of file',
-                // indicando que o cliente desconectou.
                 if (ec != boost::asio::error::eof) {
-                    std::cerr << "Erro ao ler o cabecalho: " << ec.message() << ". Desconectando." << std::endl;
+                    m_logService.warn("Erro ao ler o cabecalho: {}. Desconectando.", ec.message());
                 }
                 close();
             }

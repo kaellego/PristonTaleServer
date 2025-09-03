@@ -74,7 +74,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BOOST_ASIO_DISABLE_CONCEPTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BOOST_ASIO_DISABLE_CONCEPTS;BOOST_ASIO_WINDOWS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)
+</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -93,7 +94,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BOOST_ASIO_DISABLE_CONCEPTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BOOST_ASIO_DISABLE_CONCEPTS;BOOST_ASIO_WINDOWS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)
+</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -112,7 +114,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BOOST_ASIO_DISABLE_CONCEPTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BOOST_ASIO_DISABLE_CONCEPTS;BOOST_ASIO_WINDOWS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)
+</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -131,7 +134,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BOOST_ASIO_DISABLE_CONCEPTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WIN32_WINNT=0x0A00;BOOST_ASIO_DISABLE_CONCEPTS;BOOST_ASIO_WINDOWS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)
+</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
@@ -155,6 +159,7 @@
     <ClInclude Include="GameLogic\PlayerRepository.h" />
     <ClInclude Include="GameLogic\Services\AccountService.h" />
     <ClInclude Include="Logging\LogEvents.h" />
+    <ClInclude Include="Logging\LogService.h" />
     <ClInclude Include="Network\ClientSession.h" />
     <ClInclude Include="Network\Packet.h" />
     <ClInclude Include="GameLogic\Handlers\PingHandler.h" />
@@ -175,6 +180,7 @@
     <ClCompile Include="GameLogic\PlayerRepository.cpp" />
     <ClCompile Include="GameLogic\Services\AccountService.cpp" />
     <ClCompile Include="Logging\LogEvents.cpp" />
+    <ClCompile Include="Logging\LogService.cpp" />
     <ClCompile Include="Network\ClientSession.cpp" />
     <ClCompile Include="Network\Packet.cpp" />
     <ClCompile Include="GameLogic\Handlers\PingHandler.cpp" />

@@ -1,102 +1,118 @@
 #include "GameLogic/Services/AccountService.h"
 #include "Database/DatabaseManager.h"
 #include "Database/SQLConnection.h"
-#include "LogService.h" // Supondo a existência de um LogService
-#include "CharacterService.h" // Supondo a existência de um CharacterService
-#include "UserService.h" // Supondo a existência de um UserService
 #include "Network/ClientSession.h"
+#include "Network/Packet.h"
 
-AccountService::AccountService(DatabaseManager& dbManager, LogService& logService, CharacterService& charService, UserService& userService)
+// TODO: Incluir os headers dos outros serviços quando eles forem criados
+// #include "GameLogic/Services/CharacterService.h" 
+// #include "GameLogic/Services/UserService.h"
+// #include "Logging/LogService.h"
+
+#include <iostream>
+#include <utility>
+
+AccountService::AccountService(DatabaseManager& dbManager, CharacterService& charService, UserService& userService, LogService& logService)
     : m_dbManager(dbManager),
-    m_logService(logService),
     m_characterService(charService),
-    m_userService(userService)
+    m_userService(userService),
+    m_logService(logService)
 {
-    // Inicia a thread de trabalho que ficará monitorando a fila de logins
-    m_workerThread = std::thread(&AccountService::processLoginQueue, this);
+    m_workerThread = std::thread(&AccountService::workerLoop, this);
 }
 
 AccountService::~AccountService() {
-    // Sinaliza para a thread parar
-    {
-        std::lock_guard<std::mutex> lock(m_queueMutex);
-        m_isStopping = true;
-    }
-    m_condition.notify_one(); // Acorda a thread para que ela possa encerrar
-
-    // Espera a thread terminar sua execução
+    m_isStopping = true;
+    m_condition.notify_one();
     if (m_workerThread.joinable()) {
         m_workerThread.join();
     }
 }
 
-void AccountService::queueLoginRequest(LoginRequest request) {
-    // Trava o mutex para adicionar um item à fila de forma segura
+void AccountService::queueLoginRequest(std::shared_ptr<ClientSession> session, const PacketLoginUser& packet) {
+    LoginRequest request;
+    request.session = session;
+    request.packet = packet;
+    try {
+        request.ipAddress = session->socket().remote_endpoint().address().to_string();
+    }
+    catch (...) {
+        request.ipAddress = "?.?.?.?";
+    }
+
     {
         std::lock_guard<std::mutex> lock(m_queueMutex);
         m_loginQueue.push(std::move(request));
     }
-    // Notifica a thread de trabalho que há um novo item na fila
     m_condition.notify_one();
 }
 
-void AccountService::processLoginQueue() {
+void AccountService::workerLoop() {
     while (!m_isStopping) {
         LoginRequest request;
         {
-            // Trava o mutex e espera por uma notificação (ou até que a flag de parada seja true)
             std::unique_lock<std::mutex> lock(m_queueMutex);
             m_condition.wait(lock, [this] { return !m_loginQueue.empty() || m_isStopping; });
 
             if (m_isStopping && m_loginQueue.empty()) {
-                return; // Encerra a thread
+                return;
             }
 
-            // Pega o primeiro item da fila
             request = std::move(m_loginQueue.front());
             m_loginQueue.pop();
         }
-
-        // Processa o item fora do lock para não prender a fila
-        processSingleLogin(request);
+        processLogin(request);
     }
 }
 
-void AccountService::processSingleLogin(LoginRequest& request) {
-    // --- LÓGICA DE LOGIN REATORADA ---
-    // Esta função substitui a antiga `ProcessAccountLogin`
+void AccountService::processLogin(LoginRequest& request) {
+    std::string accountName(request.packet.szUserID, strnlen_s(request.packet.szUserID, sizeof(request.packet.szUserID)));
+    std::string password(request.packet.szPassword, strnlen_s(request.packet.szPassword, sizeof(request.packet.szPassword)));
 
-    // 1. Obter dados do usuário do banco de dados
-    //    auto userInfo = m_characterService.getAccountInfo(request.accountName);
+    auto sqlUserOpt = getSqlUserInfo(accountName);
 
-    // 2. Realizar uma série de validações
-    //    if (!userInfo.has_value()) {
-    //        // Envia pacote de conta incorreta
-    //        // m_logService.logEvent(Log::AccountEvent::IncorrectAccount, ...);
-    //        return;
-    //    }
-    //    if (!validatePassword(request.password, userInfo->hashedPassword)) {
-    //        // Envia pacote de senha incorreta
-    //        // m_logService.logEvent(Log::AccountEvent::IncorrectPassword, ...);
-    //        return;
-    //    }
-    //    // ... outras checagens (ban, manutenção, etc.)
+    if (!sqlUserOpt.has_value()) {
+        sendLoginResult(request.session, Log::LoginResult::IncorrectAccount);
+        return;
+    }
 
-    // 3. Se tudo estiver OK:
-    //    m_logService.logEvent(Log::AccountEvent::LoginSuccess, ...);
+    SQLUser& sqlUser = *sqlUserOpt;
 
-    //    // Associa a conta à sessão do cliente
-    //    // request.session->setAuthenticated(userInfo->accountId, userInfo->accountName);
+    if (sqlUser.iBanStatus == static_cast<int>(EBanStatus::BANSTATUS_Banned)) {
+        sendLoginResult(request.session, Log::LoginResult::Banned);
+        return;
+    }
 
-    //    // Envia o pacote com a lista de personagens
-    //    // auto charList = m_characterService.getCharacterList(userInfo->accountId);
-    //    // request.session->send(createCharacterListPacket(charList));
+    if (password != std::string(sqlUser.szPassword)) {
+        sendLoginResult(request.session, Log::LoginResult::IncorrectPassword);
+        return;
+    }
 
-    std::cout << "Processando login para: " << request.accountName << std::endl;
+    std::cout << "Login bem-sucedido para a conta: " << accountName << std::endl;
 }
 
-void AccountService::handleSelectCharacter(std::shared_ptr<ClientSession> session, const std::string& charName) {
-    // ... Lógica para quando o jogador seleciona um personagem ...
+std::optional<SQLUser> AccountService::getSqlUserInfo(const std::string& accountName) {
+    // Implementação do banco de dados...
+    return std::nullopt; // Retornando vazio por enquanto para compilar
 }
 
-// ... Implementação de outros métodos, como as funções de verificação (checkBans, etc.)
+void AccountService::sendLoginResult(std::shared_ptr<ClientSession> session, Log::LoginResult code, const std::string& message) {
+    PacketAccountLoginCode responseStruct;
+    responseStruct.header.opcode = PKTHDR_AccountLoginCode;
+    responseStruct.iCode = static_cast<int>(code);
+    strncpy_s(responseStruct.szMessage, message.c_str(), sizeof(responseStruct.szMessage) - 1);
+
+    // Calcula o tamanho do corpo (toda a struct menos o cabeçalho)
+    const size_t bodySize = sizeof(PacketAccountLoginCode) - sizeof(PacketHeader);
+
+    // Cria um ponteiro para o início do corpo
+    const uint8_t* bodyPtr = reinterpret_cast<const uint8_t*>(&responseStruct) + sizeof(PacketHeader);
+
+    // Cria um std::vector a partir do ponteiro e tamanho do corpo
+    std::vector<uint8_t> body(bodyPtr, bodyPtr + bodySize);
+
+    // CORRIGIDO: O construtor do Packet é (opcode, body)
+    Packet packet(responseStruct.header.opcode, body);
+
+    session->send(packet);
+}

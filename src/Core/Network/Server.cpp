@@ -13,11 +13,12 @@
  * Inicializa os membros e, mais importante, inicia o ciclo de aceitação de conexões
  * chamando do_accept() pela primeira vez.
  */
-Server::Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher)
+Server::Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService)
 // Lista de inicialização: a forma correta de inicializar membros em C++
     : m_io_context(io_context),
     m_acceptor(*m_io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),
-    m_packet_dispatcher(dispatcher)
+    m_packet_dispatcher(dispatcher),
+    m_logService(logService)
 {
     std::cout << "[Rede] Servidor escutando na porta " << port << "..." << std::endl;
 
@@ -47,7 +48,7 @@ void Server::do_accept() {
                 // Criamos uma nova sessão para gerenciar esta conexão.
                 // Usamos std::make_shared para criar um shared_ptr que gerenciará a vida útil da sessão.
                 // Usamos std::move(socket) para transferir a posse do socket para a sessão de forma eficiente.
-                std::make_shared<ClientSession>(std::move(socket), m_packet_dispatcher)->start();
+                std::make_shared<ClientSession>(std::move(socket), m_packet_dispatcher, m_logService)->start();
 
             }
             else {

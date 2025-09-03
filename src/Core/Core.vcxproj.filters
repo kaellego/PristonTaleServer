@@ -96,6 +96,9 @@
     <ClInclude Include="Logging\LogEvents.h">
       <Filter>Arquivos de Origem\Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Logging\LogService.h">
+      <Filter>Arquivos de Origem\Logging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Config\ServerConfig.cpp">
@@ -147,6 +150,9 @@
       <Filter>Arquivos de Origem\GameLogic\Services</Filter>
     </ClCompile>
     <ClCompile Include="Logging\LogEvents.cpp">
+      <Filter>Arquivos de Origem\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Logging\LogService.cpp">
       <Filter>Arquivos de Origem\Logging</Filter>
     </ClCompile>
   </ItemGroup>

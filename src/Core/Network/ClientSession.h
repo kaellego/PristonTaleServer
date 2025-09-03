@@ -8,6 +8,7 @@
 
 // Forward declarations
 class PacketDispatcher;
+class LogService;
 
 /**
  * @class ClientSession
@@ -24,7 +25,7 @@ public:
      * @param socket O socket TCP para este cliente.
      * @param dispatcher O objeto que processará os pacotes recebidos.
      */
-    ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher);
+    ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher, LogService& logService);
 
     /**
      * @brief Destrutor. Apenas para log.
@@ -73,6 +74,7 @@ private:
 
     boost::asio::ip::tcp::socket m_socket;
     PacketDispatcher& m_packet_dispatcher;
+    LogService& m_logService;
 
     // Buffer de leitura para o cabeçalho
     PacketHeader m_read_header;
