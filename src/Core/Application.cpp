@@ -10,14 +10,24 @@
 #include <chrono>
 
 Application::Application() : m_isRunning(false) {
-    std::cout << "[INFO] Inicializando a aplicacao do servidor..." << std::endl;
+    // A criação do LogService precisa vir antes de qualquer chamada a ele.
+    // É uma boa prática inicializar o GlobalState primeiro, pois outros podem depender dele.
+    m_globalState = std::make_unique<GlobalState>();
+    m_logService = std::make_unique<LogService>("ServerLog.txt", *m_globalState);
+
+    m_logService->info("Inicializando a aplicacao do servidor...");
+
     try {
         buildServices();
-        std::cout << "[INFO] Todos os servicos foram construidos com sucesso." << std::endl;
+        m_logService->info("Todos os servicos foram construidos com sucesso.");
     }
     catch (const std::exception& e) {
-        std::cerr << "ERRO FATAL DURANTE A INICIALIZACAO: " << e.what() << std::endl;
-        // Re-lança a exceção para que o main() possa capturá-la e encerrar.
+        int fase = 1;
+        // A primeira {} será substituída por 'fase', a segunda por e.what()
+        m_logService->error("Erro na fase {}: {}", fase, e.what());
+
+        // Re-lança a exceção para que o main() possa capturá-la e encerrar
+        // de forma limpa, permitindo que o usuário veja a mensagem no console.
         throw;
     }
 }
@@ -25,11 +35,9 @@ Application::Application() : m_isRunning(false) {
 void Application::buildServices() {
     // --- ETAPA 1: Serviços Base (sem dependências complexas) ---
     m_config = std::make_unique<ServerConfig>("server.ini");
-    m_globalState = std::make_unique<GlobalState>();
-    m_logService = std::make_unique<LogService>("ServerLog.txt", *m_globalState);
 
-    m_logService->info("[INFO] Versao do Jogo: {}", m_config->getGameVersion());
-    m_logService->info("[INFO] Chave XOR Calculada: 0x{:02x}", m_config->getXorKey());
+    m_logService->info("Versao do Jogo: {}", m_config->getGameVersion());
+    m_logService->info("Chave XOR Calculada: 0x{:02x}", m_config->getXorKey());
 
     m_globalState->isGameServer = m_config->getThisServerInfo().isGameServer;
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
@@ -63,21 +71,21 @@ void Application::run() {
     std::vector<std::thread> network_threads;
     network_threads.reserve(thread_count);
 
-    std::cout << "[INFO] Iniciando " << thread_count << " threads de rede..." << std::endl;
+    m_logService->info("Iniciando {} threads de rede...", thread_count);
     for (unsigned int i = 0; i < thread_count; ++i) {
         network_threads.emplace_back([this]() {
             m_io_context->run();
             });
     }
 
-    std::cout << "[INFO] Servidor de rede em execucao. Iniciando loop principal do jogo." << std::endl;
+    m_logService->info("Servidor de rede em execucao. Iniciando loop principal do jogo.");
 
     // --- Inicia o Loop Principal do Jogo (Game Loop) ---
     // Este loop roda na thread principal e é responsável pelos ticks de lógica.
     mainLoop();
 
     // --- Encerramento ---
-    std::cout << "[INFO] Aguardando as threads de rede finalizarem..." << std::endl;
+    m_logService->info("Aguardando as threads de rede finalizarem...");
     for (auto& t : network_threads) {
         if (t.joinable()) {
             t.join();

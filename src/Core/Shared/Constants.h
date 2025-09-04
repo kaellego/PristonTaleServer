@@ -1,5 +1,12 @@
 #pragma once
+
 #include <cstdint>
+#include <string>
+#include <map>
+#include <vector>
+#include <sstream>
+#include <iomanip>
+#include <algorithm>
 
 namespace Constants {
 
@@ -372,3 +379,46 @@ enum class Opcodes : uint32_t {
     DamageEncodeMem2 = 0x50322EC0,
     ProcessInfo = 0x484700E4,
 };
+
+/**
+ * @brief Converte um valor de opcode para seu nome em string.
+ */
+inline std::string getOpcodeName(uint32_t opcode) {
+    // Um mapa estático é inicializado apenas uma vez, de forma eficiente.
+    static const std::map<uint32_t, std::string> opcodeMap = {
+        { static_cast<uint32_t>(Opcodes::KeepAlive), "KeepAlive" },
+        { static_cast<uint32_t>(Opcodes::LoginUser), "LoginUser" },
+        { static_cast<uint32_t>(Opcodes::AccountLoginCode), "AccountLoginCode" },
+        // Adicione outros mapeamentos aqui
+    };
+
+    auto it = opcodeMap.find(opcode);
+    if (it != opcodeMap.end()) {
+        return it->second;
+    }
+    return "Opcode Desconhecido";
+}
+
+/**
+ * @brief Formata os primeiros bytes de um buffer para uma string hexadecimal.
+ */
+inline std::string formatHex(const std::vector<uint8_t>& data, int count = 16) {
+    if (data.empty()) {
+        return "[Vazio]";
+    }
+
+    std::stringstream hex_stream;
+    hex_stream << std::hex << std::setfill('0');
+
+    // Com NOMINMAX definido, esta linha não será mais corrompida pela macro.
+    int bytes_to_show = std::min(static_cast<int>(data.size()), count);
+
+    for (int i = 0; i < bytes_to_show; ++i) {
+        hex_stream << std::setw(2) << static_cast<int>(data[i]) << " ";
+    }
+
+    if (data.size() > static_cast<size_t>(count)) {
+        hex_stream << "...";
+    }
+    return hex_stream.str();
+}

@@ -2,6 +2,7 @@
 #include "Network/PacketDispatcher.h"
 #include "Logging/LogService.h"
 #include "Network/PacketScrambler.h"
+#include "Shared/Constants.h"
 #include <iostream>
 #include <utility>
 #include <iomanip> // Para logs hexadecimais, se necessário
@@ -15,7 +16,7 @@ ClientSession::ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatch
 
 ClientSession::~ClientSession() {
     if (m_socket.is_open()) {
-        try { m_logService.info("Sessao encerrada para {}", m_socket.remote_endpoint().address().to_string()); }
+        try { m_logService.info("Sessao encerrada para {}:{}", m_socket.remote_endpoint().address().to_string(), m_socket.remote_endpoint().port() ); }
         catch (...) {}
     }
     else {
@@ -29,7 +30,7 @@ boost::asio::ip::tcp::socket& ClientSession::socket() {
 
 void ClientSession::start() {
     try {
-        m_logService.info("Nova sessao iniciada: {}", m_socket.remote_endpoint().address().to_string());
+        m_logService.info("Nova sessao iniciada: {}:{}", m_socket.remote_endpoint().address().to_string(), m_socket.remote_endpoint().port() );
     }
     catch (...) { return; }
 
@@ -66,14 +67,14 @@ void ClientSession::do_read_header() {
         boost::asio::buffer(&m_read_header, sizeof(PacketHeader)),
         [this, self](boost::system::error_code ec, std::size_t length) {
             if (!ec) {
-                // 1. APLICA O SCRAMBLE NOS BYTES BRUTOS RECEBIDOS
                 PacketScrambler::scramble(m_read_header, m_xorKey);
 
                 if (m_read_header.length >= sizeof(PacketHeader) && m_read_header.length < 8192) {
                     do_read_body();
                 }
                 else {
-                    m_logService.error("Tamanho de pacote (apos scramble) invalido: {}. Desconectando.", m_read_header.length);
+                    // Log com o valor "scrambled", pois ainda não descriptografamos
+                    m_logService.error("Tamanho de pacote (scrambled) invalido: {}. Desconectando.", m_read_header.length);
                     close();
                 }
             }
@@ -95,20 +96,27 @@ void ClientSession::do_read_body() {
         boost::asio::buffer(m_read_body.data(), body_length),
         [this, self](boost::system::error_code ec, std::size_t /*length*/) {
             if (!ec) {
-                // 2. APLICA O SCRAMBLE NO CORPO RECEBIDO
                 PacketScrambler::scramble(m_read_body, m_xorKey);
 
                 Packet received_packet(m_read_header, m_read_body);
                 m_cipher.decrypt(received_packet);
 
                 if (received_packet.header.length != (sizeof(PacketHeader) + received_packet.body.size())) {
-                    m_logService.error("Incompatibilidade de tamanho do pacote apos descriptografar. Esperado: {}, Real: {}.",
-                        (sizeof(PacketHeader) + received_packet.body.size()), received_packet.header.length);
+                    m_logService.error("Incompatibilidade de tamanho do pacote apos descriptografar. Desconectando.");
                     close();
                     return;
                 }
 
-                m_logService.packet("Pacote recebido (Opcode: 0x{:04x}, Tamanho: {})", received_packet.header.opcode, received_packet.header.length);
+                // --- A NOVA LÓGICA DE LOG DETALHADO ---
+                std::string opcodeName = getOpcodeName(received_packet.header.opcode);
+                std::string hexDump = formatHex(received_packet.body);
+
+                m_logService.packet("-> Pacote Recebido: {} (Opcode: 0x{:04x}, Tamanho: {}) | Body: {}",
+                    opcodeName,
+                    received_packet.header.opcode,
+                    received_packet.header.length,
+                    hexDump);
+
                 m_packet_dispatcher.dispatch(self, received_packet);
 
                 do_read_header();
