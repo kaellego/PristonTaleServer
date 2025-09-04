@@ -45,7 +45,7 @@ void Application::buildServices() {
     // --- ETAPA 2: Serviços de Dados ---
     m_dbManager = std::make_unique<DatabaseManager>(*m_config, *m_logService);
     m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data está no diretório do executável
-    m_itemRepository = std::make_unique<ItemRepository>(*m_dbManager);
+    m_itemRepository = std::make_unique<ItemRepository>(*m_dbManager, *m_logService);
 
     // --- ETAPA 3: Serviços de Lógica de Jogo ---
     m_characterService = std::make_unique<CharacterService>(*m_dbManager, *m_playerRepository, *m_logService);

@@ -88,10 +88,13 @@ bool SQLConnection::fetch() {
 }
 
 void SQLConnection::clearStatement() {
-    // Não precisa de lock aqui, pois é chamada por métodos públicos que já têm lock
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
     SQLFreeStmt(m_statement, SQL_CLOSE);
     SQLFreeStmt(m_statement, SQL_UNBIND);
     SQLFreeStmt(m_statement, SQL_RESET_PARAMS);
+
+    // Limpa o buffer de strings para a próxima consulta
+    m_stringParamBuffer.clear();
 }
 
 void SQLConnection::handleError(unsigned int handleType, SQLHANDLE handle, const std::string& context) {

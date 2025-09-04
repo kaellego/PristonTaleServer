@@ -8,10 +8,11 @@
 
 // Forward declaration
 class DatabaseManager;
+class LogService;
 
 class ItemRepository {
 public:
-    explicit ItemRepository(DatabaseManager& dbManager);
+    explicit ItemRepository(DatabaseManager& dbManager, LogService& logService);
 
     // --- MÉTODOS CORRIGIDOS ---
     const DefinitionItem* findItemDef(int itemCode) const;
@@ -28,6 +29,7 @@ private:
     void loadItemDefinitions();
 
     DatabaseManager& m_dbManager;
+    LogService& m_logService;
     std::map<int, DefinitionItem> m_itemDefs;
     std::map<int, DefinitionItem> m_oldItemDefs;
 };

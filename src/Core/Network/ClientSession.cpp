@@ -122,7 +122,7 @@ void ClientSession::do_read_body() {
                 std::string opcodeName = getOpcodeName(received_packet.header.opcode);
                 std::string hexDump = formatHex(received_packet.body);
 
-                m_logService.packet("-> Pacote Recebido: {} (Opcode: 0x{:04x}, Tamanho: {}) | Body: {}",
+                m_logService.packet("<- Pacote Recebido: {} (Opcode: 0x{:04x}, Tamanho: {}) | Body: {}",
                     opcodeName,
                     received_packet.header.opcode,
                     received_packet.header.length,
@@ -189,4 +189,9 @@ void ClientSession::close() {
         m_socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
         m_socket.close(ec);
     }
+}
+void ClientSession::authenticate(int accountId, const std::string& accountName) {
+    m_isAuthenticated = true;
+    m_accountId = accountId;
+    m_accountName = accountName;
 }

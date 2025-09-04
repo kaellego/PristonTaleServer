@@ -69,16 +69,16 @@ void AccountService::workerLoop() {
 }
 
 void AccountService::processLogin(LoginRequest& request) {
-    // Garante que o nome da conta seja lido corretamente dos dados do pacote
-    std::string accountName(request.packet.szUserID, strnlen_s(request.packet.szUserID, sizeof(request.packet.szUserID)));
-    std::string password(request.packet.szPassword, strnlen_s(request.packet.szPassword, sizeof(request.packet.szPassword)));
 
-    // --- LOG DE DEPURAÇÃO CRUCIAL ---
+    // --- A FORMA CORRETA E SIMPLES DE EXTRAIR AS STRINGS ---
+    // O construtor de std::string sabe como lidar com arrays de char terminados em nulo.
+    std::string accountName(request.packet.szUserID);
+    std::string password(request.packet.szPassword);
+
     m_logService.debug("Processando tentativa de login para a conta: '{}' com a senha: '{}'", accountName, password);
 
     // 1. Get user data from the database
     auto sqlUserOpt = getSqlUserInfo(accountName);
-
     if (!sqlUserOpt.has_value()) {
         m_logService.warn("Conta '{}' nao encontrada no banco de dados.", accountName);
         onLoginFailure(request.session, Log::LoginResult::IncorrectAccount);
@@ -87,86 +87,74 @@ void AccountService::processLogin(LoginRequest& request) {
 
     SQLUser& sqlUser = *sqlUserOpt;
 
-    // ... (resto da lógica de validação de senha, etc., como antes) ...
+    // 2. Validate the request
+    Log::LoginResult validationResult = validateRequest(request, sqlUser);
+    if (validationResult != Log::LoginResult::Success) {
+        m_logService.warn("Tentativa de login falhou para a conta {} com o codigo: {}", accountName, static_cast<int>(validationResult));
+        onLoginFailure(request.session, validationResult);
+        return;
+    }
 
-    // Validação da senha
-    if (!Crypto::validatePassword(password, std::string(sqlUser.szPassword))) {
+    // 3. Validate the password
+    if (!Crypto::validatePassword(accountName, password, std::string(sqlUser.szPassword))) {
         m_logService.warn("Tentativa de login para a conta {} com senha incorreta.", accountName);
         onLoginFailure(request.session, Log::LoginResult::IncorrectPassword);
         return;
     }
 
+    // 4. Success!
     onLoginSuccess(request.session, sqlUser);
 }
 
 Log::LoginResult AccountService::validateRequest(const LoginRequest& request, const SQLUser& sqlUser) {
-    // CORRIGIDO: Agora a comparação direta funciona porque os tipos são os mesmos (EBanStatus == EBanStatus)
     if (sqlUser.iBanStatus == EBanStatus::BANSTATUS_Banned) {
         return Log::LoginResult::Banned;
     }
     if (sqlUser.iBanStatus == EBanStatus::BANSTATUS_TempBanned) {
         return Log::LoginResult::TempBanned;
     }
-
     return Log::LoginResult::Success;
 }
 
 void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, const SQLUser& sqlUser) {
     m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
-
-    // TODO: Autenticar a sessão e adicioná-la ao UserService
-    // session->authenticate(sqlUser.iID, sqlUser.szAccountName);
-    // m_userService.addUser(sqlUser.iID, session);
-
-    // Envia o pacote de sucesso e a lista de personagens
+    session->authenticate(sqlUser.iID, sqlUser.szAccountName);
+    m_userService.addUser(sqlUser.iID, sqlUser.szAccountName, session);
     sendLoginResult(session, Log::LoginResult::Success);
     sendCharacterList(session, sqlUser.szAccountName, sqlUser.iID);
 }
 
 void AccountService::onLoginFailure(std::shared_ptr<ClientSession> session, Log::LoginResult reason) {
-    // Envia o pacote de falha
+    m_logService.warn("Login falhou para a conta [{}]. Razao: {}", session->getAccountName(), static_cast<int>(reason));
     sendLoginResult(session, reason);
 }
 
 std::optional<SQLUser> AccountService::getSqlUserInfo(const std::string& accountName) {
-    SQLConnection* db = m_dbManager.getConnection(EDatabaseID::UserDB_Primary);
+    auto db = m_dbManager.createConnection(EDatabaseID::UserDB_Primary);
     if (!db) {
-        m_logService.error("Nao foi possivel obter conexao com UserDB_Primary.");
+        m_logService.error("Nao foi possivel criar conexao com UserDB_Primary.");
         return std::nullopt;
     }
-
     try {
         db->prepare("SELECT TOP 1 ID, AccountName, Password, Flag, BanStatus, IsMuted FROM UserInfo WHERE AccountName=?");
         db->bindParameter<std::string>(1, accountName);
-
-        // CORRIGIDO: A chamada de execute() não retorna valor, então não pode ser usada com &&
         db->execute();
-
-        // A verificação é feita apenas no fetch()
         if (db->fetch()) {
             SQLUser user{};
             user.iID = db->getData<int>(1).value_or(0);
-
             auto dbAccountName = db->getData<std::string>(2).value_or("");
             strncpy_s(user.szAccountName, dbAccountName.c_str(), sizeof(user.szAccountName));
-
             auto dbPassword = db->getData<std::string>(3).value_or("");
             strncpy_s(user.szPassword, dbPassword.c_str(), sizeof(user.szPassword));
-
             user.iFlag = db->getData<int>(4).value_or(0);
-
-            // CORRIGIDO: Atribui o int do DB para o enum class com um static_cast
             user.iBanStatus = static_cast<EBanStatus>(db->getData<int>(5).value_or(0));
-
             user.bIsMuted = db->getData<bool>(6).value_or(false);
-
             return user;
         }
     }
     catch (const std::exception& e) {
         m_logService.error("Erro de SQL em getSqlUserInfo para a conta {}: {}", accountName, e.what());
     }
-
     return std::nullopt;
 }
 
@@ -175,14 +163,11 @@ void AccountService::sendLoginResult(std::shared_ptr<ClientSession> session, Log
     responseStruct.header.opcode = static_cast<uint32_t>(Opcodes::AccountLoginCode);
     responseStruct.iCode = static_cast<int>(code);
     strncpy_s(responseStruct.szMessage, message.c_str(), sizeof(responseStruct.szMessage) - 1);
-
     const size_t bodySize = sizeof(PacketAccountLoginCode) - sizeof(PacketHeader);
     const uint8_t* bodyPtr = reinterpret_cast<const uint8_t*>(&responseStruct) + sizeof(PacketHeader);
     std::vector<uint8_t> body(bodyPtr, bodyPtr + bodySize);
-
     Packet packet(responseStruct.header.opcode, body);
-
-    m_logService.packet("<- Pacote Enviado: {} (Opcode: 0x{:04x})", getOpcodeName(packet.header.opcode), packet.header.opcode);
+    m_logService.packet("-> Pacote Enviado: {} (Opcode: 0x{:04x})", getOpcodeName(packet.header.opcode), packet.header.opcode);
     session->send(packet);
 }
 
@@ -216,6 +201,6 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
 
     Packet packet(userInfoPacket.header.opcode, body);
 
-    m_logService.packet("<- Pacote Enviado: {} (Opcode: 0x{:04x})", "UserInfo", packet.header.opcode);
+    m_logService.packet("-> Pacote Enviado: {} (Opcode: 0x{:04x})", "UserInfo", packet.header.opcode);
     session->send(packet);
 }

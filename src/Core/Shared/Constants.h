@@ -17,61 +17,137 @@ namespace Constants {
     // --- Configurações de Jogo ---
     constexpr int MAX_SKILL_ARRAY_DATA = 150;
     constexpr int MAX_COMMON_SKILL_INFO_DATA = 25;
-    constexpr int SERVER_LEVEL_MAX = 120;
-    constexpr int MAX_UNIT_PLAYDATA = 75;
+    constexpr int SLOW_SPEED_BASE = 256;
+    constexpr int SERVER_CHAR_FRAME_STEP = 320;
+    constexpr int SERVER_CHAR_SKIP = 4;
+    constexpr int MAX_CONTINUE_SKILL = 20;
+    constexpr int BURNING_TICKRATE_MS = 500;
+    constexpr int POISON_MAXSTACK = 5;
+    constexpr int POISON_DURATION_SEC = 30;
+    constexpr int POISON_TICKRATE_MS = 1000;
 
+    //See https://docs.google.com/document/d/1V9Ozk5gN-RaBpgflo-8_1zZzde2h5y5np4n8r1t2Q9w/edit
     // --- Constantes de Distância (Exemplo) ---
     // Usar static constexpr torna os valores type-safe e com escopo.
-    static constexpr int DISTANCE_XY_152_meters = 16777216;
-    static constexpr int DISTANCE_XY_107_meters = 8388608;
-    static constexpr int DISTANCE_XY_60_meters = 2621440;
-    static constexpr int DISTANCE_XY_54_meters = 2097152;
-    static constexpr int DISTANCE_XY_41_meters = 1228800;
+    static constexpr int DISTANCE_XY_152_meters = 16777216; // (152 meters)  (((64*64)+(64*64)) * 2048)
+    static constexpr int DISTANCE_XY_107_meters = 8388608; // (107 meters)  (((64*64)+(64*64)) * 1024)
+    static constexpr int DISTANCE_XY_76_meters = 4194304; // ( 76 meters)  (((64*64)+(64*64)) *  512)
+    static constexpr int DISTANCE_XY_60_meters = 2621440; // ( 60 meters)  (((64*64)+(64*64)) *  320)
+    static constexpr int DISTANCE_XY_54_meters = 2097152; // ( 54 meters)  (((64*64)+(64*64)) *  256)
+    static constexpr int DISTANCE_XY_47_meters = 1638400; // ( 47 meters)  (((64*64)+(64*64)) *  200) iLureDistance uses this distance
+    static constexpr int DISTANCE_XY_41_meters = 1228800; // ( 41 meters)  (((64*64)+(64*64)) *  150)
+    static constexpr int DISTANCE_XY_38_meters = 1048576; // ( 38 meters)  (((64*64)+(64*64)) *  128)
+    static constexpr int DISTANCE_XY_33_meters = 819200; // ( 33 meters)  (((64*64)+(64*64)) *  100)
+    static constexpr int DISTANCE_XY_30_meters = 640000; // ( 30 meters)
+    static constexpr int DISTANCE_XY_27_meters = 524288; // ( 27 meters)  (((64*64)+(64*64)) *  64)
+    static constexpr int DISTANCE_XY_24_meters = 409600; // ( 24 meters)  (((64*64)+(64*64)) *  50)
+    static constexpr int DISTANCE_XY_20_meters = 291600; // ( 20 meters)
+    static constexpr int DISTANCE_XY_19_meters = 262144; // ( 19 meters)  (((64*64)+(64*64)) *  32)
+    static constexpr int DISTANCE_XY_15_meters = 164025; // ( 15 meters)
+    static constexpr int DISTANCE_XY_13_meters = 131072; // ( 13 meters)  (((64*64)+(64*64)) *  16)
+    static constexpr int DISTANCE_XY_10_meters = 65536; // ( 10 meters)  (((64*64)+(64*64)) *  8)
+    static constexpr int DISTANCE_XY_7_meters = 32768; // ( 7 meters)   (((64*64)+(64*64)) *  4)
+    static constexpr int DISTANCE_XY_5_meters = 16384; // ( 5 meters)   (((64*64)+(64*64)) *  2)
+    static constexpr int DISTANCE_XY_3_meters = 8192; // ( 3 meters)   (((64*64)+(64*64)) *  1)
+    static constexpr int DISTANCE_XY_05 = 4096; // ( 1.5 meters) (((64*64)+(64*64)) *  0.5)
+    static constexpr int DISTANCE_XY_025 = 2048; // ( 0.7 meters) (((64*64)+(64*64)) *  0.25)
 
-    static constexpr int DISTANCE_MAX_UNIT_VIEWLIMIT = DISTANCE_XY_107_meters;
-    static constexpr int DISTANCE_MAX_PARTY = DISTANCE_XY_41_meters;
-    // ... e as outras constantes que dependem delas ...
+    static constexpr int DISTANCE_300 = 90000; //~11m
+
+    static constexpr int DISTANCE_MAX_UNIT_VIEWLIMIT = DISTANCE_XY_107_meters;; //107 meters
+
+    static constexpr int DISTANCE_MAX_UNIT_OUTOFRANGE = DISTANCE_XY_60_meters;	//60 meters
+    static constexpr int DISTANCE_MAX_PLAYER_BASIC_VIEW = DISTANCE_XY_54_meters;	//54 meters
+    static constexpr int DISTANCE_MAX_UNIT_BASIC_VIEW = DISTANCE_XY_54_meters;	//54 meters
+    static constexpr int DISTANCE_MAX_PARTY = DISTANCE_XY_41_meters;	//41 meters
+    static constexpr int DISTANCE_MAX_CHATRANGE = DISTANCE_XY_41_meters;	//41 meters
+    static constexpr int DISTANCE_MAX_PLAYER_DETAILED_VIEW = DISTANCE_XY_33_meters;	//33 meters
+    static constexpr int DISTANCE_MAX_UNIT_DETAILED_VIEW = DISTANCE_XY_33_meters;	//33 meters
+    static constexpr int DISTANCE_MAX_PLAYER_BASIC_VIEW_RICT = DISTANCE_XY_33_meters;	//33 meters
+    static constexpr int DISTANCE_MAX_SKILL_VISUAL = DISTANCE_XY_24_meters;	//24 meters
+    static constexpr int DISTANCE_MAX_PET_RANGE = DISTANCE_XY_24_meters;	//24 meters
+    static constexpr int DISTANCE_MAX_PLAYER_DETAILED_VIEW_RICT = DISTANCE_XY_24_meters;	//24 meters
+    static constexpr int DISTANCE_MAX_BOSS = DISTANCE_XY_24_meters;	//24 meters
+    static constexpr int DISTANCE_MAX_SKILL_RANGE = DISTANCE_XY_24_meters;	//24 meters
+    static constexpr int DISTANCE_MAX_FROZENSANCTUARY_TREE = DISTANCE_XY_19_meters;	//13 meters
+
+    static constexpr int DISTANCE_MISC = 0x1000; //4096
+    static constexpr int DISTANCE_MISC_Y = 300;
+    static constexpr int DISTANCE_MISC_Y_EX = 1000;
+
+    constexpr int SERVER_LEVEL_MAX = 120;
+    constexpr int MAX_UNIT_PLAYDATA = 75;
+    constexpr int MAX_QUESTPACKETDATA = 15;
 
 } // namespace Constants
 
+//Este arquivo conterá todos os enums, convertidos para o formato moderno enum class. 
+//Isso os torna mais seguros e fáceis de usar, sem poluir o escopo global.
 
-// --- Enums Modernizados ---
+namespace GameData {
 
-enum class ECharacterType : int {
-    None = 0,
-    NPC = 0x00,
-    Monster = 0x01,
-    Player = 0x80
-};
+    enum class CharacterType : int {
+        None = 0,
+        NPC = 0x00,
+        Monster = 0x01,
+        Player = 0x80 //smCHAR_STATE_PLAYER
+    };
 
-enum class ECharacterClass : int {
-    None = 0,
-    Fighter = 1,
-    Mechanician = 2,
-    Archer = 3,
-    Pikeman = 4,
-    Atalanta = 5,
-    Knight = 6,
-    Magician = 7,
-    Priestess = 8,
-    Assassin = 9,
-    Shaman = 10,
-};
+    enum class CharacterClass : int {
+        None = 0, Fighter = 1, Mechanician = 2, Archer = 3, Pikeman = 4, Atalanta = 5,
+        Knight = 6, Magician = 7, Priestess = 8, Assassin = 9, Shaman = 10,
+    };
 
-enum class EMonsterType : int {
-    Normal = 0x00,
-    Undead = 0x90,
-    Mutant = 0x91,
-    Demon = 0x92,
-    Neutral = 0x94,
-    Summon = 0xA0,
-    Pet = 0xA1
-};
+    enum class MonsterType : int {
+        Normal = 0x00, Undead = 0x90, Mutant = 0x91, Demon = 0x92,
+        Neutral = 0x94, Summon = 0xA0, Pet = 0xA1
+    };
 
-// ... adicione todos os outros enums (EClassFlag, EDamageTextType, etc.) aqui,
-// convertidos para o formato 'enum class'.
+    enum class AttackProperty : short {
+        Unknown = -1, Undefined = 0, Organic = 1, Earth = 2, Fire = 3, Ice = 4,
+        Lightning = 5, Poison = 6, Water = 7, Wind = 8, Holy = 9, None = 15
+    };
 
-// ...
+    enum class ItemFlag : uint8_t {
+        None = 0,
+        ForceAllowDrop = 1 << 0,
+        TreasureHuntingMode = 1 << 1,
+    };
+
+    enum class EClassFlag : int
+    {
+        CLASSFLAG_Unknown = -1,
+        CLASSFLAG_None = 0,
+        CLASSFLAG_Fighter = 2,
+        CLASSFLAG_Mechanician = 1,
+        CLASSFLAG_Archer = 4,
+        CLASSFLAG_Pikeman = 3,
+        CLASSFLAG_Atalanta = 0x00020000,
+        CLASSFLAG_Knight = 0x00010000,
+        CLASSFLAG_Magician = 0x00040000,
+        CLASSFLAG_Priestess = 0x00030000,
+        CLASSFLAG_Assassin = 0x00050100,
+        CLASSFLAG_Shaman = 0x00050000,
+    };
+
+    enum class EAllowedClassSpecFlag : int
+    {
+        None = 0,
+
+        Fighter = 1 << 0,
+        Mechanician = 1 << 1,
+        Archer = 1 << 2,
+        Pikeman = 1 << 3,
+        Assassin = 1 << 4,
+
+        Atalanta = 1 << 8,
+        Knight = 1 << 9,
+        Magician = 1 << 10,
+        Priestess = 1 << 11,
+        Shaman = 1 << 12
+    };
+    
+}
 
 /**
  * @enum class Opcodes

@@ -10,6 +10,7 @@ void SQLConnection::bindParameter(SQLUSMALLINT index, const T& value) {
     SQLSMALLINT sqlType = 0;
     SQLLEN size = 0;
     SQLPOINTER ptr = (SQLPOINTER)&value;
+    SQLLEN indicator = 0;
 
     if constexpr (std::is_same_v<T, bool>) {
         cType = SQL_C_BIT;
@@ -35,14 +36,22 @@ void SQLConnection::bindParameter(SQLUSMALLINT index, const T& value) {
     } else if constexpr (std::is_same_v<T, std::string>) {
         cType = SQL_C_CHAR;
         sqlType = SQL_VARCHAR;
-        ptr = (SQLPOINTER)const_cast<char*>(value.c_str());
-        size = value.length();
+
+        // 1. Adiciona uma cópia da string ao nosso buffer de membro.
+        m_stringParamBuffer.push_back(value);
+        
+        // 2. Pega o ponteiro para a ÚLTIMA string adicionada (a cópia).
+        //    std::list garante que este ponteiro permanecerá válido.
+        ptr = (SQLPOINTER)m_stringParamBuffer.back().c_str();
+
+        // 3. Define o indicador de tamanho para SQL_NTS (Null-Terminated String).
+        indicator = SQL_NTS;
     } else {
         // static_assert irá falhar a compilação se um tipo não suportado for usado.
         static_assert(sizeof(T) == -1, "Tipo de dado nao suportado para SQLConnection::bindParameter");
     }
 
-    SQLRETURN ret = SQLBindParameter(m_statement, index, SQL_PARAM_INPUT, cType, sqlType, size, 0, ptr, 0, (SQLLEN*)SQL_NTS);   
+    SQLRETURN ret = SQLBindParameter(m_statement, index, SQL_PARAM_INPUT, cType, sqlType, size, 0, ptr, 0, &indicator);   
     if (!SQL_SUCCEEDED(ret)) {
         handleError(SQL_HANDLE_STMT, m_statement, "Falha ao associar (bind) parametro " + std::to_string(index));
     }

@@ -6,6 +6,7 @@
 #include <deque>
 #include <memory>
 #include <vector>
+#include <string> // Necessário para std::string
 
 // Forward declarations
 class PacketDispatcher;
@@ -18,28 +19,42 @@ public:
 
     void start();
     void send(Packet packet);
-    boost::asio::ip::tcp::socket& socket();
     void close();
+    boost::asio::ip::tcp::socket& socket();
+
+    // --- NOVOS MÉTODOS DE AUTENTICAÇÃO ---
+
+    /**
+     * @brief Define a sessão como autenticada, armazenando os dados da conta.
+     * @param accountId O ID numérico da conta.
+     * @param accountName O nome de usuário da conta.
+     */
+    void authenticate(int accountId, const std::string& accountName);
+
+    bool isAuthenticated() const { return m_isAuthenticated; }
+    int getAccountId() const { return m_accountId; }
+    const std::string& getAccountName() const { return m_accountName; }
 
 private:
-    // A lógica final e correta de leitura
     void do_read_header();
     void do_read_body();
-
     void do_write();
     void sendEncryptionKey();
 
+    // --- NOVOS MEMBROS DE ESTADO ---
+    bool m_isAuthenticated = false;
+    int m_accountId = -1;
+    std::string m_accountName;
+
+    // Outros membros...
     boost::asio::ip::tcp::socket m_socket;
     PacketDispatcher& m_packet_dispatcher;
     LogService& m_logService;
     PacketCipher m_cipher;
-
     uint8_t m_xorKey;
-
-    // Buffers
+    std::vector<uint8_t> m_write_buffer;
     PacketHeader m_read_header;
     std::vector<uint8_t> m_read_body;
     std::vector<uint8_t> m_keySetBuffer;
-    std::vector<uint8_t> m_write_buffer;
     std::deque<Packet> m_write_queue;
 };

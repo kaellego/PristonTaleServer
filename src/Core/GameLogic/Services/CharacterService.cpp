@@ -13,7 +13,7 @@ CharacterService::CharacterService(DatabaseManager& dbManager, PlayerRepository&
 std::vector<CharacterData> CharacterService::getCharacterList(int accountId) {
     std::vector<CharacterData> characterList;
 
-    SQLConnection* db = m_dbManager.getConnection(EDatabaseID::UserDB_Primary);
+    auto db = m_dbManager.createConnection(EDatabaseID::UserDB_Primary);
     if (!db) {
         m_logService.error("Nao foi possivel obter conexao com UserDB_Primary em CharacterService.");
         return characterList;

@@ -1,23 +1,28 @@
 #include "GameLogic/ItemRepository.h"
 #include "Database/DatabaseManager.h"
 #include "Database/SQLConnection.h"
+#include "Logging/LogService.h"
 #include "Utils/Dice.h"
 #include <iostream>
 #include <cmath>
 
-ItemRepository::ItemRepository(DatabaseManager& dbManager) : m_dbManager(dbManager) {
-    std::cout << "Inicializando repositorio de itens..." << std::endl;
+ItemRepository::ItemRepository(DatabaseManager& dbManager, LogService& logService)
+    : m_dbManager(dbManager),
+    m_logService(logService)
+{
+    m_logService.info("Inicializando repositorio de itens...");
     // loadItemDefinitions(); // Mantido desativado para compilação inicial
 }
 
 void ItemRepository::loadItemDefinitions() {
-    SQLConnection* db = m_dbManager.getConnection(EDatabaseID::GameDB);
+    auto db = m_dbManager.createConnection(EDatabaseID::GameDB);
     if (!db) {
-        throw std::runtime_error("Nao foi possivel obter conexao com GameDB no ItemRepository.");
+        m_logService.error("Nao foi possivel obter conexao com GameDB no ItemRepository.");
+        return;
     }
 
     // Lógica para carregar ItemList e ItemListOld do banco de dados...
-    std::cout << "Definicoes de itens carregadas." << std::endl;
+    m_logService.info("Definicoes de itens carregadas (logica a ser implementada).");
 }
 
 // --- DEFINIÇÕES DE MÉTODOS CORRIGIDAS ---
