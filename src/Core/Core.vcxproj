@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="GameLogic\Services\CharacterService.h" />
     <ClInclude Include="Config\ServerConfig.h" />
     <ClInclude Include="Database\DatabaseManager.h" />
     <ClInclude Include="Database\SQLConnection.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Shared\Constants.h" />
     <ClInclude Include="Shared\datatypes.h" />
     <ClInclude Include="Shared\GlobalState.h" />
+    <ClInclude Include="GameLogic\Services\UserService.h" />
     <ClInclude Include="Utils\Crypto.h" />
     <ClInclude Include="Utils\Dice.h" />
     <ClInclude Include="Utils\ini.h" />
@@ -180,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="GameLogic\Services\CharacterService.cpp" />
     <ClCompile Include="Config\ServerConfig.cpp" />
     <ClCompile Include="Database\DatabaseManager.cpp" />
     <ClCompile Include="Database\SQLConnection.cpp" />
@@ -198,6 +201,7 @@
     <ClCompile Include="Network\Server.cpp" />
     <ClCompile Include="Shared\datatypes.cpp" />
     <ClCompile Include="Shared\GlobalState.cpp" />
+    <ClCompile Include="GameLogic\Services\UserService.cpp" />
     <ClCompile Include="Utils\ini.c" />
     <ClCompile Include="Utils\INIReader.cpp" />
   </ItemGroup>

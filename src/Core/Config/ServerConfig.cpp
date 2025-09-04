@@ -81,7 +81,7 @@ void ServerConfig::loadAndValidate(INIReader& reader) {
     m_serverCode = reader.GetInteger(serverType, "ID", 1);
 
     // Carrega [Database]
-    m_databaseConfig.driver = reader.Get("Database", "Driver", "{ODBC Driver 17 for SQL Server}");
+    m_databaseConfig.driver = reader.Get("Database", "Driver", "{ODBC Driver 18 for SQL Server}");
     m_databaseConfig.host = reader.Get("Database", "Host", "");
     m_databaseConfig.user = reader.Get("Database", "User", "");
     m_databaseConfig.password = reader.Get("Database", "Password", "");

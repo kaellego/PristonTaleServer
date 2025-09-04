@@ -41,14 +41,11 @@ public:
     explicit ServerConfig(const std::string& filename);
 
     // --- Acessores Públicos (Getters) ---
-    int getGameVersion() const;
-    int getServerCode() const;
-    const ServerInfo& getThisServerInfo() const;
-    const GlobalDatabaseConfig& getDatabaseConfig() const;
-    const std::vector<ServerInfo>& getAllServers() const;
-
-    // A FUNÇÃO QUE ESTAVA FALTANDO
+    int getGameVersion() const { return m_gameVersion; }
+    int getServerCode() const { return m_serverCode; }
     uint8_t getXorKey() const { return m_xorKey; }
+    const GlobalDatabaseConfig& getDatabaseConfig() const;
+    const ServerInfo& getThisServerInfo() const;
 
 private:
     void loadAndValidate(INIReader& reader);

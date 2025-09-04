@@ -120,6 +120,12 @@
     <ClInclude Include="Network\PacketDispatcher.h">
       <Filter>Arquivos de Origem\Network</Filter>
     </ClInclude>
+    <ClInclude Include="GameLogic\Services\CharacterService.h">
+      <Filter>Arquivos de Origem\GameLogic\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\Services\UserService.h">
+      <Filter>Arquivos de Origem\GameLogic\Services</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Config\ServerConfig.cpp">
@@ -184,6 +190,12 @@
     </ClCompile>
     <ClCompile Include="GameLogic\Handlers\LoginHandler.cpp">
       <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\Services\CharacterService.cpp">
+      <Filter>Arquivos de Origem\GameLogic\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\Services\UserService.cpp">
+      <Filter>Arquivos de Origem\GameLogic\Services</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

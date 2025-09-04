@@ -10,9 +10,13 @@
 #include "Database/DatabaseManager.h"
 #include "GameLogic/ItemRepository.h"
 #include "GameLogic/PlayerRepository.h"
-#include "GameLogic/Services/AccountService.h"
 #include "Network/PacketDispatcher.h"
 #include "Network/Server.h"
+
+// Adicionamos os novos serviços aqui
+#include "GameLogic/Services/AccountService.h"
+#include "GameLogic/Services/CharacterService.h"
+#include "GameLogic/Services/UserService.h"
 
 class Application {
 public:
@@ -33,8 +37,13 @@ private:
     std::unique_ptr<DatabaseManager> m_dbManager;
     std::unique_ptr<ItemRepository> m_itemRepository;
     std::unique_ptr<PlayerRepository> m_playerRepository;
-    std::unique_ptr<PacketDispatcher> m_packetDispatcher;
+
+    // Nossos novos serviços de lógica de jogo
+    std::unique_ptr<CharacterService> m_characterService;
+    std::unique_ptr<UserService> m_userService;
     std::unique_ptr<AccountService> m_accountService;
+
+    std::unique_ptr<PacketDispatcher> m_packetDispatcher;
     std::unique_ptr<Server> m_networkServer;
 
     bool m_isRunning;
