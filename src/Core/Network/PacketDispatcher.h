@@ -38,5 +38,5 @@ private:
     AccountService& m_accountService;
     LogService& m_logService;
 
-    std::map<uint16_t, std::unique_ptr<IPacketHandler>> m_handlers;
+    std::map<uint32_t, std::unique_ptr<IPacketHandler>> m_handlers;
 };

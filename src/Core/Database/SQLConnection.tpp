@@ -35,14 +35,14 @@ void SQLConnection::bindParameter(SQLUSMALLINT index, const T& value) {
     } else if constexpr (std::is_same_v<T, std::string>) {
         cType = SQL_C_CHAR;
         sqlType = SQL_VARCHAR;
+        ptr = (SQLPOINTER)const_cast<char*>(value.c_str());
         size = value.length();
-        ptr = (SQLPOINTER)value.c_str();
     } else {
         // static_assert irá falhar a compilação se um tipo não suportado for usado.
         static_assert(sizeof(T) == -1, "Tipo de dado nao suportado para SQLConnection::bindParameter");
     }
 
-    SQLRETURN ret = SQLBindParameter(m_statement, index, SQL_PARAM_INPUT, cType, sqlType, size, 0, ptr, 0, NULL);
+    SQLRETURN ret = SQLBindParameter(m_statement, index, SQL_PARAM_INPUT, cType, sqlType, size, 0, ptr, 0, (SQLLEN*)SQL_NTS);   
     if (!SQL_SUCCEEDED(ret)) {
         handleError(SQL_HANDLE_STMT, m_statement, "Falha ao associar (bind) parametro " + std::to_string(index));
     }

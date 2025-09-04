@@ -24,14 +24,14 @@ PacketDispatcher::PacketDispatcher(GlobalState& state, PlayerRepository& playerR
 
 void PacketDispatcher::registerHandlers() {
     // Acessa os opcodes de forma segura e com escopo
-    m_handlers[static_cast<uint16_t>(Opcodes::KeepAlive)] = std::make_unique<KeepAliveHandler>(m_logService);
-    m_handlers[static_cast<uint16_t>(Opcodes::LoginUser)] = std::make_unique<LoginHandler>(m_accountService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::KeepAlive)] = std::make_unique<KeepAliveHandler>(m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::LoginUser)] = std::make_unique<LoginHandler>(m_accountService, m_logService);
     // Adicione outros handlers aqui conforme for implementando...
-    // Ex: m_handlers[static_cast<uint16_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
+    // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }
 
 void PacketDispatcher::dispatch(std::shared_ptr<ClientSession> session, const Packet& packet) {
-    uint16_t opcode = packet.header.opcode;
+    uint32_t opcode = packet.header.opcode;
     auto it = m_handlers.find(opcode);
 
     if (it != m_handlers.end()) {

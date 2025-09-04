@@ -52,7 +52,7 @@ private:
 
     // --- Packet Senders ---
     void sendLoginResult(std::shared_ptr<ClientSession> session, Log::LoginResult code, const std::string& message = "");
-    void sendCharacterList(std::shared_ptr<ClientSession> session, const std::string& accountName);
+    void sendCharacterList(std::shared_ptr<ClientSession> session, const std::string& accountName, int accountId);
 
     // --- Dependencies & State ---
     DatabaseManager& m_dbManager;
