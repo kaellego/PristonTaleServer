@@ -25,7 +25,7 @@ public:
      * @param port A porta em que o servidor escutará por conexões.
      * @param dispatcher A referência para o dispatcher de pacotes que será passado para novas sessões.
      */
-    explicit Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService);
+    explicit Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey);
 
 private:
     /**
@@ -42,4 +42,5 @@ private:
     // Referência para o dispatcher que será injetado em cada nova sessão de cliente.
     PacketDispatcher& m_packet_dispatcher;
     LogService& m_logService;
+    uint8_t m_xorKey;
 };

@@ -26,7 +26,7 @@ void Application::buildServices() {
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
 
     // 2. Serviços de Dados (dependem da configuração)
-    m_dbManager = std::make_unique<DatabaseManager>(*m_config);
+    m_dbManager = std::make_unique<DatabaseManager>(*m_config, *m_logService);
     m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data está no diretório do executável
 
     // 3. Serviços de Lógica de Jogo (dependem dos serviços de dados)
@@ -35,12 +35,14 @@ void Application::buildServices() {
     // 4. Rede e Despacho de Pacotes (dependem de tudo)
     m_io_context = std::make_shared<boost::asio::io_context>();
 
+    uint8_t gameXorKey = m_config->getXorKey();
+
     // O PacketDispatcher precisa de acesso a outros serviços para manipular os pacotes
-    m_packetDispatcher = std::make_unique<PacketDispatcher>(*m_globalState, *m_playerRepository, *m_itemRepository);
+    m_packetDispatcher = std::make_unique<PacketDispatcher>(*m_globalState, *m_playerRepository, *m_itemRepository, *m_accountService, *m_logService);
 
     // O Servidor de Rede precisa do io_context e do dispatcher
     const auto& serverInfo = m_config->getThisServerInfo();
-    m_networkServer = std::make_unique<Server>(m_io_context, serverInfo.port, *m_packetDispatcher, *m_logService);
+    m_networkServer = std::make_unique<Server>(m_io_context, serverInfo.port, *m_packetDispatcher, *m_logService, gameXorKey);
 }
 
 void Application::run() {

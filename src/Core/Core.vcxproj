@@ -155,6 +155,8 @@
     <ClInclude Include="Config\ServerConfig.h" />
     <ClInclude Include="Database\DatabaseManager.h" />
     <ClInclude Include="Database\SQLConnection.h" />
+    <ClInclude Include="GameLogic\Handlers\KeepAliveHandler.h" />
+    <ClInclude Include="GameLogic\Handlers\LoginHandler.h" />
     <ClInclude Include="GameLogic\ItemRepository.h" />
     <ClInclude Include="GameLogic\PlayerRepository.h" />
     <ClInclude Include="GameLogic\Services\AccountService.h" />
@@ -163,19 +165,26 @@
     <ClInclude Include="Network\ClientSession.h" />
     <ClInclude Include="Network\Packet.h" />
     <ClInclude Include="GameLogic\Handlers\PingHandler.h" />
+    <ClInclude Include="Network\PacketCipher.h" />
     <ClInclude Include="Network\PacketDispatcher.h" />
+    <ClInclude Include="Network\PacketScrambler.h" />
     <ClInclude Include="Network\Server.h" />
+    <ClInclude Include="Shared\Constants.h" />
     <ClInclude Include="Shared\datatypes.h" />
     <ClInclude Include="Shared\GlobalState.h" />
+    <ClInclude Include="Utils\Crypto.h" />
     <ClInclude Include="Utils\Dice.h" />
     <ClInclude Include="Utils\ini.h" />
     <ClInclude Include="Utils\INIReader.h" />
+    <ClInclude Include="Utils\picosha2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Config\ServerConfig.cpp" />
     <ClCompile Include="Database\DatabaseManager.cpp" />
     <ClCompile Include="Database\SQLConnection.cpp" />
+    <ClCompile Include="GameLogic\Handlers\KeepAliveHandler.cpp" />
+    <ClCompile Include="GameLogic\Handlers\LoginHandler.cpp" />
     <ClCompile Include="GameLogic\ItemRepository.cpp" />
     <ClCompile Include="GameLogic\PlayerRepository.cpp" />
     <ClCompile Include="GameLogic\Services\AccountService.cpp" />
@@ -184,6 +193,7 @@
     <ClCompile Include="Network\ClientSession.cpp" />
     <ClCompile Include="Network\Packet.cpp" />
     <ClCompile Include="GameLogic\Handlers\PingHandler.cpp" />
+    <ClCompile Include="Network\PacketCipher.cpp" />
     <ClCompile Include="Network\PacketDispatcher.cpp" />
     <ClCompile Include="Network\Server.cpp" />
     <ClCompile Include="Shared\datatypes.cpp" />

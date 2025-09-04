@@ -1,23 +1,33 @@
 #include "Network/PacketDispatcher.h"
+#include "Shared/Constants.h"
+#include "GameLogic/Handlers/KeepAliveHandler.h"
+#include "GameLogic/Handlers/LoginHandler.h"
 #include "Network/ClientSession.h"
 #include "Network/Packet.h"
-#include "GameLogic/Handlers/PingHandler.h"
+#include "Logging/LogService.h"
+#include "GameLogic/Services/AccountService.h" // Necessário para passar para os handlers
+
 #include <iostream>
 
-constexpr uint16_t OPCODE_PING = 0x07E6;
-
-PacketDispatcher::PacketDispatcher(GlobalState& state, PlayerRepository& playerRepo, ItemRepository& itemRepo) :
+// Esta é a implementação que estava faltando para o vinculador.
+PacketDispatcher::PacketDispatcher(GlobalState& state, PlayerRepository& playerRepo, ItemRepository& itemRepo, AccountService& accountService, LogService& logService) :
     m_globalState(state),
     m_playerRepository(playerRepo),
-    m_itemRepository(itemRepo)
+    m_itemRepository(itemRepo),
+    m_accountService(accountService),
+    m_logService(logService)
 {
-    std::cout << "Registrando manipuladores de pacotes..." << std::endl;
+    m_logService.info("Registrando manipuladores de pacotes...");
     registerHandlers();
-    std::cout << m_handlers.size() << " manipuladores de pacotes registrados." << std::endl;
+    m_logService.info("{} manipuladores de pacotes registrados.", m_handlers.size());
 }
 
 void PacketDispatcher::registerHandlers() {
-    m_handlers[OPCODE_PING] = std::make_unique<PingHandler>();
+    // Acessa os opcodes de forma segura e com escopo
+    m_handlers[static_cast<uint16_t>(Opcodes::KeepAlive)] = std::make_unique<KeepAliveHandler>(m_logService);
+    m_handlers[static_cast<uint16_t>(Opcodes::LoginUser)] = std::make_unique<LoginHandler>(m_accountService, m_logService);
+    // Adicione outros handlers aqui conforme for implementando...
+    // Ex: m_handlers[static_cast<uint16_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }
 
 void PacketDispatcher::dispatch(std::shared_ptr<ClientSession> session, const Packet& packet) {
@@ -28,13 +38,12 @@ void PacketDispatcher::dispatch(std::shared_ptr<ClientSession> session, const Pa
         it->second->handle(session, packet);
     }
     else {
+        std::string client_ip = "IP desconhecido";
         try {
-            std::cout << "AVISO: Pacote nao manipulado recebido do cliente "
-                << session->socket().remote_endpoint()
-                << ". Opcode: 0x" << std::hex << opcode << std::dec << std::endl;
+            client_ip = session->socket().remote_endpoint().address().to_string();
         }
-        catch (...) {
-            // Ignora exceções se o socket já estiver fechado.
-        }
+        catch (...) {}
+
+        m_logService.warn("Pacote nao manipulado recebido do cliente {}. Opcode: 0x{:04x}", client_ip, opcode);
     }
 }

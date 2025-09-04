@@ -51,12 +51,14 @@ struct SQLUser {
     char        szAccountName[32];
     char        szPassword[65]; // Para acomodar hashes de senha
     int32_t     iFlag;
+
+    EBanStatus  iBanStatus;
+
     int32_t     iActive;
     int32_t     iCoins;
     int32_t     bGameMasterType;
     int32_t     iGameMasterLevel;
     char        szGameMasterMacAddress[20];
-    int32_t     iBanStatus;
     SYSTEMTIME  sUnbanDate;
     int32_t     bIsMuted;
     int32_t     iMuteCount;
@@ -92,4 +94,25 @@ struct DefinitionItem {
     int AttackRatingMax;
     // ... preencha com outros membros
 };
+
+struct PacketVersion {
+    PacketHeader header;
+    BOOL bServerFull;
+    int iVersion;
+    int iUnk2;
+};
+
+struct PacketAttackData {
+    PacketHeader header;
+    uint32_t dwDestObjectSerial;
+    uint32_t dwTarObjectSerial;
+    // ... preencha com o resto dos membros ...
+};
+
+struct PacketSingleTargetSkillData {
+    PacketHeader header;
+    uint32_t dwChkSum;
+    // ... preencha com o resto dos membros ...
+};
+
 #pragma pack(pop)

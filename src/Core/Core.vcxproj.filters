@@ -87,9 +87,6 @@
     <ClInclude Include="Network\Packet.h">
       <Filter>Arquivos de Origem\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Network\PacketDispatcher.h">
-      <Filter>Arquivos de Origem\Network</Filter>
-    </ClInclude>
     <ClInclude Include="GameLogic\Services\AccountService.h">
       <Filter>Arquivos de Origem\GameLogic\Services</Filter>
     </ClInclude>
@@ -98,6 +95,30 @@
     </ClInclude>
     <ClInclude Include="Logging\LogService.h">
       <Filter>Arquivos de Origem\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\PacketCipher.h">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\PacketScrambler.h">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\Crypto.h">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\picosha2.h">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\Handlers\KeepAliveHandler.h">
+      <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shared\Constants.h">
+      <Filter>Arquivos de Origem\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\Handlers\LoginHandler.h">
+      <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\PacketDispatcher.h">
+      <Filter>Arquivos de Origem\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -143,9 +164,6 @@
     <ClCompile Include="Network\Packet.cpp">
       <Filter>Arquivos de Origem\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Network\PacketDispatcher.cpp">
-      <Filter>Arquivos de Origem\Network</Filter>
-    </ClCompile>
     <ClCompile Include="GameLogic\Services\AccountService.cpp">
       <Filter>Arquivos de Origem\GameLogic\Services</Filter>
     </ClCompile>
@@ -154,6 +172,18 @@
     </ClCompile>
     <ClCompile Include="Logging\LogService.cpp">
       <Filter>Arquivos de Origem\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\PacketCipher.cpp">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\Handlers\KeepAliveHandler.cpp">
+      <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\PacketDispatcher.cpp">
+      <Filter>Arquivos de Origem\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\Handlers\LoginHandler.cpp">
+      <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
