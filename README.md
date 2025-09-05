@@ -2,7 +2,7 @@
 
 ![C++](https://img.shields.io/badge/C++-20-blue.svg)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-GPL--3-blue.svg)
 
 Este repositório contém a base para um servidor de Priston Tale, resultado de um esforço de refatoração de um código-fonte legado. O objetivo principal é transformar a base de código original, escrita em um estilo C mais antigo, em uma aplicação C++ moderna, robusta, segura e de fácil manutenção.
 
