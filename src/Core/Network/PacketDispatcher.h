@@ -14,6 +14,7 @@ class PlayerRepository;
 class ItemRepository;
 class AccountService;
 class LogService;
+class UserService;
 
 class IPacketHandler {
 public:
@@ -24,7 +25,14 @@ public:
 class PacketDispatcher {
 public:
     // Este é o construtor que o Application.cpp está tentando chamar
-    explicit PacketDispatcher(GlobalState& state, PlayerRepository& playerRepo, ItemRepository& itemRepo, AccountService& accountService, LogService& logService);
+    explicit PacketDispatcher(
+        GlobalState& state,
+        PlayerRepository& playerRepo,
+        ItemRepository& itemRepo,
+        AccountService& accountService,
+        LogService& logService,
+        UserService& userService
+    );
 
     void dispatch(std::shared_ptr<ClientSession> session, const Packet& packet);
 
@@ -37,6 +45,7 @@ private:
     ItemRepository& m_itemRepository;
     AccountService& m_accountService;
     LogService& m_logService;
+    UserService& m_userService;
 
     std::map<uint32_t, std::unique_ptr<IPacketHandler>> m_handlers;
 };

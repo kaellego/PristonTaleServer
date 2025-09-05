@@ -20,6 +20,7 @@ namespace Log {
         IncorrectAccount = -1,
         BlockedAccount = -3,
         AlreadyLogged = -4,
+        WrongVersion = -9,
         Banned = -6,
         TempBanned = -18,
         NotActivated = -16,

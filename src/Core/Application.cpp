@@ -54,7 +54,15 @@ void Application::buildServices() {
 
     // --- ETAPA 4: Rede e Despacho de Pacotes ---
     m_io_context = std::make_shared<boost::asio::io_context>();
-    m_packetDispatcher = std::make_unique<PacketDispatcher>(*m_globalState, *m_playerRepository, *m_itemRepository, *m_accountService, *m_logService);
+    
+    m_packetDispatcher = std::make_unique<PacketDispatcher>(
+        *m_globalState,
+        *m_playerRepository,
+        *m_itemRepository,
+        *m_accountService,
+        *m_logService,
+        *m_userService
+    );
 
     const auto& serverInfo = m_config->getThisServerInfo();
     uint8_t gameXorKey = m_config->getXorKey();

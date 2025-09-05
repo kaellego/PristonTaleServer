@@ -35,14 +35,14 @@ void ClientSession::start() {
     }
     catch (...) { return; }
 
-    m_logService.debug("Sessao::start() -> Chamando sendEncryptionKey()");
+    m_logService.debug("Sessao::start() <-> Chamando sendEncryptionKey()");
     sendEncryptionKey();
     // A chamada correta para iniciar o ciclo de leitura
     //do_read_header();
 }
 
 void ClientSession::sendEncryptionKey() {
-    m_logService.debug("Sessao::sendEncryptionKey() -> Gerando e enviando pacote de chave...");
+    m_logService.debug("Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...");
     uint16_t port = 0;
     try {
         port = m_socket.local_endpoint().port();
@@ -54,12 +54,12 @@ void ClientSession::sendEncryptionKey() {
 
     boost::asio::async_write(m_socket, boost::asio::buffer(m_keySetBuffer),
         [this, self](const boost::system::error_code& ec, std::size_t bytes_transferred) {
-            m_logService.debug("Sessao::sendEncryptionKey() -> Callback de envio executado.");
+            m_logService.debug("Sessao::sendEncryptionKey() <-> Callback de envio executado.");
             if (!ec) {
                 m_logService.packet("Pacote de chave enviado com sucesso ({} bytes).", bytes_transferred);
                 //self->m_logService.packet("Pacote de chave enviado com sucesso ({} bytes).", bytes_transferred);
                 
-                m_logService.debug("Sessao::sendEncryptionKey() -> Chamando do_read_header()");
+                m_logService.debug("Sessao::sendEncryptionKey() <-> Chamando do_read_header()");
                 do_read_header();
             }
             else {
@@ -71,12 +71,12 @@ void ClientSession::sendEncryptionKey() {
 }
 
 void ClientSession::do_read_header() {
-    m_logService.debug("Sessao::do_read_header() -> Aguardando por dados...");
+    m_logService.debug("Sessao::do_read_header() <-> Aguardando por dados...");
     auto self = shared_from_this();
     boost::asio::async_read(m_socket,
         boost::asio::buffer(&m_read_header, sizeof(PacketHeader)),
         [this, self](boost::system::error_code ec, std::size_t length) {
-            m_logService.debug("Sessao::do_read_header() -> Callback de leitura executado.");
+            m_logService.debug("Sessao::do_read_header() <-> Callback de leitura executado.");
             if (!ec) {
                 PacketScrambler::scramble(m_read_header, m_xorKey);
 

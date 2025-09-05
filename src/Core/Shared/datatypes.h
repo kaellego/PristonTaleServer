@@ -691,5 +691,11 @@ struct PacketFireMeteorite {
     int32_t iCount;
 };
 
+struct PacketPing {
+    PacketHeader header;
+    uint32_t     dwTick;
+    uint32_t     dwTime;
+    BOOL         CheatEngineDetected;
+};
 
 #pragma pack(pop)

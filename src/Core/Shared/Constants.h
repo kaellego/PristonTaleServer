@@ -465,6 +465,7 @@ inline std::string getOpcodeName(uint32_t opcode) {
         { static_cast<uint32_t>(Opcodes::KeepAlive), "KeepAlive" },
         { static_cast<uint32_t>(Opcodes::LoginUser), "LoginUser" },
         { static_cast<uint32_t>(Opcodes::AccountLoginCode), "AccountLoginCode" },
+        { static_cast<uint32_t>(Opcodes::Ping), "Ping" },
         // Adicione outros mapeamentos aqui
     };
 

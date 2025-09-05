@@ -17,6 +17,8 @@ struct GlobalState {
     // em um ambiente com múltiplas threads.
     std::atomic<uint32_t> usersOnline{ 0 };
     std::atomic<uint32_t> unitsOnline{ 0 };
+    std::atomic<uint32_t> loginAttempts{ 0 };
+    int gameVersion = 0;
 
     // O tick count pode ser atualizado pelo loop principal do servidor.
     // Não precisa ser atômico se for atualizado apenas por uma thread.
