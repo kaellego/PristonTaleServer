@@ -1,5 +1,5 @@
 #include "GameLogic/Services/AccountService.h"
-#include "Database/DatabaseManager.h"
+#include "Database/DatabasePool.h"
 #include "Database/SQLConnection.h"
 #include "Network/ClientSession.h"
 #include "Network/Packet.h"
@@ -15,8 +15,8 @@
 #include <iostream>
 #include <utility>
 
-AccountService::AccountService(DatabaseManager& dbManager, CharacterService& charService, UserService& userService, LogService& logService)
-    : m_dbManager(dbManager),
+AccountService::AccountService(DatabasePool& dbPool, CharacterService& charService, UserService& userService, LogService& logService)
+    : m_dbPool(dbPool),
     m_characterService(charService),
     m_userService(userService),
     m_logService(logService)
@@ -130,10 +130,13 @@ void AccountService::onLoginFailure(std::shared_ptr<ClientSession> session, Log:
 }
 
 std::optional<SQLUser> AccountService::getSqlUserInfo(const std::string& accountName) {
-    auto db = m_dbManager.createConnection(EDatabaseID::UserDB_Primary);
+    auto db = m_dbPool.getConnection(EDatabaseID::UserDB_Primary);
     if (!db) {
-        m_logService.error("Nao foi possivel criar conexao com UserDB_Primary.");
-        return std::nullopt;
+        // Esta parte só será executada se, por algum motivo, o pool não puder
+        // fornecer uma conexão válida (o que é improvável no design atual,
+        // mas é uma excelente verificação de segurança).
+        m_logService.error("Nao foi possivel obter uma conexao do pool para UserDB_Primary.");
+        return std::nullopt; // Ou outra forma de tratamento de erro
     }
     try {
         db->prepare("SELECT TOP 1 ID, AccountName, Password, Flag, BanStatus, IsMuted FROM UserInfo WHERE AccountName=?");

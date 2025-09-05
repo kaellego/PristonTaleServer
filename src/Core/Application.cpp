@@ -43,14 +43,14 @@ void Application::buildServices() {
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
 
     // --- ETAPA 2: Serviços de Dados ---
-    m_dbManager = std::make_unique<DatabaseManager>(*m_config, *m_logService);
+    m_dbPool = std::make_unique<DatabasePool>(*m_config, *m_logService);
     m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data está no diretório do executável
-    m_itemRepository = std::make_unique<ItemRepository>(*m_dbManager, *m_logService);
+    m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);
 
     // --- ETAPA 3: Serviços de Lógica de Jogo ---
-    m_characterService = std::make_unique<CharacterService>(*m_dbManager, *m_playerRepository, *m_logService);
+    m_characterService = std::make_unique<CharacterService>(*m_dbPool, *m_playerRepository, *m_logService);
     m_userService = std::make_unique<UserService>(*m_logService);
-    m_accountService = std::make_unique<AccountService>(*m_dbManager, *m_characterService, *m_userService, *m_logService);
+    m_accountService = std::make_unique<AccountService>(*m_dbPool, *m_characterService, *m_userService, *m_logService);
 
     // --- ETAPA 4: Rede e Despacho de Pacotes ---
     m_io_context = std::make_shared<boost::asio::io_context>();

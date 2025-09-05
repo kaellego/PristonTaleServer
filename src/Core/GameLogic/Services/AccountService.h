@@ -13,7 +13,7 @@
 #include "Logging/LogEvents.h"   // Para os enums de log
 
 // Forward declarations para as dependências que serão injetadas
-class DatabaseManager;
+class DatabasePool;
 class CharacterService;
 class UserService;
 class LogService;
@@ -28,7 +28,7 @@ struct LoginRequest {
 
 class AccountService {
 public:
-    explicit AccountService(DatabaseManager& dbManager, CharacterService& charService, UserService& userService, LogService& logService);
+    explicit AccountService(DatabasePool& dbPool, CharacterService& charService, UserService& userService, LogService& logService);
     ~AccountService();
 
     AccountService(const AccountService&) = delete;
@@ -55,7 +55,7 @@ private:
     void sendCharacterList(std::shared_ptr<ClientSession> session, const std::string& accountName, int accountId);
 
     // --- Dependencies & State ---
-    DatabaseManager& m_dbManager;
+    DatabasePool& m_dbPool;
     CharacterService& m_characterService;
     UserService& m_userService;
     LogService& m_logService;

@@ -1,13 +1,13 @@
 #include "GameLogic/ItemRepository.h"
-#include "Database/DatabaseManager.h"
+#include "Database/DatabasePool.h"
 #include "Database/SQLConnection.h"
 #include "Logging/LogService.h"
 #include "Utils/Dice.h"
 #include <iostream>
 #include <cmath>
 
-ItemRepository::ItemRepository(DatabaseManager& dbManager, LogService& logService)
-    : m_dbManager(dbManager),
+ItemRepository::ItemRepository(DatabasePool& dbPool, LogService& logService)
+    : m_dbPool(dbPool),
     m_logService(logService)
 {
     m_logService.info("Inicializando repositorio de itens...");
@@ -15,8 +15,11 @@ ItemRepository::ItemRepository(DatabaseManager& dbManager, LogService& logServic
 }
 
 void ItemRepository::loadItemDefinitions() {
-    auto db = m_dbManager.createConnection(EDatabaseID::GameDB);
+    auto db = m_dbPool.getConnection(EDatabaseID::GameDB);
     if (!db) {
+        // Esta parte só será executada se, por algum motivo, o pool não puder
+        // fornecer uma conexão válida (o que é improvável no design atual,
+        // mas é uma excelente verificação de segurança).
         m_logService.error("Nao foi possivel obter conexao com GameDB no ItemRepository.");
         return;
     }

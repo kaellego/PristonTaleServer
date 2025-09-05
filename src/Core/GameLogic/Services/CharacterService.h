@@ -6,7 +6,7 @@
 #include "Shared/datatypes.h"
 
 // Forward declarations
-class DatabaseManager;
+class DatabasePool;
 class PlayerRepository;
 class LogService;
 
@@ -19,7 +19,7 @@ public:
     /**
      * @brief Construtor com Injeção de Dependência.
      */
-    explicit CharacterService(DatabaseManager& dbManager, PlayerRepository& playerRepo, LogService& logService);
+    explicit CharacterService(DatabasePool& dbPool, PlayerRepository& playerRepo, LogService& logService);
 
     /**
      * @brief Obtém a lista de personagens para uma determinada conta.
@@ -29,7 +29,7 @@ public:
     std::vector<CharacterData> getCharacterList(int accountId);
 
 private:
-    DatabaseManager& m_dbManager;
+    DatabasePool& m_dbPool;
     PlayerRepository& m_playerRepository;
     LogService& m_logService;
 };

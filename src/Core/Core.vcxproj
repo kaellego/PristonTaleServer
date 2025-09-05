@@ -154,7 +154,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="GameLogic\Services\CharacterService.h" />
     <ClInclude Include="Config\ServerConfig.h" />
-    <ClInclude Include="Database\DatabaseManager.h" />
+    <ClInclude Include="Database\DatabasePool.h" />
     <ClInclude Include="Database\SQLConnection.h" />
     <ClInclude Include="GameLogic\Handlers\KeepAliveHandler.h" />
     <ClInclude Include="GameLogic\Handlers\LoginHandler.h" />
@@ -184,7 +184,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="GameLogic\Services\CharacterService.cpp" />
     <ClCompile Include="Config\ServerConfig.cpp" />
-    <ClCompile Include="Database\DatabaseManager.cpp" />
+    <ClCompile Include="Database\DatabasePool.cpp" />
     <ClCompile Include="Database\SQLConnection.cpp" />
     <ClCompile Include="GameLogic\Handlers\KeepAliveHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\LoginHandler.cpp" />

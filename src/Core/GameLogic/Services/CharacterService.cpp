@@ -1,11 +1,11 @@
 #include "GameLogic/Services/CharacterService.h"
-#include "Database/DatabaseManager.h"
+#include "Database/DatabasePool.h"
 #include "Database/SQLConnection.h"
 #include "GameLogic/PlayerRepository.h"
 #include "Logging/LogService.h"
 
-CharacterService::CharacterService(DatabaseManager& dbManager, PlayerRepository& playerRepo, LogService& logService)
-    : m_dbManager(dbManager),
+CharacterService::CharacterService(DatabasePool& dbPool, PlayerRepository& playerRepo, LogService& logService)
+    : m_dbPool(dbPool),
     m_playerRepository(playerRepo),
     m_logService(logService)
 {}
@@ -13,8 +13,11 @@ CharacterService::CharacterService(DatabaseManager& dbManager, PlayerRepository&
 std::vector<CharacterData> CharacterService::getCharacterList(int accountId) {
     std::vector<CharacterData> characterList;
 
-    auto db = m_dbManager.createConnection(EDatabaseID::UserDB_Primary);
+    auto db = m_dbPool.getConnection(EDatabaseID::UserDB_Primary);
     if (!db) {
+        // Esta parte só será executada se, por algum motivo, o pool não puder
+        // fornecer uma conexão válida (o que é improvável no design atual,
+        // mas é uma excelente verificação de segurança).
         m_logService.error("Nao foi possivel obter conexao com UserDB_Primary em CharacterService.");
         return characterList;
     }

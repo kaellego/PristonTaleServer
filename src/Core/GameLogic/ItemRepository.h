@@ -7,12 +7,12 @@
 #include "Shared/datatypes.h" // <-- Inclui a definição de Item e DefinitionItem
 
 // Forward declaration
-class DatabaseManager;
+class DatabasePool;
 class LogService;
 
 class ItemRepository {
 public:
-    explicit ItemRepository(DatabaseManager& dbManager, LogService& logService);
+    explicit ItemRepository(DatabasePool& dbPool, LogService& logService);
 
     // --- MÉTODOS CORRIGIDOS ---
     const DefinitionItem* findItemDef(int itemCode) const;
@@ -28,7 +28,7 @@ public:
 private:
     void loadItemDefinitions();
 
-    DatabaseManager& m_dbManager;
+    DatabasePool& m_dbPool;
     LogService& m_logService;
     std::map<int, DefinitionItem> m_itemDefs;
     std::map<int, DefinitionItem> m_oldItemDefs;

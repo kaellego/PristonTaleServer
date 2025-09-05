@@ -45,7 +45,7 @@
     <ClInclude Include="Config\ServerConfig.h">
       <Filter>Arquivos de Origem\Config</Filter>
     </ClInclude>
-    <ClInclude Include="Database\DatabaseManager.h">
+    <ClInclude Include="Database\DatabasePool.h">
       <Filter>Arquivos de Origem\Database</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic\PlayerRepository.h">
@@ -131,7 +131,7 @@
     <ClCompile Include="Config\ServerConfig.cpp">
       <Filter>Arquivos de Origem\Config</Filter>
     </ClCompile>
-    <ClCompile Include="Database\DatabaseManager.cpp">
+    <ClCompile Include="Database\DatabasePool.cpp">
       <Filter>Arquivos de Origem\Database</Filter>
     </ClCompile>
     <ClCompile Include="GameLogic\PlayerRepository.cpp">
