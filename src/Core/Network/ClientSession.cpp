@@ -190,8 +190,9 @@ void ClientSession::close() {
         m_socket.close(ec);
     }
 }
-void ClientSession::authenticate(int accountId, const std::string& accountName) {
+void ClientSession::authenticate(int accountId, const std::string& accountName, int ticket) {
     m_isAuthenticated = true;
     m_accountId = accountId;
     m_accountName = accountName;
+    m_ticket = ticket;
 }

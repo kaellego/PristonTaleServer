@@ -46,6 +46,7 @@ public:
     uint8_t getXorKey() const { return m_xorKey; }
     const GlobalDatabaseConfig& getDatabaseConfig() const;
     const ServerInfo& getThisServerInfo() const;
+    const std::vector<ServerInfo>& getAllServers() const { return m_allServers; }
 
 private:
     void loadAndValidate(INIReader& reader);

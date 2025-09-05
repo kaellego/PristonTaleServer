@@ -11,20 +11,14 @@ ItemRepository::ItemRepository(DatabasePool& dbPool, LogService& logService)
     m_logService(logService)
 {
     m_logService.info("Inicializando repositorio de itens...");
-    // loadItemDefinitions(); // Mantido desativado para compilação inicial
 }
 
 void ItemRepository::loadItemDefinitions() {
     auto db = m_dbPool.getConnection(EDatabaseID::GameDB);
     if (!db) {
-        // Esta parte só será executada se, por algum motivo, o pool não puder
-        // fornecer uma conexão válida (o que é improvável no design atual,
-        // mas é uma excelente verificação de segurança).
         m_logService.error("Nao foi possivel obter conexao com GameDB no ItemRepository.");
         return;
     }
-
-    // Lógica para carregar ItemList e ItemListOld do banco de dados...
     m_logService.info("Definicoes de itens carregadas (logica a ser implementada).");
 }
 

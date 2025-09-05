@@ -693,9 +693,26 @@ struct PacketFireMeteorite {
 
 struct PacketPing {
     PacketHeader header;
-    uint32_t     dwTick;
-    uint32_t     dwTime;
+    uint32_t     dwTick; // Usado pelo servidor legacy, podemos manter por compatibilidade
+    uint32_t     dwTime; // Usado pelo cliente para o cálculo do tempo
     BOOL         CheatEngineDetected;
+};
+
+struct ServerListServerInfo {
+    char    szName[32];
+    char    szaIP[3][20];
+    int32_t iaPort[4];
+};
+
+struct PacketServerList {
+    PacketHeader header;
+    char         szServerName[16];
+    uint32_t     dwTime;
+    int32_t      iTicket;
+    uint32_t     dwUnknown;
+    int32_t      iClanServerIndex;
+    int32_t      iGameServers;
+    ServerListServerInfo sServers[4]; // Suporta até 4 servidores de jogo
 };
 
 #pragma pack(pop)

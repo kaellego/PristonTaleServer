@@ -1,33 +1,25 @@
 #pragma once
 
 #include <string>
-#include <algorithm> // Para std::transform
-#include "picosha2.h"
+#include <algorithm>
+#include <cctype> // Para std::tolower
+
+// picosha2.h não é mais necessário aqui, mas pode ser útil para outras coisas no futuro.
+// #include "picosha2.h" 
 
 namespace Crypto {
 
     /**
-     * @brief Valida uma senha em texto puro contra um hash SHA-256 armazenado.
-     * Constrói a string "usuario:senha", a converte para minúsculas,
-     * gera o hash e o compara com o hash do banco de dados.
-     * @param accountName O nome da conta.
-     * @param plainPassword A senha em texto puro enviada pelo cliente.
-     * @param hashedPassword O hash SHA-256 hexadecimal armazenado no banco de dados.
-     * @return true se a senha for válida, false caso contrário.
+     * @brief Valida um hash de senha recebido contra um hash armazenado.
+     * Realiza uma comparação de string case-insensitive.
+     * @param receivedHash O hash enviado pelo cliente (já no formato "usuario:senha" com hash).
+     * @param databaseHash O hash SHA-256 hexadecimal armazenado no banco de dados.
+     * @return true se os hashes corresponderem, false caso contrário.
      */
-    inline bool validatePassword(const std::string& accountName, const std::string& plainPassword, const std::string& hashedPassword) {
-        // 1. Constrói a string original no formato "usuario:senha"
-        std::string original_string = accountName + ":" + plainPassword;
-
-        // 2. Converte a string para minúsculas (a maioria dos hashes de PT são case-insensitive)
-        std::transform(original_string.begin(), original_string.end(), original_string.begin(),
-            [](unsigned char c) { return std::tolower(c); });
-
-        // 3. Gera o hash SHA-256 da string formatada
-        std::string generated_hash = picosha2::hash256_hex_string(original_string);
-
-        // 4. Compara o hash gerado com o hash do banco de dados (case-insensitive)
-        return _stricmp(generated_hash.c_str(), hashedPassword.c_str()) == 0;
+    inline bool validatePassword(const std::string& receivedHash, const std::string& databaseHash) {
+        // _stricmp é uma função do Windows para comparar strings sem diferenciar maiúsculas/minúsculas.
+        // Se estiver em outra plataforma, use strcasecmp.
+        return _stricmp(receivedHash.c_str(), databaseHash.c_str()) == 0;
     }
 
 } // namespace Crypto

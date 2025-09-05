@@ -29,7 +29,7 @@ public:
      * @param accountId O ID numérico da conta.
      * @param accountName O nome de usuário da conta.
      */
-    void authenticate(int accountId, const std::string& accountName);
+    void authenticate(int accountId, const std::string& accountName, int ticket);
 
     bool isAuthenticated() const { return m_isAuthenticated; }
     int getAccountId() const { return m_accountId; }
@@ -45,6 +45,7 @@ private:
     bool m_isAuthenticated = false;
     int m_accountId = -1;
     std::string m_accountName;
+    int m_ticket = 0;
 
     // Outros membros...
     boost::asio::ip::tcp::socket m_socket;

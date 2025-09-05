@@ -26,7 +26,7 @@ public:
      * @param accountId O ID da conta.
      * @return Um vetor de structs CharacterData.
      */
-    std::vector<CharacterData> getCharacterList(int accountId);
+    std::vector<CharacterData> getCharacterList(const std::string& accountName);
 
 private:
     DatabasePool& m_dbPool;

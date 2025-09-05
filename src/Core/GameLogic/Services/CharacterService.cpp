@@ -10,7 +10,7 @@ CharacterService::CharacterService(DatabasePool& dbPool, PlayerRepository& playe
     m_logService(logService)
 {}
 
-std::vector<CharacterData> CharacterService::getCharacterList(int accountId) {
+std::vector<CharacterData> CharacterService::getCharacterList(const std::string& accountName) {
     std::vector<CharacterData> characterList;
 
     auto db = m_dbPool.getConnection(EDatabaseID::UserDB_Primary);
@@ -23,30 +23,30 @@ std::vector<CharacterData> CharacterService::getCharacterList(int accountId) {
     }
 
     try {
-        // Busca os nomes de até 6 personagens da conta, ordenados por experiência
-        db->prepare("SELECT TOP 6 Name FROM CharacterInfo WHERE AccountID=? ORDER BY Experience DESC");
-        db->bindParameter<int>(1, accountId);
+        // --- A CONSULTA SQL CORRIGIDA ---
+        // Agora busca por AccountName em vez de AccountID
+        db->prepare("SELECT TOP 6 Name FROM CharacterInfo WHERE AccountName=? ORDER BY Experience DESC");
+        db->bindParameter<std::string>(1, accountName);
 
         db->execute();
 
         while (db->fetch()) {
             auto charNameOpt = db->getData<std::string>(1);
-            if (charNameOpt.has_value()) {
-                // Para cada nome encontrado, carrega os dados completos do arquivo .chr
+            if (charNameOpt.has_value() && !charNameOpt->empty()) {
                 auto charDataOpt = m_playerRepository.loadCharacter(*charNameOpt);
                 if (charDataOpt.has_value()) {
                     characterList.push_back(*charDataOpt);
                 }
                 else {
-                    m_logService.warn("Personagem '{}' encontrado no DB, mas o arquivo .chr nao foi encontrado ou falhou ao carregar.", *charNameOpt);
+                    m_logService.warn("Personagem '{}' encontrado no DB, mas o arquivo .chr nao foi encontrado.", *charNameOpt);
                 }
             }
         }
     }
     catch (const std::exception& e) {
-        m_logService.error("Erro de SQL em getCharacterList para a conta ID {}: {}", accountId, e.what());
+        m_logService.error("Erro de SQL em getCharacterList para a conta {}: {}", accountName, e.what());
     }
 
-    m_logService.info("Encontrado(s) {} personagem(ns) para a conta ID {}.", characterList.size(), accountId);
+    m_logService.info("Encontrado(s) {} personagem(ns) para a conta {}.", characterList.size(), accountName);
     return characterList;
 }

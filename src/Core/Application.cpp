@@ -36,9 +36,10 @@ void Application::buildServices() {
     // --- ETAPA 1: Serviços Base (sem dependências complexas) ---
     m_config = std::make_unique<ServerConfig>("server.ini");
 
-    m_logService->info("Versao do Jogo: {}", m_config->getGameVersion());
-    m_logService->info("Chave XOR Calculada: 0x{:02x}", m_config->getXorKey());
+    //m_logService->info("Versao do Jogo: {}", m_config->getGameVersion());
+    //m_logService->info("Chave XOR Calculada: 0x{:02x}", m_config->getXorKey());
 
+    m_globalState->gameVersion = m_config->getGameVersion();
     m_globalState->isGameServer = m_config->getThisServerInfo().isGameServer;
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
 
@@ -50,7 +51,8 @@ void Application::buildServices() {
     // --- ETAPA 3: Serviços de Lógica de Jogo ---
     m_characterService = std::make_unique<CharacterService>(*m_dbPool, *m_playerRepository, *m_logService);
     m_userService = std::make_unique<UserService>(*m_logService);
-    m_accountService = std::make_unique<AccountService>(*m_dbPool, *m_characterService, *m_userService, *m_logService);
+    m_accountService = std::make_unique<AccountService>(*m_dbPool, *m_characterService, *m_userService, *m_logService, *m_config);
+
 
     // --- ETAPA 4: Rede e Despacho de Pacotes ---
     m_io_context = std::make_shared<boost::asio::io_context>();

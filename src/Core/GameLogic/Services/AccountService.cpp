@@ -2,10 +2,12 @@
 #include "Database/DatabasePool.h"
 #include "Database/SQLConnection.h"
 #include "Network/ClientSession.h"
+#include "Config/ServerConfig.h"
 #include "Network/Packet.h"
 #include "Utils/Crypto.h"
 #include "Shared/Constants.h"
 #include "Shared/datatypes.h"
+#include "Utils/Dice.h"
 
 // TODO: Incluir os headers dos outros serviços quando eles forem criados
 #include "GameLogic/Services/CharacterService.h" 
@@ -15,11 +17,12 @@
 #include <iostream>
 #include <utility>
 
-AccountService::AccountService(DatabasePool& dbPool, CharacterService& charService, UserService& userService, LogService& logService)
+AccountService::AccountService(DatabasePool& dbPool, CharacterService& charService, UserService& userService, LogService& logService, const ServerConfig& serverConfig)
     : m_dbPool(dbPool),
     m_characterService(charService),
     m_userService(userService),
-    m_logService(logService)
+    m_logService(logService),
+    m_serverConfig(serverConfig)
 {
     m_workerThread = std::thread(&AccountService::workerLoop, this);
 }
@@ -69,19 +72,16 @@ void AccountService::workerLoop() {
 }
 
 void AccountService::processLogin(LoginRequest& request) {
-
-    // --- A FORMA CORRETA E SIMPLES DE EXTRAIR AS STRINGS ---
-    // O construtor de std::string sabe como lidar com arrays de char terminados em nulo.
     std::string accountName(request.packet.szUserID);
-    std::string password(request.packet.szPassword);
+    std::string passwordHashFromClient(request.packet.szPassword);
 
-    m_logService.debug("Processando tentativa de login para a conta: '{}' com a senha: '{}'", accountName, password);
+    m_logService.debug("Processando tentativa de login para a conta: '{}' com a senha: '{}'", accountName, passwordHashFromClient);
 
     // 1. Get user data from the database
     auto sqlUserOpt = getSqlUserInfo(accountName);
     if (!sqlUserOpt.has_value()) {
         m_logService.warn("Conta '{}' nao encontrada no banco de dados.", accountName);
-        onLoginFailure(request.session, Log::LoginResult::IncorrectAccount);
+        onLoginFailure(request.session, Log::LoginResult::IncorrectAccount, accountName);
         return;
     }
 
@@ -91,14 +91,15 @@ void AccountService::processLogin(LoginRequest& request) {
     Log::LoginResult validationResult = validateRequest(request, sqlUser);
     if (validationResult != Log::LoginResult::Success) {
         m_logService.warn("Tentativa de login falhou para a conta {} com o codigo: {}", accountName, static_cast<int>(validationResult));
-        onLoginFailure(request.session, validationResult);
+        onLoginFailure(request.session, validationResult, accountName);
         return;
     }
 
     // 3. Validate the password
-    if (!Crypto::validatePassword(accountName, password, std::string(sqlUser.szPassword))) {
-        m_logService.warn("Tentativa de login para a conta {} com senha incorreta.", accountName);
-        onLoginFailure(request.session, Log::LoginResult::IncorrectPassword);
+    
+    if (!Crypto::validatePassword(passwordHashFromClient, std::string(sqlUser.szPassword))) {
+        m_logService.warn("Tentativa de login para a conta {} com hash de senha incorreto.", accountName);
+        onLoginFailure(request.session, Log::LoginResult::IncorrectPassword, accountName);
         return;
     }
 
@@ -116,16 +117,62 @@ Log::LoginResult AccountService::validateRequest(const LoginRequest& request, co
     return Log::LoginResult::Success;
 }
 
-void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, const SQLUser& sqlUser) {
-    m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
-    session->authenticate(sqlUser.iID, sqlUser.szAccountName);
-    m_userService.addUser(sqlUser.iID, sqlUser.szAccountName, session);
-    sendLoginResult(session, Log::LoginResult::Success);
-    sendCharacterList(session, sqlUser.szAccountName, sqlUser.iID);
+void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int ticket) {
+    PacketServerList serverListPacket{};
+
+    // As chamadas agora são válidas
+    const auto& allServers = m_serverConfig.getAllServers();
+    const auto& loginServerInfo = m_serverConfig.getThisServerInfo();
+
+    serverListPacket.header.opcode = static_cast<uint32_t>(Opcodes::ServerList);
+    // CORRIGIDO: strncpy_s precisa do tamanho do buffer de destino
+    //strncpy_s(serverListPacket.szServerName, sizeof(serverListPacket.szServerName), loginServerInfo.name.c_str());
+    serverListPacket.iTicket = ticket;
+    serverListPacket.dwTime = GetTickCount();
+
+    int gameServerCount = 0;
+    for (const auto& serverInfo : allServers) {
+        if (serverInfo.isGameServer && gameServerCount < 4) {
+            auto& destServer = serverListPacket.sServers[gameServerCount];
+            //strncpy_s(destServer.szName, sizeof(destServer.szName), serverInfo.name.c_str());
+            //strncpy_s(destServer.szaIP[0], sizeof(destServer.szaIP[0]), serverInfo.publicIp.c_str());
+            destServer.iaPort[0] = serverInfo.port;
+            destServer.iaPort[1] = serverInfo.port;
+            destServer.iaPort[2] = serverInfo.port;
+            gameServerCount++;
+        }
+    }
+    serverListPacket.iGameServers = gameServerCount;
+
+    // Converte e envia o pacote
+    const size_t packetSize = sizeof(PacketHeader) + offsetof(PacketServerList, sServers) - sizeof(PacketHeader) + (sizeof(ServerListServerInfo) * gameServerCount);
+    serverListPacket.header.length = static_cast<uint16_t>(packetSize);
+
+    const uint8_t* bodyPtr = reinterpret_cast<const uint8_t*>(&serverListPacket) + sizeof(PacketHeader);
+    std::vector<uint8_t> body(bodyPtr, bodyPtr + (packetSize - sizeof(PacketHeader)));
+
+    Packet packet(serverListPacket.header.opcode, body);
+
+    m_logService.packet("-> Pacote Enviado: {} (Opcode: 0x{:04x})", "ServerList", packet.header.opcode);
+    session->send(packet);
 }
 
-void AccountService::onLoginFailure(std::shared_ptr<ClientSession> session, Log::LoginResult reason) {
-    m_logService.warn("Login falhou para a conta [{}]. Razao: {}", session->getAccountName(), static_cast<int>(reason));
+void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, const SQLUser& sqlUser) {
+    m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
+
+    // CORRIGIDO: Gera o ticket e o passa para a sessão
+    int ticket = Dice::RandomI(1, 1000000);
+    session->authenticate(sqlUser.iID, sqlUser.szAccountName, ticket);
+
+    m_userService.addUser(sqlUser.iID, sqlUser.szAccountName, session);
+
+    sendLoginResult(session, Log::LoginResult::Success);
+    sendServerList(session, ticket); // Passa o ticket para a lista de servidores
+    sendCharacterList(session, sqlUser.szAccountName);
+}
+
+void AccountService::onLoginFailure(std::shared_ptr<ClientSession> session, Log::LoginResult reason, const std::string& accountName) {
+    m_logService.warn("Login falhou para a conta [{}]. Razao: {}", accountName, static_cast<int>(reason));
     sendLoginResult(session, reason);
 }
 
@@ -174,18 +221,17 @@ void AccountService::sendLoginResult(std::shared_ptr<ClientSession> session, Log
     session->send(packet);
 }
 
-void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, const std::string& accountName, int accountId) {
+void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, const std::string& accountName) {
     m_logService.info("Enviando lista de personagens para a conta {}", accountName);
 
-    std::vector<CharacterData> charList = m_characterService.getCharacterList(accountId);
+    // Chama o CharacterService com o accountName
+    std::vector<CharacterData> charList = m_characterService.getCharacterList(accountName);
 
-    // Agora o compilador sabe exatamente o que é PacketUserInfo
     PacketUserInfo userInfoPacket{};
-    userInfoPacket.header.opcode = PKTHDR_UserInfo;
+    userInfoPacket.header.opcode = static_cast<uint32_t>(Opcodes::UserInfo);
     strncpy_s(userInfoPacket.szUserID, accountName.c_str(), sizeof(userInfoPacket.szUserID));
     userInfoPacket.CharCount = static_cast<int>(charList.size());
 
-    // Preenche os dados de cada personagem no pacote
     for (size_t i = 0; i < charList.size() && i < 6; ++i) {
         const auto& charData = charList[i];
         auto& destChar = userInfoPacket.sCharacterData[i];
