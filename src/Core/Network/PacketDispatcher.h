@@ -57,5 +57,5 @@ private:
     InventoryService& m_inventoryService;
     GameWorld& m_gameWorld;
 
-    std::map<uint32_t, std::unique_ptr<IPacketHandler>> m_handlers;
+    std::map<uint32_t, std::shared_ptr<IPacketHandler>> m_handlers;
 };

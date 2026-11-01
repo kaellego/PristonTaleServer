@@ -20,7 +20,7 @@ enum class LogLevel {
 
 /**
  * @class LogService
- * @brief Um serviço de logging moderno, thread-safe e type-safe.
+ * @brief Um serviÃ§o de logging moderno, thread-safe e type-safe.
  * Gerencia a escrita de logs para um arquivo e para o console (sem cores).
  */
 class LogService {
@@ -31,7 +31,7 @@ public:
     LogService(const LogService&) = delete;
     LogService& operator=(const LogService&) = delete;
 
-    // Métodos de Logging Públicos (sem alterações na interface)
+    // MÃ©todos de Logging PÃºblicos (sem alteraÃ§Ãµes na interface)
     template<typename... Args>
     void info(const std::string& format_str, Args&&... args) {
         log(LogLevel::Info, std::vformat(format_str, std::make_format_args(args...)));
@@ -54,14 +54,14 @@ public:
 
     template<typename... Args>
     void debug(const std::string& format_str, Args&&... args) {
-#ifdef DEV_MODE
+#if defined(DEV_MODE) && !defined(NDEBUG)
         log(LogLevel::Debug, std::vformat(format_str, std::make_format_args(args...)));
 #endif
     }
 
     template<typename... Args>
     void packet(const std::string& format_str, Args&&... args) {
-#ifdef DEV_MODE
+#if defined(DEV_MODE) && !defined(NDEBUG)
         log(LogLevel::Packet, std::vformat(format_str, std::make_format_args(args...)));
 #endif
     }

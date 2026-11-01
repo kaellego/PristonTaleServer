@@ -49,18 +49,20 @@ PacketDispatcher::PacketDispatcher(
 
 void PacketDispatcher::registerHandlers() {
     // Acessa os opcodes de forma segura e com escopo
-    m_handlers[static_cast<uint32_t>(Opcodes::KeepAlive)] = std::make_unique<KeepAliveHandler>(m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::LoginUser)] = std::make_unique<LoginHandler>(m_accountService, m_logService, m_globalState);
-    m_handlers[static_cast<uint32_t>(Opcodes::Ping)] = std::make_unique<PingHandler>(m_logService, m_userService, m_globalState);
-    m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::NetPlayerInventory)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouse)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouseSeasonal)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::KeepAlive)] = std::make_shared<KeepAliveHandler>(m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::LoginUser)] = std::make_shared<LoginHandler>(m_accountService, m_logService, m_globalState);
+    m_handlers[static_cast<uint32_t>(Opcodes::Ping)] = std::make_shared<PingHandler>(m_logService, m_userService, m_globalState);
+    auto characterHandler = std::make_shared<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = characterHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = characterHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = characterHandler;
+    auto itemHandler = std::make_shared<ItemHandler>(m_inventoryService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetPlayerInventory)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouse)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouseSeasonal)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = itemHandler;
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }
