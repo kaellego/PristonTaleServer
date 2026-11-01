@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <functional>
+#include <string>
 
 // Forward declarations
 class ClientSession;
@@ -41,6 +42,7 @@ public:
     );
 
     void dispatch(std::shared_ptr<ClientSession> session, const Packet& packet);
+    bool transferLegacySession(std::shared_ptr<ClientSession> session, const std::string& accountName);
     void sessionClosed(std::shared_ptr<ClientSession> session);
 
 private:

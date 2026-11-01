@@ -13,12 +13,13 @@
  * Inicializa os membros e, mais importante, inicia o ciclo de aceita??o de conex?es
  * chamando do_accept() pela primeira vez.
  */
-Server::Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey)
+Server::Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey, bool gameEndpoint)
     : m_io_context(io_context),
     m_acceptor(*io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port)),
     m_packet_dispatcher(dispatcher),
     m_logService(logService),
-    m_xorKey(xorKey) // <-- Armazena a chave
+    m_xorKey(xorKey),
+    m_gameEndpoint(gameEndpoint)
 {
     std::cout << "[Rede] Servidor escutando na porta " << port << "..." << std::endl;
     do_accept();
@@ -58,7 +59,8 @@ void Server::do_accept() {
         [this](const boost::system::error_code& ec, boost::asio::ip::tcp::socket socket) {
             if (!ec) {
                 // CORRIGIDO: Passa a chave XOR para o construtor do ClientSession
-                auto session = std::make_shared<ClientSession>(std::move(socket), m_packet_dispatcher, m_logService, m_xorKey);
+                const bool gameEndpoint = socket.local_endpoint().port() == 5056;
+                auto session = std::make_shared<ClientSession>(std::move(socket), m_packet_dispatcher, m_logService, m_xorKey, gameEndpoint);
                 {
                     std::lock_guard lock(m_sessionsMutex);
                     m_sessions.emplace_back(session);

@@ -1,0 +1,63 @@
+Inicializando Servidor Priston Tale...
+[INFO]   Inicializando a aplicacao do servidor...
+[INFO] Versao do Jogo: 1610
+[INFO] Chave XOR Calculada: 0xd3
+[INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+Inicializando repositorio de jogadores...
+[INFO]   Inicializando repositorio de itens...
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+[INFO]   737 definicoes de itens carregadas.
+[INFO]   Registrando manipuladores de pacotes...
+[INFO]   19 manipuladores de pacotes registrados.
+[Rede] Servidor escutando na porta 5055...
+[Rede] Servidor escutando na porta 5056...
+[INFO]   Todos os servicos foram construidos com sucesso.
+[main] Servidor inicializado com sucesso. Executando...
+[INFO]   Iniciando 32 threads de rede...
+[INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+[INFO]   Nova sessao iniciada: 127.0.0.1:30075
+[DEBUG]  Sessao::start() <-> Aguardando frame legado
+[DEBUG]  Processando tentativa de login para a conta: 'test'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Login bem-sucedido para a conta: test
+[DEBUG]  Ticket assinado emitido para 'test' (assinatura efbf9e5370a5...).
+[INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+[PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+[INFO]   Enviando lista de personagens para a conta test
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+[PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+[INFO]   Nova sessao iniciada: 127.0.0.1:30083
+[DEBUG]  Sessao::start() <-> Aguardando frame legado
+[INFO]   GameServer: enviando confirmacao legada de entrada
+[INFO]   Sessao encerrada para um socket ja desconectado.
+[INFO]   Nova sessao iniciada: 127.0.0.1:30089
+[DEBUG]  Sessao::start() <-> Aguardando frame legado
+[INFO]   GameServer: enviando confirmacao legada de entrada
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Operacao de personagem aceita para test: dasd
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Operacao de personagem aceita para test: dasd
+[WARN]   Frame legado nao suportado: size=52, code=108, bytes=52 0 0 0
+[INFO]   Usuario 'test' removido da lista de online. Total: 0
+[INFO]   Sessao encerrada para um socket ja desconectado.
+[INFO]   Sessao encerrada para um socket ja desconectado.
+[INFO]   Nova sessao iniciada: 127.0.0.1:38452
+[DEBUG]  Sessao::start() <-> Aguardando frame legado
+[DEBUG]  Processando tentativa de login para a conta: 'test'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Login bem-sucedido para a conta: test
+[DEBUG]  Ticket assinado emitido para 'test' (assinatura 71fd49c66c21...).
+[INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+[PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+[INFO]   Enviando lista de personagens para a conta test
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+[PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+[INFO]   Nova sessao iniciada: 127.0.0.1:38458
+[DEBUG]  Sessao::start() <-> Aguardando frame legado
+[INFO]   GameServer: enviando confirmacao legada de entrada

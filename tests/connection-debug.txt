@@ -1,0 +1,71 @@
+﻿Inicio: 11/01/2026 16:33:28
+Servidor PID: 46720 | Cliente PID: 19344
+Cliente: C:\Users\weeel\Desktop\ZeroPT-Client\Game.exe
+ConfiguraÃ§Ã£o: C:\Users\weeel\Desktop\ZeroPT-Client\Settings.ini
+
+16:33:38 TCP: 127.0.0.1:5055 [Established]
+16:33:40 TCP: 127.0.0.1:5055 [Established]
+16:33:42 TCP: 127.0.0.1:5055 [Established]
+16:33:43 TCP: 127.0.0.1:5055 [Established]
+16:33:45 TCP: 127.0.0.1:5055 [Established]
+16:33:47 TCP: 127.0.0.1:5055 [Established]
+16:33:49 TCP: 127.0.0.1:5055 [Established]
+16:33:50 TCP: 127.0.0.1:5055 [Established]
+16:33:52 TCP: 127.0.0.1:5055 [Established]
+16:33:54 TCP: 127.0.0.1:5055 [Established]
+16:33:56 TCP: 127.0.0.1:5055 [Established]
+16:33:58 TCP: 127.0.0.1:5055 [Established]
+16:33:59 TCP: 127.0.0.1:5055 [Established]
+16:34:01 TCP: 127.0.0.1:5055 [Established]
+16:34:03 TCP: 127.0.0.1:5055 [Established]
+16:34:05 TCP: 127.0.0.1:5055 [Established]
+16:34:07 TCP: 127.0.0.1:5055 [Established]
+16:34:09 TCP: 127.0.0.1:5055 [Established]
+16:34:11 TCP: 127.0.0.1:5055 [Established]
+16:34:13 TCP: 127.0.0.1:5055 [Established]
+16:34:15 TCP: 127.0.0.1:5055 [Established]
+16:34:17 TCP: 127.0.0.1:5055 [Established]
+16:34:19 TCP: 127.0.0.1:5055 [Established]
+16:34:21 TCP: 127.0.0.1:5055 [Established]
+16:34:23 TCP: 127.0.0.1:5055 [Established]
+16:34:25 TCP: 127.0.0.1:5055 [Established]
+16:34:27 TCP: 127.0.0.1:5055 [Established]
+16:34:29 TCP: 127.0.0.1:5055 [Established]
+16:34:31 TCP: 127.0.0.1:5055 [Established]
+16:34:33 TCP: 127.0.0.1:5055 [Established]
+16:34:35 TCP: 127.0.0.1:5055 [Established]
+16:34:37 TCP: 127.0.0.1:5055 [Established]
+16:34:39 TCP: 127.0.0.1:5055 [Established]
+
+--- SERVER LOG ---
+Inicializando Servidor Priston Tale...
+[INFO]   Inicializando a aplicacao do servidor...
+[INFO] Versao do Jogo: 1610
+[INFO] Chave XOR Calculada: 0xd3
+[INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+Inicializando repositorio de jogadores...
+[INFO]   Inicializando repositorio de itens...
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+[INFO]   737 definicoes de itens carregadas.
+[INFO]   Registrando manipuladores de pacotes...
+[INFO]   19 manipuladores de pacotes registrados.
+[Rede] Servidor escutando na porta 5055...
+[INFO]   Todos os servicos foram construidos com sucesso.
+[main] Servidor inicializado com sucesso. Executando...
+[INFO]   Iniciando 32 threads de rede...
+[INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+[INFO]   Nova sessao iniciada: 127.0.0.1:39598
+[DEBUG]  Sessao::start() <-> Aguardando frame legado
+[DEBUG]  Processando tentativa de login para a conta: 'test'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Login bem-sucedido para a conta: test
+[DEBUG]  Ticket assinado emitido para 'test' (assinatura e7c49f147603...).
+[INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+[PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+[PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+[INFO]   Enviando lista de personagens para a conta test
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+[INFO]   Usuario 'test' removido da lista de online. Total: 0
+[INFO]   Sessao encerrada para um socket ja desconectado.
+--- SERVER STDERR ---

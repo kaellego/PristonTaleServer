@@ -28,7 +28,7 @@ public:
      * @param port A porta em que o servidor escutar? por conex?es.
      * @param dispatcher A refer?ncia para o dispatcher de pacotes que ser? passado para novas sess?es.
      */
-    explicit Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey);
+    explicit Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey, bool gameEndpoint = false);
     void stop();
 
 private:
@@ -47,6 +47,7 @@ private:
     PacketDispatcher& m_packet_dispatcher;
     LogService& m_logService;
     uint8_t m_xorKey;
+    bool m_gameEndpoint;
     std::atomic_bool m_stopped{false};
     std::mutex m_sessionsMutex;
     std::vector<std::weak_ptr<ClientSession>> m_sessions;

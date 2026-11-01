@@ -83,6 +83,18 @@ void Application::buildServices()
     uint8_t gameXorKey = m_config->getXorKey();
 
     m_networkServer = std::make_unique<Server>(m_io_context, serverInfo.port, *m_packetDispatcher, *m_logService, gameXorKey);
+
+    // A login process must also accept the GameServer endpoint advertised to
+    // the legacy client, otherwise server selection can never complete.
+    if (serverInfo.isLoginServer) {
+        for (const auto& gameServer : m_config->getAllServers()) {
+            if (gameServer.isGameServer && gameServer.port != serverInfo.port) {
+                m_gameNetworkServer = std::make_unique<Server>(
+                    m_io_context, gameServer.port, *m_packetDispatcher, *m_logService, gameXorKey, true);
+                break;
+            }
+        }
+    }
 }
 
 void Application::run()
@@ -126,6 +138,7 @@ void Application::requestShutdown()
     if (!m_isRunning.exchange(false)) return;
     m_logService->info("Solicitação de encerramento recebida; iniciando shutdown gracioso.");
     if (m_networkServer) m_networkServer->stop();
+    if (m_gameNetworkServer) m_gameNetworkServer->stop();
     if (m_signals) m_signals->cancel();
     if (m_io_context) m_io_context->stop();
 }

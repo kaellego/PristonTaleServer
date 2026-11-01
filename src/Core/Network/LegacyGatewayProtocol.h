@@ -14,8 +14,8 @@ enum class Opcode : int32_t {
     Connected = 3,
     GetUserInfo = 8,
     SetUserInfo = 9,
-    FailConnect = 0x22,
-    ServerInfo = 0x23,
+    FailConnect = 64,
+    ServerInfo = 96,
 };
 
 #pragma pack(push, 1)
@@ -50,6 +50,8 @@ struct LoginPacket {
 
 std::optional<Packet> toModernPacket(const std::vector<uint8_t>& payload);
 std::optional<Packet> loginToModernPacket(const std::vector<uint8_t>& payload);
+std::optional<std::vector<uint8_t>> toLegacyPayload(const Packet& packet, uint32_t packetKey, int32_t requestCode = 0);
+std::vector<uint8_t> gameServerReadyPayload();
 bool isSafeString(const char* value, size_t capacity);
 
 } // namespace LegacyGateway

@@ -56,6 +56,7 @@ private:
 
     std::unique_ptr<PacketDispatcher> m_packetDispatcher;
     std::unique_ptr<Server> m_networkServer;
+    std::unique_ptr<Server> m_gameNetworkServer;
 
     std::atomic_bool m_isRunning{false};
     std::unique_ptr<boost::asio::signal_set> m_signals;

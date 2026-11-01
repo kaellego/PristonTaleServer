@@ -17,7 +17,7 @@ class LogService;
 
 class ClientSession : public std::enable_shared_from_this<ClientSession> {
 public:
-    ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey);
+    ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey, bool gameEndpoint = false);
     ~ClientSession();
 
     void start();
@@ -51,6 +51,7 @@ private:
     void do_read_legacy_length();
     void do_read_legacy_frame();
     void do_write();
+    void do_legacy_write();
     void sendEncryptionKey();
 
     // --- NOVOS MEMBROS DE ESTADO ---
@@ -70,6 +71,8 @@ private:
     LogService& m_logService;
     PacketCipher m_cipher;
     uint8_t m_xorKey;
+    bool m_gameEndpoint;
+    int32_t m_legacyRequestCode = 0;
     std::vector<uint8_t> m_write_buffer;
     PacketHeader m_read_header;
     std::vector<uint8_t> m_read_body;
@@ -77,5 +80,7 @@ private:
     std::array<uint8_t, 4> m_legacyLengthBuffer{};
     std::vector<uint8_t> m_legacyFrame;
     uint32_t m_legacyCounter = 0;
+    uint32_t m_legacySendCounter = 0;
     std::deque<Packet> m_write_queue;
+    std::deque<std::vector<uint8_t>> m_legacy_write_queue;
 };

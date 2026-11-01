@@ -96,6 +96,10 @@ void PacketDispatcher::dispatch(std::shared_ptr<ClientSession> session, const Pa
     }
 }
 
+bool PacketDispatcher::transferLegacySession(std::shared_ptr<ClientSession> session, const std::string& accountName) {
+    return m_userService.transferSession(accountName, session);
+}
+
 void PacketDispatcher::sessionClosed(std::shared_ptr<ClientSession> session) {
     m_gameWorld.leave(session->getAccountName());
     m_userService.removeUser(std::move(session));

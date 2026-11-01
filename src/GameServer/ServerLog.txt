@@ -2371,3 +2371,1525 @@
 2026-11-01 15:08:02 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
 2026-11-01 15:08:02 [WARN]   Erro ao ler o cabecalho: Foi forçado o cancelamento de uma conexão existente pelo host remoto. Desconectando.
 2026-11-01 15:08:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:39:33 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:39:33 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:39:33 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:39:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:39:33 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:39:33 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:39:33 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:39:33 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:39:33 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:39:33 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:39:39 [INFO]   Nova sessao iniciada: 127.0.0.1:1588
+2026-11-01 15:39:39 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:39:39 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:39:46 [INFO]   Nova sessao iniciada: 127.0.0.1:1611
+2026-11-01 15:39:46 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:39:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:40:31 [INFO]   Nova sessao iniciada: 127.0.0.1:53480
+2026-11-01 15:40:31 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:40:31 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:41:27 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:41:27 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:41:27 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:41:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:41:27 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:41:27 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:41:27 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:41:27 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:41:27 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:41:27 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:41:32 [INFO]   Nova sessao iniciada: 127.0.0.1:53776
+2026-11-01 15:41:32 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:41:32 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:43:59 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:43:59 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:43:59 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:43:59 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:43:59 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:43:59 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:43:59 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:43:59 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:43:59 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:43:59 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:44:06 [INFO]   Nova sessao iniciada: 127.0.0.1:11119
+2026-11-01 15:44:06 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:44:06 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:47:07 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:47:07 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:47:07 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:47:07 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:47:08 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:47:08 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:47:08 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:47:08 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:47:08 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:47:08 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:47:13 [INFO]   Nova sessao iniciada: 127.0.0.1:57643
+2026-11-01 15:47:13 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:47:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:49:20 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:49:20 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:49:20 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:49:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:49:20 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:49:20 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:49:20 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:49:20 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:49:20 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:49:20 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:49:25 [INFO]   Nova sessao iniciada: 127.0.0.1:26138
+2026-11-01 15:49:25 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:49:25 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:49:46 [INFO]   Nova sessao iniciada: 127.0.0.1:19041
+2026-11-01 15:49:46 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:49:46 [WARN]   Opcode ou estrutura legada nao suportada
+2026-11-01 15:49:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:49:54 [INFO]   Nova sessao iniciada: 127.0.0.1:51339
+2026-11-01 15:49:54 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:49:54 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 15:49:54 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 15:49:54 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 15:49:54 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 503a276d21c4...).
+2026-11-01 15:49:54 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 15:49:54 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 15:49:54 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 15:49:54 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 15:49:54 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 15:49:54 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 15:49:55 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 15:49:55 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:52:16 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:52:16 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:52:16 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:52:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:52:16 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:52:16 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:52:16 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:52:16 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:52:16 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:52:16 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:52:21 [INFO]   Nova sessao iniciada: 127.0.0.1:36223
+2026-11-01 15:52:21 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:52:21 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:53:50 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:53:50 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:53:50 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:53:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:53:50 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:53:50 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:53:50 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:53:50 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:53:50 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:53:50 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:53:56 [INFO]   Nova sessao iniciada: 127.0.0.1:27132
+2026-11-01 15:53:56 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:53:56 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:54:56 [INFO]   Nova sessao iniciada: 127.0.0.1:22431
+2026-11-01 15:54:56 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:54:56 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:55:11 [INFO]   Nova sessao iniciada: 127.0.0.1:22479
+2026-11-01 15:55:11 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:55:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:57:04 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:57:04 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:57:04 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:57:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:57:04 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:57:04 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:57:04 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:57:04 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:57:04 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:57:04 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:57:09 [INFO]   Nova sessao iniciada: 127.0.0.1:28941
+2026-11-01 15:57:09 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 15:57:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:59:02 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:59:02 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:59:02 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:59:02 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:59:02 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:59:02 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:59:02 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:59:02 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:59:02 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:59:02 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:01:26 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:01:26 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:01:26 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:01:26 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:01:26 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:01:26 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:01:26 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:01:26 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:01:26 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:01:26 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:03:12 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:03:12 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:03:12 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:03:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:03:12 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:03:12 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:03:12 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:03:12 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:03:12 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:03:12 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:05:18 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:05:18 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:05:18 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:05:18 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:05:18 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:05:18 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:05:18 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:05:18 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:05:18 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:05:18 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:05:33 [INFO]   Nova sessao iniciada: 127.0.0.1:60597
+2026-11-01 16:05:33 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:05:33 [DEBUG]  Processando tentativa de login para a conta: 'admin'
+2026-11-01 16:05:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:05:33 [WARN]   Conta 'admin' nao encontrada no banco de dados.
+2026-11-01 16:05:33 [WARN]   Login falhou para a conta [admin]. Razao: -1
+2026-11-01 16:05:33 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:08:12 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:08:12 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:08:12 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:08:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:08:12 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:08:12 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:08:12 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:08:12 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:08:12 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:08:12 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:08:48 [INFO]   Nova sessao iniciada: 127.0.0.1:51171
+2026-11-01 16:08:48 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:08:48 [DEBUG]  Processando tentativa de login para a conta: 'teesttest'
+2026-11-01 16:08:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:08:48 [WARN]   Conta 'teesttest' nao encontrada no banco de dados.
+2026-11-01 16:08:48 [WARN]   Login falhou para a conta [teesttest]. Razao: -1
+2026-11-01 16:08:48 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:11:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:11:19 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:11:19 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:11:19 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:11:19 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:11:19 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:11:19 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:11:19 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:11:19 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:11:19 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:11:19 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:12:27 [INFO]   Nova sessao iniciada: 127.0.0.1:46178
+2026-11-01 16:12:27 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:12:27 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:12:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:12:27 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:12:27 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 68038eced4a7...).
+2026-11-01 16:12:27 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:12:27 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:12:27 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:12:27 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:12:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:12:27 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:12:35 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:12:35 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:13:16 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:13:16 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:13:16 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:13:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:13:16 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:13:16 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:13:16 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:13:16 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:13:16 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:13:16 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:13:47 [INFO]   Nova sessao iniciada: 127.0.0.1:37376
+2026-11-01 16:13:47 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:13:47 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:13:47 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:13:47 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:13:48 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 0c8201410e6b...).
+2026-11-01 16:13:48 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:13:48 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:13:48 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:13:48 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:13:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:13:48 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:13:55 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:13:55 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:15:16 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:15:16 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:15:16 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:15:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:15:16 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:15:16 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:15:16 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:15:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:15:16 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:15:16 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:15:16 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:15:16 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:15:16 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:15:16 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:15:16 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:15:16 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:15:16 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:15:16 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:15:16 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:15:16 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:15:33 [INFO]   Nova sessao iniciada: 127.0.0.1:14185
+2026-11-01 16:15:33 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:15:33 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:15:48 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:15:48 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:15:48 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:15:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:15:48 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:15:48 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:15:48 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:15:48 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:15:48 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:15:48 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:16:06 [INFO]   Nova sessao iniciada: 127.0.0.1:12915
+2026-11-01 16:16:06 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:06 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:06 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:06 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:06 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 89a911fab62e...).
+2026-11-01 16:16:06 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:06 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:06 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:06 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:06 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:06 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:13 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:13 [INFO]   Nova sessao iniciada: 127.0.0.1:12950
+2026-11-01 16:16:13 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:13 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:13 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:13 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:13 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 40b2f28e72ce...).
+2026-11-01 16:16:13 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:13 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:13 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:13 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:13 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:13 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:14 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:14 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:14 [INFO]   Nova sessao iniciada: 127.0.0.1:12963
+2026-11-01 16:16:14 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:14 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:14 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:14 [DEBUG]  Ticket assinado emitido para 'test' (assinatura eb94dd7a8896...).
+2026-11-01 16:16:14 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:14 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:14 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:14 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:14 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:15 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:15 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:15 [INFO]   Nova sessao iniciada: 127.0.0.1:12971
+2026-11-01 16:16:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:15 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:15 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:15 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 41eb9ec620ec...).
+2026-11-01 16:16:15 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:15 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:15 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:15 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:15 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:16 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:16 [INFO]   Nova sessao iniciada: 127.0.0.1:12980
+2026-11-01 16:16:16 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:16 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:16 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:16 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 90be1094e565...).
+2026-11-01 16:16:16 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:16 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:16 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:16 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:16 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:17 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:17 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:17 [INFO]   Nova sessao iniciada: 127.0.0.1:45084
+2026-11-01 16:16:17 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:17 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:17 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:17 [DEBUG]  Ticket assinado emitido para 'test' (assinatura bbd23a1e7dc6...).
+2026-11-01 16:16:17 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:17 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:17 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:17 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:17 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:18 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:18 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:18 [INFO]   Nova sessao iniciada: 127.0.0.1:45090
+2026-11-01 16:16:18 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:18 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:18 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:18 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:18 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b00e1750f28e...).
+2026-11-01 16:16:18 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:18 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:18 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:18 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:18 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:18 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:19 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:19 [INFO]   Nova sessao iniciada: 127.0.0.1:45100
+2026-11-01 16:16:19 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:19 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:19 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:19 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:19 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:19 [DEBUG]  Ticket assinado emitido para 'test' (assinatura aa42d6e7d7ed...).
+2026-11-01 16:16:19 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:19 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:19 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:19 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:19 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:19 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:20 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:20 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:20 [INFO]   Nova sessao iniciada: 127.0.0.1:45109
+2026-11-01 16:16:20 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:20 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:20 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:20 [DEBUG]  Ticket assinado emitido para 'test' (assinatura f52589ef4d47...).
+2026-11-01 16:16:20 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:20 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:20 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:20 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:20 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:22 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:22 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:22 [INFO]   Nova sessao iniciada: 127.0.0.1:45127
+2026-11-01 16:16:22 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:22 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:22 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:22 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e5477a80b85e...).
+2026-11-01 16:16:22 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:22 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:22 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:22 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:22 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:23 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:23 [INFO]   Nova sessao iniciada: 127.0.0.1:45140
+2026-11-01 16:16:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:23 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:23 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:23 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 769636241176...).
+2026-11-01 16:16:23 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:23 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:23 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:23 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:24 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:25 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:25 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:25 [INFO]   Nova sessao iniciada: 127.0.0.1:2845
+2026-11-01 16:16:25 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:25 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:25 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:25 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:25 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 2c9204c1be7e...).
+2026-11-01 16:16:25 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:25 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:25 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:25 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:25 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:25 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:27 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:27 [INFO]   Nova sessao iniciada: 127.0.0.1:7061
+2026-11-01 16:16:27 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:27 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:27 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:27 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:27 [DEBUG]  Ticket assinado emitido para 'test' (assinatura fd207baf02ec...).
+2026-11-01 16:16:27 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:27 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:27 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:27 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:27 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:28 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:28 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:28 [INFO]   Nova sessao iniciada: 127.0.0.1:7075
+2026-11-01 16:16:28 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:28 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:28 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:28 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 1b22d93e065d...).
+2026-11-01 16:16:28 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:28 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:28 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:28 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:28 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:30 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:30 [INFO]   Nova sessao iniciada: 127.0.0.1:7086
+2026-11-01 16:16:30 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:30 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:30 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:30 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:30 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:30 [DEBUG]  Ticket assinado emitido para 'test' (assinatura a4f56c730a94...).
+2026-11-01 16:16:30 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:30 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:30 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:30 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:30 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:30 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:31 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:31 [INFO]   Nova sessao iniciada: 127.0.0.1:7103
+2026-11-01 16:16:31 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:31 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:32 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:32 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:32 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:32 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b145e09bec06...).
+2026-11-01 16:16:32 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:32 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:32 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:32 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:32 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:32 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:33 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:33 [INFO]   Nova sessao iniciada: 127.0.0.1:7113
+2026-11-01 16:16:33 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:33 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:33 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:33 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:33 [DEBUG]  Ticket assinado emitido para 'test' (assinatura c6cd3c503e62...).
+2026-11-01 16:16:33 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:33 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:33 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:33 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:33 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:35 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:35 [INFO]   Nova sessao iniciada: 127.0.0.1:7119
+2026-11-01 16:16:35 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:35 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:35 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:35 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:35 [DEBUG]  Ticket assinado emitido para 'test' (assinatura ce22cba0661a...).
+2026-11-01 16:16:35 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:35 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:35 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:35 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:35 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:36 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:36 [INFO]   Nova sessao iniciada: 127.0.0.1:7140
+2026-11-01 16:16:36 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:36 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:36 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:36 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:36 [DEBUG]  Ticket assinado emitido para 'test' (assinatura c246e522a3ab...).
+2026-11-01 16:16:36 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:36 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:36 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:36 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:36 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:36 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:38 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:38 [INFO]   Nova sessao iniciada: 127.0.0.1:7149
+2026-11-01 16:16:38 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:38 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:38 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:16:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:38 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:16:38 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 9e8c7fecbcdc...).
+2026-11-01 16:16:38 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:16:38 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:16:38 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:16:38 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:16:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:16:38 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:16:39 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:16:39 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:16:39 [INFO]   Nova sessao iniciada: 127.0.0.1:53385
+2026-11-01 16:16:39 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:16:39 [WARN]   Rate limit de login atingido para 127.0.0.1.
+2026-11-01 16:16:39 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:18:22 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:18:22 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:18:22 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:18:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:18:22 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:18:22 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:18:22 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:18:22 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:18:22 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:18:22 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:18:44 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:18:44 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:18:44 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:18:44 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:18:44 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:18:44 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:18:44 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:18:44 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:18:44 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:18:44 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:19:00 [INFO]   Nova sessao iniciada: 127.0.0.1:5575
+2026-11-01 16:19:00 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:00 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:00 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:01 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:01 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 76bef79c054d...).
+2026-11-01 16:19:01 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:01 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:01 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:01 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:01 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:01 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:08 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:08 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:08 [INFO]   Nova sessao iniciada: 127.0.0.1:5604
+2026-11-01 16:19:08 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:08 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:08 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:08 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:08 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 0543af7a9151...).
+2026-11-01 16:19:08 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:08 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:08 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:08 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:08 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:08 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:09 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:09 [INFO]   Nova sessao iniciada: 127.0.0.1:5617
+2026-11-01 16:19:09 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:09 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:09 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:09 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:09 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 7d03108abb5f...).
+2026-11-01 16:19:09 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:09 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:09 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:09 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:09 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:09 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:10 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:10 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:10 [INFO]   Nova sessao iniciada: 127.0.0.1:5623
+2026-11-01 16:19:10 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:10 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:10 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:10 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 179042f8f7d9...).
+2026-11-01 16:19:10 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:10 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:10 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:10 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:10 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:11 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:11 [INFO]   Nova sessao iniciada: 127.0.0.1:5632
+2026-11-01 16:19:11 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:11 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:11 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:11 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:11 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b9419a198c9f...).
+2026-11-01 16:19:11 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:11 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:11 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:11 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:11 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:11 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:12 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:12 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:12 [INFO]   Nova sessao iniciada: 127.0.0.1:5635
+2026-11-01 16:19:12 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:12 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:12 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:12 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 6aa692a6ef4f...).
+2026-11-01 16:19:12 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:12 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:12 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:12 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:12 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:13 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:13 [INFO]   Nova sessao iniciada: 127.0.0.1:5656
+2026-11-01 16:19:13 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:13 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:13 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:13 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:13 [DEBUG]  Ticket assinado emitido para 'test' (assinatura d00b4443aa25...).
+2026-11-01 16:19:13 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:13 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:13 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:13 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:13 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:13 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:15 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:15 [INFO]   Nova sessao iniciada: 127.0.0.1:5659
+2026-11-01 16:19:15 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:15 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:15 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:15 [DEBUG]  Ticket assinado emitido para 'test' (assinatura eccdc5bea7e9...).
+2026-11-01 16:19:15 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:15 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:15 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:15 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:15 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:16 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:16 [INFO]   Nova sessao iniciada: 127.0.0.1:5671
+2026-11-01 16:19:16 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:16 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:16 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:16 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 0d578e23f44a...).
+2026-11-01 16:19:16 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:16 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:16 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:16 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:16 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:18 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:18 [INFO]   Nova sessao iniciada: 127.0.0.1:28744
+2026-11-01 16:19:18 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:18 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:18 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:18 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:18 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:18 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 16466041912e...).
+2026-11-01 16:19:18 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:18 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:18 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:18 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:18 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:18 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:20 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:20 [INFO]   Nova sessao iniciada: 127.0.0.1:28762
+2026-11-01 16:19:20 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:20 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:20 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:20 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:20 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 881550d682ab...).
+2026-11-01 16:19:20 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:20 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:20 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:20 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:20 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:21 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:21 [INFO]   Nova sessao iniciada: 127.0.0.1:55577
+2026-11-01 16:19:21 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:21 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:21 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:21 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:21 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e798dfea6880...).
+2026-11-01 16:19:21 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:21 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:21 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:21 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:21 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:23 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:23 [INFO]   Nova sessao iniciada: 127.0.0.1:55585
+2026-11-01 16:19:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:23 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:23 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:23 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 497a1c2ba609...).
+2026-11-01 16:19:23 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:23 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:23 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:23 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:23 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:24 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:24 [INFO]   Nova sessao iniciada: 127.0.0.1:55601
+2026-11-01 16:19:24 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:24 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:24 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:24 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:24 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:24 [DEBUG]  Ticket assinado emitido para 'test' (assinatura fec85006bdcc...).
+2026-11-01 16:19:24 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:24 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:24 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:24 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:24 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:24 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:26 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:26 [INFO]   Nova sessao iniciada: 127.0.0.1:55611
+2026-11-01 16:19:26 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:26 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:26 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:26 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:26 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:26 [DEBUG]  Ticket assinado emitido para 'test' (assinatura a18147a9a58c...).
+2026-11-01 16:19:26 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:26 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:26 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:26 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:26 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:26 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:28 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:28 [INFO]   Nova sessao iniciada: 127.0.0.1:55623
+2026-11-01 16:19:28 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:28 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:28 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:28 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:28 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 37bf7e7918b4...).
+2026-11-01 16:19:28 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:28 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:28 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:28 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:28 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:29 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:29 [INFO]   Nova sessao iniciada: 127.0.0.1:55637
+2026-11-01 16:19:29 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:29 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:29 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:29 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:29 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:29 [DEBUG]  Ticket assinado emitido para 'test' (assinatura d06a61a671cb...).
+2026-11-01 16:19:29 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:29 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:29 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:29 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:29 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:29 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:31 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:31 [INFO]   Nova sessao iniciada: 127.0.0.1:55646
+2026-11-01 16:19:31 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:31 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:31 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:31 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:31 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 8a3154881a1c...).
+2026-11-01 16:19:31 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:31 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:31 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:31 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:32 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:32 [INFO]   Nova sessao iniciada: 127.0.0.1:47556
+2026-11-01 16:19:32 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:32 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:32 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:32 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:32 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:32 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 421ad863e01f...).
+2026-11-01 16:19:32 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:32 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:32 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:32 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:32 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:32 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:34 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:34 [INFO]   Nova sessao iniciada: 127.0.0.1:47575
+2026-11-01 16:19:34 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:34 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:34 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:19:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:34 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:19:34 [DEBUG]  Ticket assinado emitido para 'test' (assinatura bda13d64b382...).
+2026-11-01 16:19:34 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:19:34 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:19:34 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:19:34 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:19:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:19:34 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:19:36 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:19:36 [INFO]   Nova sessao iniciada: 127.0.0.1:47581
+2026-11-01 16:19:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:19:36 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:19:36 [WARN]   Rate limit de login atingido para 127.0.0.1.
+2026-11-01 16:19:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:20:17 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:20:17 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:20:17 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:20:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:20:17 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:20:17 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:20:17 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:20:17 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:20:17 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:20:17 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:25:04 [INFO]   Nova sessao iniciada: 127.0.0.1:13864
+2026-11-01 16:25:04 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:25:04 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:25:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:25:04 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:25:04 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 8cf462d437cc...).
+2026-11-01 16:25:04 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:25:04 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:25:04 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:25:04 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:25:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:25:04 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:25:09 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:25:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:26:37 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:26:37 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:26:37 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:26:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:26:37 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:26:37 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:26:37 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:26:37 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:26:37 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:26:37 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:26:57 [INFO]   Nova sessao iniciada: 127.0.0.1:53239
+2026-11-01 16:26:57 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:26:57 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:26:57 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:26:57 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:26:57 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 191cb58412b1...).
+2026-11-01 16:26:57 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:26:57 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:26:57 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:26:57 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:26:57 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:26:57 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:27:02 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:27:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:29:09 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:29:09 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:29:09 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:29:09 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:29:09 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:29:09 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:29:09 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:29:09 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:29:09 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:29:09 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:29:28 [INFO]   Nova sessao iniciada: 127.0.0.1:13728
+2026-11-01 16:29:28 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:29:28 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:29:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:29:28 [WARN]   Tentativa de login para a conta test com hash de senha incorreto.
+2026-11-01 16:29:28 [WARN]   Login falhou para a conta [test]. Razao: -2
+2026-11-01 16:29:28 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:29:28 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:29:35 [INFO]   Nova sessao iniciada: 127.0.0.1:13786
+2026-11-01 16:29:35 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:29:35 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:29:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:29:35 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:29:35 [DEBUG]  Ticket assinado emitido para 'test' (assinatura bc25b80438fd...).
+2026-11-01 16:29:35 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:29:35 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:29:35 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:29:35 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:29:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:29:35 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:29:44 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:29:44 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:30:12 [INFO]   Nova sessao iniciada: 127.0.0.1:27393
+2026-11-01 16:30:12 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:30:12 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:30:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:30:12 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:30:12 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 2f5f38e7edfd...).
+2026-11-01 16:30:12 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:30:12 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:30:12 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:30:12 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:30:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:30:12 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:30:13 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:30:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:30:26 [INFO]   Nova sessao iniciada: 127.0.0.1:27442
+2026-11-01 16:30:26 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:30:27 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:30:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:30:27 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:30:27 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 6002e5f966fe...).
+2026-11-01 16:30:27 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:30:27 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:30:27 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:30:27 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:30:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:30:27 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:30:28 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:30:28 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:30:39 [INFO]   Nova sessao iniciada: 127.0.0.1:27506
+2026-11-01 16:30:39 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:30:39 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:30:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:30:39 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:30:39 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 393bafd21480...).
+2026-11-01 16:30:39 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:30:39 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:30:39 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:30:39 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:30:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:30:39 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:30:40 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:30:40 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:31:39 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:31:39 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:31:39 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:31:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:31:39 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:31:39 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:31:39 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:31:39 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:31:39 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:31:39 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:31:48 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:31:48 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:31:48 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:31:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:31:48 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:31:48 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:31:48 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:31:48 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:31:48 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:31:48 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:31:48 [INFO]   Nova sessao iniciada: 127.0.0.1:65141
+2026-11-01 16:31:48 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:31:48 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:31:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:31:48 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:31:48 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 743ccd7a48e9...).
+2026-11-01 16:31:48 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:31:48 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:31:48 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:31:48 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:31:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:31:48 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:31:49 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:31:49 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:32:51 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:32:51 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:32:51 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:32:51 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:32:51 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:32:51 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:32:51 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:32:51 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:32:51 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:32:51 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:32:51 [INFO]   Nova sessao iniciada: 127.0.0.1:51245
+2026-11-01 16:32:51 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:32:51 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:32:59 [INFO]   Nova sessao iniciada: 127.0.0.1:39418
+2026-11-01 16:32:59 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:32:59 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:32:59 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:32:59 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:32:59 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 46d3af0f00db...).
+2026-11-01 16:32:59 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:32:59 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:32:59 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:32:59 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:32:59 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:32:59 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:32:59 [INFO]   Nova sessao iniciada: 127.0.0.1:39421
+2026-11-01 16:32:59 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:32:59 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:32:59 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:32:59 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:32:59 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 9a43773c05ef...).
+2026-11-01 16:32:59 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:32:59 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:32:59 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:32:59 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:32:59 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:32:59 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:32:59 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:33:00 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:33:00 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:33:23 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:33:23 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:33:23 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:33:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:33:23 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:33:23 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:33:23 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:33:23 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:33:23 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:33:23 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:33:37 [INFO]   Nova sessao iniciada: 127.0.0.1:39598
+2026-11-01 16:33:37 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:33:37 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:33:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:33:37 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:33:37 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e7c49f147603...).
+2026-11-01 16:33:37 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:33:37 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:33:37 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:33:37 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:33:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:33:37 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:34:39 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:34:39 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:35:45 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:35:45 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:35:45 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:35:45 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:35:45 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:35:45 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:35:45 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:35:45 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:35:45 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:35:45 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:36:06 [INFO]   Nova sessao iniciada: 127.0.0.1:16524
+2026-11-01 16:36:06 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:36:06 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:36:06 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:36:06 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:36:06 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 29b31451804d...).
+2026-11-01 16:36:06 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:36:06 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:36:06 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:36:06 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:36:06 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:36:06 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:38:45 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:38:45 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:38:45 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:38:45 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:38:45 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:38:45 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:38:45 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:38:45 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:38:45 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:38:45 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:38:49 [INFO]   Nova sessao iniciada: 127.0.0.1:56361
+2026-11-01 16:38:49 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:38:52 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:39:15 [INFO]   Nova sessao iniciada: 127.0.0.1:17882
+2026-11-01 16:39:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:39:15 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:39:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:39:15 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:39:15 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b1b55962736b...).
+2026-11-01 16:39:15 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:39:15 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:39:15 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:39:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:39:15 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:39:15 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:39:17 [INFO]   Nova sessao iniciada: 127.0.0.1:17892
+2026-11-01 16:39:17 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:39:35 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:39:35 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:39:35 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:39:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:39:35 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:39:35 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:39:35 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:39:35 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:39:35 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:39:35 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:40:03 [INFO]   Nova sessao iniciada: 127.0.0.1:16495
+2026-11-01 16:40:03 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:40:03 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:40:03 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:40:03 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:40:03 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b46cf06c1328...).
+2026-11-01 16:40:03 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:40:03 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:40:03 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:40:03 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:40:03 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:40:03 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:40:05 [INFO]   Nova sessao iniciada: 127.0.0.1:16503
+2026-11-01 16:40:05 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:40:18 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:40:18 [INFO]   Nova sessao iniciada: 127.0.0.1:16537
+2026-11-01 16:40:18 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:41:33 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:41:33 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:41:33 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:41:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:41:33 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:41:33 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:41:33 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:41:33 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:41:33 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:41:33 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:41:38 [INFO]   Nova sessao iniciada: 127.0.0.1:5306
+2026-11-01 16:41:38 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:41:40 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:42:04 [INFO]   Nova sessao iniciada: 127.0.0.1:5460
+2026-11-01 16:42:04 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:42:04 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:42:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:42:04 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:42:04 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 1e56245692fb...).
+2026-11-01 16:42:04 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:42:04 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:42:04 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:42:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:42:04 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:42:04 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:42:05 [INFO]   Nova sessao iniciada: 127.0.0.1:5466
+2026-11-01 16:42:05 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:42:10 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:42:10 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:42:10 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:42:15 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:42:15 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:42:15 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:42:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:42:15 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:42:15 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:42:15 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:42:15 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:42:15 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:42:15 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:42:29 [INFO]   Nova sessao iniciada: 127.0.0.1:1694
+2026-11-01 16:42:29 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:42:29 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:42:29 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:42:29 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:42:29 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 38a71df65d71...).
+2026-11-01 16:42:29 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:42:29 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:42:29 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:42:29 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:42:30 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:42:30 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:42:31 [INFO]   Nova sessao iniciada: 127.0.0.1:1701
+2026-11-01 16:42:31 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:42:54 [INFO]   Nova sessao iniciada: 127.0.0.1:1821
+2026-11-01 16:42:54 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:42:58 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:43:56 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:43:56 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:43:56 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:43:56 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:43:56 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:43:56 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:43:56 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:43:56 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:43:56 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:43:56 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:44:23 [INFO]   Nova sessao iniciada: 127.0.0.1:49990
+2026-11-01 16:44:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:44:23 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:44:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:44:23 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:44:23 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 853c419907e8...).
+2026-11-01 16:44:23 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:44:23 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:44:23 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:44:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:44:23 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:44:23 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:44:24 [INFO]   Nova sessao iniciada: 127.0.0.1:51160
+2026-11-01 16:44:24 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:44:34 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:44:34 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:44:34 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:44:51 [INFO]   Nova sessao iniciada: 127.0.0.1:1993
+2026-11-01 16:44:51 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:44:51 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:52:12 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 16:52:12 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 16:52:12 [INFO]   Inicializando repositorio de itens...
+2026-11-01 16:52:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 16:52:12 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 16:52:12 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 16:52:12 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 16:52:12 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 16:52:12 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 16:52:12 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 16:52:16 [INFO]   Nova sessao iniciada: 127.0.0.1:2130
+2026-11-01 16:52:16 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:52:16 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:52:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:52:16 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:52:16 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 440e12bd359f...).
+2026-11-01 16:52:16 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:52:16 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:52:16 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:52:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:52:16 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:52:16 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:52:19 [INFO]   Nova sessao iniciada: 127.0.0.1:2152
+2026-11-01 16:52:19 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:52:19 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 16:52:24 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:52:24 [INFO]   Nova sessao iniciada: 127.0.0.1:2167
+2026-11-01 16:52:24 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:52:24 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 16:52:46 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:52:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:52:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:52:49 [INFO]   Nova sessao iniciada: 127.0.0.1:24530
+2026-11-01 16:52:49 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:52:49 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:52:49 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:52:49 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:52:49 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b1ffb10c3e06...).
+2026-11-01 16:52:49 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:52:49 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:52:49 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:52:49 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:52:49 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:52:49 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:52:50 [INFO]   Nova sessao iniciada: 127.0.0.1:24536
+2026-11-01 16:52:50 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:52:50 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 16:52:55 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:52:55 [INFO]   Nova sessao iniciada: 127.0.0.1:31704
+2026-11-01 16:52:55 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:52:55 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 16:53:37 [WARN]   Opcode ou estrutura legada nao suportada
+2026-11-01 16:53:37 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:53:37 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:54:26 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:54:41 [INFO]   Nova sessao iniciada: 127.0.0.1:59177
+2026-11-01 16:54:41 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:54:41 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 16:54:41 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:54:41 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 16:54:41 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 7b7485a8fe30...).
+2026-11-01 16:54:41 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 16:54:41 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 16:54:41 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 16:54:41 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 16:54:41 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 16:54:41 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 16:54:43 [INFO]   Nova sessao iniciada: 127.0.0.1:59186
+2026-11-01 16:54:43 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:54:43 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 16:54:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 16:54:46 [INFO]   Nova sessao iniciada: 127.0.0.1:59197
+2026-11-01 16:54:46 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 16:54:46 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 16:55:04 [WARN]   Opcode ou estrutura legada nao suportada
+2026-11-01 16:55:04 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 16:55:04 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:00:36 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 17:00:36 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 17:00:36 [INFO]   Inicializando repositorio de itens...
+2026-11-01 17:00:36 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 17:00:36 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 17:00:36 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 17:00:36 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 17:00:36 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 17:00:36 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 17:00:36 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 17:00:49 [INFO]   Nova sessao iniciada: 127.0.0.1:32271
+2026-11-01 17:00:49 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:00:49 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 17:00:49 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:00:49 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 17:00:49 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 423acc928ce0...).
+2026-11-01 17:00:49 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 17:00:49 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 17:00:49 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 17:00:49 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:00:49 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 17:00:49 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 17:00:50 [INFO]   Nova sessao iniciada: 127.0.0.1:32280
+2026-11-01 17:00:50 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:00:50 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:00:54 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:00:54 [INFO]   Nova sessao iniciada: 127.0.0.1:32291
+2026-11-01 17:00:54 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:00:54 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:01:03 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 17:01:03 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 17:01:03 [INFO]   Inicializando repositorio de itens...
+2026-11-01 17:01:03 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 17:01:03 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 17:01:03 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 17:01:03 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 17:01:03 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 17:01:03 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 17:01:03 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 17:01:21 [INFO]   Nova sessao iniciada: 127.0.0.1:55361
+2026-11-01 17:01:21 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:01:21 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 17:01:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:01:21 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 17:01:21 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 3222cf13e235...).
+2026-11-01 17:01:21 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 17:01:21 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 17:01:21 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 17:01:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:01:21 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 17:01:21 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 17:01:23 [INFO]   Nova sessao iniciada: 127.0.0.1:55370
+2026-11-01 17:01:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:01:23 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:01:27 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:01:27 [INFO]   Nova sessao iniciada: 127.0.0.1:55390
+2026-11-01 17:01:27 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:01:27 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:01:38 [WARN]   Frame legado nao suportado: size=76, code=11, bytes=76 0 0 0
+2026-11-01 17:01:38 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 17:01:38 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:03:50 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 17:03:50 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 17:03:50 [INFO]   Inicializando repositorio de itens...
+2026-11-01 17:03:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 17:03:50 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 17:03:50 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 17:03:50 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 17:03:50 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 17:03:50 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 17:03:50 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 17:03:55 [INFO]   Nova sessao iniciada: 127.0.0.1:55135
+2026-11-01 17:03:55 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:03:55 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 17:03:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:03:55 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 17:03:55 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 7c39957839d9...).
+2026-11-01 17:03:55 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 17:03:55 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 17:03:55 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 17:03:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:03:55 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 17:03:55 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 17:04:01 [INFO]   Nova sessao iniciada: 127.0.0.1:55154
+2026-11-01 17:04:01 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:04:01 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:04:06 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:04:06 [INFO]   Nova sessao iniciada: 127.0.0.1:55173
+2026-11-01 17:04:06 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:04:06 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:04:11 [INFO]   Nova sessao iniciada: 127.0.0.1:55185
+2026-11-01 17:04:11 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:04:11 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 17:04:11 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:04:11 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 17:04:11 [DEBUG]  Ticket assinado emitido para 'test' (assinatura aacbbc2a896c...).
+2026-11-01 17:04:11 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 17:04:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:04:11 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 17:04:11 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 17:04:11 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:04:11 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 17:04:11 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 17:04:33 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:07:40 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 17:07:40 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 17:07:40 [INFO]   Inicializando repositorio de itens...
+2026-11-01 17:07:40 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 17:07:40 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 17:07:40 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 17:07:40 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 17:07:40 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 17:07:40 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 17:07:40 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 17:07:55 [INFO]   Nova sessao iniciada: 127.0.0.1:58632
+2026-11-01 17:07:55 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:07:55 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 17:07:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:07:55 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 17:07:55 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 75fa5e1db7c2...).
+2026-11-01 17:07:55 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 17:07:55 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 17:07:55 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 17:07:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:07:55 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 17:07:55 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 17:07:57 [INFO]   Nova sessao iniciada: 127.0.0.1:58639
+2026-11-01 17:07:57 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:07:57 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:08:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:08:02 [INFO]   Nova sessao iniciada: 127.0.0.1:58653
+2026-11-01 17:08:02 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:08:02 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:08:11 [INFO]   Operacao de personagem rejeitada para test: test
+2026-11-01 17:08:17 [INFO]   Operacao de personagem rejeitada para test: testdasd
+2026-11-01 17:08:22 [INFO]   Operacao de personagem rejeitada para test: testdasddasdasd
+2026-11-01 17:08:31 [INFO]   Operacao de personagem rejeitada para test: dasd
+2026-11-01 17:08:38 [INFO]   Operacao de personagem rejeitada para test: dasd11
+2026-11-01 17:10:17 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 17:10:17 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 17:10:17 [INFO]   Inicializando repositorio de itens...
+2026-11-01 17:10:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 17:10:17 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 17:10:17 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 17:10:17 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 17:10:17 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 17:10:17 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 17:10:17 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 17:10:23 [INFO]   Nova sessao iniciada: 127.0.0.1:30075
+2026-11-01 17:10:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:10:23 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 17:10:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:23 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 17:10:23 [DEBUG]  Ticket assinado emitido para 'test' (assinatura efbf9e5370a5...).
+2026-11-01 17:10:23 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 17:10:23 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 17:10:23 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 17:10:23 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:23 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 17:10:23 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 17:10:24 [INFO]   Nova sessao iniciada: 127.0.0.1:30083
+2026-11-01 17:10:24 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:10:24 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:10:27 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:10:27 [INFO]   Nova sessao iniciada: 127.0.0.1:30089
+2026-11-01 17:10:27 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:10:27 [INFO]   GameServer: enviando confirmacao legada de entrada
+2026-11-01 17:10:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:37 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 17:10:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:10:50 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 17:10:50 [WARN]   Frame legado nao suportado: size=52, code=108, bytes=52 0 0 0
+2026-11-01 17:10:50 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 17:10:50 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:10:55 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 17:11:21 [INFO]   Nova sessao iniciada: 127.0.0.1:38452
+2026-11-01 17:11:21 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:11:21 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 17:11:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:11:21 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 17:11:21 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 71fd49c66c21...).
+2026-11-01 17:11:21 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 17:11:21 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 17:11:21 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 17:11:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 17:11:21 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 17:11:21 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 17:11:23 [INFO]   Nova sessao iniciada: 127.0.0.1:38458
+2026-11-01 17:11:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 17:11:23 [INFO]   GameServer: enviando confirmacao legada de entrada

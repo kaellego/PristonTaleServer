@@ -10,12 +10,13 @@
 #include <cstring>
 #include <iomanip>
 
-ClientSession::ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey)
+ClientSession::ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey, bool gameEndpoint)
     : m_socket(std::move(socket)),
     m_strand(boost::asio::make_strand(m_socket.get_executor())),
     m_packet_dispatcher(dispatcher),
     m_logService(logService),
-    m_xorKey(xorKey)
+    m_xorKey(xorKey),
+    m_gameEndpoint(gameEndpoint)
 {}
 
 ClientSession::~ClientSession() {
@@ -41,6 +42,11 @@ void ClientSession::start() {
     // O cliente legado não entende o pacote de chave moderno. O gateway
     // começa pelo frame legado e só encaminha payloads validados.
     m_logService.debug("Sessao::start() <-> Aguardando frame legado");
+    if (m_gameEndpoint) {
+        m_logService.info("GameServer: enviando confirmacao legada de entrada");
+        m_legacy_write_queue.push_back(LegacyGateway::gameServerReadyPayload());
+        do_legacy_write();
+    }
     do_read_legacy_length();
 }
 
@@ -51,7 +57,7 @@ void ClientSession::do_read_legacy_length() {
             if (ec) { close(); return; }
             uint32_t length = 0;
             std::memcpy(&length, m_legacyLengthBuffer.data(), sizeof(length));
-            if (length < LegacyPacketCodec::HeaderSize || length > LegacyPacketCodec::MaxFrameSize) {
+            if (length < sizeof(LegacyGateway::Command) || length > LegacyPacketCodec::MaxFrameSize) {
                 m_logService.warn("Frame legado invalido: {}", length);
                 close();
                 return;
@@ -69,19 +75,25 @@ void ClientSession::do_read_legacy_frame() {
         [this, self](boost::system::error_code ec, std::size_t) {
             if (ec) { close(); return; }
 
-            LegacyPacketCodec::Frame frame;
-            if (!LegacyPacketCodec::decode(m_legacyFrame, m_legacyCounter, frame)) {
-                m_logService.warn("Frame legado rejeitado por checksum, tamanho ou replay");
+            auto packet = LegacyGateway::toModernPacket(m_legacyFrame);
+            if (!packet) {
+                int32_t legacyCode = 0;
+                std::memcpy(&legacyCode, m_legacyFrame.data() + sizeof(int32_t), sizeof(legacyCode));
+                m_logService.warn("Frame legado nao suportado: size={}, code={}, bytes={}",
+                    m_legacyFrame.size(), legacyCode,
+                    m_legacyFrame.size() >= 8 ? std::to_string(m_legacyFrame[0]) + " " + std::to_string(m_legacyFrame[1]) + " " + std::to_string(m_legacyFrame[2]) + " " + std::to_string(m_legacyFrame[3]) : "");
                 close();
                 return;
             }
-            m_legacyCounter = frame.key;
-
-            auto packet = LegacyGateway::toModernPacket(frame.payload);
-            if (!packet) {
-                m_logService.warn("Opcode ou estrutura legada nao suportada");
-                close();
-                return;
+            std::memcpy(&m_legacyRequestCode, m_legacyFrame.data() + sizeof(int32_t), sizeof(m_legacyRequestCode));
+            if (m_gameEndpoint && !isAuthenticated() && (m_legacyRequestCode == 10 || m_legacyRequestCode == 11)) {
+                char account[21]{};
+                std::memcpy(account, m_legacyFrame.data() + 20, sizeof(account));
+                if (!m_packet_dispatcher.transferLegacySession(self, account)) {
+                    m_logService.warn("Sessao legada do GameServer rejeitada para a conta '{}'.", account);
+                    close();
+                    return;
+                }
             }
             m_packet_dispatcher.dispatch(self, *packet);
             do_read_legacy_length();
@@ -187,6 +199,18 @@ void ClientSession::do_read_body() {
 }
 
 void ClientSession::send(Packet packet) {
+    if (auto legacy = LegacyGateway::toLegacyPayload(packet, m_legacySendCounter + 1, m_legacyRequestCode); legacy) {
+        if (legacy->empty()) return; // Successful legacy login has no response frame.
+        m_legacySendCounter++;
+        auto frame = std::move(*legacy);
+        auto self = shared_from_this();
+        boost::asio::post(m_strand, [this, self, frame = std::move(frame)]() mutable {
+            const bool writing = !m_legacy_write_queue.empty();
+            m_legacy_write_queue.push_back(std::move(frame));
+            if (!writing) do_legacy_write();
+        });
+        return;
+    }
     m_cipher.encrypt(packet);
 
     auto self = shared_from_this();
@@ -197,6 +221,16 @@ void ClientSession::send(Packet packet) {
             do_write();
         }
         });
+}
+
+void ClientSession::do_legacy_write() {
+    auto self = shared_from_this();
+    boost::asio::async_write(m_socket, boost::asio::buffer(m_legacy_write_queue.front()),
+        boost::asio::bind_executor(m_strand, [this, self](boost::system::error_code ec, std::size_t) {
+            if (ec) { close(); return; }
+            m_legacy_write_queue.pop_front();
+            if (!m_legacy_write_queue.empty()) do_legacy_write();
+        }));
 }
 
 void ClientSession::do_write() {

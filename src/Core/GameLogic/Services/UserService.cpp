@@ -3,6 +3,7 @@
 #include "Logging/LogService.h"
 #include "Database/DatabasePool.h"
 #include "Database/SQLConnection.h"
+#include <chrono>
 
 UserService::UserService(DatabasePool& dbPool, LogService& logService) : m_logService(logService), m_dbPool(dbPool) {}
 
@@ -38,6 +39,25 @@ void UserService::removeUser(std::shared_ptr<ClientSession> session) {
 bool UserService::isUserOnline(const std::string& accountName) {
     std::lock_guard<std::mutex> lock(m_usersMutex);
     return m_onlineUsers.count(accountName) > 0;
+}
+
+bool UserService::transferSession(const std::string& accountName, const std::shared_ptr<ClientSession>& session) {
+    std::lock_guard<std::mutex> lock(m_usersMutex);
+    auto it = m_onlineUsers.find(accountName);
+    if (it == m_onlineUsers.end() || !it->second.session || it->second.session == session)
+        return false;
+
+    const auto& source = it->second.session;
+    if (!source->isAuthenticated() || source->ticketExpired()) return false;
+    try {
+        if (source->socket().remote_endpoint().address() != session->socket().remote_endpoint().address())
+            return false;
+    } catch (...) { return false; }
+
+    session->authenticate(source->getAccountId(), accountName, source->getTicket(),
+        std::chrono::steady_clock::now() + std::chrono::minutes(15));
+    it->second.session = session;
+    return true;
 }
 
 bool UserService::banAccount(const std::string& accountName, const std::string& reason) {

@@ -26,6 +26,7 @@ public:
 
     void removeUser(std::shared_ptr<ClientSession> session);
     bool isUserOnline(const std::string& accountName); // <-- Modificado para buscar por nome
+    bool transferSession(const std::string& accountName, const std::shared_ptr<ClientSession>& session);
     bool banAccount(const std::string& accountName, const std::string& reason);
 
 private:

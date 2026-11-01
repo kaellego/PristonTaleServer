@@ -222,8 +222,9 @@ void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, cons
     session->authenticate(sqlUser.iID, sqlUser.szAccountName, ticket, expiresAt);
 
     sendLoginResult(session, Log::LoginResult::Success);
-    sendServerList(session, ticket); // Passa o ticket para a lista de servidores
+    // The legacy SrcServer sends characters before the server list.
     sendCharacterList(session, sqlUser.szAccountName);
+    sendServerList(session, ticket); // Passa o ticket para a lista de servidores
 }
 
 void AccountService::onLoginFailure(std::shared_ptr<ClientSession> session, Log::LoginResult reason, const std::string& accountName) {
