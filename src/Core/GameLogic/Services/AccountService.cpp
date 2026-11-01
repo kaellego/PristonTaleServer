@@ -277,8 +277,8 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         destChar.Brood = 0;
         destChar.dwArmorCode = 0;
         destChar.StartField = 0;
-        destChar.PosX = 0;
-        destChar.PosZ = 0;
+        destChar.PosX = static_cast<int32_t>(charData.fPosX);
+        destChar.PosZ = static_cast<int32_t>(charData.fPosZ);
         std::fill(std::begin(destChar.dwTemp), std::end(destChar.dwTemp), 0);
         // ... aqui vocÃƒÂ¯Ã‚Â¿Ã‚Â½ copiaria os outros campos necessÃƒÂ¯Ã‚Â¿Ã‚Â½rios, como modelo 3D, mapa, etc.
     }

@@ -2,14 +2,42 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
+#include <cstring>
+#include <algorithm>
 
 namespace fs = std::filesystem;
 
 PlayerRepository::PlayerRepository(const std::string& dataPath) : m_basePath(dataPath) {
     m_charPath = (fs::path(m_basePath) / "Character").string();
     m_warehousePath = (fs::path(m_basePath) / "Warehouse").string();
+    fs::create_directories(m_charPath);
     fs::create_directories((fs::path(m_basePath) / "Inventory"));
+    migrateLegacyCharacters();
     std::cout << "Inicializando repositorio de jogadores..." << std::endl;
+}
+
+void PlayerRepository::migrateLegacyCharacters() {
+    struct LegacyCharacterData { char szName[32]; int32_t iLevel; int64_t liEXP; int32_t iClass; };
+    for (const auto& entry : fs::directory_iterator(m_charPath)) {
+        if (!entry.is_regular_file() || entry.path().extension() != ".chr") continue;
+        std::error_code error;
+        const auto size = fs::file_size(entry.path(), error);
+        if (error || size != sizeof(LegacyCharacterData)) continue;
+        LegacyCharacterData legacy{};
+        std::ifstream input(entry.path(), std::ios::binary);
+        if (!input.read(reinterpret_cast<char*>(&legacy), sizeof(legacy))) continue;
+        CharacterData upgraded{};
+        std::memcpy(upgraded.szName, legacy.szName, sizeof(upgraded.szName));
+        upgraded.iLevel = std::max(1, legacy.iLevel);
+        upgraded.liEXP = std::max<int64_t>(0, legacy.liEXP);
+        upgraded.iClass = std::clamp(legacy.iClass, 1, 10);
+        upgraded.iHP = upgraded.iMaxHP = 100;
+        upgraded.iMP = upgraded.iMaxMP = 100;
+        upgraded.iStrength = upgraded.iSpirit = upgraded.iTalent = upgraded.iAgility = upgraded.iHealth = 1;
+        upgraded.iAttackMin = upgraded.iAttackMax = 10;
+        upgraded.iDefense = 0;
+        if (saveCharacter(upgraded)) std::cout << "Personagem legado migrado: " << entry.path().filename().string() << std::endl;
+    }
 }
 
 std::optional<CharacterData> PlayerRepository::loadCharacter(const std::string& characterName) const {
@@ -27,9 +55,7 @@ std::optional<CharacterData> PlayerRepository::loadCharacter(const std::string& 
     std::streamsize size = file.tellg();
     file.seekg(0, std::ios::beg);
 
-    if (size != sizeof(CharacterData)) {
-        return std::nullopt;
-    }
+    if (size != sizeof(CharacterData)) return std::nullopt;
 
     CharacterData charData;
     if (file.read(reinterpret_cast<char*>(&charData), sizeof(CharacterData))) {

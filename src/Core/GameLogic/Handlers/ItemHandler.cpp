@@ -49,4 +49,12 @@ void ItemHandler::handle(std::shared_ptr<ClientSession> session, const Packet &p
             if (ok) sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), data); else session->close();
         });
     }
+    if ((op == Opcodes::UseItemCode || op == Opcodes::CheckItemUseSlot || op == Opcodes::CheckItemUseSlotEx) && packet.body.size() == sizeof(PacketItemUse) - sizeof(PacketHeader))
+    {
+        PacketItemUse command{};
+        std::memcpy(reinterpret_cast<uint8_t*>(&command) + sizeof(PacketHeader), packet.body.data(), packet.body.size());
+        m_inventory.useOrEquipItem(session->getAccountName(), session->getCharacterName(), command.inventorySlot, command.equipmentSlot, command.action, [session](bool ok, InventoryData data) {
+            if (ok) sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), data); else session->close();
+        });
+    }
 }

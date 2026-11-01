@@ -40,6 +40,7 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
     std::memcpy(reinterpret_cast<uint8_t *>(&command) + sizeof(PacketHeader), packet.body.data(), packet.body.size());
     const std::string name(command.szName, strnlen_s(command.szName, sizeof(command.szName)));
     bool success = false;
+    std::optional<CharacterData> selectedCharacter;
     switch (static_cast<Opcodes>(packet.header.opcode))
     {
     case Opcodes::CreateCharacter:
@@ -49,11 +50,12 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
         success = m_service.deleteCharacter(session->getAccountName(), name);
         break;
     case Opcodes::SelectCharacter:
-        success = m_service.selectCharacter(session->getAccountName(), name).has_value();
+        selectedCharacter = m_service.selectCharacter(session->getAccountName(), name);
+        success = selectedCharacter.has_value();
         if (success)
         {
             session->selectCharacter(name);
-            m_world.enter(session->getAccountId(), session->getAccountName(), name, session);
+            m_world.enter(session->getAccountId(), session->getAccountName(), name, *selectedCharacter, session);
         }
         break;
     default:

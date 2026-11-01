@@ -30,6 +30,7 @@ public:
     std::vector<std::string> getAllCharacterNames() const;
 
 private:
+    void migrateLegacyCharacters();
     std::string m_basePath;
     std::string m_charPath;
     std::string m_warehousePath;

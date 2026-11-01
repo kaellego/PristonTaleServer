@@ -65,6 +65,9 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::UseItemCode)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::CheckItemUseSlot)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::CheckItemUseSlotEx)] = itemHandler;
     auto movementHandler = std::make_shared<MovementHandler>(m_gameWorld, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::UnitStatusMove)] = movementHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::PlayData)] = movementHandler;

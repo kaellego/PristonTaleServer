@@ -43,7 +43,13 @@ bool CharacterService::createCharacter(const std::string& accountName, const std
     CharacterData character{};
     strncpy_s(character.szName, sizeof(character.szName), characterName.c_str(), _TRUNCATE);
     character.iLevel = 1;
+    character.liEXP = 0;
     character.iClass = characterClass;
+    character.iMapId = 0;
+    character.iHP = character.iMaxHP = 100;
+    character.iMP = character.iMaxMP = 100;
+    character.iStrength = character.iSpirit = character.iTalent = character.iAgility = character.iHealth = 1;
+    character.iAttackMin = character.iAttackMax = 10; character.iDefense = 0;
     if (!m_playerRepository.saveCharacter(character)) return false;
     if (!orm.createCharacterRecord(accountName, characterName)) {
         m_playerRepository.deleteCharacter(characterName);

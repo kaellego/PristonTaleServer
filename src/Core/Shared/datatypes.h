@@ -580,6 +580,13 @@ struct CharacterData {
     int32_t     iLevel;
     int64_t     liEXP;
     int32_t     iClass;
+    int32_t     iMapId;
+    float       fPosX, fPosY, fPosZ;
+    int32_t     iHP, iMaxHP, iMP, iMaxMP;
+    int32_t     iStrength, iSpirit, iTalent, iAgility, iHealth;
+    int32_t     iAttackMin, iAttackMax, iDefense;
+    int32_t     iGold;
+    Item        saEquipment[16];
     // ... preencha com todos os outros membros exatos do personagem
 };
 
@@ -599,6 +606,7 @@ struct InventoryData {
 struct PacketInventoryRequest { PacketHeader header; };
 struct PacketWarehouseRequest { PacketHeader header; };
 struct PacketItemSlotHandle { PacketHeader header; int32_t sourceSlot; int32_t targetSlot; };
+struct PacketItemUse { PacketHeader header; int32_t inventorySlot; int32_t equipmentSlot; int32_t action; };
 
 // Estrutura para uma definição de item carregada da tabela ItemList do banco de dados.
 struct DefinitionItem {

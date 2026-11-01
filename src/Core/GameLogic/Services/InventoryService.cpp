@@ -53,3 +53,16 @@ void InventoryService::moveInventoryItem(const std::string& account, const std::
         callback(true, data);
     });
 }
+
+void InventoryService::useOrEquipItem(const std::string& account, const std::string& character, int inventorySlot, int equipmentSlot, int action, InventoryCallback callback) {
+    enqueue([this, account, character, inventorySlot, equipmentSlot, action, callback = std::move(callback)]() mutable {
+        if (inventorySlot < 0 || inventorySlot >= static_cast<int>(PLAYER_INVENTORY_SLOTS) || equipmentSlot < 0 || equipmentSlot >= 16 || (action != 1 && action != 2) || !m_characters.ownsCharacter(account, character)) { callback(false, {}); return; }
+        auto inventory = m_players.loadInventory(character).value_or(InventoryData{});
+        auto characterData = m_players.loadCharacter(character);
+        if (!characterData || inventory.saItem[inventorySlot].sItemID <= 0) { callback(false, {}); return; }
+        if (action == 1) std::swap(inventory.saItem[inventorySlot], characterData->saEquipment[equipmentSlot]);
+        else { characterData->iHP = std::min(characterData->iMaxHP, characterData->iHP + 10); inventory.saItem[inventorySlot] = {}; }
+        if (!m_players.saveCharacter(*characterData) || !m_players.saveInventory(character, inventory)) { callback(false, {}); return; }
+        callback(true, inventory);
+    });
+}

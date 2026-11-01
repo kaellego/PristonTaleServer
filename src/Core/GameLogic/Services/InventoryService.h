@@ -23,6 +23,7 @@ public:
     void loadInventory(const std::string& account, const std::string& character, InventoryCallback callback);
     void loadWarehouse(const std::string& account, const std::string& character, WarehouseCallback callback);
     void moveInventoryItem(const std::string& account, const std::string& character, int source, int target, InventoryCallback callback);
+    void useOrEquipItem(const std::string& account, const std::string& character, int inventorySlot, int equipmentSlot, int action, InventoryCallback callback);
 
 private:
     void workerLoop();

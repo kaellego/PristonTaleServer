@@ -10,6 +10,7 @@
 #include <optional>
 #include "Network/Packet.h"
 #include "Network/ClientSession.h"
+#include "Shared/datatypes.h"
 #include <vector>
 
 class ClientSession;
@@ -30,14 +31,14 @@ struct CombatResult { bool hit = false; bool targetDefeated = false; int damage 
 
 class GameWorld {
 public:
-    std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName, std::weak_ptr<ClientSession> client = {}) {
+    std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName, const CharacterData& character, std::weak_ptr<ClientSession> client = {}) {
         auto gameSession = std::make_shared<GameSession>(accountId, accountName, characterName, std::move(client));
         std::lock_guard lock(m_mutex);
         if (auto existing = m_sessions.find(accountName); existing != m_sessions.end())
             m_entities.erase(existing->second->entityId());
         gameSession->setEntityId(m_nextEntityId);
         m_sessions[accountName] = gameSession;
-        m_entities[m_nextEntityId] = MapEntity{m_nextEntityId, accountId};
+        MapEntity entity{m_nextEntityId, accountId}; entity.position = {character.fPosX, character.fPosY, character.fPosZ}; entity.mapId = character.iMapId; entity.health = character.iHP; entity.maxHealth = character.iMaxHP; entity.attack = std::max(1, character.iAttackMax); entity.defense = character.iDefense; entity.alive = entity.health > 0; m_entities[m_nextEntityId] = entity;
         ++m_nextEntityId;
         return gameSession;
     }
