@@ -65,6 +65,9 @@ A solução no Visual Studio está dividida em:
 - [x] Implementar o sistema de criptografia de duas camadas.
 - [x] Implementar o Pool de Conexões de Banco de Dados.
 - [x] Implementar o fluxo de login completo.
-- [ ] Implementar o handler de seleção de personagens.
-- [ ] Refatorar e implementar os serviços `CharacterService` e `UserService` com lógica de jogo.
-- [ ] Adicionar handlers para todos os outros pacotes do jogo.
+- [x] Implementar o fluxo de selecao, criacao e exclusao de personagens.
+- [x] Refatorar e implementar os servicos CharacterService e UserService com logica de jogo.
+- [x] Implementar handlers dos fluxos base: keep-alive, login, ping, personagens, inventario e warehouse.
+- [ ] Implementar handlers avancados do protocolo legado: combate, NPCs, quests, trade, skills e eventos.
+- [ ] Expandir CharacterData com atributos, mapa, posicao, equipamentos e progresso persistidos.
+- [ ] Validar pacotes com o cliente original e completar testes de integracao.

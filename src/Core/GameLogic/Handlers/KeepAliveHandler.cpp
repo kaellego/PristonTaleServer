@@ -13,5 +13,5 @@ void KeepAliveHandler::handle(std::shared_ptr<ClientSession> session, const Pack
     catch (...)
     {
     }
-    // Normalmente, nenhuma resposta � necess�ria para um keep-alive.
+    // Normalmente, nenhuma resposta � necessária para um keep-alive.
 }

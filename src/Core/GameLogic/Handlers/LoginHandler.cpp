@@ -16,11 +16,16 @@ LoginHandler::LoginHandler(AccountService &accountService, LogService &logServic
 {
 }
 
-bool LoginHandler::validateLoginPacket(const PacketLoginUser& packet) const {
-    if (packet.header.opcode != static_cast<uint32_t>(Opcodes::LoginUser)) return false;
-    if (strnlen_s(packet.szUserID, sizeof(packet.szUserID)) == sizeof(packet.szUserID)) return false;
-    if (strnlen_s(packet.szPassword, sizeof(packet.szPassword)) == sizeof(packet.szPassword)) return false;
-    if (packet.uWidthScreen == 0 || packet.uHeightScreen == 0) return false;
+bool LoginHandler::validateLoginPacket(const PacketLoginUser &packet) const
+{
+    if (packet.header.opcode != static_cast<uint32_t>(Opcodes::LoginUser))
+        return false;
+    if (strnlen_s(packet.szUserID, sizeof(packet.szUserID)) == sizeof(packet.szUserID))
+        return false;
+    if (strnlen_s(packet.szPassword, sizeof(packet.szPassword)) == sizeof(packet.szPassword))
+        return false;
+    if (packet.uWidthScreen == 0 || packet.uHeightScreen == 0)
+        return false;
     return true;
 }
 
@@ -32,7 +37,7 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
         return;
     }
 
-    // 2. ValidaÃ§Ã£o de tamanho
+    // 2. Validação de tamanho
     constexpr size_t expectedBodySize = sizeof(PacketLoginUser) - sizeof(PacketHeader);
     if (packet.body.size() != expectedBodySize)
     {
@@ -58,13 +63,13 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
         return;
     }
 
-    // 4. Validaï¿½ï¿½o da versÃ£o do jogo
+    // 4. Validação da versão do jogo
     if (loginPacket.iVersion != m_globalState.gameVersion)
     {
         m_logService.warn("Tentativa de login com versao incorreta do jogo. Cliente: {}, Servidor: {}. Enviando erro.",
                           loginPacket.iVersion, m_globalState.gameVersion);
 
-        // Monta e envia o pacote de versï¿½o incorreta
+        // Monta e envia o pacote de versão incorreta
         PacketAccountLoginCode responseStruct{};
         responseStruct.header.opcode = static_cast<uint32_t>(Opcodes::AccountLoginCode);
         responseStruct.iCode = static_cast<int>(Log::LoginResult::WrongVersion); // Supondo que WrongVersion exista
@@ -79,7 +84,7 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
         return;
     }
 
-    // 5. Se todas as validaÃ§Ãµes passaram, incrementa os contadores e enfileira a requisiÃ§Ã£o
+    // 5. Se todas as validações passaram, incrementa os contadores e enfileira a requisição
     m_globalState.loginAttempts++;
     session->markVerifiedLogin();
 

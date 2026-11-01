@@ -35,7 +35,7 @@ void PingHandler::handle(std::shared_ptr<ClientSession> session, const Packet &p
 
     m_logService.packet("-> Pacote Ping recebido de {}. Respondido com Pong.", session->getAccountName());
 
-    // 4. Lï¿½gica Anti-Cheat (traduzida do cï¿½digo original)
+    // 4. Logica Anti-Cheat (traduzida do codigo original)
     if (m_globalState.isLoginServer && receivedPingPacket.CheatEngineDetected && session->isAuthenticated())
     {
         m_logService.warn("!! DETECCAO DE CHEAT !! Conta: {}. Causa: CheatEngine Detectado via Ping.",

@@ -9,7 +9,7 @@
 #include "Shared/datatypes.h"
 #include "Utils/Dice.h"
 
-// TODO: Incluir os headers dos outros servi�os quando eles forem criados
+// TODO: Incluir os headers dos outros serviï¿½os quando eles forem criados
 #include "GameLogic/Services/CharacterService.h" 
 #include "GameLogic/Services/UserService.h"
 #include "Logging/LogService.h"
@@ -17,6 +17,17 @@
 
 #include <iostream>
 #include <utility>
+#include <array>
+
+namespace {
+const char* modelNameForClass(int characterClass) {
+    static constexpr std::array<const char*, 10> names{
+        "Fighter", "Mechanician", "Archer", "Pikeman", "Atalanta",
+        "Knight", "Magician", "Priestess", "Assassin", "Shaman"};
+    return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
+        ? names[static_cast<size_t>(characterClass - 1)] : "Fighter";
+}
+}
 
 AccountService::AccountService(DatabasePool& dbPool, CharacterService& charService, UserService& userService, LogService& logService, const ServerConfig& serverConfig)
     : m_dbPool(dbPool),
@@ -125,7 +136,7 @@ Log::LoginResult AccountService::validateRequest(const LoginRequest& request, co
 void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int ticket) {
     PacketServerList serverListPacket{};
 
-    // As chamadas agora s�o v�lidas
+    // As chamadas agora sï¿½o vï¿½lidas
     const auto& allServers = m_serverConfig.getAllServers();
     const auto& loginServerInfo = m_serverConfig.getThisServerInfo();
 
@@ -166,7 +177,7 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
 void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, const SQLUser& sqlUser) {
     m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
 
-    // CORRIGIDO: Gera o ticket e o passa para a sess�o
+    // CORRIGIDO: Gera o ticket e o passa para a sessï¿½o
     int ticket = Dice::RandomI(1, 1000000);
     session->authenticate(sqlUser.iID, sqlUser.szAccountName, ticket);
 
@@ -223,7 +234,15 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         strncpy_s(destChar.szName, charData.szName, sizeof(destChar.szName));
         destChar.iLevel = charData.iLevel;
         destChar.JobCode = charData.iClass;
-        // ... aqui voc� copiaria os outros campos necess�rios, como modelo 3D, mapa, etc.
+        strncpy_s(destChar.szModelName, sizeof(destChar.szModelName), modelNameForClass(charData.iClass), _TRUNCATE);
+        strncpy_s(destChar.szModelName2, sizeof(destChar.szModelName2), modelNameForClass(charData.iClass), _TRUNCATE);
+        destChar.Brood = 0;
+        destChar.dwArmorCode = 0;
+        destChar.StartField = 0;
+        destChar.PosX = 0;
+        destChar.PosZ = 0;
+        std::fill(std::begin(destChar.dwTemp), std::end(destChar.dwTemp), 0);
+        // ... aqui vocï¿½ copiaria os outros campos necessï¿½rios, como modelo 3D, mapa, etc.
     }
 
     // Converte e envia o pacote
