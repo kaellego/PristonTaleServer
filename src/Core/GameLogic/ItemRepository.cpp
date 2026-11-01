@@ -1,7 +1,7 @@
 #include "GameLogic/ItemRepository.h"
 #include "Database/DatabasePool.h"
-#include "Database/SQLConnection.h"
 #include "Logging/LogService.h"
+#include "Database/SQLConnection.h"
 #include "Utils/Dice.h"
 #include <iostream>
 #include <cmath>
@@ -15,16 +15,9 @@ ItemRepository::ItemRepository(DatabasePool& dbPool, LogService& logService)
 }
 
 void ItemRepository::loadItemDefinitions() {
-    auto db = m_dbPool.getConnection(EDatabaseID::GameDB);
-    if (!db) {
-        m_logService.error("Nao foi possivel obter conexao com GameDB no ItemRepository.");
-        return;
-    }
-    db->prepare("SELECT ItemCode, ItemName FROM ItemList");
-    db->execute();
+    auto db = m_dbPool.createConnection(EDatabaseID::GameDB); db->prepare("SELECT ItemCode, ItemName FROM ItemList"); db->execute();
     while (db->fetch()) {
-        const int code = db->getData<int>(1).value_or(0);
-        const auto name = db->getData<std::string>(2).value_or("");
+        auto code = db->getData<int>(1).value_or(0); auto name = db->getData<std::string>(2).value_or("");
         if (code <= 0 || name.empty()) continue;
         DefinitionItem definition{};
         definition.sItem.sItemID = code;

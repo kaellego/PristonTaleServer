@@ -1,6 +1,5 @@
 #include "GameLogic/Services/AccountService.h"
 #include "Database/DatabasePool.h"
-#include "Database/SQLConnection.h"
 #include "Network/ClientSession.h"
 #include "Config/ServerConfig.h"
 #include "Network/Packet.h"

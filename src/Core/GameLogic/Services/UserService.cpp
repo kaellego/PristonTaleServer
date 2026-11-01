@@ -39,11 +39,11 @@ bool UserService::isUserOnline(const std::string& accountName) {
 
 bool UserService::banAccount(const std::string& accountName, const std::string& reason) {
     if (accountName.empty()) return false;
-    auto db = m_dbPool.getConnection(EDatabaseID::UserDB_Primary);
-    if (!db) return false;
-    db->prepare("UPDATE UserInfo SET BanStatus=1 WHERE AccountName=?");
-    db->bindParameter<std::string>(1, accountName);
-    db->execute();
+    try {
+        auto db = m_dbPool.createConnection(EDatabaseID::UserDB_Primary); db->prepare("UPDATE UserInfo SET BanStatus=1 WHERE AccountName=?"); db->bindParameter(1, accountName); db->execute();
+    } catch (const std::exception&) {
+        return false;
+    }
     std::shared_ptr<ClientSession> session;
     { std::lock_guard<std::mutex> lock(m_usersMutex); auto it = m_onlineUsers.find(accountName); if (it != m_onlineUsers.end()) { session = it->second.session; m_onlineUsers.erase(it); } }
     if (session) session->close();

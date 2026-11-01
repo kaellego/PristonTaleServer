@@ -4,9 +4,23 @@ x64/
 src/Core/x64/
 src/GameServer/x64/
 extern/boost/
+extern/soci/
+extern/soci-install/
+build/
+$install/
 
 *.obj
 *.exe
 *.lib
 *.pdb
 *.ilk
+
+# Local runtime data and secrets
+src/GameServer/server.ini
+src/GameServer/ServerLog.txt
+src/GameServer/Data/
+Data/
+
+# Local test output
+tests/*.out
+tests/*.err

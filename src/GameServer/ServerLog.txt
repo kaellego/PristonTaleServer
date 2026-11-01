@@ -47,3 +47,1817 @@
 2026-11-01 12:35:51 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
 2026-11-01 12:35:51 [WARN]   Erro ao ler o cabecalho: Foi forçado o cancelamento de uma conexão existente pelo host remoto. Desconectando.
 2026-11-01 12:35:51 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:32:56 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:32:56 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:32:56 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:33:03 [ERROR]  Erro na fase 1: Connecting to the database cancelled by user.
+2026-11-01 13:33:30 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:33:30 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:33:30 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:33:30 [ERROR]  Erro na fase 1: Invalid non-numeric driver completion option value "".
+2026-11-01 13:34:08 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:34:08 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:34:08 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:34:08 [ERROR]  Erro na fase 1: Invalid non-numeric driver completion option value "".
+2026-11-01 13:34:42 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:34:43 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:34:43 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:34:43 [ERROR]  Erro na fase 1: Invalid non-numeric driver completion option value "".
+2026-11-01 13:35:07 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:35:07 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:35:07 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:35:07 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:39:39 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:39:39 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:39:39 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:39:39 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:39:55 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:39:55 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:39:55 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:39:55 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:40:15 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:40:15 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:40:15 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:40:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:40:15 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:40:33 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:40:33 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:40:33 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:40:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:40:33 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:43:22 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:43:22 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:43:22 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:43:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:43:22 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:43:50 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:43:50 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:43:50 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:43:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:43:50 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:44:13 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:44:13 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:44:13 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:44:13 [DEBUG]  SOCI ODBC driver='SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:44:13 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:45:00 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:45:00 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:45:00 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:45:00 [DEBUG]  SOCI ODBC driver='SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:45:00 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:46:59 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:46:59 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:46:59 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:46:59 [DEBUG]  SOCI ODBC driver='SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:46:59 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:47:17 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:47:17 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:47:17 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:47:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:47:17 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:47:45 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:47:45 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:47:45 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:47:45 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:47:45 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:48:39 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:48:39 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:48:39 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:48:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:48:39 [ERROR]  Erro na fase 1: Error connecting to database: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado (SQL state IM002)
+2026-11-01 13:51:29 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:51:29 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:51:29 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:51:29 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:51:29 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:51:29 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:51:29 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:51:29 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:51:29 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:51:29 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:55:19 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:55:19 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:55:19 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:55:19 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:55:19 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:55:19 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:55:19 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:55:19 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:55:19 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:55:19 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:55:33 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:55:33 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:55:33 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:55:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:55:33 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:55:33 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:55:33 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:55:33 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:55:33 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:55:33 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:55:42 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:55:42 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:55:42 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:55:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:55:42 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:55:42 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:55:42 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:55:42 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:55:42 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:55:42 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:55:53 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:55:53 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:55:53 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:55:53 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:55:53 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:55:53 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:55:53 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:55:53 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:55:53 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:55:53 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:56:01 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:56:01 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:56:01 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:56:01 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:56:01 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:56:01 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:56:01 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:56:01 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:56:01 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:56:01 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:56:12 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:56:12 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:56:12 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:56:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:56:12 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:56:12 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:56:12 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:56:12 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:56:12 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:56:12 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31439
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31440
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31437
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31438
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31441
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31442
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31444
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31443
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31445
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31446
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31447
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31448
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31449
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31450
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31451
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31452
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31453
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31454
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31455
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [INFO]   Nova sessao iniciada: 127.0.0.1:31456
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:15 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:15 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:15 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:16 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:21 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:56:21 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:56:21 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:56:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:56:21 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:56:21 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:56:21 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:56:21 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:56:21 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:56:21 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31513
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31514
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31512
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31516
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31515
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31517
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31518
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31519
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31520
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [INFO]   Nova sessao iniciada: 127.0.0.1:31521
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:23 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:23 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:34 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:56:34 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:56:34 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:56:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:56:34 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:56:34 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:56:34 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:56:34 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:56:34 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:56:34 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31580
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31583
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31582
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 56373. Desconectando.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31585
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 43328. Desconectando.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31584
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 27008. Desconectando.
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31581
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 22705. Desconectando.
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31586
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 8907. Desconectando.
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31587
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 56887. Desconectando.
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31588
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 53819. Desconectando.
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [INFO]   Nova sessao iniciada: 127.0.0.1:31589
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 63007. Desconectando.
+2026-11-01 13:56:36 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 45145. Desconectando.
+2026-11-01 13:56:36 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:36 [ERROR]  Tamanho de pacote (scrambled) invalido: 50990. Desconectando.
+2026-11-01 13:56:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:50 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:56:50 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:56:50 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:56:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:56:50 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:56:50 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:56:50 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:56:50 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:56:50 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:56:50 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31663
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31666
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31669
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31667
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31668
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31670
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31664
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31665
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31671
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [INFO]   Nova sessao iniciada: 127.0.0.1:31672
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:52 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:56:52 [WARN]   Tentativa de login com versao incorreta do jogo. Cliente: 0, Servidor: 1610. Enviando erro.
+2026-11-01 13:56:52 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:56:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:28 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:57:28 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:57:28 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:57:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:57:28 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:57:28 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:57:28 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:57:28 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:57:28 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:57:28 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2246
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2248
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2247
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2249
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2250
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2251
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2252
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2253
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2254
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [INFO]   Nova sessao iniciada: 127.0.0.1:2255
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:31 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:31 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [INFO]   Usuario 'smoke_test' (ID: 2) adicionado a lista de online. Total: 1
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 13:57:31 [INFO]   Enviando lista de personagens para a conta smoke_test
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:31 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:31 [WARN]   Conta 'smoke_test' ja esta conectada.
+2026-11-01 13:57:31 [WARN]   Login falhou para a conta [smoke_test]. Razao: -4
+2026-11-01 13:57:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:32 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:32 [INFO]   Usuario 'smoke_test' removido da lista de online. Total: 0
+2026-11-01 13:57:32 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:36 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:57:40 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:57:40 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:57:40 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:57:40 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:57:40 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:57:40 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:57:40 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:57:40 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:57:40 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:57:40 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:57:42 [INFO]   Nova sessao iniciada: 127.0.0.1:2311
+2026-11-01 13:57:42 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:57:42 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:57:42 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:57:42 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:57:42 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:57:42 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:42 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:42 [PACKET] <- Pacote Recebido: LoginUser (Opcode: 0x48480001, Tamanho: 488) | Body: 00 00 00 00 00 00 00 00 00 00 00 00 73 6d 6f 6b ...
+2026-11-01 13:57:42 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:57:42 [DEBUG]  Processando tentativa de login para a conta: 'smoke_test'
+2026-11-01 13:57:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:43 [INFO]   Login bem-sucedido para a conta: smoke_test
+2026-11-01 13:57:43 [INFO]   Usuario 'smoke_test' (ID: 2) adicionado a lista de online. Total: 1
+2026-11-01 13:57:43 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 13:57:43 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 13:57:43 [INFO]   Enviando lista de personagens para a conta smoke_test
+2026-11-01 13:57:43 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 13:57:43 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 13:57:48 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:57:48 [INFO]   Usuario 'smoke_test' removido da lista de online. Total: 0
+2026-11-01 13:57:48 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:05 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 13:58:05 [INFO]   SOCI/ODBC configurado para os bancos; workers logicos por banco: 5.
+2026-11-01 13:58:05 [INFO]   Inicializando repositorio de itens...
+2026-11-01 13:58:05 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 13:58:05 [INFO]   1 definicoes de itens carregadas.
+2026-11-01 13:58:05 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 13:58:05 [INFO]   12 manipuladores de pacotes registrados.
+2026-11-01 13:58:05 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 13:58:05 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 13:58:05 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2395
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2396
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2398
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2397
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2399
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2403
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2400
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2406
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2407
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2401
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2412
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2411
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2402
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2404
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2409
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2408
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2405
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2410
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2415
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2413
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2414
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2417
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2416
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2418
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2419
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2421
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2422
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2420
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2423
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2424
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2425
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [INFO]   Nova sessao iniciada: 127.0.0.1:2426
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:07 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:07 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:07 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:08 [INFO]   Nova sessao iniciada: 127.0.0.1:2433
+2026-11-01 13:58:08 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:08 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:08 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:08 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:08 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:08 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2435
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2436
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2437
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2439
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2438
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2440
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2441
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2444
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2443
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2442
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2445
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2446
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2447
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2448
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2451
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2450
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2449
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2453
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2454
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2452
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2458
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2456
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2463
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2462
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2461
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2455
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2460
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2459
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2457
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2467
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2464
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2466
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [INFO]   Nova sessao iniciada: 127.0.0.1:2465
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:09 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:09 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:09 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:10 [INFO]   Nova sessao iniciada: 127.0.0.1:2468
+2026-11-01 13:58:10 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:10 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:10 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:10 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:10 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:10 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:10 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:10 [INFO]   Nova sessao iniciada: 127.0.0.1:2469
+2026-11-01 13:58:10 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:10 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:10 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:10 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:10 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:10 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:10 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2473
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2474
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2475
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2476
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2477
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2481
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2478
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2479
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2480
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2482
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2483
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2485
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2484
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2486
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2489
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2488
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2487
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2492
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2490
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2491
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2493
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2494
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2495
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2496
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2497
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2498
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2499
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2500
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2501
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2503
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2502
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [INFO]   Nova sessao iniciada: 127.0.0.1:2504
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 13:58:11 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 13:58:11 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 13:58:11 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 13:58:12 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:12 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:12 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:12 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 13:58:13 [INFO]   Sessao encerrada para um socket ja desconectado.

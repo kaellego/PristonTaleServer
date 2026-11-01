@@ -1,6 +1,5 @@
 #include "GameLogic/Services/CharacterService.h"
 #include "Database/DatabasePool.h"
-#include "Database/SQLConnection.h"
 #include "GameLogic/PlayerRepository.h"
 #include "Logging/LogService.h"
 #include "Database/Orm.h"
