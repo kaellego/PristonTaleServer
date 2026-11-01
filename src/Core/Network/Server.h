@@ -4,6 +4,8 @@
 #include <memory>
 #include <cstdint>
 #include <atomic>
+#include <mutex>
+#include <vector>
 
 // Forward declarations para desacoplar cabe?alhos
 class PacketDispatcher;
@@ -46,4 +48,6 @@ private:
     LogService& m_logService;
     uint8_t m_xorKey;
     std::atomic_bool m_stopped{false};
+    std::mutex m_sessionsMutex;
+    std::vector<std::weak_ptr<ClientSession>> m_sessions;
 };

@@ -29,6 +29,20 @@ void Server::stop() {
     boost::system::error_code ec;
     m_acceptor.cancel(ec);
     m_acceptor.close(ec);
+
+    std::vector<std::shared_ptr<ClientSession>> sessions;
+    {
+        std::lock_guard lock(m_sessionsMutex);
+        for (auto it = m_sessions.begin(); it != m_sessions.end();) {
+            if (auto session = it->lock()) {
+                sessions.push_back(std::move(session));
+                ++it;
+            } else {
+                it = m_sessions.erase(it);
+            }
+        }
+    }
+    for (const auto& session : sessions) session->close();
 }
 
 /**
@@ -44,7 +58,12 @@ void Server::do_accept() {
         [this](const boost::system::error_code& ec, boost::asio::ip::tcp::socket socket) {
             if (!ec) {
                 // CORRIGIDO: Passa a chave XOR para o construtor do ClientSession
-                std::make_shared<ClientSession>(std::move(socket), m_packet_dispatcher, m_logService, m_xorKey)->start();
+                auto session = std::make_shared<ClientSession>(std::move(socket), m_packet_dispatcher, m_logService, m_xorKey);
+                {
+                    std::lock_guard lock(m_sessionsMutex);
+                    m_sessions.emplace_back(session);
+                }
+                session->start();
             }
             else {
                 std::cerr << "[Rede] Erro ao aceitar conexao: " << ec.message() << std::endl;
