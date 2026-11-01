@@ -24,6 +24,13 @@ GO
 
 USE GameDB;
 GO
+IF OBJECT_ID('dbo.ItemList', 'U') IS NULL
+CREATE TABLE dbo.ItemList (
+    ItemCode int NOT NULL PRIMARY KEY,
+    ItemName varchar(63) NOT NULL
+);
+IF NOT EXISTS (SELECT 1 FROM dbo.ItemList WHERE ItemCode=1)
+    INSERT INTO dbo.ItemList (ItemCode, ItemName) VALUES (1, 'Beginner Sword');
 IF OBJECT_ID('dbo.GameMasters', 'U') IS NULL
 CREATE TABLE dbo.GameMasters (ID int IDENTITY PRIMARY KEY, AccountID varchar(32), Password varchar(30), Type int NOT NULL DEFAULT 0, active bit NOT NULL DEFAULT 1);
 GO

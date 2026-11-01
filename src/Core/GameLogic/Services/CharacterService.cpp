@@ -38,22 +38,37 @@ std::vector<CharacterData> CharacterService::getCharacterList(const std::string&
     return characterList;
 }
 bool CharacterService::createCharacter(const std::string& accountName, const std::string& characterName, int characterClass) {
-    if (accountName.empty() || !validCharacterName(characterName) || characterClass < 1 || characterClass > 10 ||
-        m_playerRepository.loadCharacter(characterName).has_value()) return false;
+    if (accountName.empty() || !validCharacterName(characterName) || characterClass < 1 || characterClass > 10) return false;
+    Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
+    if (orm.findCharacterNames(accountName, 7).size() >= 6 || orm.characterBelongsTo(accountName, characterName)) return false;
     CharacterData character{};
     strncpy_s(character.szName, sizeof(character.szName), characterName.c_str(), _TRUNCATE);
     character.iLevel = 1;
     character.iClass = characterClass;
-    return m_playerRepository.saveCharacter(character);
+    if (!m_playerRepository.saveCharacter(character)) return false;
+    if (!orm.createCharacterRecord(accountName, characterName)) {
+        m_playerRepository.deleteCharacter(characterName);
+        return false;
+    }
+    return true;
 }
 
 bool CharacterService::deleteCharacter(const std::string& accountName, const std::string& characterName) {
     if (accountName.empty() || !validCharacterName(characterName)) return false;
-    if (!m_playerRepository.loadCharacter(characterName).has_value()) return false;
+    Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
+    if (!orm.characterBelongsTo(accountName, characterName)) return false;
+    if (!orm.deleteCharacterRecord(accountName, characterName)) return false;
     return m_playerRepository.deleteCharacter(characterName);
 }
 
 std::optional<CharacterData> CharacterService::selectCharacter(const std::string& accountName, const std::string& characterName) const {
     if (accountName.empty() || !validCharacterName(characterName)) return std::nullopt;
+    Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
+    if (!orm.characterBelongsTo(accountName, characterName)) return std::nullopt;
     return m_playerRepository.loadCharacter(characterName);
+}
+
+bool CharacterService::ownsCharacter(const std::string& accountName, const std::string& characterName) const {
+    Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
+    return !accountName.empty() && validCharacterName(characterName) && orm.characterBelongsTo(accountName, characterName);
 }

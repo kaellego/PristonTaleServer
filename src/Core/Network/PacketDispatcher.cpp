@@ -12,6 +12,7 @@
 #include "GameLogic/Handlers/LoginHandler.h"
 #include "GameLogic/Handlers/PingHandler.h"
 #include "GameLogic/Handlers/CharacterHandler.h"
+#include "GameLogic/Handlers/ItemHandler.h"
 #include "GameLogic/Services/CharacterService.h"
 
 #include <iostream>
@@ -48,6 +49,12 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetPlayerInventory)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouse)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouseSeasonal)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }

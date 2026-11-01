@@ -8,6 +8,7 @@ namespace fs = std::filesystem;
 PlayerRepository::PlayerRepository(const std::string& dataPath) : m_basePath(dataPath) {
     m_charPath = (fs::path(m_basePath) / "Character").string();
     m_warehousePath = (fs::path(m_basePath) / "Warehouse").string();
+    fs::create_directories((fs::path(m_basePath) / "Inventory"));
     std::cout << "Inicializando repositorio de jogadores..." << std::endl;
 }
 
@@ -74,6 +75,7 @@ std::optional<WarehouseData> PlayerRepository::loadWarehouse(const std::string& 
 }
 
 bool PlayerRepository::saveWarehouse(const std::string& accountName, const WarehouseData& warehouseData) const {
+    fs::create_directories(m_warehousePath);
     fs::path filePath = fs::path(m_warehousePath) / (accountName + ".dat");
     std::ofstream file(filePath, std::ios::binary | std::ios::trunc);
     if (!file.is_open()) {
@@ -81,6 +83,19 @@ bool PlayerRepository::saveWarehouse(const std::string& accountName, const Wareh
     }
     file.write(reinterpret_cast<const char*>(&warehouseData), sizeof(WarehouseData));
     return file.good();
+}
+
+std::optional<InventoryData> PlayerRepository::loadInventory(const std::string& characterName) const {
+    std::ifstream file(fs::path(m_basePath) / "Inventory" / (characterName + ".dat"), std::ios::binary);
+    if (!file.is_open()) return std::nullopt;
+    InventoryData data{};
+    return file.read(reinterpret_cast<char*>(&data), sizeof(data)) ? std::optional<InventoryData>(data) : std::nullopt;
+}
+
+bool PlayerRepository::saveInventory(const std::string& characterName, const InventoryData& inventoryData) const {
+    fs::create_directories(fs::path(m_basePath) / "Inventory");
+    std::ofstream file(fs::path(m_basePath) / "Inventory" / (characterName + ".dat"), std::ios::binary | std::ios::trunc);
+    return file.is_open() && static_cast<bool>(file.write(reinterpret_cast<const char*>(&inventoryData), sizeof(inventoryData)));
 }
 
 std::vector<std::string> PlayerRepository::getAllCharacterNames() const {

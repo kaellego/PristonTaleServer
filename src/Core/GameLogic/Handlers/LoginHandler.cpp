@@ -8,48 +8,52 @@
 #include "Logging/LogEvents.h"
 #include <cstring> // Para std::memcpy
 
-LoginHandler::LoginHandler(AccountService& accountService, LogService& logService, GlobalState& globalState)
+LoginHandler::LoginHandler(AccountService &accountService, LogService &logService, GlobalState &globalState)
     : m_accountService(accountService),
-    m_logService(logService),
-    m_globalState(globalState)
-{}
+      m_logService(logService),
+      m_globalState(globalState)
+{
+}
 
-void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet& packet) {
+void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &packet)
+{
     // 1. Ignora o pacote se for um Game Server
-    if (m_globalState.isGameServer) {
+    if (m_globalState.isGameServer)
+    {
         return;
     }
 
-    // 2. Validação de tamanho
+    // 2. ValidaÃ§Ã£o de tamanho
     constexpr size_t expectedBodySize = sizeof(PacketLoginUser) - sizeof(PacketHeader);
-    if (packet.body.size() != expectedBodySize) {
+    if (packet.body.size() != expectedBodySize)
+    {
         m_logService.warn("Pacote de login recebido com tamanho de corpo invalido. Fechando conexao.");
         session->close();
         return;
     }
 
-    // 3. Reconstrói a struct do pacote
+    // 3. Reconstroi a struct do pacote
     PacketLoginUser loginPacket;
     loginPacket.header = packet.header;
     std::memcpy(
-        reinterpret_cast<uint8_t*>(&loginPacket) + sizeof(PacketHeader),
+        reinterpret_cast<uint8_t *>(&loginPacket) + sizeof(PacketHeader),
         packet.body.data(),
-        expectedBodySize
-    );
+        expectedBodySize);
 
-    // 4. Validação da versão do jogo
-    if (loginPacket.iVersion != m_globalState.gameVersion) {
+    // 4. Validaï¿½ï¿½o da versÃ£o do jogo
+    if (loginPacket.iVersion != m_globalState.gameVersion)
+    {
         m_logService.warn("Tentativa de login com versao incorreta do jogo. Cliente: {}, Servidor: {}. Enviando erro.",
-            loginPacket.iVersion, m_globalState.gameVersion);
+                          loginPacket.iVersion, m_globalState.gameVersion);
 
-        // Monta e envia o pacote de versão incorreta
+        // Monta e envia o pacote de versï¿½o incorreta
         PacketAccountLoginCode responseStruct{};
         responseStruct.header.opcode = static_cast<uint32_t>(Opcodes::AccountLoginCode);
         responseStruct.iCode = static_cast<int>(Log::LoginResult::WrongVersion); // Supondo que WrongVersion exista
         strncpy_s(responseStruct.szMessage, "Game version is incorrect please update", sizeof(responseStruct.szMessage) - 1);
 
         const size_t bodySize = sizeof(PacketAccountLoginCode) - sizeof(PacketHeader);
-        const uint8_t* bodyPtr = reinterpret_cast<const uint8_t*>(&responseStruct) + sizeof(PacketHeader);
+        const uint8_t *bodyPtr = reinterpret_cast<const uint8_t *>(&responseStruct) + sizeof(PacketHeader);
         std::vector<uint8_t> body(bodyPtr, bodyPtr + bodySize);
 
         Packet response(responseStruct.header.opcode, body);
@@ -57,7 +61,7 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet& 
         return;
     }
 
-    // 5. Se todas as validações passaram, incrementa os contadores e enfileira a requisição
+    // 5. Se todas as validaÃ§Ãµes passaram, incrementa os contadores e enfileira a requisiÃ§Ã£o
     m_globalState.loginAttempts++;
     // TODO: session->getUserData()->iVerifiedLogin++; (quando UserData for implementado)
 

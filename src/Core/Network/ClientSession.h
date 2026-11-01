@@ -6,7 +6,7 @@
 #include <deque>
 #include <memory>
 #include <vector>
-#include <string> // Necess·rio para std::string
+#include <string> // Necess√°rio para std::string
 
 // Forward declarations
 class PacketDispatcher;
@@ -22,18 +22,20 @@ public:
     void close();
     boost::asio::ip::tcp::socket& socket();
 
-    // --- NOVOS M…TODOS DE AUTENTICA«√O ---
+    // --- NOVOS M√âTODOS DE AUTENTICA√á√ÉO ---
 
     /**
-     * @brief Define a sess„o como autenticada, armazenando os dados da conta.
-     * @param accountId O ID numÈrico da conta.
-     * @param accountName O nome de usu·rio da conta.
+     * @brief Define a sess√£o como autenticada, armazenando os dados da conta.
+     * @param accountId O ID num√©rico da conta.
+     * @param accountName O nome de usu√°rio da conta.
      */
     void authenticate(int accountId, const std::string& accountName, int ticket);
 
     bool isAuthenticated() const { return m_isAuthenticated; }
     int getAccountId() const { return m_accountId; }
     const std::string& getAccountName() const { return m_accountName; }
+    void selectCharacter(const std::string& name) { m_characterName = name; }
+    const std::string& getCharacterName() const { return m_characterName; }
 
 private:
     void do_read_header();
@@ -46,6 +48,7 @@ private:
     int m_accountId = -1;
     std::string m_accountName;
     int m_ticket = 0;
+    std::string m_characterName;
 
     // Outros membros...
     boost::asio::ip::tcp::socket m_socket;

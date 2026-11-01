@@ -15,6 +15,9 @@ public:
 
     std::optional<SQLUser> findUser(const std::string& accountName) const;
     std::vector<std::string> findCharacterNames(const std::string& accountName, int limit = 6) const;
+    bool characterBelongsTo(const std::string& accountName, const std::string& characterName) const;
+    bool createCharacterRecord(const std::string& accountName, const std::string& characterName) const;
+    bool deleteCharacterRecord(const std::string& accountName, const std::string& characterName) const;
     DatabaseDialect dialect() const noexcept { return m_dialect; }
 
 private:

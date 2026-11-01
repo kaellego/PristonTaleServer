@@ -20,7 +20,18 @@ void ItemRepository::loadItemDefinitions() {
         m_logService.error("Nao foi possivel obter conexao com GameDB no ItemRepository.");
         return;
     }
-    m_logService.info("Definicoes de itens carregadas (logica a ser implementada).");
+    db->prepare("SELECT ItemCode, ItemName FROM ItemList");
+    db->execute();
+    while (db->fetch()) {
+        const int code = db->getData<int>(1).value_or(0);
+        const auto name = db->getData<std::string>(2).value_or("");
+        if (code <= 0 || name.empty()) continue;
+        DefinitionItem definition{};
+        definition.sItem.sItemID = code;
+        strncpy_s(definition.sItem.szItemName, sizeof(definition.sItem.szItemName), name.c_str(), _TRUNCATE);
+        m_itemDefs.emplace(code, definition);
+    }
+    m_logService.info("{} definicoes de itens carregadas.", m_itemDefs.size());
 }
 
 // --- DEFINIÃ‡Ã•ES DE MÃ‰TODOS CORRIGIDAS ---

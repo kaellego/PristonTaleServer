@@ -590,6 +590,16 @@ struct WarehouseData {
     // ... preencha com outros membros
 };
 
+constexpr size_t PLAYER_INVENTORY_SLOTS = 60;
+struct InventoryData {
+    int32_t iGold;
+    Item saItem[PLAYER_INVENTORY_SLOTS];
+};
+
+struct PacketInventoryRequest { PacketHeader header; };
+struct PacketWarehouseRequest { PacketHeader header; };
+struct PacketItemSlotHandle { PacketHeader header; int32_t sourceSlot; int32_t targetSlot; };
+
 // Estrutura para uma definição de item carregada da tabela ItemList do banco de dados.
 struct DefinitionItem {
     Item sItem;

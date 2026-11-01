@@ -42,3 +42,33 @@ std::vector<std::string> Orm::findCharacterNames(const std::string& accountName,
     }
     return names;
 }
+
+bool Orm::characterBelongsTo(const std::string& accountName, const std::string& characterName) const {
+    auto db = m_pool.getConnection(EDatabaseID::UserDB_Primary);
+    if (!db) return false;
+    db->prepare("SELECT Name FROM CharacterInfo WHERE AccountName=? AND Name=?");
+    db->bindParameter<std::string>(1, accountName);
+    db->bindParameter<std::string>(2, characterName);
+    db->execute();
+    return db->fetch();
+}
+
+bool Orm::createCharacterRecord(const std::string& accountName, const std::string& characterName) const {
+    auto db = m_pool.getConnection(EDatabaseID::UserDB_Primary);
+    if (!db || characterBelongsTo(accountName, characterName)) return false;
+    db->prepare("INSERT INTO CharacterInfo (Name, AccountName, Experience) VALUES (?, ?, 0)");
+    db->bindParameter<std::string>(1, characterName);
+    db->bindParameter<std::string>(2, accountName);
+    db->execute();
+    return true;
+}
+
+bool Orm::deleteCharacterRecord(const std::string& accountName, const std::string& characterName) const {
+    auto db = m_pool.getConnection(EDatabaseID::UserDB_Primary);
+    if (!db || !characterBelongsTo(accountName, characterName)) return false;
+    db->prepare("DELETE FROM CharacterInfo WHERE AccountName=? AND Name=?");
+    db->bindParameter<std::string>(1, accountName);
+    db->bindParameter<std::string>(2, characterName);
+    db->execute();
+    return true;
+}
