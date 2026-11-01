@@ -19,7 +19,7 @@ namespace
 
 void ItemHandler::handle(std::shared_ptr<ClientSession> session, const Packet &packet)
 {
-    if (!session->isAuthenticated() || session->getCharacterName().empty())
+    if (!session->isAuthenticated() || session->ticketExpired() || session->getCharacterName().empty())
     {
         session->close();
         return;

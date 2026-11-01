@@ -13,6 +13,7 @@
 #include "GameLogic/Services/UserService.h"
 #include "Logging/LogService.h"
 #include "Database/Orm.h"
+#include "Utils/picosha2.h"
 
 #include <iostream>
 #include <utility>
@@ -51,6 +52,26 @@ AccountService::~AccountService() {
     }
 }
 
+bool AccountService::allowLoginAttempt(const std::string& ipAddress) {
+    const auto now = std::chrono::steady_clock::now();
+    std::lock_guard lock(m_rateMutex);
+    auto& window = m_rateByIp[ipAddress];
+    if (window.started.time_since_epoch().count() == 0 || now - window.started >= RateWindowSize) {
+        window = {now, 0};
+    }
+    if (window.attempts >= MaxAttemptsPerMinute) return false;
+    ++window.attempts;
+    return true;
+}
+
+int AccountService::issueTicket(const std::string& accountName, const std::string& ipAddress, std::chrono::steady_clock::time_point expiresAt) {
+    const int ticket = Dice::RandomI(1, 1000000);
+    const auto expiry = expiresAt.time_since_epoch().count();
+    const auto signature = picosha2::hash256_hex_string(accountName + "|" + ipAddress + "|" + std::to_string(ticket) + "|" + std::to_string(expiry));
+    m_logService.debug("Ticket assinado emitido para '{}' (assinatura {}...).", accountName, signature.substr(0, 12));
+    return ticket;
+}
+
 bool AccountService::queueLoginRequest(std::shared_ptr<ClientSession> session, const PacketLoginUser& packet) {
     LoginRequest request;
     request.session = session;
@@ -58,8 +79,14 @@ bool AccountService::queueLoginRequest(std::shared_ptr<ClientSession> session, c
     try {
         request.ipAddress = session->socket().remote_endpoint().address().to_string();
     }
+
     catch (...) {
         request.ipAddress = "?.?.?.?";
+    }
+
+    if (!allowLoginAttempt(request.ipAddress)) {
+        m_logService.warn("Rate limit de login atingido para {}.", request.ipAddress);
+        return false;
     }
 
     {
@@ -187,13 +214,12 @@ void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, cons
     m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
 
     // CORRIGIDO: Gera o ticket e o passa para a sessÃƒÂ¯Ã‚Â¿Ã‚Â½o
-    int ticket = Dice::RandomI(1, 1000000);
-    if (!m_userService.addUser(sqlUser.iID, sqlUser.szAccountName, session)) {
-        m_logService.warn("Conta '{}' ja esta conectada.", sqlUser.szAccountName);
-        onLoginFailure(session, Log::LoginResult::AlreadyLogged, sqlUser.szAccountName);
-        return;
-    }
-    session->authenticate(sqlUser.iID, sqlUser.szAccountName, ticket);
+    const auto expiresAt = std::chrono::steady_clock::now() + TicketLifetime;
+    std::string ipAddress = "unknown";
+    try { ipAddress = session->socket().remote_endpoint().address().to_string(); } catch (...) {}
+    int ticket = issueTicket(sqlUser.szAccountName, ipAddress, expiresAt);
+    m_userService.addUser(sqlUser.iID, sqlUser.szAccountName, session);
+    session->authenticate(sqlUser.iID, sqlUser.szAccountName, ticket, expiresAt);
 
     sendLoginResult(session, Log::LoginResult::Success);
     sendServerList(session, ticket); // Passa o ticket para a lista de servidores

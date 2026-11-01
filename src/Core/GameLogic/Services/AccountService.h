@@ -9,6 +9,8 @@
 #include <atomic>
 #include <optional>
 #include <vector>
+#include <unordered_map>
+#include <chrono>
 
 #include "Shared/datatypes.h" // Para structs como PacketLoginUser e SQLUser
 #include "Logging/LogEvents.h"   // Para os enums de log
@@ -72,4 +74,12 @@ private:
     std::vector<std::thread> m_workerThreads;
     std::atomic<bool> m_isStopping{ false };
     static constexpr size_t MaxLoginQueueSize = 1024;
+    struct RateWindow { std::chrono::steady_clock::time_point started; size_t attempts = 0; };
+    std::mutex m_rateMutex;
+    std::unordered_map<std::string, RateWindow> m_rateByIp;
+    static constexpr size_t MaxAttemptsPerMinute = 20;
+    static constexpr auto TicketLifetime = std::chrono::minutes(15);
+    static constexpr auto RateWindowSize = std::chrono::minutes(1);
+    bool allowLoginAttempt(const std::string& ipAddress);
+    int issueTicket(const std::string& accountName, const std::string& ipAddress, std::chrono::steady_clock::time_point expiresAt);
 };

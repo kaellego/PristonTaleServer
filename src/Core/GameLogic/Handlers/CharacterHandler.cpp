@@ -31,7 +31,7 @@ namespace
 
 void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Packet &packet)
 {
-    if (!session->isAuthenticated() || packet.body.size() != sizeof(PacketCharacterCommand) - sizeof(PacketHeader))
+    if (!session->isAuthenticated() || session->ticketExpired() || packet.body.size() != sizeof(PacketCharacterCommand) - sizeof(PacketHeader))
     {
         session->close();
         return;
@@ -53,7 +53,7 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
         if (success)
         {
             session->selectCharacter(name);
-            m_world.enter(session->getAccountId(), session->getAccountName(), name);
+            m_world.enter(session->getAccountId(), session->getAccountName(), name, session);
         }
         break;
     default:

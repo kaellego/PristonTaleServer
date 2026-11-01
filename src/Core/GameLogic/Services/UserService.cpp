@@ -7,16 +7,19 @@
 UserService::UserService(DatabasePool& dbPool, LogService& logService) : m_logService(logService), m_dbPool(dbPool) {}
 
 bool UserService::addUser(int accountId, const std::string& accountName, std::shared_ptr<ClientSession> session) {
-    std::lock_guard<std::mutex> lock(m_usersMutex);
+    std::shared_ptr<ClientSession> previous;
+    {
+        std::lock_guard<std::mutex> lock(m_usersMutex);
+        if (auto it = m_onlineUsers.find(accountName); it != m_onlineUsers.end()) previous = it->second.session;
 
-    if (m_onlineUsers.contains(accountName)) return false;
+        UserSession userSession;
+        userSession.accountId = accountId;
+        userSession.accountName = accountName;
+        userSession.session = session;
+        m_onlineUsers[accountName] = userSession;
+    }
+    if (previous && previous != session) previous->close();
 
-    UserSession userSession;
-    userSession.accountId = accountId;
-    userSession.accountName = accountName;
-    userSession.session = session;
-
-    m_onlineUsers[accountName] = userSession;
     m_logService.info("Usuario '{}' (ID: {}) adicionado a lista de online. Total: {}", accountName, accountId, m_onlineUsers.size());
     return true;
 }

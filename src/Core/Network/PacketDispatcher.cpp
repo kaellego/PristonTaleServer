@@ -13,6 +13,8 @@
 #include "GameLogic/Handlers/PingHandler.h"
 #include "GameLogic/Handlers/CharacterHandler.h"
 #include "GameLogic/Handlers/ItemHandler.h"
+#include "GameLogic/Handlers/MovementHandler.h"
+#include "GameLogic/Handlers/CombatHandler.h"
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/Services/InventoryService.h"
 #include "GameLogic/GameWorld.h"
@@ -63,6 +65,12 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = itemHandler;
+    auto movementHandler = std::make_shared<MovementHandler>(m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::UnitStatusMove)] = movementHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::PlayData)] = movementHandler;
+    auto combatHandler = std::make_shared<CombatHandler>(m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::AttackData)] = combatHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::AttackData2)] = combatHandler;
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }

@@ -13,6 +13,7 @@ PingHandler::PingHandler(LogService &logService, UserService &userService, Globa
 
 void PingHandler::handle(std::shared_ptr<ClientSession> session, const Packet &packet)
 {
+    if (session->isAuthenticated() && session->ticketExpired()) { session->close(); return; }
     // 1. Validaï¿½ï¿½o de tamanho
     constexpr size_t expectedBodySize = sizeof(PacketPing) - sizeof(PacketHeader);
     if (packet.body.size() != expectedBodySize)

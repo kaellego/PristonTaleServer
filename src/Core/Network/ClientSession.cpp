@@ -190,9 +190,10 @@ void ClientSession::close() {
         m_socket.close(ec);
     }
 }
-void ClientSession::authenticate(int accountId, const std::string& accountName, int ticket) {
+void ClientSession::authenticate(int accountId, const std::string& accountName, int ticket, std::chrono::steady_clock::time_point expiresAt) {
     m_isAuthenticated = true;
     m_accountId = accountId;
     m_accountName = accountName;
     m_ticket = ticket;
+    m_ticketExpiresAt = expiresAt;
 }

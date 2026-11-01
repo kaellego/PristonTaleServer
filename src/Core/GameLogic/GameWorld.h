@@ -8,12 +8,18 @@
 #include <atomic>
 #include <algorithm>
 #include <optional>
+#include "Network/Packet.h"
+#include "Network/ClientSession.h"
+#include <vector>
+
+class ClientSession;
 
 struct MapPosition { float x = 0.0f; float y = 0.0f; float z = 0.0f; };
 struct MapEntity {
     int id = 0;
     int accountId = 0;
     MapPosition position{};
+    int mapId = 0;
     int health = 100;
     int maxHealth = 100;
     int attack = 10;
@@ -24,8 +30,8 @@ struct CombatResult { bool hit = false; bool targetDefeated = false; int damage 
 
 class GameWorld {
 public:
-    std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName) {
-        auto gameSession = std::make_shared<GameSession>(accountId, accountName, characterName);
+    std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName, std::weak_ptr<ClientSession> client = {}) {
+        auto gameSession = std::make_shared<GameSession>(accountId, accountName, characterName, std::move(client));
         std::lock_guard lock(m_mutex);
         if (auto existing = m_sessions.find(accountName); existing != m_sessions.end())
             m_entities.erase(existing->second->entityId());
@@ -48,6 +54,28 @@ public:
         const float dx = destination.x - p.x, dy = destination.y - p.y, dz = destination.z - p.z;
         if (dx * dx + dy * dy + dz * dz > 400.0f) return false;
         it->second.position = destination; return true;
+    }
+    std::optional<int> entityIdForAccount(const std::string& accountName) const {
+        std::lock_guard lock(m_mutex); auto it = m_sessions.find(accountName); return it == m_sessions.end() ? std::nullopt : std::optional<int>(it->second->entityId());
+    }
+    void broadcastNearby(const std::string& exceptAccount, int sourceEntityId, const Packet& packet, float radius = 120.0f) const {
+        std::vector<std::shared_ptr<ClientSession>> clients;
+        std::lock_guard lock(m_mutex);
+        const auto source = m_entities.find(sourceEntityId);
+        if (source == m_entities.end()) return;
+        const auto& origin = source->second;
+        const auto maxDistance = radius * radius;
+        for (const auto& [name, session] : m_sessions) {
+            if (name == exceptAccount) continue;
+            const auto target = m_entities.find(session->entityId());
+            if (target == m_entities.end() || target->second.mapId != origin.mapId) continue;
+            const auto dx = target->second.position.x - origin.position.x;
+            const auto dy = target->second.position.y - origin.position.y;
+            const auto dz = target->second.position.z - origin.position.z;
+            if (dx * dx + dy * dy + dz * dz > maxDistance) continue;
+            if (auto client = session->client()) clients.push_back(std::move(client));
+        }
+        for (auto& client : clients) client->send(packet);
     }
     CombatResult attack(int attackerId, int targetId) {
         std::lock_guard lock(m_mutex);

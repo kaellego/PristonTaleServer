@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include <atomic>
+#include <chrono>
 #include <string> // NecessÃ¡rio para std::string
 
 // Forward declarations
@@ -30,7 +31,7 @@ public:
      * @param accountId O ID numÃ©rico da conta.
      * @param accountName O nome de usuÃ¡rio da conta.
      */
-    void authenticate(int accountId, const std::string& accountName, int ticket);
+    void authenticate(int accountId, const std::string& accountName, int ticket, std::chrono::steady_clock::time_point expiresAt);
 
     bool isAuthenticated() const { return m_isAuthenticated; }
     int getAccountId() const { return m_accountId; }
@@ -39,6 +40,9 @@ public:
     const std::string& getCharacterName() const { return m_characterName; }
     void markVerifiedLogin() { ++m_verifiedLoginPackets; }
     uint32_t getVerifiedLoginPackets() const { return m_verifiedLoginPackets; }
+    int getTicket() const { return m_ticket; }
+    bool ticketExpired() const { return std::chrono::steady_clock::now() >= m_ticketExpiresAt; }
+    void renewTicket(std::chrono::steady_clock::time_point expiresAt) { m_ticketExpiresAt = expiresAt; }
 
 private:
     void do_read_header();
@@ -52,6 +56,7 @@ private:
     int m_accountId = -1;
     std::string m_accountName;
     int m_ticket = 0;
+    std::chrono::steady_clock::time_point m_ticketExpiresAt{};
     std::string m_characterName;
     uint32_t m_verifiedLoginPackets = 0;
 
