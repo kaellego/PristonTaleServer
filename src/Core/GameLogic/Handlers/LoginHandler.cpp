@@ -7,12 +7,21 @@
 #include "Shared/Constants.h"
 #include "Logging/LogEvents.h"
 #include <cstring> // Para std::memcpy
+#include <algorithm>
 
 LoginHandler::LoginHandler(AccountService &accountService, LogService &logService, GlobalState &globalState)
     : m_accountService(accountService),
       m_logService(logService),
       m_globalState(globalState)
 {
+}
+
+bool LoginHandler::validateLoginPacket(const PacketLoginUser& packet) const {
+    if (packet.header.opcode != static_cast<uint32_t>(Opcodes::LoginUser)) return false;
+    if (strnlen_s(packet.szUserID, sizeof(packet.szUserID)) == sizeof(packet.szUserID)) return false;
+    if (strnlen_s(packet.szPassword, sizeof(packet.szPassword)) == sizeof(packet.szPassword)) return false;
+    if (packet.uWidthScreen == 0 || packet.uHeightScreen == 0) return false;
+    return true;
 }
 
 void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &packet)
@@ -23,7 +32,7 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
         return;
     }
 
-    // 2. Validação de tamanho
+    // 2. ValidaÃ§Ã£o de tamanho
     constexpr size_t expectedBodySize = sizeof(PacketLoginUser) - sizeof(PacketHeader);
     if (packet.body.size() != expectedBodySize)
     {
@@ -40,13 +49,22 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
         packet.body.data(),
         expectedBodySize);
 
-    // 4. Valida��o da versão do jogo
+    // Validação equivalente ao ponto de entrada do CheatService: rejeita
+    // pacotes forjados ou campos sem terminador antes de entrar na fila.
+    if (!validateLoginPacket(loginPacket))
+    {
+        m_logService.warn("Pacote de login suspeito rejeitado antes do processamento.");
+        session->close();
+        return;
+    }
+
+    // 4. Validaï¿½ï¿½o da versÃ£o do jogo
     if (loginPacket.iVersion != m_globalState.gameVersion)
     {
         m_logService.warn("Tentativa de login com versao incorreta do jogo. Cliente: {}, Servidor: {}. Enviando erro.",
                           loginPacket.iVersion, m_globalState.gameVersion);
 
-        // Monta e envia o pacote de vers�o incorreta
+        // Monta e envia o pacote de versï¿½o incorreta
         PacketAccountLoginCode responseStruct{};
         responseStruct.header.opcode = static_cast<uint32_t>(Opcodes::AccountLoginCode);
         responseStruct.iCode = static_cast<int>(Log::LoginResult::WrongVersion); // Supondo que WrongVersion exista
@@ -61,12 +79,9 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
         return;
     }
 
-    // 5. Se todas as validações passaram, incrementa os contadores e enfileira a requisição
+    // 5. Se todas as validaÃ§Ãµes passaram, incrementa os contadores e enfileira a requisiÃ§Ã£o
     m_globalState.loginAttempts++;
-    // TODO: session->getUserData()->iVerifiedLogin++; (quando UserData for implementado)
-
-    // TODO: Chamar o CheatService
-    // m_cheatService.onLoginUserPacket(session, loginPacket);
+    session->markVerifiedLogin();
 
     m_accountService.queueLoginRequest(session, loginPacket);
 }

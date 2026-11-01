@@ -5,12 +5,14 @@
 class AccountService;
 class LogService;
 struct GlobalState;
+struct PacketLoginUser;
 
 class LoginHandler : public IPacketHandler {
 public:
     explicit LoginHandler(AccountService& accountService, LogService& logService, GlobalState& globalState);
     void handle(std::shared_ptr<ClientSession> session, const Packet& packet) override;
 private:
+    bool validateLoginPacket(const PacketLoginUser& packet) const;
     AccountService& m_accountService;
     LogService& m_logService;
     GlobalState& m_globalState;

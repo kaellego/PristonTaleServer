@@ -4,10 +4,12 @@
 // Forward declarations
 class LogService;
 
-class KeepAliveHandler : public IPacketHandler {
+class KeepAliveHandler : public IPacketHandler
+{
 public:
-    explicit KeepAliveHandler(LogService& logService);
-    void handle(std::shared_ptr<ClientSession> session, const Packet& packet) override;
+    explicit KeepAliveHandler(LogService &logService);
+    void handle(std::shared_ptr<ClientSession> session, const Packet &packet) override;
+
 private:
-    LogService& m_logService;
+    LogService &m_logService;
 };

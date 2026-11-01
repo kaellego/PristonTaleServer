@@ -36,6 +36,8 @@ public:
     const std::string& getAccountName() const { return m_accountName; }
     void selectCharacter(const std::string& name) { m_characterName = name; }
     const std::string& getCharacterName() const { return m_characterName; }
+    void markVerifiedLogin() { ++m_verifiedLoginPackets; }
+    uint32_t getVerifiedLoginPackets() const { return m_verifiedLoginPackets; }
 
 private:
     void do_read_header();
@@ -49,6 +51,7 @@ private:
     std::string m_accountName;
     int m_ticket = 0;
     std::string m_characterName;
+    uint32_t m_verifiedLoginPackets = 0;
 
     // Outros membros...
     boost::asio::ip::tcp::socket m_socket;

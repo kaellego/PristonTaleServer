@@ -1,8 +1,10 @@
 #include "GameLogic/Services/UserService.h"
 #include "Network/ClientSession.h"
 #include "Logging/LogService.h"
+#include "Database/DatabasePool.h"
+#include "Database/SQLConnection.h"
 
-UserService::UserService(LogService& logService) : m_logService(logService) {}
+UserService::UserService(DatabasePool& dbPool, LogService& logService) : m_logService(logService), m_dbPool(dbPool) {}
 
 void UserService::addUser(int accountId, const std::string& accountName, std::shared_ptr<ClientSession> session) {
     std::lock_guard<std::mutex> lock(m_usersMutex);
@@ -30,4 +32,18 @@ void UserService::removeUser(std::shared_ptr<ClientSession> session) {
 bool UserService::isUserOnline(const std::string& accountName) {
     std::lock_guard<std::mutex> lock(m_usersMutex);
     return m_onlineUsers.count(accountName) > 0;
+}
+
+bool UserService::banAccount(const std::string& accountName, const std::string& reason) {
+    if (accountName.empty()) return false;
+    auto db = m_dbPool.getConnection(EDatabaseID::UserDB_Primary);
+    if (!db) return false;
+    db->prepare("UPDATE UserInfo SET BanStatus=1 WHERE AccountName=?");
+    db->bindParameter<std::string>(1, accountName);
+    db->execute();
+    std::shared_ptr<ClientSession> session;
+    { std::lock_guard<std::mutex> lock(m_usersMutex); auto it = m_onlineUsers.find(accountName); if (it != m_onlineUsers.end()) { session = it->second.session; m_onlineUsers.erase(it); } }
+    if (session) session->close();
+    m_logService.warn("Conta '{}' banida automaticamente: {}", accountName, reason);
+    return true;
 }
