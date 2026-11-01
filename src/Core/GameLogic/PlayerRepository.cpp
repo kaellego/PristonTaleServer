@@ -39,6 +39,7 @@ std::optional<CharacterData> PlayerRepository::loadCharacter(const std::string& 
 }
 
 bool PlayerRepository::saveCharacter(const CharacterData& characterData) const {
+    fs::create_directories(m_charPath);
     fs::path filePath = fs::path(m_charPath) / (std::string(characterData.szName) + ".chr");
     std::ofstream file(filePath, std::ios::binary | std::ios::trunc);
     if (!file.is_open()) {
@@ -46,6 +47,10 @@ bool PlayerRepository::saveCharacter(const CharacterData& characterData) const {
     }
     file.write(reinterpret_cast<const char*>(&characterData), sizeof(CharacterData));
     return file.good();
+}
+
+bool PlayerRepository::deleteCharacter(const std::string& characterName) const {
+    return fs::remove(fs::path(m_charPath) / (characterName + ".chr"));
 }
 
 std::optional<WarehouseData> PlayerRepository::loadWarehouse(const std::string& accountName) const {

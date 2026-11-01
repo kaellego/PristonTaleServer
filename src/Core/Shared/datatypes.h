@@ -1,4 +1,4 @@
-﻿    #pragma once
+    #pragma once
 
 #include <cstdint>
 #include <windows.h>
@@ -530,6 +530,21 @@ struct PacketUserInfo {
     char             szUserID[32];
     int32_t          CharCount;
     TransCharInfo    sCharacterData[6];
+};
+
+struct PacketCharacterCommand {
+    PacketHeader header;
+    int32_t LParam;
+    int32_t WParam;
+    int32_t SParam;
+    char szAccount[32];
+    char szName[32];
+};
+
+struct PacketRecordResult {
+    PacketHeader header;
+    int32_t Result;
+    char szName[32];
 };
 
 // --- Estruturas de Dados do Jogo ---

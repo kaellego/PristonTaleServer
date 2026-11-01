@@ -4,20 +4,32 @@
 #include "GameLogic/PlayerRepository.h"
 #include "Logging/LogService.h"
 
+#include <cctype>
+#include <algorithm>
+
 CharacterService::CharacterService(DatabasePool& dbPool, PlayerRepository& playerRepo, LogService& logService)
     : m_dbPool(dbPool),
     m_playerRepository(playerRepo),
     m_logService(logService)
 {}
 
+namespace {
+bool validCharacterName(const std::string& name) {
+    if (name.empty() || name.size() >= 32) return false;
+    return std::all_of(name.begin(), name.end(), [](unsigned char c) {
+        return std::isalnum(c) || c == '_' || c == '-';
+    });
+}
+}
+
 std::vector<CharacterData> CharacterService::getCharacterList(const std::string& accountName) {
     std::vector<CharacterData> characterList;
 
     auto db = m_dbPool.getConnection(EDatabaseID::UserDB_Primary);
     if (!db) {
-        // Esta parte sÛ ser· executada se, por algum motivo, o pool n„o puder
-        // fornecer uma conex„o v·lida (o que È improv·vel no design atual,
-        // mas È uma excelente verificaÁ„o de seguranÁa).
+        // Esta parte s√≥ ser√° executada se, por algum motivo, o pool n√£o puder
+        // fornecer uma conex√£o v√°lida (o que √© improv√°vel no design atual,
+        // mas √© uma excelente verifica√ß√£o de seguran√ßa).
         m_logService.error("Nao foi possivel obter conexao com UserDB_Primary em CharacterService.");
         return characterList;
     }
@@ -49,4 +61,25 @@ std::vector<CharacterData> CharacterService::getCharacterList(const std::string&
 
     m_logService.info("Encontrado(s) {} personagem(ns) para a conta {}.", characterList.size(), accountName);
     return characterList;
+}
+
+bool CharacterService::createCharacter(const std::string& accountName, const std::string& characterName, int characterClass) {
+    if (accountName.empty() || !validCharacterName(characterName) || characterClass < 1 || characterClass > 10 ||
+        m_playerRepository.loadCharacter(characterName).has_value()) return false;
+    CharacterData character{};
+    strncpy_s(character.szName, sizeof(character.szName), characterName.c_str(), _TRUNCATE);
+    character.iLevel = 1;
+    character.iClass = characterClass;
+    return m_playerRepository.saveCharacter(character);
+}
+
+bool CharacterService::deleteCharacter(const std::string& accountName, const std::string& characterName) {
+    if (accountName.empty() || !validCharacterName(characterName)) return false;
+    if (!m_playerRepository.loadCharacter(characterName).has_value()) return false;
+    return m_playerRepository.deleteCharacter(characterName);
+}
+
+std::optional<CharacterData> CharacterService::selectCharacter(const std::string& accountName, const std::string& characterName) const {
+    if (accountName.empty() || !validCharacterName(characterName)) return std::nullopt;
+    return m_playerRepository.loadCharacter(characterName);
 }

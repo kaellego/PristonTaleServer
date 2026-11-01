@@ -10,8 +10,8 @@
 #include <chrono>
 
 Application::Application() : m_isRunning(false) {
-    // A criaÁ„o do LogService precisa vir antes de qualquer chamada a ele.
-    // … uma boa pr·tica inicializar o GlobalState primeiro, pois outros podem depender dele.
+    // A cria√ß√£o do LogService precisa vir antes de qualquer chamada a ele.
+    // √â uma boa pr√°tica inicializar o GlobalState primeiro, pois outros podem depender dele.
     m_globalState = std::make_unique<GlobalState>();
     m_logService = std::make_unique<LogService>("ServerLog.txt", *m_globalState);
 
@@ -23,17 +23,17 @@ Application::Application() : m_isRunning(false) {
     }
     catch (const std::exception& e) {
         int fase = 1;
-        // A primeira {} ser· substituÌda por 'fase', a segunda por e.what()
+        // A primeira {} ser√° substitu√≠da por 'fase', a segunda por e.what()
         m_logService->error("Erro na fase {}: {}", fase, e.what());
 
-        // Re-lanÁa a exceÁ„o para que o main() possa captur·-la e encerrar
-        // de forma limpa, permitindo que o usu·rio veja a mensagem no console.
+        // Re-lan√ßa a exce√ß√£o para que o main() possa captur√°-la e encerrar
+        // de forma limpa, permitindo que o usu√°rio veja a mensagem no console.
         throw;
     }
 }
 
 void Application::buildServices() {
-    // --- ETAPA 1: ServiÁos Base (sem dependÍncias complexas) ---
+    // --- ETAPA 1: Servi√ßos Base (sem depend√™ncias complexas) ---
     m_config = std::make_unique<ServerConfig>("server.ini");
 
     //m_logService->info("Versao do Jogo: {}", m_config->getGameVersion());
@@ -43,12 +43,12 @@ void Application::buildServices() {
     m_globalState->isGameServer = m_config->getThisServerInfo().isGameServer;
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
 
-    // --- ETAPA 2: ServiÁos de Dados ---
+    // --- ETAPA 2: Servi√ßos de Dados ---
     m_dbPool = std::make_unique<DatabasePool>(*m_config, *m_logService);
-    m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data est· no diretÛrio do execut·vel
+    m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data est√° no diret√≥rio do execut√°vel
     m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);
 
-    // --- ETAPA 3: ServiÁos de LÛgica de Jogo ---
+    // --- ETAPA 3: Servi√ßos de L√≥gica de Jogo ---
     m_characterService = std::make_unique<CharacterService>(*m_dbPool, *m_playerRepository, *m_logService);
     m_userService = std::make_unique<UserService>(*m_logService);
     m_accountService = std::make_unique<AccountService>(*m_dbPool, *m_characterService, *m_userService, *m_logService, *m_config);
@@ -63,7 +63,8 @@ void Application::buildServices() {
         *m_itemRepository,
         *m_accountService,
         *m_logService,
-        *m_userService
+        *m_userService,
+        *m_characterService
     );
 
     const auto& serverInfo = m_config->getThisServerInfo();
@@ -76,7 +77,7 @@ void Application::run() {
     m_isRunning = true;
 
     // --- Inicia as Threads de Rede ---
-    // Cria um pool de threads para processar as operaÁıes de I/O de rede.
+    // Cria um pool de threads para processar as opera√ß√µes de I/O de rede.
     const auto thread_count = std::max(1u, std::thread::hardware_concurrency());
     std::vector<std::thread> network_threads;
     network_threads.reserve(thread_count);
@@ -91,7 +92,7 @@ void Application::run() {
     m_logService->info("Servidor de rede em execucao. Iniciando loop principal do jogo.");
 
     // --- Inicia o Loop Principal do Jogo (Game Loop) ---
-    // Este loop roda na thread principal e È respons·vel pelos ticks de lÛgica.
+    // Este loop roda na thread principal e √© respons√°vel pelos ticks de l√≥gica.
     mainLoop();
 
     // --- Encerramento ---
@@ -109,23 +110,23 @@ void Application::mainLoop() {
     const auto tick_interval = std::chrono::milliseconds(50); // 20 ticks por segundo
 
     while (m_isRunning) {
-        // Para encerrar o servidor de forma limpa, vocÍ precisaria de um mecanismo
+        // Para encerrar o servidor de forma limpa, voc√™ precisaria de um mecanismo
         // para definir m_isRunning como false (ex: um comando no console).
 
-        // Atualiza o tick count global (se estiver usando a funÁ„o do Windows)
+        // Atualiza o tick count global (se estiver usando a fun√ß√£o do Windows)
         // m_globalState->tickCount = GetTickCount(); 
 
-        // --- LÛgica do Jogo executada a cada tick ---
-        // Aqui vocÍ chamaria os mÈtodos de update dos seus outros serviÁos
+        // --- L√≥gica do Jogo executada a cada tick ---
+        // Aqui voc√™ chamaria os m√©todos de update dos seus outros servi√ßos
         // Ex:
         // m_unitServer->update();
         // m_mapServer->update();
 
-        // Dorme atÈ o prÛximo tick para controlar o FPS do servidor
+        // Dorme at√© o pr√≥ximo tick para controlar o FPS do servidor
         next_tick += tick_interval;
         std::this_thread::sleep_until(next_tick);
     }
 
-    // Pede ao serviÁo de I/O para parar quando o loop terminar
+    // Pede ao servi√ßo de I/O para parar quando o loop terminar
     m_io_context->stop();
 }

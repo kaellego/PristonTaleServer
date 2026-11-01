@@ -11,17 +11,20 @@
 #include "GameLogic/Handlers/KeepAliveHandler.h"
 #include "GameLogic/Handlers/LoginHandler.h"
 #include "GameLogic/Handlers/PingHandler.h"
+#include "GameLogic/Handlers/CharacterHandler.h"
+#include "GameLogic/Services/CharacterService.h"
 
 #include <iostream>
 
-// Esta é a implementação que estava faltando para o vinculador.
+// Esta Ã© a implementaÃ§Ã£o que estava faltando para o vinculador.
 PacketDispatcher::PacketDispatcher(
     GlobalState& state,
     PlayerRepository& playerRepo,
     ItemRepository& itemRepo,
     AccountService& accountService,
     LogService& logService,
-    UserService& userService
+    UserService& userService,
+    CharacterService& characterService
 
 ) :
     m_globalState(state),
@@ -29,7 +32,8 @@ PacketDispatcher::PacketDispatcher(
     m_itemRepository(itemRepo),
     m_accountService(accountService),
     m_logService(logService),
-    m_userService(userService)
+    m_userService(userService),
+    m_characterService(characterService)
 {
     m_logService.info("Registrando manipuladores de pacotes...");
     registerHandlers();
@@ -41,6 +45,9 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::KeepAlive)] = std::make_unique<KeepAliveHandler>(m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::LoginUser)] = std::make_unique<LoginHandler>(m_accountService, m_logService, m_globalState);
     m_handlers[static_cast<uint32_t>(Opcodes::Ping)] = std::make_unique<PingHandler>(m_logService, m_userService, m_globalState);
+    m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }

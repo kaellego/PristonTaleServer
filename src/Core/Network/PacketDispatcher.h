@@ -15,6 +15,7 @@ class ItemRepository;
 class AccountService;
 class LogService;
 class UserService;
+class CharacterService;
 
 class IPacketHandler {
 public:
@@ -24,14 +25,15 @@ public:
 
 class PacketDispatcher {
 public:
-    // Este é o construtor que o Application.cpp está tentando chamar
+    // Este Ã© o construtor que o Application.cpp estÃ¡ tentando chamar
     explicit PacketDispatcher(
         GlobalState& state,
         PlayerRepository& playerRepo,
         ItemRepository& itemRepo,
         AccountService& accountService,
         LogService& logService,
-        UserService& userService
+        UserService& userService,
+        CharacterService& characterService
     );
 
     void dispatch(std::shared_ptr<ClientSession> session, const Packet& packet);
@@ -39,13 +41,14 @@ public:
 private:
     void registerHandlers();
 
-    // Referências para os serviços
+    // ReferÃªncias para os serviÃ§os
     GlobalState& m_globalState;
     PlayerRepository& m_playerRepository;
     ItemRepository& m_itemRepository;
     AccountService& m_accountService;
     LogService& m_logService;
     UserService& m_userService;
+    CharacterService& m_characterService;
 
     std::map<uint32_t, std::unique_ptr<IPacketHandler>> m_handlers;
 };

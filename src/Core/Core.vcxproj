@@ -169,6 +169,7 @@
     <ClInclude Include="Network\ClientSession.h" />
     <ClInclude Include="Network\Packet.h" />
     <ClInclude Include="GameLogic\Handlers\PingHandler.h" />
+    <ClInclude Include="GameLogic\Handlers\CharacterHandler.h" />
     <ClInclude Include="Network\PacketCipher.h" />
     <ClInclude Include="Network\PacketDispatcher.h" />
     <ClInclude Include="Network\PacketScrambler.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Network\ClientSession.cpp" />
     <ClCompile Include="Network\Packet.cpp" />
     <ClCompile Include="GameLogic\Handlers\PingHandler.cpp" />
+    <ClCompile Include="GameLogic\Handlers\CharacterHandler.cpp" />
     <ClCompile Include="Network\PacketCipher.cpp" />
     <ClCompile Include="Network\PacketDispatcher.cpp" />
     <ClCompile Include="Network\Server.cpp" />
