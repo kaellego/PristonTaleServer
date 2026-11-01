@@ -7040,3 +7040,103 @@
 2026-11-01 20:49:39 [INFO]   Usuario 'test' removido da lista de online. Total: 0
 2026-11-01 20:49:39 [INFO]   Sessao encerrada para um socket ja desconectado.
 2026-11-01 20:49:45 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 20:56:38 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 20:56:38 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 20:56:38 [INFO]   Inicializando repositorio de itens...
+2026-11-01 20:56:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 20:56:38 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 20:56:38 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 20:56:38 [INFO]   23 manipuladores de pacotes registrados.
+2026-11-01 20:56:38 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 20:56:38 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 20:56:38 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 20:56:42 [INFO]   Nova sessao iniciada: 127.0.0.1:51169 (local 5055)
+2026-11-01 20:56:42 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 20:56:42 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 20:56:42 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 20:56:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:56:42 [WARN]   Tentativa de login para a conta test com hash de senha incorreto.
+2026-11-01 20:56:42 [WARN]   Login falhou para a conta [test]. Razao: -2
+2026-11-01 20:56:42 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 20:56:43 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 20:56:47 [INFO]   Nova sessao iniciada: 127.0.0.1:51183 (local 5055)
+2026-11-01 20:56:47 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 20:56:47 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 20:56:47 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 20:56:47 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:56:47 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 20:56:47 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b4c857a408a2...).
+2026-11-01 20:56:47 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 20:56:47 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 20:56:47 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 20:56:47 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:56:47 [WARN]   Personagem 'mge' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:56:47 [WARN]   Personagem 'sacer' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:56:47 [WARN]   Personagem 'ue' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:56:47 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 20:56:47 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 20:56:48 [INFO]   Nova sessao iniciada: 127.0.0.1:51194 (local 5056)
+2026-11-01 20:56:48 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 20:56:48 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 20:57:02 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 20:57:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 20:57:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 20:57:04 [INFO]   Nova sessao iniciada: 127.0.0.1:51232 (local 5055)
+2026-11-01 20:57:04 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 20:57:04 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 20:57:04 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 20:57:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:04 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 20:57:04 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 6d9322c09392...).
+2026-11-01 20:57:04 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 20:57:04 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 20:57:04 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 20:57:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:04 [WARN]   Personagem 'mge' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:04 [WARN]   Personagem 'sacer' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:04 [WARN]   Personagem 'ue' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:04 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 20:57:04 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 20:57:05 [INFO]   Nova sessao iniciada: 127.0.0.1:51244 (local 5056)
+2026-11-01 20:57:05 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 20:57:05 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 20:57:22 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 20:57:22 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 20:57:22 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 20:57:24 [INFO]   Nova sessao iniciada: 127.0.0.1:44267 (local 5055)
+2026-11-01 20:57:24 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 20:57:24 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 20:57:24 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 20:57:24 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:24 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 20:57:24 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 66cb81ec3bf7...).
+2026-11-01 20:57:24 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 20:57:24 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 20:57:24 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 20:57:24 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:24 [WARN]   Personagem 'mge' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:24 [WARN]   Personagem 'sacer' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:24 [WARN]   Personagem 'ue' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:24 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 20:57:24 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 20:57:25 [INFO]   Nova sessao iniciada: 127.0.0.1:44272 (local 5056)
+2026-11-01 20:57:25 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 20:57:25 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 20:57:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:34 [WARN]   Personagem 'mge' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:34 [WARN]   Personagem 'sacer' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:34 [WARN]   Personagem 'ue' encontrado no DB, mas o arquivo .chr nao foi encontrado.
+2026-11-01 20:57:34 [INFO]   Operacao de personagem aceita para test: das (classe 6)
+2026-11-01 20:57:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 20:57:38 [INFO]   Operacao de personagem aceita para test: das (classe 0)
+2026-11-01 20:57:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 20:57:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 20:57:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 20:57:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 20:57:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 20:57:39 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 20:57:39 [INFO]   Sessao encerrada para um socket ja desconectado.

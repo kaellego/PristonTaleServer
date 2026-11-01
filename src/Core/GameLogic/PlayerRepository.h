@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <optional>
+#include <mutex>
 #include "Shared/datatypes.h" // Inclui a definição completa das structs CharacterData e WarehouseData
 
 struct CharacterData;
@@ -34,4 +35,5 @@ private:
     std::string m_basePath;
     std::string m_charPath;
     std::string m_warehousePath;
+    mutable std::mutex m_mutex;
 };

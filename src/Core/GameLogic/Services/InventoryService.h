@@ -16,6 +16,8 @@ class InventoryService {
 public:
     using InventoryCallback = std::function<void(bool, InventoryData)>;
     using WarehouseCallback = std::function<void(bool, WarehouseData)>;
+    using TransferCallback = std::function<void(bool, InventoryData, WarehouseData)>;
+    using ItemCallback = std::function<void(bool, InventoryData, Item)>;
 
     InventoryService(PlayerRepository& players, CharacterService& characters, ItemPolicy& itemPolicy);
     ~InventoryService();
@@ -25,6 +27,9 @@ public:
     void loadWarehouse(const std::string& account, const std::string& character, WarehouseCallback callback);
     void moveInventoryItem(const std::string& account, const std::string& character, int source, int target, InventoryCallback callback);
     void useOrEquipItem(const std::string& account, const std::string& character, int inventorySlot, int equipmentSlot, int action, InventoryCallback callback);
+    void transferItem(const std::string& account, const std::string& character, int inventorySlot, int warehouseSlot, int quantity, bool toWarehouse, TransferCallback callback);
+    void dropItem(const std::string& account, const std::string& character, int inventorySlot, int quantity, ItemCallback callback);
+    void addItem(const std::string& account, const std::string& character, Item item, InventoryCallback callback);
 
 private:
     void workerLoop();

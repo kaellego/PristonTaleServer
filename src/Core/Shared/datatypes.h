@@ -571,6 +571,7 @@ struct SQLUser {
 struct Item {
     int32_t     sItemID;
     char        szItemName[64];
+    int32_t     iQuantity;
     // ... preencha com todos os outros membros exatos do item
 };
 
@@ -607,6 +608,9 @@ struct PacketInventoryRequest { PacketHeader header; };
 struct PacketWarehouseRequest { PacketHeader header; };
 struct PacketItemSlotHandle { PacketHeader header; int32_t sourceSlot; int32_t targetSlot; };
 struct PacketItemUse { PacketHeader header; int32_t inventorySlot; int32_t equipmentSlot; int32_t action; };
+struct PacketWarehouseTransfer { PacketHeader header; int32_t inventorySlot; int32_t warehouseSlot; int32_t quantity; int32_t toWarehouse; };
+struct PacketDropRequest { PacketHeader header; int32_t inventorySlot; int32_t quantity; };
+struct PacketDropPickup { PacketHeader header; int32_t dropId; };
 
 // Estrutura para uma definição de item carregada da tabela ItemList do banco de dados.
 struct DefinitionItem {

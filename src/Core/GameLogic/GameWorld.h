@@ -12,6 +12,7 @@
 #include "Network/ClientSession.h"
 #include "Shared/datatypes.h"
 #include <vector>
+#include <chrono>
 
 class ClientSession;
 
@@ -28,6 +29,7 @@ struct MapEntity {
     bool alive = true;
 };
 struct CombatResult { bool hit = false; bool targetDefeated = false; int damage = 0; int targetHealth = 0; };
+struct WorldDrop { int id = 0; int mapId = 0; MapPosition position{}; Item item{}; std::chrono::steady_clock::time_point expiresAt{}; };
 
 class GameWorld {
 public:
@@ -93,9 +95,29 @@ public:
     std::optional<MapEntity> entity(int entityId) const {
         std::lock_guard lock(m_mutex); auto it = m_entities.find(entityId); return it == m_entities.end() ? std::nullopt : std::optional<MapEntity>(it->second);
     }
+    std::optional<int> spawnDrop(int entityId, Item item) {
+        std::lock_guard lock(m_mutex);
+        auto entityIt = m_entities.find(entityId);
+        if (entityIt == m_entities.end() || !entityIt->second.alive || item.sItemID <= 0 || item.iQuantity <= 0 || m_drops.size() >= 4096) return std::nullopt;
+        WorldDrop drop{}; drop.id = m_nextDropId++; drop.mapId = entityIt->second.mapId; drop.position = entityIt->second.position; drop.item = item;
+        drop.expiresAt = std::chrono::steady_clock::now() + std::chrono::minutes(5);
+        m_drops.emplace(drop.id, drop); return drop.id;
+    }
+    std::optional<Item> takeDrop(int entityId, int dropId) {
+        std::lock_guard lock(m_mutex);
+        auto entityIt = m_entities.find(entityId); auto dropIt = m_drops.find(dropId);
+        if (entityIt == m_entities.end() || dropIt == m_drops.end()) return std::nullopt;
+        const auto& e = entityIt->second; const auto& d = dropIt->second;
+        const float dx = e.position.x - d.position.x, dy = e.position.y - d.position.y, dz = e.position.z - d.position.z;
+        if (e.mapId != d.mapId || dx * dx + dy * dy + dz * dz > 36.0f || d.expiresAt <= std::chrono::steady_clock::now()) return std::nullopt;
+        Item item = d.item; m_drops.erase(dropIt); return item;
+    }
+    void restoreDrop(Item item, int entityId) { spawnDrop(entityId, item); }
     void update() {
         std::lock_guard lock(m_mutex);
         for (auto& [name, session] : m_sessions) session->update();
+        const auto now = std::chrono::steady_clock::now();
+        for (auto it = m_drops.begin(); it != m_drops.end();) it = it->second.expiresAt <= now ? m_drops.erase(it) : std::next(it);
     }
     std::size_t size() const { std::lock_guard lock(m_mutex); return m_sessions.size(); }
 private:
@@ -103,4 +125,6 @@ private:
     std::unordered_map<std::string, std::shared_ptr<GameSession>> m_sessions;
     std::unordered_map<int, MapEntity> m_entities;
     int m_nextEntityId = 1;
+    int m_nextDropId = 1;
+    std::unordered_map<int, WorldDrop> m_drops;
 };

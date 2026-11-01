@@ -61,12 +61,15 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = characterHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = characterHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = characterHandler;
-    auto itemHandler = std::make_shared<ItemHandler>(m_inventoryService, m_logService);
+    auto itemHandler = std::make_shared<ItemHandler>(m_inventoryService, m_gameWorld, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::NetPlayerInventory)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouse)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouseSeasonal)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::NetWarehouseTransfer)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::NetDropItem)] = itemHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::NetPickupDrop)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::UseItemCode)] = itemHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::CheckItemUseSlot)] = itemHandler;

@@ -4,6 +4,7 @@
 #include "Network/Packet.h"
 #include "Shared/Constants.h"
 #include "Shared/datatypes.h"
+#include "GameLogic/GameWorld.h"
 #include <cstring>
 #include <utility>
 
@@ -56,5 +57,32 @@ void ItemHandler::handle(std::shared_ptr<ClientSession> session, const Packet &p
         m_inventory.useOrEquipItem(session->getAccountName(), session->getCharacterName(), command.inventorySlot, command.equipmentSlot, command.action, [session](bool ok, InventoryData data) {
             if (ok) sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), data); else session->close();
         });
+    }
+    if (op == Opcodes::NetWarehouseTransfer && packet.body.size() == sizeof(PacketWarehouseTransfer) - sizeof(PacketHeader))
+    {
+        PacketWarehouseTransfer command{};
+        std::memcpy(reinterpret_cast<uint8_t*>(&command) + sizeof(PacketHeader), packet.body.data(), packet.body.size());
+        if (command.toWarehouse != 0 && command.toWarehouse != 1) return;
+        m_inventory.transferItem(session->getAccountName(), session->getCharacterName(), command.inventorySlot, command.warehouseSlot, command.quantity, command.toWarehouse != 0,
+            [session](bool ok, InventoryData inventory, WarehouseData warehouse) {
+                if (!ok) { session->close(); return; }
+                sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), inventory);
+                sendData(session, static_cast<uint32_t>(Opcodes::RecvWarehouse), warehouse);
+            });
+    }
+    if (op == Opcodes::NetDropItem && packet.body.size() == sizeof(PacketDropRequest) - sizeof(PacketHeader)) {
+        PacketDropRequest command{}; std::memcpy(reinterpret_cast<uint8_t*>(&command) + sizeof(PacketHeader), packet.body.data(), packet.body.size());
+        m_inventory.dropItem(session->getAccountName(), session->getCharacterName(), command.inventorySlot, command.quantity, [this, session](bool ok, InventoryData data, Item item) {
+            if (!ok) { session->close(); return; }
+            auto entity = m_world.entityIdForAccount(session->getAccountName());
+            if (!entity || !m_world.spawnDrop(*entity, item)) { session->close(); return; }
+            sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), data);
+        });
+    }
+    if (op == Opcodes::NetPickupDrop && packet.body.size() == sizeof(PacketDropPickup) - sizeof(PacketHeader)) {
+        PacketDropPickup command{}; std::memcpy(reinterpret_cast<uint8_t*>(&command) + sizeof(PacketHeader), packet.body.data(), packet.body.size());
+        auto entity = m_world.entityIdForAccount(session->getAccountName()); if (!entity) { session->close(); return; }
+        auto item = m_world.takeDrop(*entity, command.dropId); if (!item) return;
+        m_inventory.addItem(session->getAccountName(), session->getCharacterName(), *item, [this, session, entity, item = *item](bool ok, InventoryData data) { if (ok) sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), data); else { m_world.restoreDrop(item, *entity); session->close(); } });
     }
 }
