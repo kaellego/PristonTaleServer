@@ -73,7 +73,7 @@ void ClientSession::do_read_legacy_frame() {
         [this, self](boost::system::error_code ec, std::size_t) {
             if (ec) { close(); return; }
 
-            auto packet = LegacyGateway::toModernPacket(m_legacyFrame);
+            auto packet = m_legacyAdapter.decode(m_legacyFrame);
             if (!packet) {
                 int32_t legacyCode = 0;
                 std::memcpy(&legacyCode, m_legacyFrame.data() + sizeof(int32_t), sizeof(legacyCode));

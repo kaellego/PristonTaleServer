@@ -561,11 +561,14 @@ namespace LegacyGateway
         }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::AccountLoginCode))
         {
-            if (packet.body.size() < sizeof(uint32_t) + sizeof(int32_t) * 2)
+            // PacketAccountLoginCode body: dwReserved, iCode, iFailCode, message.
+            // O primeiro DWORD não é o resultado; ler esse campo fazia toda falha
+            // de senha parecer sucesso para o cliente legado.
+            if (packet.body.size() < sizeof(uint32_t) + sizeof(int32_t))
                 return std::nullopt;
             int32_t result = 0;
-            std::memcpy(&result, packet.body.data(), sizeof(result));
-            if (result == 0)
+            std::memcpy(&result, packet.body.data() + sizeof(uint32_t), sizeof(result));
+            if (result == 1) // LoginResult::Success
                 return std::vector<uint8_t>{}; // Success is followed by server/character lists.
             Command command{sizeof(Command), static_cast<int32_t>(Opcode::FailConnect), 0, result, 0, 1};
             append(&command, sizeof(command));

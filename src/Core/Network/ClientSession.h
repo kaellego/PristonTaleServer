@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Network/Packet.h"
+#include "Network/LegacyPacketAdapter.h"
 #include "Network/PacketCipher.h"
 #include <boost/asio.hpp>
 #include <deque>
@@ -80,6 +81,7 @@ private:
     std::array<uint8_t, 4> m_legacyLengthBuffer{};
     std::vector<uint8_t> m_legacyFrame;
     uint32_t m_legacyCounter = 0;
+    LegacyPacketAdapter m_legacyAdapter;
     uint32_t m_legacySendCounter = 0;
     std::deque<Packet> m_write_queue;
     std::deque<std::vector<uint8_t>> m_legacy_write_queue;
