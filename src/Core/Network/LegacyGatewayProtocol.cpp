@@ -2,9 +2,154 @@
 #include "Shared/Constants.h"
 #include "Shared/datatypes.h"
 
+#include <algorithm>
 #include <cstring>
 
 namespace LegacyGateway {
+
+namespace {
+
+#pragma pack(push, 1)
+struct LegacyCharacterInfo {
+    char name[32];
+    char modelName[64];
+    char modelName2[60];
+    uint32_t modelNameCode2;
+    uint32_t objectSerial;
+    int32_t classClan, state, sizeLevel;
+    uint32_t charSoundCode;
+    uint32_t jobCode;
+    int32_t level, strength, spirit, talent, dexterity, health;
+    int32_t accuracy, attackRating, attackDamage[2], attackSpeed, shootingRange, criticalHit;
+    int32_t defense, chanceBlock, absorption, moveSpeed, sight;
+    int16_t weight[2], resistance[8], attackResistance[8], life[2], mana[2], stamina[2];
+    float lifeRegen, manaRegen, staminaRegen;
+    int32_t experience, nextExperience, money;
+    uint32_t monsterInfo;
+    uint32_t brood;
+    int32_t statePoint;
+    uint8_t updateInfo[4];
+    int16_t arrowPosition[2];
+    int32_t potionSpace, lifeFunction, manaFunction, staminaFunction;
+    int16_t damageFunction[2];
+    uint32_t reformCode, changeJob, jobBitMask;
+    uint16_t playerKilling[2], playClass[2];
+    int32_t experienceHigh;
+    uint32_t eventTime;
+    int16_t eventParam[2], presentItem[2], gravityScrollCheck[2];
+    uint32_t temp[11], loginServerIp, loginServerSafeKey;
+    uint16_t version[2];
+};
+
+struct LegacyRecordSkill {
+    uint8_t skillPoint[16];
+    uint16_t skillMastery[16];
+    uint8_t shortKey[16];
+    uint16_t selectedSkill[2];
+};
+
+struct LegacyQuestInfo {
+    uint16_t questCode[2];
+    uint32_t data[7];
+};
+
+struct LegacyLastQuestInfo {
+    uint16_t lastQuest[32];
+    int32_t lastQuestCount;
+};
+
+struct LegacyGameSaveInfo {
+    uint32_t head;
+    int32_t playStage, cameraMode, posX, posZ, lastMoney;
+    uint32_t charInfoChecksum;
+    LegacyRecordSkill skillInfo;
+    int32_t saveTime, pcrNo;
+    int16_t eventPlay[2], petInfo[2], potionUpdate[2], potionCount[3][4];
+    uint16_t forceOrbUsing[2];
+    uint32_t levelQuestLog;
+    int32_t shortKeyNormalAttack, blessCastleTax;
+    uint32_t blessCastleMaster, elementaryQuestLog;
+    uint32_t primeItemTimes[12];
+    int32_t totalSubExp, totalMoney, totalExp;
+    char masterId[32];
+    LegacyQuestInfo questInfo;
+    LegacyLastQuestInfo lastQuestInfo;
+    uint32_t serverId;
+    uint16_t lifeBoosterUsing[2], manaBoosterUsing[2], staminaBoosterUsing[2], skillDelayUsing[2];
+    uint32_t temp2[34];
+};
+
+struct LegacyRecordPrefix {
+    int32_t size;
+    int32_t code;
+    char header[8];
+    LegacyCharacterInfo character;
+    LegacyGameSaveInfo save;
+    uint32_t thrownItems[64][3];
+    int32_t throwItemCount, itemCount, itemSubStart, dataSize;
+};
+#pragma pack(pop)
+
+static_assert(sizeof(LegacyCharacterInfo) == 464);
+static_assert(sizeof(LegacyGameSaveInfo) == 512);
+
+const char* modelBodyForClass(int characterClass) {
+    static constexpr const char* models[] = {
+        "char\\tmABCD\\b001.ini", "char\\tmABCD\\a001.ini", "char\\tmABCD\\d001.ini", "char\\tmABCD\\c001.ini",
+        "char\\tmABCD\\mb001.ini", "char\\tmABCD\\ma001.ini", "char\\tmABCD\\md001.ini", "char\\tmABCD\\mc001.ini"};
+    return characterClass >= 1 && characterClass <= 8 ? models[characterClass - 1] : models[0];
+}
+
+const char* modelFaceForClass(int characterClass) {
+    static constexpr const char* models[] = {
+        "char\\tmABCD\\tmh-b01.inf", "char\\tmABCD\\tmh-a01.inf", "char\\tmABCD\\tfh-D01.inf", "char\\tmABCD\\tmh-c01.inf",
+        "char\\tmABCD\\Mfh-B01.inf", "char\\tmABCD\\Mmh-A01.inf", "char\\tmABCD\\Mmh-D01.inf", "char\\tmABCD\\Mfh-C01.inf"};
+    return characterClass >= 1 && characterClass <= 8 ? models[characterClass - 1] : models[0];
+}
+
+std::vector<uint8_t> characterRecordPayload(const CharacterData& character) {
+    LegacyRecordPrefix record{};
+    record.code = static_cast<int32_t>(Opcode::RecordData);
+    record.size = static_cast<int32_t>(sizeof(record));
+    std::memcpy(record.character.name, character.szName, sizeof(record.character.name));
+    strncpy_s(record.character.modelName, modelBodyForClass(character.iClass), _TRUNCATE);
+    strncpy_s(record.character.modelName2, modelFaceForClass(character.iClass), _TRUNCATE);
+    record.character.objectSerial = 0x10000000u + static_cast<uint32_t>(std::hash<std::string>{}(character.szName));
+    record.character.jobCode = static_cast<uint32_t>(character.iClass);
+    record.character.level = std::max(1, character.iLevel);
+    record.character.strength = character.iStrength;
+    record.character.spirit = character.iSpirit;
+    record.character.talent = character.iTalent;
+    record.character.dexterity = character.iAgility;
+    record.character.health = character.iHealth;
+    record.character.attackDamage[0] = character.iAttackMin;
+    record.character.attackDamage[1] = character.iAttackMax;
+    record.character.defense = character.iDefense;
+    record.character.life[0] = static_cast<int16_t>(std::clamp(character.iHP, 0, 32767));
+    record.character.life[1] = static_cast<int16_t>(std::clamp(character.iMaxHP, 1, 32767));
+    record.character.mana[0] = static_cast<int16_t>(std::clamp(character.iMP, 0, 32767));
+    record.character.mana[1] = static_cast<int16_t>(std::clamp(character.iMaxMP, 1, 32767));
+    record.character.money = character.iGold;
+    record.character.version[0] = 1;
+    record.save.head = 150;
+    record.save.playStage = character.iMapId;
+    record.save.posX = static_cast<int32_t>(character.fPosX);
+    record.save.posZ = static_cast<int32_t>(character.fPosZ);
+    record.save.totalMoney = character.iGold;
+
+    std::vector<uint8_t> frame(sizeof(record) + 32, 0);
+    const int32_t frameSize = static_cast<int32_t>(frame.size());
+    const int32_t total = 1;
+    const int32_t dataSize = static_cast<int32_t>(sizeof(record));
+    std::memcpy(frame.data(), &frameSize, sizeof(frameSize));
+    std::memcpy(frame.data() + 4, &record.code, sizeof(record.code));
+    std::memcpy(frame.data() + 12, &total, sizeof(total));
+    std::memcpy(frame.data() + 16, &dataSize, sizeof(dataSize));
+    std::memcpy(frame.data() + 20, &record, sizeof(record));
+    return frame;
+}
+
+} // namespace
 
 bool isSafeString(const char* value, size_t capacity) {
     return value != nullptr && std::memchr(value, '\0', capacity) != nullptr;
@@ -25,11 +170,48 @@ std::optional<Packet> toModernPacket(const std::vector<uint8_t>& payload) {
     case Opcode::Connected:
         modernOpcode = static_cast<uint32_t>(Opcodes::KeepAlive);
         break;
+    case Opcode::RecordData: {
+        // TRANS_RECORD_DATAS: five integers, serialized record and 12 legacy padding bytes.
+        if (command.size != static_cast<int32_t>(payload.size()) || command.size < 32 ||
+            command.lParam < 0 || command.wParam <= 0 || command.wParam > 64 ||
+            command.lParam >= command.wParam || command.sParam <= 0 ||
+            command.sParam > command.size - 32)
+            return std::nullopt;
+        modernOpcode = static_cast<uint32_t>(Opcodes::KeepAlive);
+        break;
+    }
+    case Opcode::SetBlacklist:
+        if (command.size != sizeof(Command) || payload.size() != sizeof(Command))
+            return std::nullopt;
+        // The legacy client reports local protection status through this command.
+        // Do not trust or execute its values; only acknowledge its fixed layout.
+        modernOpcode = static_cast<uint32_t>(Opcodes::KeepAlive);
+        break;
+    case Opcode::PlayerInfo:
+        // smTRNAS_PLAYERINFO uses the 32-bit legacy smCHAR_INFO layout: 504 bytes.
+        if (command.size != 504 || payload.size() != 504)
+            return std::nullopt;
+        modernOpcode = static_cast<uint32_t>(Opcodes::KeepAlive);
+        break;
+    case Opcode::ProcessInfo:
+        // TRANS_CHATMESSAGE carries two DWORDs followed by a bounded process path.
+        if (command.size != static_cast<int32_t>(payload.size()) || command.size < 17 ||
+            command.size > 512 || !isSafeString(reinterpret_cast<const char*>(payload.data() + 16), payload.size() - 16))
+            return std::nullopt;
+        modernOpcode = static_cast<uint32_t>(Opcodes::KeepAlive);
+        break;
     case Opcode::GetUserInfo:
         return loginToModernPacket(payload);
     case Opcode::CheckIP:
         if (command.size != 52 || command.wParam < 0 || command.wParam > 3 ||
             !isSafeString(reinterpret_cast<const char*>(payload.data() + 20), 32))
+            return std::nullopt;
+        return Packet(static_cast<uint32_t>(Opcodes::KeepAlive));
+    case Opcode::FunctionResult:
+        // The legacy client sends this fixed command for its client-function
+        // check. Validate the frame and continue; the modern server has no
+        // executable-memory probe to run on the client.
+        if (command.size != sizeof(Command) || payload.size() < sizeof(Command))
             return std::nullopt;
         return Packet(static_cast<uint32_t>(Opcodes::KeepAlive));
     default:
@@ -158,6 +340,12 @@ std::optional<std::vector<uint8_t>> toLegacyPayload(const Packet& packet, uint32
         PacketRecordResult result{};
         std::memcpy(reinterpret_cast<uint8_t*>(&result) + sizeof(PacketHeader), packet.body.data(),
             sizeof(result) - sizeof(PacketHeader));
+        if (packet.header.opcode == static_cast<uint32_t>(Opcodes::RecordResult) && requestCode == 5 &&
+            result.Result != 0 && packet.body.size() >= sizeof(PacketRecordResult) - sizeof(PacketHeader) + sizeof(CharacterData)) {
+            CharacterData character{};
+            std::memcpy(&character, packet.body.data() + sizeof(PacketRecordResult) - sizeof(PacketHeader), sizeof(character));
+            return characterRecordPayload(character);
+        }
         const int32_t responseCode = requestCode == 10 || requestCode == 11
             ? requestCode
             : static_cast<int32_t>(packet.header.opcode == static_cast<uint32_t>(Opcodes::RecordResult) ? 7 : 6);

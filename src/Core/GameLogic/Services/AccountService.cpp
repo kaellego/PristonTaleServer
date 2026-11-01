@@ -21,12 +21,24 @@
 #include <algorithm>
 
 namespace {
-const char* modelNameForClass(int characterClass) {
-    static constexpr std::array<const char*, 10> names{
-        "Fighter", "Mechanician", "Archer", "Pikeman", "Atalanta",
-        "Knight", "Magician", "Priestess", "Assassin", "Shaman"};
+const char* modelBodyForClass(int characterClass) {
+    static constexpr std::array<const char*, 8> names{
+        "char\\tmABCD\\b001.ini", "char\\tmABCD\\a001.ini",
+        "char\\tmABCD\\d001.ini", "char\\tmABCD\\c001.ini",
+        "char\\tmABCD\\mb001.ini", "char\\tmABCD\\ma001.ini",
+        "char\\tmABCD\\md001.ini", "char\\tmABCD\\mc001.ini"};
     return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
-        ? names[static_cast<size_t>(characterClass - 1)] : "Fighter";
+        ? names[static_cast<size_t>(characterClass - 1)] : names[0];
+}
+
+const char* modelFaceForClass(int characterClass) {
+    static constexpr std::array<const char*, 8> names{
+        "char\\tmABCD\\tmh-b01.inf", "char\\tmABCD\\tmh-a01.inf",
+        "char\\tmABCD\\tfh-D01.inf", "char\\tmABCD\\tmh-c01.inf",
+        "char\\tmABCD\\Mfh-B01.inf", "char\\tmABCD\\Mmh-A01.inf",
+        "char\\tmABCD\\Mmh-D01.inf", "char\\tmABCD\\Mfh-C01.inf"};
+    return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
+        ? names[static_cast<size_t>(characterClass - 1)] : names[0];
 }
 }
 
@@ -273,8 +285,8 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         strncpy_s(destChar.szName, charData.szName, sizeof(destChar.szName));
         destChar.iLevel = charData.iLevel;
         destChar.JobCode = charData.iClass;
-        strncpy_s(destChar.szModelName, sizeof(destChar.szModelName), modelNameForClass(charData.iClass), _TRUNCATE);
-        strncpy_s(destChar.szModelName2, sizeof(destChar.szModelName2), modelNameForClass(charData.iClass), _TRUNCATE);
+        strncpy_s(destChar.szModelName, sizeof(destChar.szModelName), modelBodyForClass(charData.iClass), _TRUNCATE);
+        strncpy_s(destChar.szModelName2, sizeof(destChar.szModelName2), modelFaceForClass(charData.iClass), _TRUNCATE);
         destChar.Brood = 0;
         destChar.dwArmorCode = 0;
         destChar.StartField = 0;

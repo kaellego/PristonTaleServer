@@ -15,40 +15,59 @@ Inicializando repositorio de jogadores...
 [main] Servidor inicializado com sucesso. Executando...
 [INFO]   Iniciando 32 threads de rede...
 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
-[INFO]   Nova sessao iniciada: 127.0.0.1:22134 (local 5055)
+[INFO]   Nova sessao iniciada: 127.0.0.1:31059 (local 5055)
 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+[INFO]   Enviando confirmacao legada VERSION para LoginServer
 [DEBUG]  Processando tentativa de login para a conta: 'test'
 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
 [INFO]   Login bem-sucedido para a conta: test
-[DEBUG]  Ticket assinado emitido para 'test' (assinatura 6469f6fe702f...).
+[DEBUG]  Ticket assinado emitido para 'test' (assinatura df86ab77c8f4...).
 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
 [INFO]   Enviando lista de personagens para a conta test
 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
-[INFO]   Nova sessao iniciada: 127.0.0.1:22142 (local 5056)
+[INFO]   Nova sessao iniciada: 127.0.0.1:31066 (local 5056)
 [DEBUG]  Sessao::start() <-> Aguardando frame legado
-[INFO]   GameServer: enviando confirmacao legada de entrada
+[INFO]   Enviando confirmacao legada VERSION para GameServer
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Operacao de personagem aceita para test: sacer
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
 [INFO]   Sessao encerrada para um socket ja desconectado.
-[INFO]   Nova sessao iniciada: 127.0.0.1:22157 (local 5056)
-[DEBUG]  Sessao::start() <-> Aguardando frame legado
-[INFO]   GameServer: enviando confirmacao legada de entrada
+[INFO]   Usuario 'test' removido da lista de online. Total: 0
 [INFO]   Sessao encerrada para um socket ja desconectado.
-[INFO]   Nova sessao iniciada: 127.0.0.1:22166 (local 5056)
+[INFO]   Nova sessao iniciada: 127.0.0.1:19262 (local 5055)
 [DEBUG]  Sessao::start() <-> Aguardando frame legado
-[INFO]   GameServer: enviando confirmacao legada de entrada
+[INFO]   Enviando confirmacao legada VERSION para LoginServer
+[DEBUG]  Processando tentativa de login para a conta: 'test'
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Login bem-sucedido para a conta: test
+[DEBUG]  Ticket assinado emitido para 'test' (assinatura 1f8fc8e498f3...).
+[INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+[PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+[INFO]   Enviando lista de personagens para a conta test
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+[PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+[INFO]   Nova sessao iniciada: 127.0.0.1:9085 (local 5056)
+[DEBUG]  Sessao::start() <-> Aguardando frame legado
+[INFO]   Enviando confirmacao legada VERSION para GameServer
+[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+[INFO]   Operacao de personagem aceita para test: sacer
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+[PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
 [INFO]   Usuario 'test' removido da lista de online. Total: 0
 [INFO]   Sessao encerrada para um socket ja desconectado.
 [INFO]   Sessao encerrada para um socket ja desconectado.
-[INFO]   Nova sessao iniciada: 127.0.0.1:51186 (local 5056)
-[DEBUG]  Sessao::start() <-> Aguardando frame legado
-[INFO]   GameServer: enviando confirmacao legada de entrada
-[INFO]   Sessao encerrada para um socket ja desconectado.
-[INFO]   Nova sessao iniciada: 127.0.0.1:21767 (local 5055)
-[DEBUG]  Sessao::start() <-> Aguardando frame legado
-[DEBUG]  Processando tentativa de login para a conta: 'test'
-[DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
-[WARN]   Tentativa de login para a conta test com hash de senha incorreto.
-[WARN]   Login falhou para a conta [test]. Razao: -2
-[PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)

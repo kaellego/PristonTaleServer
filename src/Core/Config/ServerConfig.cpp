@@ -113,6 +113,7 @@ void ServerConfig::loadServerList(INIReader& reader) {
         ServerInfo gameServer;
         gameServer.name = reader.Get(section, "Name", "Game Server " + std::to_string(i));
         gameServer.publicIp = reader.Get(section, "IP", "127.0.0.1");
+        gameServer.networkIp = reader.Get(section, "NetIP", gameServer.publicIp);
         gameServer.port = static_cast<uint16_t>(reader.GetInteger(section, "Port", 5056 + i - 1));
         gameServer.maxUsers = reader.GetInteger(section, "MaxUsers", 500);
         gameServer.isGameServer = true;

@@ -12,11 +12,16 @@ namespace LegacyGateway {
 // cannot accidentally be treated as a modern opcode.
 enum class Opcode : int32_t {
     Connected = 3,
+    RecordData = 4,
+    SetBlacklist = 39,
+    PlayerInfo = 62,
+    ProcessInfo = 106,
     GetUserInfo = 8,
     SetUserInfo = 9,
     Version = 13,
     FailConnect = 64,
     CheckIP = 108,
+    FunctionResult = 187,
     ServerInfo = 96,
 };
 

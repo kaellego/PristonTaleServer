@@ -42,11 +42,9 @@ void ClientSession::start() {
     // O cliente legado não entende o pacote de chave moderno. O gateway
     // começa pelo frame legado e só encaminha payloads validados.
     m_logService.debug("Sessao::start() <-> Aguardando frame legado");
-    if (m_gameEndpoint) {
-        m_logService.info("GameServer: enviando confirmacao legada de entrada");
-        m_legacy_write_queue.push_back(LegacyGateway::gameServerReadyPayload());
-        do_legacy_write();
-    }
+    m_logService.info("Enviando confirmacao legada VERSION para {}", m_gameEndpoint ? "GameServer" : "LoginServer");
+    m_legacy_write_queue.push_back(LegacyGateway::gameServerReadyPayload());
+    do_legacy_write();
     do_read_legacy_length();
 }
 
