@@ -27,7 +27,7 @@ void ItemRepository::loadItemDefinitions() {
     m_logService.info("{} definicoes de itens carregadas.", m_itemDefs.size());
 }
 
-// --- DEFINIÃ‡Ã•ES DE MÃ‰TODOS CORRIGIDAS ---
+// --- DEFINIÇÕES DE MÉTODOS CORRIGIDAS ---
 
 const DefinitionItem* ItemRepository::findItemDef(int itemCode) const {
     auto it = m_itemDefs.find(itemCode);
@@ -65,7 +65,7 @@ bool ItemRepository::adjustStat(const std::string& itemName, T& statValue, T new
     return true;
 }
 
-// NecessÃ¡rio para o compilador encontrar a implementaÃ§Ã£o do template
+// Necessário para o compilador encontrar a implementação do template
 template bool ItemRepository::adjustStat<int>(const std::string&, int&, int, int, int, int) const;
 template bool ItemRepository::adjustStat<short>(const std::string&, short&, short, short, short, short) const;
 template bool ItemRepository::adjustStat<float>(const std::string&, float&, float, float, float, float) const;

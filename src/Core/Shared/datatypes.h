@@ -456,9 +456,9 @@ constexpr uint32_t PKTHDR_YahooMotion = 0x50320E10;  //smTRANSCODE_YAHOO_MOTION 
 //1345466112 -> 0x50322F00 ?? --> DAMAGE_ENCODE_MEM
 //1345466048 -> 0x50322EC0 ?? --> DAMAGE_ENCODE_MEM2
 
-//Este é o arquivo principal. Ele conterá todas as definições de struct, especialmente as 
-//estruturas de pacotes. A herança : Packet foi substituída por um membro PacketHeader
-//header;. Isso garante um layout de memória previsível e limpo.
+// Este é o arquivo principal. Ele contém todas as definições de struct, especialmente as
+// estruturas de pacotes. A herança de Packet foi substituída por um membro PacketHeader.
+// Isso garante um layout de memória previsível e limpo.
 
 enum class EBanStatus {
     BANSTATUS_NotBanned,

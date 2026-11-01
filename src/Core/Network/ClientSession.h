@@ -8,7 +8,7 @@
 #include <vector>
 #include <atomic>
 #include <chrono>
-#include <string> // NecessÃ¡rio para std::string
+#include <string> // Necessário para std::string
 
 // Forward declarations
 class PacketDispatcher;
@@ -24,12 +24,12 @@ public:
     void close();
     boost::asio::ip::tcp::socket& socket();
 
-    // --- NOVOS MÃ‰TODOS DE AUTENTICAÃ‡ÃƒO ---
+    // --- NOVOS MÉTODOS DE AUTENTICAÇÃO ---
 
     /**
-     * @brief Define a sessÃ£o como autenticada, armazenando os dados da conta.
-     * @param accountId O ID numÃ©rico da conta.
-     * @param accountName O nome de usuÃ¡rio da conta.
+     * @brief Define a sessão como autenticada, armazenando os dados da conta.
+     * @param accountId O ID numérico da conta.
+     * @param accountName O nome de usuário da conta.
      */
     void authenticate(int accountId, const std::string& accountName, int ticket, std::chrono::steady_clock::time_point expiresAt);
 

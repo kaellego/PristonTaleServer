@@ -27,7 +27,7 @@ public:
 
 class PacketDispatcher {
 public:
-    // Este ÃƒÆ’Ã‚Â© o construtor que o Application.cpp estÃƒÆ’Ã‚Â¡ tentando chamar
+    // Este é o construtor que o Application.cpp está tentando chamar
     explicit PacketDispatcher(
         GlobalState& state,
         PlayerRepository& playerRepo,
@@ -46,7 +46,7 @@ public:
 private:
     void registerHandlers();
 
-    // ReferÃƒÆ’Ã‚Âªncias para os serviÃƒÆ’Ã‚Â§os
+    // Referências para os serviços
     GlobalState& m_globalState;
     PlayerRepository& m_playerRepository;
     ItemRepository& m_itemRepository;

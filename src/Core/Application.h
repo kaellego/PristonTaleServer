@@ -1,9 +1,10 @@
 #pragma once
 
 #include <memory>
+#include <atomic>
 #include <boost/asio/io_context.hpp>
 
-// --- InclusÃµes Completas dos ServiÃ§os ---
+// --- Inclusões Completas dos Serviços ---
 #include "Config/ServerConfig.h"
 #include "Shared/GlobalState.h"
 #include "Logging/LogService.h"
@@ -14,7 +15,7 @@
 #include "Network/PacketDispatcher.h"
 #include "Network/Server.h"
 
-// Adicionamos os novos serviÃ§os aqui
+// Adicionamos os novos serviços aqui
 #include "GameLogic/Services/AccountService.h"
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/Services/UserService.h"
@@ -26,6 +27,7 @@ class Application {
 public:
     Application();
     void run();
+    void requestShutdown();
 
 private:
     void buildServices();
@@ -34,7 +36,7 @@ private:
     // O contexto de I/O do Boost.Asio
     std::shared_ptr<boost::asio::io_context> m_io_context;
 
-    // --- ServiÃ§os do Servidor ---
+    // --- Serviços do Servidor ---
     std::unique_ptr<ServerConfig> m_config;
     std::unique_ptr<GlobalState> m_globalState;
     std::unique_ptr<LogService> m_logService;
@@ -43,7 +45,7 @@ private:
     std::unique_ptr<ItemPolicy> m_itemPolicy;
     std::unique_ptr<PlayerRepository> m_playerRepository;
 
-    // Nossos novos serviÃ§os de lÃ³gica de jogo
+    // Nossos novos serviços de lógica de jogo
     std::unique_ptr<CharacterService> m_characterService;
     std::unique_ptr<UserService> m_userService;
     std::unique_ptr<AccountService> m_accountService;
@@ -54,5 +56,6 @@ private:
     std::unique_ptr<PacketDispatcher> m_packetDispatcher;
     std::unique_ptr<Server> m_networkServer;
 
-    bool m_isRunning;
+    std::atomic_bool m_isRunning{false};
+    std::unique_ptr<boost::asio::signal_set> m_signals;
 };

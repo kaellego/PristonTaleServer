@@ -15,7 +15,7 @@
 #include "Shared/datatypes.h" // Para structs como PacketLoginUser e SQLUser
 #include "Logging/LogEvents.h"   // Para os enums de log
 
-// Forward declarations para as dependÃªncias que serÃ£o injetadas
+// Forward declarations para as dependências que serão injetadas
 class DatabasePool;
 class CharacterService;
 class UserService;
@@ -23,7 +23,7 @@ class LogService;
 class ClientSession;
 class ServerConfig;
 
-// Uma struct para representar uma requisiÃ§Ã£o de login na fila de processamento
+// Uma struct para representar uma requisição de login na fila de processamento
 struct LoginRequest {
     std::shared_ptr<ClientSession> session;
     PacketLoginUser packet;

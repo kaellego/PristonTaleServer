@@ -12,17 +12,17 @@ class LogService;
 
 /**
  * @class CharacterService
- * @brief Gerencia a lÃ³gica de negÃ³cio para os personagens dos jogadores.
+ * @brief Gerencia a lógica de negócio para os personagens dos jogadores.
  */
 class CharacterService {
 public:
     /**
-     * @brief Construtor com InjeÃ§Ã£o de DependÃªncia.
+     * @brief Construtor com Injeção de Dependência.
      */
     explicit CharacterService(DatabasePool& dbPool, PlayerRepository& playerRepo, LogService& logService);
 
     /**
-     * @brief ObtÃ©m a lista de personagens para uma determinada conta.
+     * @brief Obtém a lista de personagens para uma determinada conta.
      * @param accountId O ID da conta.
      * @return Um vetor de structs CharacterData.
      */

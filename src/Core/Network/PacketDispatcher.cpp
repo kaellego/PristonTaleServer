@@ -21,7 +21,7 @@
 
 #include <iostream>
 
-// Esta ÃƒÆ’Ã‚Â© a implementaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o que estava faltando para o vinculador.
+// Esta é a implementação que estava faltando para o vinculador.
 PacketDispatcher::PacketDispatcher(
     GlobalState& state,
     PlayerRepository& playerRepo,

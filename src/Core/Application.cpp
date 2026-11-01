@@ -8,6 +8,8 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <boost/asio/signal_set.hpp>
+#include <csignal>
 
 Application::Application() : m_isRunning(false)
 {
@@ -26,10 +28,10 @@ Application::Application() : m_isRunning(false)
     catch (const std::exception &e)
     {
         int fase = 1;
-        // A primeira {} será substituída por 'fase', a segunda por e.what()
+        // A primeira {} será substituída por 'fase', a segunda por e.what().
         m_logService->error("Erro na fase {}: {}", fase, e.what());
 
-        // Re-lança a exceção para que o main() possa capturá-la e encerrar
+        // Relança a exceção para que o main() possa capturá-la e encerrar
         // de forma limpa, permitindo que o usuário veja a mensagem no console.
         throw;
     }
@@ -37,7 +39,7 @@ Application::Application() : m_isRunning(false)
 
 void Application::buildServices()
 {
-    // --- ETAPA 1: Serviços Base (sem dependências complexas) ---
+    // --- ETAPA 1: Serviços base (sem dependências complexas) ---
     m_config = std::make_unique<ServerConfig>("server.ini");
 
     // m_logService->info("Versao do Jogo: {}", m_config->getGameVersion());
@@ -47,13 +49,13 @@ void Application::buildServices()
     m_globalState->isGameServer = m_config->getThisServerInfo().isGameServer;
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
 
-    // --- ETAPA 2: Serviços de Dados ---
+    // --- ETAPA 2: Serviços de dados ---
     m_dbPool = std::make_unique<DatabasePool>(*m_config, *m_logService);
-    m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data estÃƒÆ’Ã‚Â¡ no diretÃƒÆ’Ã‚Â³rio do executÃƒÆ’Ã‚Â¡vel
+    m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data está no diretório do executável
     m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);
     m_itemPolicy = std::make_unique<ItemPolicy>(*m_dbPool);
 
-    // --- ETAPA 3: Serviço de Lógica de Jogo ---
+    // --- ETAPA 3: Serviço de lógica de jogo ---
     m_characterService = std::make_unique<CharacterService>(*m_dbPool, *m_playerRepository, *m_logService);
     m_userService = std::make_unique<UserService>(*m_dbPool, *m_logService);
     m_accountService = std::make_unique<AccountService>(*m_dbPool, *m_characterService, *m_userService, *m_logService, *m_config);
@@ -61,6 +63,10 @@ void Application::buildServices()
 
     // --- ETAPA 4: Rede e Despacho de Pacotes ---
     m_io_context = std::make_shared<boost::asio::io_context>();
+    m_signals = std::make_unique<boost::asio::signal_set>(*m_io_context, SIGINT, SIGTERM);
+    m_signals->async_wait([this](const boost::system::error_code& error, int) {
+        if (!error) requestShutdown();
+    });
 
     m_packetDispatcher = std::make_unique<PacketDispatcher>(
         *m_globalState,
@@ -99,8 +105,10 @@ void Application::run()
     m_logService->info("Servidor de rede em execucao. Iniciando loop principal do jogo.");
 
     // --- Inicia o Loop Principal do Jogo (Game Loop) ---
-    // Este loop roda na thread principal e ÃƒÆ’Ã‚Â© responsÃƒÆ’Ã‚Â¡vel pelos ticks de lÃƒÆ’Ã‚Â³gica.
+    // Este loop roda na thread principal e é responsável pelos ticks de lógica.
     mainLoop();
+
+    requestShutdown();
 
     // --- Encerramento ---
     m_logService->info("Aguardando as threads de rede finalizarem...");
@@ -111,6 +119,15 @@ void Application::run()
             t.join();
         }
     }
+}
+
+void Application::requestShutdown()
+{
+    if (!m_isRunning.exchange(false)) return;
+    m_logService->info("Solicitação de encerramento recebida; iniciando shutdown gracioso.");
+    if (m_networkServer) m_networkServer->stop();
+    if (m_signals) m_signals->cancel();
+    if (m_io_context) m_io_context->stop();
 }
 
 void Application::mainLoop()
@@ -126,20 +143,19 @@ void Application::mainLoop()
         // Para encerrar o servidor de forma limpa, você precisaria de um mecanismo
         // para definir m_isRunning como false (ex: um comando no console).
 
-        // Atualiza o tick count global (se estiver usando a funçao do Windows)
+        // Atualiza o tick count global (se estiver usando a função do Windows)
         // m_globalState->tickCount = GetTickCount();
 
         // --- Logica do Jogo executada a cada tick ---
-        // Aqui você chamaria os mÃƒÆ’Ã‚Â©todos de update dos seus outros serviços de logica, como o GameWorld, UnitServer, MapServer, etc.
+        // Aqui você chamaria os métodos de update dos seus outros serviços de lógica, como o GameWorld, UnitServer, MapServer, etc.
         // Ex:
         // m_unitServer->update();
         // m_mapServer->update();
 
-        // Dorme atÃƒÆ’Ã‚Â© o proximo tick para controlar o FPS do servidor
+        // Dorme até o proximo tick para controlar o FPS do servidor
         next_tick += tick_interval;
         std::this_thread::sleep_until(next_tick);
     }
 
-    // Pede ao serviço de I/O para parar quando o loop terminar
-    m_io_context->stop();
+    requestShutdown();
 }

@@ -8,7 +8,7 @@
 #include "Shared/datatypes.h"
 #include "Utils/Dice.h"
 
-// TODO: Incluir os headers dos outros serviÃƒÂ¯Ã‚Â¿Ã‚Â½os quando eles forem criados
+// TODO: Incluir os headers dos outros serviï¿½os quando eles forem criados
 #include "GameLogic/Services/CharacterService.h" 
 #include "GameLogic/Services/UserService.h"
 #include "Logging/LogService.h"
@@ -172,7 +172,7 @@ Log::LoginResult AccountService::validateRequest(const LoginRequest& request, co
 void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int ticket) {
     PacketServerList serverListPacket{};
 
-    // As chamadas agora sÃƒÂ¯Ã‚Â¿Ã‚Â½o vÃƒÂ¯Ã‚Â¿Ã‚Â½lidas
+    // As chamadas agora sï¿½o vï¿½lidas
     const auto& allServers = m_serverConfig.getAllServers();
     const auto& loginServerInfo = m_serverConfig.getThisServerInfo();
 
@@ -213,7 +213,7 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
 void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, const SQLUser& sqlUser) {
     m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
 
-    // CORRIGIDO: Gera o ticket e o passa para a sessÃƒÂ¯Ã‚Â¿Ã‚Â½o
+    // CORRIGIDO: Gera o ticket e o passa para a sessï¿½o
     const auto expiresAt = std::chrono::steady_clock::now() + TicketLifetime;
     std::string ipAddress = "unknown";
     try { ipAddress = session->socket().remote_endpoint().address().to_string(); } catch (...) {}
@@ -280,7 +280,7 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         destChar.PosX = static_cast<int32_t>(charData.fPosX);
         destChar.PosZ = static_cast<int32_t>(charData.fPosZ);
         std::fill(std::begin(destChar.dwTemp), std::end(destChar.dwTemp), 0);
-        // ... aqui vocÃƒÂ¯Ã‚Â¿Ã‚Â½ copiaria os outros campos necessÃƒÂ¯Ã‚Â¿Ã‚Â½rios, como modelo 3D, mapa, etc.
+        // ... aqui vocï¿½ copiaria os outros campos necessï¿½rios, como modelo 3D, mapa, etc.
     }
 
     // Converte e envia o pacote
