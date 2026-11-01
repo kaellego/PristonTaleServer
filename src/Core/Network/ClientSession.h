@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include <atomic>
+#include <array>
 #include <chrono>
 #include <string> // Necessário para std::string
 
@@ -47,6 +48,8 @@ public:
 private:
     void do_read_header();
     void do_read_body();
+    void do_read_legacy_length();
+    void do_read_legacy_frame();
     void do_write();
     void sendEncryptionKey();
 
@@ -71,5 +74,8 @@ private:
     PacketHeader m_read_header;
     std::vector<uint8_t> m_read_body;
     std::vector<uint8_t> m_keySetBuffer;
+    std::array<uint8_t, 4> m_legacyLengthBuffer{};
+    std::vector<uint8_t> m_legacyFrame;
+    uint32_t m_legacyCounter = 0;
     std::deque<Packet> m_write_queue;
 };

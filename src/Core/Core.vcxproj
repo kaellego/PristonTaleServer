@@ -182,6 +182,8 @@
     <ClInclude Include="GameLogic\Handlers\CombatHandler.h" />
     <ClInclude Include="Network\PacketCipher.h" />
     <ClInclude Include="Network\PacketDispatcher.h" />
+    <ClInclude Include="Network\LegacyPacketCodec.h" />
+    <ClInclude Include="Network\LegacyGatewayProtocol.h" />
     <ClInclude Include="Network\PacketScrambler.h" />
     <ClInclude Include="Network\Server.h" />
     <ClInclude Include="Shared\Constants.h" />
@@ -220,6 +222,8 @@
     <ClCompile Include="GameLogic\Handlers\CombatHandler.cpp" />
     <ClCompile Include="Network\PacketCipher.cpp" />
     <ClCompile Include="Network\PacketDispatcher.cpp" />
+    <ClCompile Include="Network\LegacyPacketCodec.cpp" />
+    <ClCompile Include="Network\LegacyGatewayProtocol.cpp" />
     <ClCompile Include="Network\Server.cpp" />
     <ClCompile Include="Shared\datatypes.cpp" />
     <ClCompile Include="Shared\GlobalState.cpp" />

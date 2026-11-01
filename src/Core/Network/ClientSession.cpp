@@ -2,6 +2,8 @@
 #include "Network/PacketDispatcher.h"
 #include "Logging/LogService.h"
 #include "Network/PacketScrambler.h"
+#include "Network/LegacyPacketCodec.h"
+#include "Network/LegacyGatewayProtocol.h"
 #include "Shared/Constants.h"
 #include <iostream>
 #include <utility>
@@ -36,8 +38,54 @@ void ClientSession::start() {
     }
     catch (...) { return; }
 
-    m_logService.debug("Sessao::start() <-> Chamando sendEncryptionKey()");
-    sendEncryptionKey();
+    // O cliente legado não entende o pacote de chave moderno. O gateway
+    // começa pelo frame legado e só encaminha payloads validados.
+    m_logService.debug("Sessao::start() <-> Aguardando frame legado");
+    do_read_legacy_length();
+}
+
+void ClientSession::do_read_legacy_length() {
+    auto self = shared_from_this();
+    boost::asio::async_read(m_socket, boost::asio::buffer(m_legacyLengthBuffer),
+        [this, self](boost::system::error_code ec, std::size_t) {
+            if (ec) { close(); return; }
+            uint32_t length = 0;
+            std::memcpy(&length, m_legacyLengthBuffer.data(), sizeof(length));
+            if (length < LegacyPacketCodec::HeaderSize || length > LegacyPacketCodec::MaxFrameSize) {
+                m_logService.warn("Frame legado invalido: {}", length);
+                close();
+                return;
+            }
+            m_legacyFrame.assign(length, 0);
+            std::memcpy(m_legacyFrame.data(), m_legacyLengthBuffer.data(), sizeof(length));
+            do_read_legacy_frame();
+        });
+}
+
+void ClientSession::do_read_legacy_frame() {
+    auto self = shared_from_this();
+    boost::asio::async_read(m_socket,
+        boost::asio::buffer(m_legacyFrame.data() + sizeof(uint32_t), m_legacyFrame.size() - sizeof(uint32_t)),
+        [this, self](boost::system::error_code ec, std::size_t) {
+            if (ec) { close(); return; }
+
+            LegacyPacketCodec::Frame frame;
+            if (!LegacyPacketCodec::decode(m_legacyFrame, m_legacyCounter, frame)) {
+                m_logService.warn("Frame legado rejeitado por checksum, tamanho ou replay");
+                close();
+                return;
+            }
+            m_legacyCounter = frame.key;
+
+            auto packet = LegacyGateway::toModernPacket(frame.payload);
+            if (!packet) {
+                m_logService.warn("Opcode ou estrutura legada nao suportada");
+                close();
+                return;
+            }
+            m_packet_dispatcher.dispatch(self, *packet);
+            do_read_legacy_length();
+        });
 }
 
 void ClientSession::sendEncryptionKey() {

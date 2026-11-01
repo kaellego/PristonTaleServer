@@ -1,0 +1,7 @@
+2026-11-01 15:07:27 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:07:27 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:07:27 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:07:27 [DEBUG]  SOCI ODBC driver='ODBC Driver 17 for SQL Server' host='localhost' database='GameDB'
+2026-11-01 15:07:27 [ERROR]  Erro na fase 1: [ODBC Error] Nao foi possivel conectar ao banco de dados.
+  SQLSTATE: IM002
+  Message: [Microsoft][ODBC Driver Manager] Nome da fonte de dados não encontrado e nenhum driver padrão especificado

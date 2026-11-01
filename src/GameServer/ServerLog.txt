@@ -2341,3 +2341,33 @@
 2026-11-01 14:11:15 [INFO]   Todos os servicos foram construidos com sucesso.
 2026-11-01 14:11:15 [INFO]   Iniciando 32 threads de rede...
 2026-11-01 14:11:15 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:07:37 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 15:07:37 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 15:07:37 [INFO]   Inicializando repositorio de itens...
+2026-11-01 15:07:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 15:07:37 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 15:07:37 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 15:07:37 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 15:07:37 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 15:07:37 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 15:07:37 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 15:07:50 [INFO]   Nova sessao iniciada: 127.0.0.1:36891
+2026-11-01 15:07:50 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 15:07:50 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 15:07:50 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 15:07:50 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 15:07:50 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 15:07:50 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 15:07:50 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 15:07:50 [WARN]   Erro ao ler o cabecalho: Foi forçado o cancelamento de uma conexão existente pelo host remoto. Desconectando.
+2026-11-01 15:07:50 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 15:08:02 [INFO]   Nova sessao iniciada: 127.0.0.1:36931
+2026-11-01 15:08:02 [DEBUG]  Sessao::start() <-> Chamando sendEncryptionKey()
+2026-11-01 15:08:02 [DEBUG]  Sessao::sendEncryptionKey() <-> Gerando e enviando pacote de chave...
+2026-11-01 15:08:02 [DEBUG]  Sessao::sendEncryptionKey() <-> Callback de envio executado.
+2026-11-01 15:08:02 [PACKET] Pacote de chave enviado com sucesso (266 bytes).
+2026-11-01 15:08:02 [DEBUG]  Sessao::sendEncryptionKey() <-> Chamando do_read_header()
+2026-11-01 15:08:02 [DEBUG]  Sessao::do_read_header() <-> Aguardando por dados...
+2026-11-01 15:08:02 [DEBUG]  Sessao::do_read_header() <-> Callback de leitura executado.
+2026-11-01 15:08:02 [WARN]   Erro ao ler o cabecalho: Foi forçado o cancelamento de uma conexão existente pelo host remoto. Desconectando.
+2026-11-01 15:08:02 [INFO]   Sessao encerrada para um socket ja desconectado.
