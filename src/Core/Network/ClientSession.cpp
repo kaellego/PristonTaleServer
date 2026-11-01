@@ -37,7 +37,6 @@ void ClientSession::start() {
 
     m_logService.debug("Sessao::start() <-> Chamando sendEncryptionKey()");
     sendEncryptionKey();
-    do_read_header();
 }
 
 void ClientSession::sendEncryptionKey() {
@@ -83,7 +82,7 @@ void ClientSession::do_read_header() {
                     do_read_body();
                 }
                 else {
-                    // Log com o valor "scrambled", pois ainda nÃ£o descriptografamos
+                    // Log com o valor "scrambled", pois ainda nÃƒÂ£o descriptografamos
                     m_logService.error("Tamanho de pacote (scrambled) invalido: {}. Desconectando.", m_read_header.length);
                     close();
                 }
@@ -117,7 +116,7 @@ void ClientSession::do_read_body() {
                     return;
                 }
 
-                // --- A NOVA LÃ“GICA DE LOG DETALHADO ---
+                // --- A NOVA LÃƒâ€œGICA DE LOG DETALHADO ---
                 std::string opcodeName = getOpcodeName(received_packet.header.opcode);
                 std::string hexDump = formatHex(received_packet.body);
 

@@ -73,8 +73,12 @@ void AccountService::workerLoop() {
 }
 
 void AccountService::processLogin(LoginRequest& request) {
-    std::string accountName(request.packet.szUserID);
-    std::string passwordHashFromClient(request.packet.szPassword);
+    std::string accountName(request.packet.szUserID, strnlen_s(request.packet.szUserID, sizeof(request.packet.szUserID)));
+    std::string passwordHashFromClient(request.packet.szPassword, strnlen_s(request.packet.szPassword, sizeof(request.packet.szPassword)));
+    if (accountName.empty() || accountName.size() >= sizeof(request.packet.szUserID)) {
+        onLoginFailure(request.session, Log::LoginResult::IncorrectAccount, "");
+        return;
+    }
 
     m_logService.debug("Processando tentativa de login para a conta: '{}' com a senha: '{}'", accountName, passwordHashFromClient);
 
@@ -127,7 +131,7 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
 
     serverListPacket.header.opcode = static_cast<uint32_t>(Opcodes::ServerList);
     // CORRIGIDO: strncpy_s precisa do tamanho do buffer de destino
-    //strncpy_s(serverListPacket.szServerName, sizeof(serverListPacket.szServerName), loginServerInfo.name.c_str());
+    strncpy_s(serverListPacket.szServerName, sizeof(serverListPacket.szServerName), loginServerInfo.name.c_str(), _TRUNCATE);
     serverListPacket.iTicket = ticket;
     serverListPacket.dwTime = GetTickCount();
 
@@ -135,8 +139,10 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
     for (const auto& serverInfo : allServers) {
         if (serverInfo.isGameServer && gameServerCount < 4) {
             auto& destServer = serverListPacket.sServers[gameServerCount];
-            //strncpy_s(destServer.szName, sizeof(destServer.szName), serverInfo.name.c_str());
-            //strncpy_s(destServer.szaIP[0], sizeof(destServer.szaIP[0]), serverInfo.publicIp.c_str());
+            strncpy_s(destServer.szName, sizeof(destServer.szName), serverInfo.name.c_str(), _TRUNCATE);
+            strncpy_s(destServer.szaIP[0], sizeof(destServer.szaIP[0]), serverInfo.publicIp.c_str(), _TRUNCATE);
+            strncpy_s(destServer.szaIP[1], sizeof(destServer.szaIP[1]), serverInfo.networkIp.c_str(), _TRUNCATE);
+            strncpy_s(destServer.szaIP[2], sizeof(destServer.szaIP[2]), serverInfo.publicIp.c_str(), _TRUNCATE);
             destServer.iaPort[0] = serverInfo.port;
             destServer.iaPort[1] = serverInfo.port;
             destServer.iaPort[2] = serverInfo.port;
@@ -144,7 +150,6 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
         }
     }
     serverListPacket.iGameServers = gameServerCount;
-
     // Converte e envia o pacote
     const size_t packetSize = sizeof(PacketHeader) + offsetof(PacketServerList, sServers) - sizeof(PacketHeader) + (sizeof(ServerListServerInfo) * gameServerCount);
     serverListPacket.header.length = static_cast<uint16_t>(packetSize);
@@ -208,7 +213,7 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
     PacketUserInfo userInfoPacket{};
     userInfoPacket.header.opcode = static_cast<uint32_t>(Opcodes::UserInfo);
     strncpy_s(userInfoPacket.szUserID, accountName.c_str(), sizeof(userInfoPacket.szUserID));
-    userInfoPacket.CharCount = static_cast<int>(charList.size());
+    userInfoPacket.CharCount = static_cast<int>(std::min<size_t>(charList.size(), 6));
 
     for (size_t i = 0; i < charList.size() && i < 6; ++i) {
         const auto& charData = charList[i];
