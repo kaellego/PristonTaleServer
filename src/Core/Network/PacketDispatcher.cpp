@@ -17,7 +17,7 @@
 
 #include <iostream>
 
-// Esta é a implementação que estava faltando para o vinculador.
+// Esta Ã© a implementaÃ§Ã£o que estava faltando para o vinculador.
 PacketDispatcher::PacketDispatcher(
     GlobalState& state,
     PlayerRepository& playerRepo,
@@ -75,4 +75,8 @@ void PacketDispatcher::dispatch(std::shared_ptr<ClientSession> session, const Pa
 
         m_logService.warn("Pacote nao manipulado recebido do cliente {}. Opcode: 0x{:04x}", client_ip, opcode);
     }
+}
+
+void PacketDispatcher::sessionClosed(std::shared_ptr<ClientSession> session) {
+    m_userService.removeUser(std::move(session));
 }

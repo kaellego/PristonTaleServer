@@ -25,7 +25,7 @@ public:
 
 class PacketDispatcher {
 public:
-    // Este é o construtor que o Application.cpp está tentando chamar
+    // Este Ã© o construtor que o Application.cpp estÃ¡ tentando chamar
     explicit PacketDispatcher(
         GlobalState& state,
         PlayerRepository& playerRepo,
@@ -37,11 +37,12 @@ public:
     );
 
     void dispatch(std::shared_ptr<ClientSession> session, const Packet& packet);
+    void sessionClosed(std::shared_ptr<ClientSession> session);
 
 private:
     void registerHandlers();
 
-    // Referências para os serviços
+    // ReferÃªncias para os serviÃ§os
     GlobalState& m_globalState;
     PlayerRepository& m_playerRepository;
     ItemRepository& m_itemRepository;

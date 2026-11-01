@@ -82,7 +82,7 @@ void ClientSession::do_read_header() {
                     do_read_body();
                 }
                 else {
-                    // Log com o valor "scrambled", pois ainda nÃƒÂ£o descriptografamos
+                    // Log com o valor "scrambled", pois ainda nÃƒÆ’Ã‚Â£o descriptografamos
                     m_logService.error("Tamanho de pacote (scrambled) invalido: {}. Desconectando.", m_read_header.length);
                     close();
                 }
@@ -116,7 +116,7 @@ void ClientSession::do_read_body() {
                     return;
                 }
 
-                // --- A NOVA LÃƒâ€œGICA DE LOG DETALHADO ---
+                // --- A NOVA LÃƒÆ’Ã¢â‚¬Å“GICA DE LOG DETALHADO ---
                 std::string opcodeName = getOpcodeName(received_packet.header.opcode);
                 std::string hexDump = formatHex(received_packet.body);
 
@@ -182,6 +182,8 @@ void ClientSession::do_write() {
 }
 
 void ClientSession::close() {
+    if (m_closeStarted.exchange(true)) return;
+    m_packet_dispatcher.sessionClosed(shared_from_this());
     boost::system::error_code ec;
     if (m_socket.is_open()) {
         m_socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);

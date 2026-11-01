@@ -8,11 +8,12 @@
 #include <memory>
 #include <atomic>
 #include <optional>
+#include <vector>
 
 #include "Shared/datatypes.h" // Para structs como PacketLoginUser e SQLUser
 #include "Logging/LogEvents.h"   // Para os enums de log
 
-// Forward declarations para as depend�ncias que ser�o injetadas
+// Forward declarations para as dependÃªncias que serÃ£o injetadas
 class DatabasePool;
 class CharacterService;
 class UserService;
@@ -20,7 +21,7 @@ class LogService;
 class ClientSession;
 class ServerConfig;
 
-// Uma struct para representar uma requisi��o de login na fila de processamento
+// Uma struct para representar uma requisiÃ§Ã£o de login na fila de processamento
 struct LoginRequest {
     std::shared_ptr<ClientSession> session;
     PacketLoginUser packet;
@@ -36,7 +37,7 @@ public:
     AccountService(const AccountService&) = delete;
     AccountService& operator=(const AccountService&) = delete;
 
-    void queueLoginRequest(std::shared_ptr<ClientSession> session, const PacketLoginUser& packet);
+    bool queueLoginRequest(std::shared_ptr<ClientSession> session, const PacketLoginUser& packet);
 
 private:
     void workerLoop();
@@ -68,6 +69,7 @@ private:
     std::queue<LoginRequest> m_loginQueue;
     std::mutex m_queueMutex;
     std::condition_variable m_condition;
-    std::thread m_workerThread;
+    std::vector<std::thread> m_workerThreads;
     std::atomic<bool> m_isStopping{ false };
+    static constexpr size_t MaxLoginQueueSize = 1024;
 };

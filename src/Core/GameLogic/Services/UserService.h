@@ -22,7 +22,7 @@ public:
     UserService(DatabasePool& dbPool, LogService& logService);
 
     // CORRIGIDO: Assinatura do método addUser atualizada
-    void addUser(int accountId, const std::string& accountName, std::shared_ptr<ClientSession> session);
+    bool addUser(int accountId, const std::string& accountName, std::shared_ptr<ClientSession> session);
 
     void removeUser(std::shared_ptr<ClientSession> session);
     bool isUserOnline(const std::string& accountName); // <-- Modificado para buscar por nome

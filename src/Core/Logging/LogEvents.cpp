@@ -5,33 +5,33 @@ namespace Log {
 
     std::string formatLoginSuccess(const std::string& accountName, const std::string& password, const std::string& macAddr, const std::string& pcName, int serialHD, const std::string& videoName) {
         std::stringstream ss;
-        ss << "[" << accountName << "] (Login Success) -> Password[" << password << "] MacAddr[" << macAddr
+        ss << "[" << accountName << "] (Login Success) -> Password[REDACTED] MacAddr[" << macAddr
             << "] PCName[" << pcName << "] SerialHD[" << serialHD << "] VideoName[" << videoName << "]";
         return ss.str();
     }
 
     std::string formatIncorrectAccount(const std::string& accountName, const std::string& password, const std::string& macAddr, const std::string& pcName, int serialHD, const std::string& videoName) {
         std::stringstream ss;
-        ss << "Unknown_Account (Incorrect Account) -> AccountName[" << accountName << "] Password[" << password
-            << "] MacAddr[" << macAddr << "] PCName[" << pcName << "] SerialHD[" << serialHD << "] VideoName[" << videoName << "]";
+        ss << "Unknown_Account (Incorrect Account) -> AccountName[" << accountName << "] Password[REDACTED]"
+            << " MacAddr[" << macAddr << "] PCName[" << pcName << "] SerialHD[" << serialHD << "] VideoName[" << videoName << "]";
         return ss.str();
     }
 
     std::string formatIncorrectPassword(const std::string& accountName, const std::string& password) {
         std::stringstream ss;
-        ss << accountName << " (Incorrect Password) -> Password \"" << password << "\"";
+        ss << accountName << " (Incorrect Password) -> Password [REDACTED]";
         return ss.str();
     }
 
     std::string formatAccountNotActivated(const std::string& accountName, const std::string& password) {
         std::stringstream ss;
-        ss << accountName << " (Account not activated) -> Password \"" << password << "\"";
+        ss << accountName << " (Account not activated) -> Password [REDACTED]";
         return ss.str();
     }
 
     std::string formatAccountBanned(const std::string& accountName, const std::string& password) {
         std::stringstream ss;
-        ss << accountName << " (Account is banned) -> Password \"" << password << "\"";
+        ss << accountName << " (Account is banned) -> Password [REDACTED]";
         return ss.str();
     }
 

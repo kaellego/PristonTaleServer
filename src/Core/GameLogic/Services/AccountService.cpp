@@ -9,7 +9,7 @@
 #include "Shared/datatypes.h"
 #include "Utils/Dice.h"
 
-// TODO: Incluir os headers dos outros serviï¿½os quando eles forem criados
+// TODO: Incluir os headers dos outros serviÃƒÂ¯Ã‚Â¿Ã‚Â½os quando eles forem criados
 #include "GameLogic/Services/CharacterService.h" 
 #include "GameLogic/Services/UserService.h"
 #include "Logging/LogService.h"
@@ -18,6 +18,7 @@
 #include <iostream>
 #include <utility>
 #include <array>
+#include <algorithm>
 
 namespace {
 const char* modelNameForClass(int characterClass) {
@@ -36,18 +37,22 @@ AccountService::AccountService(DatabasePool& dbPool, CharacterService& charServi
     m_logService(logService),
     m_serverConfig(serverConfig)
 {
-    m_workerThread = std::thread(&AccountService::workerLoop, this);
+    constexpr size_t workerCount = 2;
+    m_workerThreads.reserve(workerCount);
+    for (size_t i = 0; i < workerCount; ++i) {
+        m_workerThreads.emplace_back(&AccountService::workerLoop, this);
+    }
 }
 
 AccountService::~AccountService() {
     m_isStopping = true;
-    m_condition.notify_one();
-    if (m_workerThread.joinable()) {
-        m_workerThread.join();
+    m_condition.notify_all();
+    for (auto& worker : m_workerThreads) {
+        if (worker.joinable()) worker.join();
     }
 }
 
-void AccountService::queueLoginRequest(std::shared_ptr<ClientSession> session, const PacketLoginUser& packet) {
+bool AccountService::queueLoginRequest(std::shared_ptr<ClientSession> session, const PacketLoginUser& packet) {
     LoginRequest request;
     request.session = session;
     request.packet = packet;
@@ -60,13 +65,18 @@ void AccountService::queueLoginRequest(std::shared_ptr<ClientSession> session, c
 
     {
         std::lock_guard<std::mutex> lock(m_queueMutex);
+        if (m_isStopping || m_loginQueue.size() >= MaxLoginQueueSize) {
+            m_logService.warn("Fila de login cheia; requisicao rejeitada para {}.", request.ipAddress);
+            return false;
+        }
         m_loginQueue.push(std::move(request));
     }
     m_condition.notify_one();
+    return true;
 }
 
 void AccountService::workerLoop() {
-    while (!m_isStopping) {
+    while (true) {
         LoginRequest request;
         {
             std::unique_lock<std::mutex> lock(m_queueMutex);
@@ -91,7 +101,7 @@ void AccountService::processLogin(LoginRequest& request) {
         return;
     }
 
-    m_logService.debug("Processando tentativa de login para a conta: '{}' com a senha: '{}'", accountName, passwordHashFromClient);
+    m_logService.debug("Processando tentativa de login para a conta: '{}'", accountName);
 
     // 1. Get user data from the database
     auto sqlUserOpt = getSqlUserInfo(accountName);
@@ -136,7 +146,7 @@ Log::LoginResult AccountService::validateRequest(const LoginRequest& request, co
 void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int ticket) {
     PacketServerList serverListPacket{};
 
-    // As chamadas agora sï¿½o vï¿½lidas
+    // As chamadas agora sÃƒÂ¯Ã‚Â¿Ã‚Â½o vÃƒÂ¯Ã‚Â¿Ã‚Â½lidas
     const auto& allServers = m_serverConfig.getAllServers();
     const auto& loginServerInfo = m_serverConfig.getThisServerInfo();
 
@@ -177,11 +187,14 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
 void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, const SQLUser& sqlUser) {
     m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
 
-    // CORRIGIDO: Gera o ticket e o passa para a sessï¿½o
+    // CORRIGIDO: Gera o ticket e o passa para a sessÃƒÂ¯Ã‚Â¿Ã‚Â½o
     int ticket = Dice::RandomI(1, 1000000);
+    if (!m_userService.addUser(sqlUser.iID, sqlUser.szAccountName, session)) {
+        m_logService.warn("Conta '{}' ja esta conectada.", sqlUser.szAccountName);
+        onLoginFailure(session, Log::LoginResult::AlreadyLogged, sqlUser.szAccountName);
+        return;
+    }
     session->authenticate(sqlUser.iID, sqlUser.szAccountName, ticket);
-
-    m_userService.addUser(sqlUser.iID, sqlUser.szAccountName, session);
 
     sendLoginResult(session, Log::LoginResult::Success);
     sendServerList(session, ticket); // Passa o ticket para a lista de servidores
@@ -242,7 +255,7 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         destChar.PosX = 0;
         destChar.PosZ = 0;
         std::fill(std::begin(destChar.dwTemp), std::end(destChar.dwTemp), 0);
-        // ... aqui vocï¿½ copiaria os outros campos necessï¿½rios, como modelo 3D, mapa, etc.
+        // ... aqui vocÃƒÂ¯Ã‚Â¿Ã‚Â½ copiaria os outros campos necessÃƒÂ¯Ã‚Â¿Ã‚Â½rios, como modelo 3D, mapa, etc.
     }
 
     // Converte e envia o pacote

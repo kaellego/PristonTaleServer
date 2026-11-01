@@ -88,5 +88,5 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
     m_globalState.loginAttempts++;
     session->markVerifiedLogin();
 
-    m_accountService.queueLoginRequest(session, loginPacket);
+    if (!m_accountService.queueLoginRequest(session, loginPacket)) session->close();
 }

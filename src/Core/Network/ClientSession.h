@@ -6,7 +6,8 @@
 #include <deque>
 #include <memory>
 #include <vector>
-#include <string> // Necessário para std::string
+#include <atomic>
+#include <string> // NecessÃ¡rio para std::string
 
 // Forward declarations
 class PacketDispatcher;
@@ -22,12 +23,12 @@ public:
     void close();
     boost::asio::ip::tcp::socket& socket();
 
-    // --- NOVOS MÉTODOS DE AUTENTICAÇÃO ---
+    // --- NOVOS MÃ‰TODOS DE AUTENTICAÃ‡ÃƒO ---
 
     /**
-     * @brief Define a sessão como autenticada, armazenando os dados da conta.
-     * @param accountId O ID numérico da conta.
-     * @param accountName O nome de usuário da conta.
+     * @brief Define a sessÃ£o como autenticada, armazenando os dados da conta.
+     * @param accountId O ID numÃ©rico da conta.
+     * @param accountName O nome de usuÃ¡rio da conta.
      */
     void authenticate(int accountId, const std::string& accountName, int ticket);
 
@@ -47,6 +48,7 @@ private:
 
     // --- NOVOS MEMBROS DE ESTADO ---
     bool m_isAuthenticated = false;
+    std::atomic_bool m_closeStarted{false};
     int m_accountId = -1;
     std::string m_accountName;
     int m_ticket = 0;
