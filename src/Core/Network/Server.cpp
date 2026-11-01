@@ -1,6 +1,6 @@
 #include "Network/Server.h"
 
-// Incluímos as definições completas aqui, pois são necessárias para a implementação.
+// Inclu?mos as defini??es completas aqui, pois s?o necess?rias para a implementa??o.
 #include "Network/ClientSession.h"
 #include "Network/PacketDispatcher.h"
 
@@ -10,7 +10,7 @@
 /**
  * @brief Construtor do Server.
  *
- * Inicializa os membros e, mais importante, inicia o ciclo de aceitação de conexões
+ * Inicializa os membros e, mais importante, inicia o ciclo de aceita??o de conex?es
  * chamando do_accept() pela primeira vez.
  */
 Server::Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t port, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey)
@@ -24,14 +24,22 @@ Server::Server(std::shared_ptr<boost::asio::io_context> io_context, uint16_t por
     do_accept();
 }
 
+void Server::stop() {
+    if (m_stopped.exchange(true)) return;
+    boost::system::error_code ec;
+    m_acceptor.cancel(ec);
+    m_acceptor.close(ec);
+}
+
 /**
- * @brief O coração do servidor: o "accept loop" assíncrono.
+ * @brief O cora??o do servidor: o "accept loop" ass?ncrono.
  *
- * Esta função posta uma operação de "accept" no io_context. A função retorna
- * imediatamente. O io_context chamará o lambda de callback quando uma nova
- * conexão chegar.
+ * Esta fun??o posta uma opera??o de "accept" no io_context. A fun??o retorna
+ * imediatamente. O io_context chamar? o lambda de callback quando uma nova
+ * conex?o chegar.
  */
 void Server::do_accept() {
+    if (m_stopped) return;
     m_acceptor.async_accept(
         [this](const boost::system::error_code& ec, boost::asio::ip::tcp::socket socket) {
             if (!ec) {
@@ -41,7 +49,7 @@ void Server::do_accept() {
             else {
                 std::cerr << "[Rede] Erro ao aceitar conexao: " << ec.message() << std::endl;
             }
-            do_accept();
+            if (!m_stopped) do_accept();
         }
     );
 }

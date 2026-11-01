@@ -62,6 +62,7 @@ private:
 
     // Outros membros...
     boost::asio::ip::tcp::socket m_socket;
+    boost::asio::strand<boost::asio::any_io_executor> m_strand;
     PacketDispatcher& m_packet_dispatcher;
     LogService& m_logService;
     PacketCipher m_cipher;

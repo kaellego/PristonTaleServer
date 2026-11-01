@@ -3,6 +3,7 @@
 #include <memory>
 #include <atomic>
 #include <boost/asio/io_context.hpp>
+#include <boost/asio/signal_set.hpp>
 
 // --- Inclusões Completas dos Serviços ---
 #include "Config/ServerConfig.h"

@@ -10,6 +10,7 @@
 
 ClientSession::ClientSession(boost::asio::ip::tcp::socket socket, PacketDispatcher& dispatcher, LogService& logService, uint8_t xorKey)
     : m_socket(std::move(socket)),
+    m_strand(boost::asio::make_strand(m_socket.get_executor())),
     m_packet_dispatcher(dispatcher),
     m_logService(logService),
     m_xorKey(xorKey)
@@ -141,7 +142,7 @@ void ClientSession::send(Packet packet) {
     m_cipher.encrypt(packet);
 
     auto self = shared_from_this();
-    boost::asio::post(m_socket.get_executor(), [this, self, packet = std::move(packet)]() mutable {
+    boost::asio::post(m_strand, [this, self, packet = std::move(packet)]() mutable {
         bool write_in_progress = !m_write_queue.empty();
         m_write_queue.push_back(std::move(packet));
         if (!write_in_progress) {
@@ -167,6 +168,7 @@ void ClientSession::do_write() {
     PacketScrambler::scramble(m_write_buffer, m_xorKey);
 
     boost::asio::async_write(m_socket, boost::asio::buffer(m_write_buffer),
+        boost::asio::bind_executor(m_strand,
         [this, self](boost::system::error_code ec, std::size_t /*length*/) {
             if (!ec) {
                 m_write_queue.pop_front();
@@ -178,7 +180,7 @@ void ClientSession::do_write() {
                 m_logService.warn("Erro ao escrever pacote: {}. Desconectando.", ec.message());
                 close();
             }
-        });
+        }));
 }
 
 void ClientSession::close() {
