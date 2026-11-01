@@ -168,6 +168,7 @@
     <ClInclude Include="GameLogic\Handlers\KeepAliveHandler.h" />
     <ClInclude Include="GameLogic\Handlers\LoginHandler.h" />
     <ClInclude Include="GameLogic\ItemRepository.h" />
+    <ClInclude Include="GameLogic\ItemPolicy.h" />
     <ClInclude Include="GameLogic\PlayerRepository.h" />
     <ClInclude Include="GameLogic\Services\AccountService.h" />
     <ClInclude Include="Logging\LogEvents.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="GameLogic\Handlers\KeepAliveHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\LoginHandler.cpp" />
     <ClCompile Include="GameLogic\ItemRepository.cpp" />
+    <ClCompile Include="GameLogic\ItemPolicy.cpp" />
     <ClCompile Include="GameLogic\PlayerRepository.cpp" />
     <ClCompile Include="GameLogic\Services\AccountService.cpp" />
     <ClCompile Include="Logging\LogEvents.cpp" />

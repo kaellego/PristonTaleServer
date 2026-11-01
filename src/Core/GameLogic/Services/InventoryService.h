@@ -10,13 +10,14 @@
 
 class CharacterService;
 class PlayerRepository;
+class ItemPolicy;
 
 class InventoryService {
 public:
     using InventoryCallback = std::function<void(bool, InventoryData)>;
     using WarehouseCallback = std::function<void(bool, WarehouseData)>;
 
-    InventoryService(PlayerRepository& players, CharacterService& characters);
+    InventoryService(PlayerRepository& players, CharacterService& characters, ItemPolicy& itemPolicy);
     ~InventoryService();
     InventoryService(const InventoryService&) = delete;
 
@@ -31,6 +32,7 @@ private:
 
     PlayerRepository& m_players;
     CharacterService& m_characters;
+    ItemPolicy& m_itemPolicy;
     std::queue<std::function<void()>> m_tasks;
     std::mutex m_mutex;
     std::condition_variable m_condition;

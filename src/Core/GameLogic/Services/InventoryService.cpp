@@ -1,10 +1,11 @@
 #include "GameLogic/Services/InventoryService.h"
 #include "GameLogic/PlayerRepository.h"
 #include "GameLogic/Services/CharacterService.h"
+#include "GameLogic/ItemPolicy.h"
 #include <utility>
 
-InventoryService::InventoryService(PlayerRepository& players, CharacterService& characters)
-    : m_players(players), m_characters(characters), m_worker(&InventoryService::workerLoop, this) {}
+InventoryService::InventoryService(PlayerRepository& players, CharacterService& characters, ItemPolicy& itemPolicy)
+    : m_players(players), m_characters(characters), m_itemPolicy(itemPolicy), m_worker(&InventoryService::workerLoop, this) {}
 
 InventoryService::~InventoryService() {
     { std::lock_guard lock(m_mutex); m_stopping = true; }
@@ -60,6 +61,9 @@ void InventoryService::useOrEquipItem(const std::string& account, const std::str
         auto inventory = m_players.loadInventory(character).value_or(InventoryData{});
         auto characterData = m_players.loadCharacter(character);
         if (!characterData || inventory.saItem[inventorySlot].sItemID <= 0) { callback(false, {}); return; }
+        const auto itemCode = inventory.saItem[inventorySlot].sItemID;
+        if (action == 1 && !m_itemPolicy.canEquip(itemCode, characterData->iLevel, characterData->iClass, equipmentSlot)) { callback(false, {}); return; }
+        if (action == 2 && !m_itemPolicy.canUse(itemCode)) { callback(false, {}); return; }
         if (action == 1) std::swap(inventory.saItem[inventorySlot], characterData->saEquipment[equipmentSlot]);
         else { characterData->iHP = std::min(characterData->iMaxHP, characterData->iHP + 10); inventory.saItem[inventorySlot] = {}; }
         if (!m_players.saveCharacter(*characterData) || !m_players.saveInventory(character, inventory)) { callback(false, {}); return; }

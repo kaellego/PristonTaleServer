@@ -47,12 +47,13 @@ void Application::buildServices() {
     m_dbPool = std::make_unique<DatabasePool>(*m_config, *m_logService);
     m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data estÃƒÆ’Ã‚Â¡ no diretÃƒÆ’Ã‚Â³rio do executÃƒÆ’Ã‚Â¡vel
     m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);
+    m_itemPolicy = std::make_unique<ItemPolicy>(*m_dbPool);
 
     // --- ETAPA 3: ServiÃƒÆ’Ã‚Â§os de LÃƒÆ’Ã‚Â³gica de Jogo ---
     m_characterService = std::make_unique<CharacterService>(*m_dbPool, *m_playerRepository, *m_logService);
     m_userService = std::make_unique<UserService>(*m_dbPool, *m_logService);
     m_accountService = std::make_unique<AccountService>(*m_dbPool, *m_characterService, *m_userService, *m_logService, *m_config);
-    m_inventoryService = std::make_unique<InventoryService>(*m_playerRepository, *m_characterService);
+    m_inventoryService = std::make_unique<InventoryService>(*m_playerRepository, *m_characterService, *m_itemPolicy);
 
 
     // --- ETAPA 4: Rede e Despacho de Pacotes ---
