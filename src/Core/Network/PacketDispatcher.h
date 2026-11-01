@@ -16,6 +16,8 @@ class AccountService;
 class LogService;
 class UserService;
 class CharacterService;
+class InventoryService;
+class GameWorld;
 
 class IPacketHandler {
 public:
@@ -25,7 +27,7 @@ public:
 
 class PacketDispatcher {
 public:
-    // Este Ã© o construtor que o Application.cpp estÃ¡ tentando chamar
+    // Este ÃƒÆ’Ã‚Â© o construtor que o Application.cpp estÃƒÆ’Ã‚Â¡ tentando chamar
     explicit PacketDispatcher(
         GlobalState& state,
         PlayerRepository& playerRepo,
@@ -33,7 +35,9 @@ public:
         AccountService& accountService,
         LogService& logService,
         UserService& userService,
-        CharacterService& characterService
+        CharacterService& characterService,
+        InventoryService& inventoryService,
+        GameWorld& gameWorld
     );
 
     void dispatch(std::shared_ptr<ClientSession> session, const Packet& packet);
@@ -42,7 +46,7 @@ public:
 private:
     void registerHandlers();
 
-    // ReferÃªncias para os serviÃ§os
+    // ReferÃƒÆ’Ã‚Âªncias para os serviÃƒÆ’Ã‚Â§os
     GlobalState& m_globalState;
     PlayerRepository& m_playerRepository;
     ItemRepository& m_itemRepository;
@@ -50,6 +54,8 @@ private:
     LogService& m_logService;
     UserService& m_userService;
     CharacterService& m_characterService;
+    InventoryService& m_inventoryService;
+    GameWorld& m_gameWorld;
 
     std::map<uint32_t, std::unique_ptr<IPacketHandler>> m_handlers;
 };

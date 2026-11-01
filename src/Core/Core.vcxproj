@@ -157,6 +157,10 @@
     <ClCompile Include="Database\Orm.cpp" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="GameLogic\Services\CharacterService.h" />
+    <ClInclude Include="GameLogic\Services\InventoryService.h" />
+    <ClInclude Include="GameLogic\EventQueue.h" />
+    <ClInclude Include="GameLogic\GameSession.h" />
+    <ClInclude Include="GameLogic\GameWorld.h" />
     <ClInclude Include="Config\ServerConfig.h" />
     <ClInclude Include="Database\DatabasePool.h" />
     <ClInclude Include="Database\SQLConnection.h" />
@@ -191,6 +195,7 @@
     <ClInclude Include="Database\Orm.h" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="GameLogic\Services\CharacterService.cpp" />
+    <ClCompile Include="GameLogic\Services\InventoryService.cpp" />
     <ClCompile Include="Config\ServerConfig.cpp" />
     <ClCompile Include="Database\DatabasePool.cpp" />
     <ClCompile Include="Database\SQLConnection.cpp" />

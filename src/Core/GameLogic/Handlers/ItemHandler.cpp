@@ -1,6 +1,5 @@
 #include "GameLogic/Handlers/ItemHandler.h"
-#include "GameLogic/PlayerRepository.h"
-#include "GameLogic/Services/CharacterService.h"
+#include "GameLogic/Services/InventoryService.h"
 #include "Network/ClientSession.h"
 #include "Network/Packet.h"
 #include "Shared/Constants.h"
@@ -20,7 +19,7 @@ namespace
 
 void ItemHandler::handle(std::shared_ptr<ClientSession> session, const Packet &packet)
 {
-    if (!session->isAuthenticated() || session->getCharacterName().empty() || !m_characters.ownsCharacter(session->getAccountName(), session->getCharacterName()))
+    if (!session->isAuthenticated() || session->getCharacterName().empty())
     {
         session->close();
         return;
@@ -28,16 +27,16 @@ void ItemHandler::handle(std::shared_ptr<ClientSession> session, const Packet &p
     const auto op = static_cast<Opcodes>(packet.header.opcode);
     if (op == Opcodes::NetPlayerInventory)
     {
-        auto data = m_players.loadInventory(session->getCharacterName()).value_or(InventoryData{});
-        m_players.saveInventory(session->getCharacterName(), data);
-        sendData(session, packet.header.opcode, data);
+        m_inventory.loadInventory(session->getAccountName(), session->getCharacterName(), [session, opcode = packet.header.opcode](bool ok, InventoryData data) {
+            if (ok) sendData(session, opcode, data); else session->close();
+        });
         return;
     }
     if (op == Opcodes::NetOpenWarehouse || op == Opcodes::NetOpenWarehouseSeasonal || op == Opcodes::RecvWarehouse || op == Opcodes::SendWarehouse)
     {
-        auto data = m_players.loadWarehouse(session->getAccountName()).value_or(WarehouseData{});
-        m_players.saveWarehouse(session->getAccountName(), data);
-        sendData(session, static_cast<uint32_t>(Opcodes::RecvWarehouse), data);
+        m_inventory.loadWarehouse(session->getAccountName(), session->getCharacterName(), [session](bool ok, WarehouseData data) {
+            if (ok) sendData(session, static_cast<uint32_t>(Opcodes::RecvWarehouse), data); else session->close();
+        });
         return;
     }
     if (op == Opcodes::ItemSlotHandle && packet.body.size() == sizeof(PacketItemSlotHandle) - sizeof(PacketHeader))
@@ -46,9 +45,8 @@ void ItemHandler::handle(std::shared_ptr<ClientSession> session, const Packet &p
         std::memcpy(reinterpret_cast<uint8_t *>(&command) + sizeof(PacketHeader), packet.body.data(), packet.body.size());
         if (command.sourceSlot < 0 || command.sourceSlot >= static_cast<int32_t>(PLAYER_INVENTORY_SLOTS) || command.targetSlot < 0 || command.targetSlot >= static_cast<int32_t>(PLAYER_INVENTORY_SLOTS))
             return;
-        auto data = m_players.loadInventory(session->getCharacterName()).value_or(InventoryData{});
-        std::swap(data.saItem[command.sourceSlot], data.saItem[command.targetSlot]);
-        if (m_players.saveInventory(session->getCharacterName(), data))
-            sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), data);
+        m_inventory.moveInventoryItem(session->getAccountName(), session->getCharacterName(), command.sourceSlot, command.targetSlot, [session](bool ok, InventoryData data) {
+            if (ok) sendData(session, static_cast<uint32_t>(Opcodes::NetPlayerInventory), data); else session->close();
+        });
     }
 }

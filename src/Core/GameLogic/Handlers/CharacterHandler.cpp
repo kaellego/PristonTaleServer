@@ -5,8 +5,9 @@
 #include "Shared/Constants.h"
 #include "Shared/datatypes.h"
 #include "Logging/LogService.h"
+#include "GameLogic/GameWorld.h"
 #include <cstring>
-CharacterHandler::CharacterHandler(CharacterService &service, LogService &logService) : m_service(service), m_logService(logService) {}
+CharacterHandler::CharacterHandler(CharacterService &service, GameWorld& world, LogService &logService) : m_service(service), m_world(world), m_logService(logService) {}
 
 namespace
 {
@@ -50,7 +51,10 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
     case Opcodes::SelectCharacter:
         success = m_service.selectCharacter(session->getAccountName(), name).has_value();
         if (success)
+        {
             session->selectCharacter(name);
+            m_world.enter(session->getAccountId(), session->getAccountName(), name);
+        }
         break;
     default:
         return;

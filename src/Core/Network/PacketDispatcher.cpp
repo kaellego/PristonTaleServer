@@ -14,10 +14,12 @@
 #include "GameLogic/Handlers/CharacterHandler.h"
 #include "GameLogic/Handlers/ItemHandler.h"
 #include "GameLogic/Services/CharacterService.h"
+#include "GameLogic/Services/InventoryService.h"
+#include "GameLogic/GameWorld.h"
 
 #include <iostream>
 
-// Esta Ã© a implementaÃ§Ã£o que estava faltando para o vinculador.
+// Esta ÃƒÆ’Ã‚Â© a implementaÃƒÆ’Ã‚Â§ÃƒÆ’Ã‚Â£o que estava faltando para o vinculador.
 PacketDispatcher::PacketDispatcher(
     GlobalState& state,
     PlayerRepository& playerRepo,
@@ -25,7 +27,9 @@ PacketDispatcher::PacketDispatcher(
     AccountService& accountService,
     LogService& logService,
     UserService& userService,
-    CharacterService& characterService
+    CharacterService& characterService,
+    InventoryService& inventoryService,
+    GameWorld& gameWorld
 
 ) :
     m_globalState(state),
@@ -34,7 +38,9 @@ PacketDispatcher::PacketDispatcher(
     m_accountService(accountService),
     m_logService(logService),
     m_userService(userService),
-    m_characterService(characterService)
+    m_characterService(characterService),
+    m_inventoryService(inventoryService),
+    m_gameWorld(gameWorld)
 {
     m_logService.info("Registrando manipuladores de pacotes...");
     registerHandlers();
@@ -46,15 +52,15 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::KeepAlive)] = std::make_unique<KeepAliveHandler>(m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::LoginUser)] = std::make_unique<LoginHandler>(m_accountService, m_logService, m_globalState);
     m_handlers[static_cast<uint32_t>(Opcodes::Ping)] = std::make_unique<PingHandler>(m_logService, m_userService, m_globalState);
-    m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::NetPlayerInventory)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouse)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouseSeasonal)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = std::make_unique<ItemHandler>(m_playerRepository, m_characterService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = std::make_unique<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetPlayerInventory)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouse)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetOpenWarehouseSeasonal)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::RecvWarehouse)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::SendWarehouse)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::ItemSlotHandle)] = std::make_unique<ItemHandler>(m_inventoryService, m_logService);
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }
@@ -78,5 +84,6 @@ void PacketDispatcher::dispatch(std::shared_ptr<ClientSession> session, const Pa
 }
 
 void PacketDispatcher::sessionClosed(std::shared_ptr<ClientSession> session) {
+    m_gameWorld.leave(session->getAccountName());
     m_userService.removeUser(std::move(session));
 }
