@@ -14,7 +14,9 @@ enum class Opcode : int32_t {
     Connected = 3,
     GetUserInfo = 8,
     SetUserInfo = 9,
+    Version = 13,
     FailConnect = 64,
+    CheckIP = 108,
     ServerInfo = 96,
 };
 

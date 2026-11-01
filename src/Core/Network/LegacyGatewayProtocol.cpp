@@ -27,6 +27,11 @@ std::optional<Packet> toModernPacket(const std::vector<uint8_t>& payload) {
         break;
     case Opcode::GetUserInfo:
         return loginToModernPacket(payload);
+    case Opcode::CheckIP:
+        if (command.size != 52 || command.wParam < 0 || command.wParam > 3 ||
+            !isSafeString(reinterpret_cast<const char*>(payload.data() + 20), 32))
+            return std::nullopt;
+        return Packet(static_cast<uint32_t>(Opcodes::KeepAlive));
     default:
         // The legacy client uses GETRECORDDATA (opcode 5) on the login/data
         // socket when it requests the selected character after choosing a
@@ -167,17 +172,10 @@ std::optional<std::vector<uint8_t>> toLegacyPayload(const Packet& packet, uint32
 }
 
 std::vector<uint8_t> gameServerReadyPayload() {
-    struct ServerInfo { char name[32], ip1[20], ip2[20], ip3[20]; uint32_t port1, port2, port3, state; };
-    struct ServerList { int32_t size, code; char name[16]; uint32_t time; int32_t clanTicket, temp, clanCount, count; ServerInfo servers[8]; } legacy{};
-    legacy.size = sizeof(legacy);
-    legacy.code = static_cast<int32_t>(Opcode::ServerInfo);
-    std::memcpy(legacy.name, "Awell", sizeof("Awell"));
-    legacy.count = 1;
-    std::memcpy(legacy.servers[0].name, "Awell", sizeof("Awell"));
-    std::memcpy(legacy.servers[0].ip1, "127.0.0.1", sizeof("127.0.0.1"));
-    std::memcpy(legacy.servers[0].ip2, "127.0.0.1", sizeof("127.0.0.1"));
-    std::memcpy(legacy.servers[0].ip3, "127.0.0.1", sizeof("127.0.0.1"));
-    legacy.servers[0].port1 = legacy.servers[0].port2 = legacy.servers[0].port3 = 5056;
+    // The original SrcServer sends VERSION immediately after a GameServer
+    // connection. SERVER_INFO belongs to the login/server-selection stage.
+    constexpr int32_t legacyClientVersion = 4135;
+    Command legacy{sizeof(Command), static_cast<int32_t>(Opcode::Version), 0, legacyClientVersion, 0, 0};
     const auto* bytes = reinterpret_cast<const uint8_t*>(&legacy);
     return std::vector<uint8_t>(bytes, bytes + sizeof(legacy));
 }

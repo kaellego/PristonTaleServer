@@ -43,6 +43,7 @@ public:
 
     void dispatch(std::shared_ptr<ClientSession> session, const Packet& packet);
     bool transferLegacySession(std::shared_ptr<ClientSession> session, const std::string& accountName);
+    bool transferLegacySessionByIp(std::shared_ptr<ClientSession> session);
     void sessionClosed(std::shared_ptr<ClientSession> session);
 
 private:

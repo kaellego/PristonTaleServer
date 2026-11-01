@@ -35,7 +35,7 @@ boost::asio::ip::tcp::socket& ClientSession::socket() {
 
 void ClientSession::start() {
     try {
-        m_logService.info("Nova sessao iniciada: {}:{}", m_socket.remote_endpoint().address().to_string(), m_socket.remote_endpoint().port() );
+        m_logService.info("Nova sessao iniciada: {}:{} (local {})", m_socket.remote_endpoint().address().to_string(), m_socket.remote_endpoint().port(), m_socket.local_endpoint().port());
     }
     catch (...) { return; }
 
@@ -86,11 +86,19 @@ void ClientSession::do_read_legacy_frame() {
                 return;
             }
             std::memcpy(&m_legacyRequestCode, m_legacyFrame.data() + sizeof(int32_t), sizeof(m_legacyRequestCode));
-            if (m_gameEndpoint && !isAuthenticated() && (m_legacyRequestCode == 10 || m_legacyRequestCode == 11)) {
-                char account[21]{};
-                std::memcpy(account, m_legacyFrame.data() + 20, sizeof(account));
-                if (!m_packet_dispatcher.transferLegacySession(self, account)) {
-                    m_logService.warn("Sessao legada do GameServer rejeitada para a conta '{}'.", account);
+            if (m_gameEndpoint && !isAuthenticated()) {
+                bool transferred = false;
+                if (m_legacyRequestCode == 10 || m_legacyRequestCode == 11) {
+                    char account[21]{};
+                    std::memcpy(account, m_legacyFrame.data() + 20, sizeof(account));
+                    transferred = m_packet_dispatcher.transferLegacySession(self, account);
+                    if (!transferred)
+                        m_logService.warn("Sessao legada do GameServer rejeitada para a conta '{}'.", account);
+                } else {
+                    transferred = m_packet_dispatcher.transferLegacySessionByIp(self);
+                }
+                if (!transferred) {
+                    m_logService.warn("Sessao legada do GameServer rejeitada: conta nao identificada.");
                     close();
                     return;
                 }

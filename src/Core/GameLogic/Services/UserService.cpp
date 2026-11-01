@@ -60,6 +60,32 @@ bool UserService::transferSession(const std::string& accountName, const std::sha
     return true;
 }
 
+bool UserService::transferSessionByIp(const std::shared_ptr<ClientSession>& session) {
+    std::shared_ptr<ClientSession> source;
+    std::string accountName;
+    int matches = 0;
+    std::string remoteIp;
+    try { remoteIp = session->socket().remote_endpoint().address().to_string(); }
+    catch (...) { return false; }
+
+    std::lock_guard<std::mutex> lock(m_usersMutex);
+    for (const auto& [name, user] : m_onlineUsers) {
+        if (!user.session || !user.session->isAuthenticated() || user.session->ticketExpired()) continue;
+        try {
+            if (user.session->socket().remote_endpoint().address().to_string() != remoteIp) continue;
+        } catch (...) { continue; }
+        source = user.session;
+        accountName = name;
+        ++matches;
+    }
+    if (matches != 1) return false;
+
+    session->authenticate(source->getAccountId(), accountName, source->getTicket(),
+        std::chrono::steady_clock::now() + std::chrono::minutes(15));
+    m_onlineUsers[accountName].session = session;
+    return true;
+}
+
 bool UserService::banAccount(const std::string& accountName, const std::string& reason) {
     if (accountName.empty()) return false;
     try {
