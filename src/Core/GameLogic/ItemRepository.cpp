@@ -11,6 +11,7 @@ ItemRepository::ItemRepository(DatabasePool& dbPool, LogService& logService)
     m_logService(logService)
 {
     m_logService.info("Inicializando repositorio de itens...");
+    loadItemDefinitions();
 }
 
 void ItemRepository::loadItemDefinitions() {
@@ -22,7 +23,7 @@ void ItemRepository::loadItemDefinitions() {
     m_logService.info("Definicoes de itens carregadas (logica a ser implementada).");
 }
 
-// --- DEFINIÇÕES DE MÉTODOS CORRIGIDAS ---
+// --- DEFINIÃƒâ€¡Ãƒâ€¢ES DE MÃƒâ€°TODOS CORRIGIDAS ---
 
 const DefinitionItem* ItemRepository::findItemDef(int itemCode) const {
     auto it = m_itemDefs.find(itemCode);
@@ -35,23 +36,32 @@ const DefinitionItem* ItemRepository::findOldItemDef(int itemCode) const {
 }
 
 bool ItemRepository::updateItemStats(Item& item) const {
-    return false; // Lógica de placeholder
+    const auto* definition = findItemDef(item.sItemID);
+    if (!definition) return false;
+    std::memcpy(&item, &definition->sItem, sizeof(Item));
+    return true;
 }
 
 void ItemRepository::stripAugments(Item& item) const {
-    // Lógica de placeholder
+    (void)item;
 }
 
 void ItemRepository::applyAugments(const Item& originalItem, Item& updatedItem) const {
-    // Lógica de placeholder
+    updatedItem = originalItem;
 }
 
 template<typename T>
 bool ItemRepository::adjustStat(const std::string& itemName, T& statValue, T newMin, T newMax, T oldMin, T oldMax) const {
-    return false; // Lógica de placeholder
+    (void)itemName;
+    if (newMin > newMax || oldMin > oldMax || statValue < oldMin || statValue > oldMax) return false;
+    const auto oldRange = oldMax - oldMin;
+    if (oldRange == T{}) { statValue = newMin; return true; }
+    const auto ratio = static_cast<double>(statValue - oldMin) / static_cast<double>(oldRange);
+    statValue = static_cast<T>(newMin + (newMax - newMin) * ratio);
+    return true;
 }
 
-// Necessário para o compilador encontrar a implementação do template
+// NecessÃƒÂ¡rio para o compilador encontrar a implementaÃƒÂ§ÃƒÂ£o do template
 template bool ItemRepository::adjustStat<int>(const std::string&, int&, int, int, int, int) const;
 template bool ItemRepository::adjustStat<short>(const std::string&, short&, short, short, short, short) const;
 template bool ItemRepository::adjustStat<float>(const std::string&, float&, float, float, float, float) const;
