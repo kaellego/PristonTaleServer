@@ -22,21 +22,25 @@
 
 namespace {
 const char* modelBodyForClass(int characterClass) {
-    static constexpr std::array<const char*, 8> names{
+    static constexpr std::array<const char*, 11> names{
         "char\\tmABCD\\b001.ini", "char\\tmABCD\\a001.ini",
         "char\\tmABCD\\d001.ini", "char\\tmABCD\\c001.ini",
-        "char\\tmABCD\\ma001.ini", "char\\tmABCD\\mb001.ini",
-        "char\\tmABCD\\mc001.ini", "char\\tmABCD\\md001.ini"};
+        "char\\tmABCD\\mb001.ini", "char\\tmABCD\\ma001.ini",
+        "char\\tmABCD\\md001.ini", "char\\tmABCD\\mc001.ini",
+        "char\\tmABCD\\e001.ini", "char\\tmABCD\\me001.ini",
+        "char\\tmABCD\\f001.ini"};
     return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
         ? names[static_cast<size_t>(characterClass - 1)] : names[0];
 }
 
 const char* modelFaceForClass(int characterClass) {
-    static constexpr std::array<const char*, 8> names{
+    static constexpr std::array<const char*, 11> names{
         "char\\tmABCD\\tmh-b01.inf", "char\\tmABCD\\tmh-a01.inf",
         "char\\tmABCD\\tfh-D01.inf", "char\\tmABCD\\tmh-c01.inf",
-        "char\\tmABCD\\Mmh-A01.inf", "char\\tmABCD\\Mfh-B01.inf",
-        "char\\tmABCD\\Mfh-C01.inf", "char\\tmABCD\\Mmh-D01.inf"};
+        "char\\tmABCD\\Mfh-B01.inf", "char\\tmABCD\\Mmh-A01.inf",
+        "char\\tmABCD\\Mmh-D01.inf", "char\\tmABCD\\Mfh-C01.inf",
+        "char\\tmABCD\\tfh-e01.inf", "char\\tmABCD\\Mmh-e01.inf",
+        "char\\tmABCD\\tfh-f01.inf"};
     return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
         ? names[static_cast<size_t>(characterClass - 1)] : names[0];
 }

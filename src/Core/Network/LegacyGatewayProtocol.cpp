@@ -152,10 +152,10 @@ namespace LegacyGateway
                 "char\\tmABCD\\a001.ini",  // 2: Mechanician
                 "char\\tmABCD\\d001.ini",  // 3: Archer
                 "char\\tmABCD\\c001.ini",  // 4: Pikeman
-                "char\\tmABCD\\ma001.ini", // 5: Knight
-                "char\\tmABCD\\mb001.ini", // 6: Atalanta
-                "char\\tmABCD\\mc001.ini", // 7: Priestess
-                "char\\tmABCD\\md001.ini", // 8: Magician
+                "char\\tmABCD\\mb001.ini", // 5: Atalanta
+                "char\\tmABCD\\ma001.ini", // 6: Knight
+                "char\\tmABCD\\md001.ini", // 7: Magician
+                "char\\tmABCD\\mc001.ini", // 8: Priestess
                 "char\\tmABCD\\e001.ini",  // 9: Assassin
                 "char\\tmABCD\\me001.ini", // 10: Shaman
                 "char\\tmABCD\\f001.ini"   // 11: Martial Artist
@@ -172,10 +172,10 @@ namespace LegacyGateway
                 "char\\tmABCD\\tmh-a01.inf", // 2: Mechanician
                 "char\\tmABCD\\tfh-D01.inf", // 3: Archer
                 "char\\tmABCD\\tmh-c01.inf", // 4: Pikeman
-                "char\\tmABCD\\Mmh-A01.inf", // 5: Knight
-                "char\\tmABCD\\Mfh-B01.inf", // 6: Atalanta
-                "char\\tmABCD\\Mfh-C01.inf", // 7: Priestess
-                "char\\tmABCD\\Mmh-D01.inf", // 8: Magician
+                "char\\tmABCD\\Mfh-B01.inf", // 5: Atalanta
+                "char\\tmABCD\\Mmh-A01.inf", // 6: Knight
+                "char\\tmABCD\\Mmh-D01.inf", // 7: Magician
+                "char\\tmABCD\\Mfh-C01.inf", // 8: Priestess
                 "char\\tmABCD\\tfh-e01.inf", // 9: Assassin
                 "char\\tmABCD\\Mmh-e01.inf", // 10: Shaman
                 "char\\tmABCD\\tfh-f01.inf"  // 11: Martial Artist (Artista Marcial)
@@ -192,10 +192,10 @@ namespace LegacyGateway
                 "char\\tmABCD\\tmh-a01a.inf", // 2: Mechanician (Cabelo padrão A)
                 "char\\tmABCD\\tfh-D01a.inf", // 3: Archer (Cabelo padrão A)
                 "char\\tmABCD\\tmh-c01a.inf", // 4: Pikeman (Cabelo padrão A)
-                "char\\tmABCD\\Mmh-B01a.inf", // 5: Knight (Cabelo padrão A)
-                "char\\tmABCD\\Mfh-A01a.inf", // 6: Atalanta (Cabelo padrão A)
-                "char\\tmABCD\\Mfh-D01a.inf", // 7: Priestess (Cabelo padrão A)
-                "char\\tmABCD\\Mmh-C01a.inf", // 8: Magician (Cabelo padrão A)
+                "char\\tmABCD\\Mfh-B01a.inf", // 5: Atalanta (Cabelo padrão A)
+                "char\\tmABCD\\Mmh-A01a.inf", // 6: Knight (Cabelo padrão A)
+                "char\\tmABCD\\Mmh-D01a.inf", // 7: Magician (Cabelo padrão A)
+                "char\\tmABCD\\Mfh-C01a.inf", // 8: Priestess (Cabelo padrão A)
                 "char\\tmABCD\\tfh-e01a.inf", // 9: Assassin (Cabelo padrão A)
                 "char\\tmABCD\\Mmh-e01a.inf", // 10: Shaman (Cabelo padrão A)
                 "char\\tmABCD\\tfh-f01a.inf"  // 11: Martial Artist (Cabelo padrão A)
@@ -374,8 +374,16 @@ namespace LegacyGateway
                 std::memcpy(&modern.LParam, payload.data() + 8, sizeof(modern.LParam));
                 std::memcpy(&modern.WParam, payload.data() + 12, sizeof(modern.WParam));
                 std::memcpy(&modern.SParam, payload.data() + 16, sizeof(modern.SParam));
-                if (command.code == 11 && modern.LParam == 0)
-                    modern.LParam = 1; // Legacy creation packets omit the class; use the standard first class.
+                if (command.code == 11)
+                {
+                    // Older clients leave LParam at zero. Keep that client
+                    // compatible, but never accept a class outside the game
+                    // range when an updated client supplies it.
+                    if (modern.LParam == 0)
+                        modern.LParam = 1;
+                    else if (modern.LParam < 1 || modern.LParam > 11)
+                        return std::nullopt;
+                }
                 if (command.code != 5)
                     std::memcpy(modern.szAccount, payload.data() + 20, 21);
                 const auto *name = reinterpret_cast<const char *>(payload.data() + (command.code == 5 ? 20 : 41));

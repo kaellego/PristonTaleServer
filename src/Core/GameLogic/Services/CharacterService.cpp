@@ -37,9 +37,19 @@ std::vector<CharacterData> CharacterService::getCharacterList(const std::string&
     return characterList;
 }
 bool CharacterService::createCharacter(const std::string& accountName, const std::string& characterName, int characterClass) {
-    if (accountName.empty() || !validCharacterName(characterName) || characterClass < 1 || characterClass > 10) return false;
+    if (accountName.empty() || !validCharacterName(characterName) || characterClass < 1 || characterClass > 11) {
+        m_logService.warn("Criacao rejeitada: dados invalidos para '{}' (classe {}).", characterName, characterClass);
+        return false;
+    }
     Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
-    if (orm.findCharacterNames(accountName, 7).size() >= 6 || orm.characterBelongsTo(accountName, characterName)) return false;
+    if (orm.findCharacterNames(accountName, 7).size() >= 6) {
+        m_logService.warn("Criacao rejeitada para {}: limite de 6 personagens atingido.", accountName);
+        return false;
+    }
+    if (orm.characterBelongsTo(accountName, characterName)) {
+        m_logService.warn("Criacao rejeitada para {}: personagem '{}' ja existe.", accountName, characterName);
+        return false;
+    }
     CharacterData character{};
     strncpy_s(character.szName, sizeof(character.szName), characterName.c_str(), _TRUNCATE);
     character.iLevel = 1;
@@ -50,9 +60,13 @@ bool CharacterService::createCharacter(const std::string& accountName, const std
     character.iMP = character.iMaxMP = 100;
     character.iStrength = character.iSpirit = character.iTalent = character.iAgility = character.iHealth = 1;
     character.iAttackMin = character.iAttackMax = 10; character.iDefense = 0;
-    if (!m_playerRepository.saveCharacter(character)) return false;
+    if (!m_playerRepository.saveCharacter(character)) {
+        m_logService.error("Criacao rejeitada para {}: falha ao salvar o arquivo de '{}'.", accountName, characterName);
+        return false;
+    }
     if (!orm.createCharacterRecord(accountName, characterName)) {
         m_playerRepository.deleteCharacter(characterName);
+        m_logService.error("Criacao rejeitada para {}: falha ao criar o registro de '{}' no banco.", accountName, characterName);
         return false;
     }
     return true;

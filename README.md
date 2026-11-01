@@ -1,73 +1,139 @@
-# Priston Tale - Servidor Refatorado (Base de Projeto)
+# Priston Tale Server
 
-![C++](https://img.shields.io/badge/C++-20-blue.svg)
-![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
-![License](https://img.shields.io/badge/license-GPL--3-blue.svg)
+Servidor de jogo em C++20, baseado na refatoração do código legado do Priston Tale. O projeto separa rede, serviços de aplicação, runtime do jogo e infraestrutura de persistência.
 
-Este repositório contém a base para um servidor de Priston Tale, resultado de um esforço de refatoração de um código-fonte legado. O objetivo principal é transformar a base de código original, escrita em um estilo C mais antigo, em uma aplicação C++ moderna, robusta, segura e de fácil manutenção.
+> Status: base funcional para testes de login, personagens, inventário, warehouse, movimentação e combate simplificado. O protocolo legado e os sistemas avançados do jogo ainda estão em evolução.
 
-O foco não é apenas fazer o servidor funcionar, mas construí-lo sobre uma fundação de boas práticas de engenharia de software e Padrões de Design (`Design Patterns`).
+## Arquitetura
 
-> ⚠️ **Status do Projeto:** Em Desenvolvimento Ativo.
-> A base da arquitetura, incluindo a camada de rede assíncrona, criptografia, configuração e o sistema de banco de dados, está implementada e funcional. A implementação dos handlers de pacotes e da lógica de jogo está em andamento.
+```text
+Network Layer
+  ClientSession, Server, PacketDispatcher, LegacyGatewayProtocol
 
-## Filosofia e Objetivos
+Application Services
+  AccountService, CharacterService, InventoryService, UserService
 
-A reestruturação deste projeto segue três pilares principais:
+Game Runtime
+  GameSession, GameWorld, EventQueue
 
-* **Modularidade e Desacoplamento:** Isolar as responsabilidades em serviços independentes (`AccountService`, `LogService`, etc.) para que as alterações em uma parte do sistema não afetem outras.
-* **Segurança e Robustez:** Utilizar recursos modernos do C++ (Smart Pointers, RAII, `enum class`) para eliminar classes inteiras de bugs, como vazamentos de memória, corrupção de dados e falhas inesperadas.
-* **Performance e Escalabilidade:** Construir a camada de rede com Boost.Asio, utilizando um modelo assíncrono e multithread para lidar com um grande número de conexões simultâneas de forma eficiente.
+Infrastructure
+  DatabasePool, Orm, repositories, LogService, ServerConfig
+```
 
-## Arquitetura e Padrões de Projeto
+As responsabilidades principais são:
 
-A nova arquitetura foi construída utilizando vários Padrões de Design fundamentais para garantir um código limpo e escalável:
+- I/O de rede assíncrono com Boost.Asio;
+- processamento de login em fila própria;
+- validação de sessão, ticket, expiração, rate limit e proteção contra replay;
+- lógica do jogo no `GameWorld`;
+- acesso ao banco por ODBC/SOCI e persistência complementar em arquivos legados.
 
-### 1. Injeção de Dependência (Dependency Injection)
-O padrão mais importante da nossa arquitetura. Em vez de serviços criarem suas próprias dependências (o que gera forte acoplamento), as dependências são "injetadas" de fora. A classe `Application` atua como nosso "Contêiner de Injeção de Dependência", criando todos os serviços e passando-os para os construtores dos serviços que deles precisam.
+## Funcionalidades implementadas
 
-### 2. Strategy
-A lógica de manipulação de pacotes é implementada com o padrão Strategy. O `PacketDispatcher` é o "Contexto" que recebe um pacote. Ele não sabe o que fazer com o pacote, apenas consulta um mapa de "Estratégias" (`IPacketHandler`). Cada `Opcode` é mapeado a uma classe de handler concreta (`LoginHandler`, `PingHandler`, etc.), que contém a lógica específica para aquele pacote. Isso torna a adição de novos pacotes trivial, sem a necessidade de modificar `switch-cases` gigantes.
+- Inicialização e encerramento controlado do servidor;
+- sessões assíncronas de clientes e despacho por opcode;
+- login com validação de hash, banimento, limite por IP e ticket de sessão;
+- seleção de servidor e gateway para o protocolo legado;
+- seleção, criação e exclusão de personagens;
+- migração de personagens legados para o formato atual de `.chr`;
+- suporte no servidor às classes de código `1..11`;
+- inventário, warehouse, movimentação básica de itens e uso/equipamento com `ItemPolicy`;
+- movimentação básica de jogadores com validação de entidade, distância e células próximas;
+- combate básico com validação de atacante, alvo, alcance e dano;
+- carregamento inicial do personagem, posição, atributos, vida, mana, ouro e equipamentos;
+- carregamento do catálogo de itens a partir de `ItemList`.
 
-### 3. RAII (Resource Acquisition Is Initialization)
-Um princípio fundamental do C++ moderno. Todos os recursos (memória, conexões de banco de dados, arquivos, threads) são gerenciados por objetos. A aquisição do recurso acontece no construtor do objeto, e a liberação acontece automaticamente no destrutor. Usamos isso extensivamente com:
-* `std::unique_ptr` para gerenciar o ciclo de vida dos nossos serviços.
-* `std::lock_guard` para garantir que `mutexes` sejam sempre liberados.
-* Nossa classe `PooledConnection` para garantir que as conexões de banco de dados sejam sempre devolvidas ao pool.
+Os handlers atualmente registrados cobrem keep-alive, login, ping, personagens, inventário/warehouse, movimentação e combate moderno. Isso não significa que todos os opcodes declarados no legado estejam implementados.
 
-### 4. Pool de Conexões (Connection Pool)
-Para evitar o alto custo de abrir e fechar conexões com o banco de dados a cada consulta, a classe `DatabasePool` mantém um conjunto de conexões prontas para uso. A lógica é thread-safe, utilizando `std::mutex` e `std::condition_variable` para que múltiplas threads possam "emprestar" e "devolver" conexões de forma segura e eficiente.
+## Classes de personagem
 
-### 5. Asynchronous Design (Proactor)
-A camada de rede é construída com **Boost.Asio**, seguindo o padrão Proactor. As operações de I/O (leitura e escrita de rede) são iniciadas e não bloqueiam a execução. Quando uma operação é concluída, uma função de "callback" (um `lambda`) é chamada para processar o resultado. Isso permite que um pequeno número de threads gerencie milhares de conexões de clientes simultaneamente.
+O código do servidor usa a ordem numérica legada abaixo:
 
-## Estrutura do Projeto
-A solução no Visual Studio está dividida em:
-* **`Core` (Biblioteca Estática - `.lib`):** Contém toda a lógica, serviços, rede e classes do servidor. É o "motor" do projeto.
-* **`GameServer` (Executável - `.exe`):** Contém apenas a função `main()`. Sua única responsabilidade é criar uma instância da classe `Application` (do `Core`) e executá-la.
+| Código | Classe | Corpo padrão | Rosto padrão |
+|---:|---|---|---|
+| 1 | Fighter | `b001.ini` | `tmh-b01.inf` |
+| 2 | Mechanician | `a001.ini` | `tmh-a01.inf` |
+| 3 | Archer | `d001.ini` | `tfh-D01.inf` |
+| 4 | Pikeman | `c001.ini` | `tmh-c01.inf` |
+| 5 | Atalanta | `mb001.ini` | `Mfh-B01.inf` |
+| 6 | Knight | `ma001.ini` | `Mmh-A01.inf` |
+| 7 | Magician | `md001.ini` | `Mmh-D01.inf` |
+| 8 | Priestess | `mc001.ini` | `Mfh-C01.inf` |
+| 9 | Assassin | `e001.ini` | `tfh-e01.inf` |
+| 10 | Shaman | `me001.ini` | `Mmh-e01.inf` |
+| 11 | Martial Artist | `f001.ini` | `tfh-f01.inf` |
 
-## Como Compilar
+Essa tabela é aplicada no `CharacterHandler`, `AccountService` e `LegacyGatewayProtocol`. A migração e a criação também aceitam o intervalo `1..11`.
 
-### Pré-requisitos
-* Visual Studio 2022 (com toolset para C++20).
-* Biblioteca Boost (versão 1.76 ou superior).
+### Limitação do cliente legado
 
-### Passos para Compilação
-1.  Clone este repositório.
-2.  Compile as bibliotecas do Boost necessárias (`system`, `thread`, etc.) executando `bootstrap.bat` e `b2.exe` na pasta do Boost.
-3.  Abra o arquivo `.sln` no Visual Studio.
-4.  Configure as propriedades do projeto para apontar para os diretórios de `include` e `lib` do Boost.
-5.  Compile a solução.
+O `SrcGame` original ainda declara `MAX_JOBNUM = 8` e possui somente oito opções de criação na interface. Portanto, o servidor aceita as classes 9, 10 e 11, mas o cliente original não as torna selecionáveis sem alterações adicionais na interface e nos dados do cliente.
 
-## Próximos Passos (Roadmap)
-- [x] Estabelecer arquitetura base com Injeção de Dependência.
-- [x] Implementar camada de rede assíncrona com Boost.Asio.
-- [x] Implementar o sistema de criptografia de duas camadas.
-- [x] Implementar o Pool de Conexões de Banco de Dados.
-- [x] Implementar o fluxo de login completo.
-- [x] Implementar o fluxo de selecao, criacao e exclusao de personagens.
-- [x] Refatorar e implementar os servicos CharacterService e UserService com logica de jogo.
-- [x] Implementar handlers dos fluxos base: keep-alive, login, ping, personagens, inventario e warehouse.
-- [ ] Implementar handlers avancados do protocolo legado: combate, NPCs, quests, trade, skills e eventos.
-- [ ] Expandir CharacterData com atributos, mapa, posicao, equipamentos e progresso persistidos.
-- [ ] Validar pacotes com o cliente original e completar testes de integracao.
+Na cópia atual de `ZeroPT-Client`, os arquivos de corpo `.ini` usados pelos nomes legados não foram encontrados; há arquivos `.inx` correspondentes para parte dos modelos. O asset `tfh-f01.inf`, usado pela classe 11, também não foi encontrado. É necessário instalar o pacote correto de assets antes de validar a renderização das 11 classes.
+
+## Banco de dados e persistência
+
+O servidor usa SQL Server por ODBC/SOCI. As tabelas iniciais ficam em [`database/init.sql`](database/init.sql). A configuração de conexão fica em `server.ini` e não deve conter credenciais reais versionadas.
+
+A implementação atual combina:
+
+- banco de dados para contas, vínculos de personagens e catálogo de itens;
+- arquivos legados para personagens, inventário e warehouse;
+- `PlayerRepository` para carregar, salvar e migrar esses arquivos.
+
+Essa combinação ainda não é uma transação única. Uma falha entre a gravação no banco e a gravação do arquivo pode exigir reconciliação manual. A estrutura `Item` e parte de `CharacterData` ainda não representam todos os campos do cliente original; quests, skills, pets, timers e progressos avançados continuam pendentes.
+
+## Compilação
+
+Pré-requisitos:
+
+- Visual Studio 2022 com C++20;
+- MSBuild;
+- Boost.Asio e dependências configuradas;
+- ODBC Driver 18 for SQL Server, ou driver compatível configurado;
+- banco de dados criado e inicializado com `database/init.sql`.
+
+No PowerShell, a compilação Debug x64 pode ser feita com:
+
+```powershell
+.\build.ps1 -Configuration Debug -Platform x64
+```
+
+O executável é gerado em `x64\Debug\GameServer.exe`.
+
+## Testes disponíveis
+
+- `tests\ProtocolSmoke.ps1`: fluxo básico de protocolo, login e sessão;
+- `tests\LoadSmoke.ps1`: teste de múltiplas conexões;
+- `tests\StartServer.ps1`: inicialização rápida do servidor;
+- `tests\StartServerAndClientDebug.ps1`: execução com coleta de diagnóstico do cliente.
+
+Ainda não existe um teste de integração completo que valide, com o cliente original, criação das 11 classes, seleção de personagem, inventário, combate, warehouse e encerramento simultâneo de todas as conexões.
+
+## Pendências do roadmap
+
+- [ ] Mapear todos os layouts reais do protocolo legado em `smTRANS_COMMAND`;
+- [ ] Implementar respostas legadas completas para login, servidores e personagens;
+- [ ] Corrigir e validar os pacotes legados de dano `ATTACK_DAMAGE`, `DISP_DAMAGE` e `ATTACK_RESULT`;
+- [ ] Implementar skills e efeitos persistidos;
+- [ ] Implementar NPCs, lojas e drops;
+- [ ] Implementar quests e progresso de quests;
+- [ ] Implementar party, raid, trade e comunicação de clã;
+- [ ] Implementar eventos, coin shop e comunicação entre servidores;
+- [ ] Completar os campos de `Item`, `CharacterData`, warehouse e inventário;
+- [ ] Tornar criação, exclusão e salvamento de personagem transacionais;
+- [ ] Importar e validar os metadados reais de classe, nível e slot de todos os itens;
+- [ ] Adicionar suporte visual das classes 9–11 ao cliente e instalar os assets corretos;
+- [ ] Executar testes end-to-end com o cliente legado e testes de carga prolongados.
+
+## Segurança e operação
+
+Não desative a validação do `LegacyPacketCodec`, checksum, contador, expiração de ticket ou limites de tamanho para contornar incompatibilidades do cliente. Quando um pacote legado ainda não possui layout confirmado, ele deve ser rejeitado ou encaminhado para um handler explicitamente seguro, nunca aceito como autenticação válida.
+
+Antes de executar em produção:
+
+1. altere as credenciais padrão do banco;
+2. valide os assets e o endereço/porta do cliente;
+3. execute os testes de protocolo e carga;
+4. revise os logs e o encerramento controlado do processo;
+5. faça backup dos arquivos `.chr`, inventário e warehouse antes de qualquer migração.

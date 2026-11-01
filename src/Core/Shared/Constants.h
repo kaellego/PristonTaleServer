@@ -110,6 +110,7 @@ namespace GameData
         Priestess = 8,
         Assassin = 9,
         Shaman = 10,
+        MartialArtist = 11,
     };
 
     enum class MonsterType : int

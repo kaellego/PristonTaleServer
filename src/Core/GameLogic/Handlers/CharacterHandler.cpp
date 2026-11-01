@@ -6,11 +6,34 @@
 #include "Shared/datatypes.h"
 #include "Logging/LogService.h"
 #include "GameLogic/GameWorld.h"
+#include <array>
 #include <cstring>
 CharacterHandler::CharacterHandler(CharacterService &service, GameWorld &world, LogService &logService) : m_service(service), m_world(world), m_logService(logService) {}
 
 namespace
 {
+    const char *modelBodyForClass(int characterClass)
+    {
+        static constexpr std::array<const char *, 11> models{
+            "char\\tmABCD\\b001.ini", "char\\tmABCD\\a001.ini", "char\\tmABCD\\d001.ini",
+            "char\\tmABCD\\c001.ini", "char\\tmABCD\\mb001.ini", "char\\tmABCD\\ma001.ini",
+            "char\\tmABCD\\md001.ini", "char\\tmABCD\\mc001.ini", "char\\tmABCD\\e001.ini",
+            "char\\tmABCD\\me001.ini", "char\\tmABCD\\f001.ini"};
+        return characterClass >= 1 && characterClass <= static_cast<int>(models.size())
+            ? models[static_cast<size_t>(characterClass - 1)] : models[0];
+    }
+
+    const char *modelFaceForClass(int characterClass)
+    {
+        static constexpr std::array<const char *, 11> models{
+            "char\\tmABCD\\tmh-b01.inf", "char\\tmABCD\\tmh-a01.inf", "char\\tmABCD\\tfh-D01.inf",
+            "char\\tmABCD\\tmh-c01.inf", "char\\tmABCD\\Mfh-B01.inf", "char\\tmABCD\\Mmh-A01.inf",
+            "char\\tmABCD\\Mmh-D01.inf", "char\\tmABCD\\Mfh-C01.inf", "char\\tmABCD\\tfh-e01.inf",
+            "char\\tmABCD\\Mmh-e01.inf", "char\\tmABCD\\tfh-f01.inf"};
+        return characterClass >= 1 && characterClass <= static_cast<int>(models.size())
+            ? models[static_cast<size_t>(characterClass - 1)] : models[0];
+    }
+
     void sendCharacterList(const std::shared_ptr<ClientSession> &session, CharacterService &service)
     {
         PacketUserInfo response{};
@@ -23,6 +46,10 @@ namespace
             strncpy_s(response.sCharacterData[i].szName, sizeof(response.sCharacterData[i].szName), characters[i].szName, _TRUNCATE);
             response.sCharacterData[i].iLevel = characters[i].iLevel;
             response.sCharacterData[i].JobCode = characters[i].iClass;
+            strncpy_s(response.sCharacterData[i].szModelName, sizeof(response.sCharacterData[i].szModelName),
+                      modelBodyForClass(characters[i].iClass), _TRUNCATE);
+            strncpy_s(response.sCharacterData[i].szModelName2, sizeof(response.sCharacterData[i].szModelName2),
+                      modelFaceForClass(characters[i].iClass), _TRUNCATE);
         }
         const auto *body = reinterpret_cast<const uint8_t *>(&response) + sizeof(PacketHeader);
         session->send(Packet(response.header.opcode, std::vector<uint8_t>(body, body + sizeof(response) - sizeof(PacketHeader))));
@@ -77,5 +104,6 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
         session->send(Packet(static_cast<uint32_t>(Opcodes::LegacyConnected)));
     if (success && static_cast<Opcodes>(packet.header.opcode) != Opcodes::SelectCharacter)
         sendCharacterList(session, m_service);
-    m_logService.info("Operacao de personagem {} para {}: {}", success ? "aceita" : "rejeitada", session->getAccountName(), name);
+    m_logService.info("Operacao de personagem {} para {}: {} (classe {})", success ? "aceita" : "rejeitada",
+                      session->getAccountName(), name, command.LParam);
 }

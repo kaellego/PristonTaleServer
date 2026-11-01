@@ -30,7 +30,7 @@ void PlayerRepository::migrateLegacyCharacters() {
         std::memcpy(upgraded.szName, legacy.szName, sizeof(upgraded.szName));
         upgraded.iLevel = std::max(1, legacy.iLevel);
         upgraded.liEXP = std::max<int64_t>(0, legacy.liEXP);
-        upgraded.iClass = std::clamp(legacy.iClass, 1, 10);
+        upgraded.iClass = std::clamp(legacy.iClass, 1, 11);
         upgraded.iHP = upgraded.iMaxHP = 100;
         upgraded.iMP = upgraded.iMaxMP = 100;
         upgraded.iStrength = upgraded.iSpirit = upgraded.iTalent = upgraded.iAgility = upgraded.iHealth = 1;
