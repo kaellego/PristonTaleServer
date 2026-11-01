@@ -1,0 +1,33 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build PristonTaleServer (Debug x64)",
+      "type": "shell",
+      "command": "${env:ProgramFiles}\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe",
+      "args": ["${workspaceFolder}\\PristonTaleServer.sln", "/m", "/p:Configuration=Debug", "/p:Platform=x64", "/v:minimal"],
+      "problemMatcher": "$msCompile",
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "Banco: iniciar SQL Server",
+      "type": "shell",
+      "command": "powershell -ExecutionPolicy Bypass -File database\\setup-db.ps1",
+      "problemMatcher": []
+    },
+    {
+      "label": "Banco: parar SQL Server",
+      "type": "shell",
+      "command": "docker compose down",
+      "problemMatcher": []
+    },
+    {
+      "label": "Executar GameServer",
+      "type": "shell",
+      "command": "${workspaceFolder}\\x64\\Debug\\GameServer.exe",
+      "options": { "cwd": "${workspaceFolder}\\src\\GameServer" },
+      "dependsOn": "Build PristonTaleServer (Debug x64)",
+      "problemMatcher": []
+    }
+  ]
+}

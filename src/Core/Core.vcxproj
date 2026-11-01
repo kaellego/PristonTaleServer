@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Database\Orm.cpp" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="GameLogic\Services\CharacterService.h" />
     <ClInclude Include="Config\ServerConfig.h" />
@@ -185,6 +186,8 @@
     <ClInclude Include="Utils\picosha2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Database\DatabaseDialect.h" />
+    <ClInclude Include="Database\Orm.h" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="GameLogic\Services\CharacterService.cpp" />
     <ClCompile Include="Config\ServerConfig.cpp" />

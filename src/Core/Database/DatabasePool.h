@@ -7,19 +7,20 @@
 #include <mutex>
 #include <condition_variable>
 #include "Shared/Constants.h" // Para EDatabaseID
+#include "Database/DatabaseDialect.h"
 
 // Forward declarations
 class ServerConfig;
 class LogService;
 class SQLConnection;
-class DatabasePool; // Necess·rio para a declaraÁ„o de PooledConnection
+class DatabasePool; // Necess√°rio para a declara√ß√£o de PooledConnection
 
 enum class EDatabaseID { GameDB, LogDB, UserDB_Primary, Invalid };
 
 /**
  * @class PooledConnection
- * @brief Um invÛlucro RAII para uma SQLConnection emprestada do pool.
- * Garante que a conex„o seja devolvida automaticamente ao pool quando sair de escopo.
+ * @brief Um inv√≥lucro RAII para uma SQLConnection emprestada do pool.
+ * Garante que a conex√£o seja devolvida automaticamente ao pool quando sair de escopo.
  */
 class PooledConnection {
 public:
@@ -28,32 +29,32 @@ public:
         return m_connection;
     }
 
-    // Permite obter o ponteiro bruto, se necess·rio
+    // Permite obter o ponteiro bruto, se necess√°rio
     SQLConnection* get() const {
         return m_connection;
     }
 
     /**
      * @brief Permite que o objeto seja usado em contextos booleanos (ex: if (conn)).
-     * @return true se a conex„o for v·lida (n„o nula), false caso contr·rio.
+     * @return true se a conex√£o for v√°lida (n√£o nula), false caso contr√°rio.
      */
     explicit operator bool() const {
         return m_connection != nullptr;
     }
 
-    // Impede a cÛpia para garantir que a conex„o sÛ seja devolvida uma vez.
+    // Impede a c√≥pia para garantir que a conex√£o s√≥ seja devolvida uma vez.
     PooledConnection(const PooledConnection&) = delete;
     PooledConnection& operator=(const PooledConnection&) = delete;
 
-    // Construtor de movimentaÁ„o para permitir que a funÁ„o getConnection a retorne.
+    // Construtor de movimenta√ß√£o para permitir que a fun√ß√£o getConnection a retorne.
     PooledConnection(PooledConnection&& other) noexcept;
     PooledConnection& operator=(PooledConnection&& other) noexcept;
 
-    // Destrutor que devolve a conex„o ao pool.
+    // Destrutor que devolve a conex√£o ao pool.
     ~PooledConnection();
 
 private:
-    // SÛ o DatabasePool pode criar inst‚ncias desta classe.
+    // S√≥ o DatabasePool pode criar inst√¢ncias desta classe.
     friend class DatabasePool;
     PooledConnection(SQLConnection* connection, DatabasePool& pool);
 
@@ -63,7 +64,7 @@ private:
 
 /**
  * @class DatabasePool
- * @brief Gerencia um pool de conexıes de banco de dados thread-safe.
+ * @brief Gerencia um pool de conex√µes de banco de dados thread-safe.
  */
 class DatabasePool {
 public:
@@ -74,27 +75,29 @@ public:
     DatabasePool& operator=(const DatabasePool&) = delete;
 
     /**
-     * @brief Pega emprestada uma conex„o do pool para um banco de dados especÌfico.
-     * Se o pool estiver vazio, a chamada ir· bloquear atÈ uma conex„o ser devolvida.
+     * @brief Pega emprestada uma conex√£o do pool para um banco de dados espec√≠fico.
+     * Se o pool estiver vazio, a chamada ir√° bloquear at√© uma conex√£o ser devolvida.
      * @param id O identificador do banco de dados.
-     * @return Um objeto RAII PooledConnection que gerencia a conex„o.
+     * @return Um objeto RAII PooledConnection que gerencia a conex√£o.
      */
     PooledConnection getConnection(EDatabaseID id);
+    DatabaseDialect dialect() const noexcept { return m_dialect; }
 
 private:
     friend class PooledConnection;
     /**
-     * @brief Devolve uma conex„o ao pool. Chamado pelo destrutor de PooledConnection.
+     * @brief Devolve uma conex√£o ao pool. Chamado pelo destrutor de PooledConnection.
      * @param connection O ponteiro para a SQLConnection a ser devolvida.
      */
     void returnConnection(SQLConnection* connection);
 
     LogService& m_logService;
+    DatabaseDialect m_dialect = DatabaseDialect::Unknown;
 
-    // Um mapa que armazena um pool (uma pilha) de conexıes para cada ID de banco de dados.
+    // Um mapa que armazena um pool (uma pilha) de conex√µes para cada ID de banco de dados.
     std::map<EDatabaseID, std::stack<std::unique_ptr<SQLConnection>>> m_pools;
 
-    // Mapa para associar uma conex„o devolvida ao seu pool correto.
+    // Mapa para associar uma conex√£o devolvida ao seu pool correto.
     std::map<SQLConnection*, EDatabaseID> m_connectionToPoolMap;
 
     std::mutex m_mutex;

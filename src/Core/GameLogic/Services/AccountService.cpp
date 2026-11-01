@@ -9,10 +9,11 @@
 #include "Shared/datatypes.h"
 #include "Utils/Dice.h"
 
-// TODO: Incluir os headers dos outros serviços quando eles forem criados
+// TODO: Incluir os headers dos outros serviï¿½os quando eles forem criados
 #include "GameLogic/Services/CharacterService.h" 
 #include "GameLogic/Services/UserService.h"
 #include "Logging/LogService.h"
+#include "Database/Orm.h"
 
 #include <iostream>
 #include <utility>
@@ -120,7 +121,7 @@ Log::LoginResult AccountService::validateRequest(const LoginRequest& request, co
 void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int ticket) {
     PacketServerList serverListPacket{};
 
-    // As chamadas agora são válidas
+    // As chamadas agora sï¿½o vï¿½lidas
     const auto& allServers = m_serverConfig.getAllServers();
     const auto& loginServerInfo = m_serverConfig.getThisServerInfo();
 
@@ -160,7 +161,7 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
 void AccountService::onLoginSuccess(std::shared_ptr<ClientSession> session, const SQLUser& sqlUser) {
     m_logService.info("Login bem-sucedido para a conta: {}", sqlUser.szAccountName);
 
-    // CORRIGIDO: Gera o ticket e o passa para a sessão
+    // CORRIGIDO: Gera o ticket e o passa para a sessï¿½o
     int ticket = Dice::RandomI(1, 1000000);
     session->authenticate(sqlUser.iID, sqlUser.szAccountName, ticket);
 
@@ -177,37 +178,14 @@ void AccountService::onLoginFailure(std::shared_ptr<ClientSession> session, Log:
 }
 
 std::optional<SQLUser> AccountService::getSqlUserInfo(const std::string& accountName) {
-    auto db = m_dbPool.getConnection(EDatabaseID::UserDB_Primary);
-    if (!db) {
-        // Esta parte só será executada se, por algum motivo, o pool não puder
-        // fornecer uma conexão válida (o que é improvável no design atual,
-        // mas é uma excelente verificação de segurança).
-        m_logService.error("Nao foi possivel obter uma conexao do pool para UserDB_Primary.");
-        return std::nullopt; // Ou outra forma de tratamento de erro
-    }
     try {
-        db->prepare("SELECT TOP 1 ID, AccountName, Password, Flag, BanStatus, IsMuted FROM UserInfo WHERE AccountName=?");
-        db->bindParameter<std::string>(1, accountName);
-        db->execute();
-        if (db->fetch()) {
-            SQLUser user{};
-            user.iID = db->getData<int>(1).value_or(0);
-            auto dbAccountName = db->getData<std::string>(2).value_or("");
-            strncpy_s(user.szAccountName, dbAccountName.c_str(), sizeof(user.szAccountName));
-            auto dbPassword = db->getData<std::string>(3).value_or("");
-            strncpy_s(user.szPassword, dbPassword.c_str(), sizeof(user.szPassword));
-            user.iFlag = db->getData<int>(4).value_or(0);
-            user.iBanStatus = static_cast<EBanStatus>(db->getData<int>(5).value_or(0));
-            user.bIsMuted = db->getData<bool>(6).value_or(false);
-            return user;
-        }
+        Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
+        return orm.findUser(accountName);
+    } catch (const std::exception& e) {
+        m_logService.error("Erro de ORM ao consultar a conta {}: {}", accountName, e.what());
+        return std::nullopt;
     }
-    catch (const std::exception& e) {
-        m_logService.error("Erro de SQL em getSqlUserInfo para a conta {}: {}", accountName, e.what());
-    }
-    return std::nullopt;
 }
-
 void AccountService::sendLoginResult(std::shared_ptr<ClientSession> session, Log::LoginResult code, const std::string& message) {
     PacketAccountLoginCode responseStruct{};
     responseStruct.header.opcode = static_cast<uint32_t>(Opcodes::AccountLoginCode);
@@ -240,7 +218,7 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         strncpy_s(destChar.szName, charData.szName, sizeof(destChar.szName));
         destChar.iLevel = charData.iLevel;
         destChar.JobCode = charData.iClass;
-        // ... aqui você copiaria os outros campos necessários, como modelo 3D, mapa, etc.
+        // ... aqui vocï¿½ copiaria os outros campos necessï¿½rios, como modelo 3D, mapa, etc.
     }
 
     // Converte e envia o pacote

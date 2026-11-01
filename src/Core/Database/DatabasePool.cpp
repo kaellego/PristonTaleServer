@@ -17,6 +17,10 @@ DatabasePool::DatabasePool(const ServerConfig& config, LogService& logService, s
 {
     m_logService.info("Inicializando pool de conexoes de banco de dados...");
     const auto& dbConfig = config.getDatabaseConfig();
+    m_dialect = detectDatabaseDialect(dbConfig.driver);
+    if (m_dialect == DatabaseDialect::Unknown) {
+        throw std::runtime_error("Driver ODBC nao suportado pelo ORM: " + dbConfig.driver);
+    }
 
     for (const auto& pair : databaseMap) {
         EDatabaseID id = pair.first;
@@ -49,20 +53,20 @@ DatabasePool::DatabasePool(const ServerConfig& config, LogService& logService, s
 
 DatabasePool::~DatabasePool() {
     m_logService.info("Encerrando pool de conexoes...");
-    // A limpeza È autom·tica devido aos unique_ptrs.
+    // A limpeza √© autom√°tica devido aos unique_ptrs.
 }
 
 PooledConnection DatabasePool::getConnection(EDatabaseID id) {
     std::unique_lock<std::mutex> lock(m_mutex);
 
-    // Espera atÈ que o pool para o ID solicitado n„o esteja vazio
+    // Espera at√© que o pool para o ID solicitado n√£o esteja vazio
     m_condition.wait(lock, [this, id] { return !m_pools[id].empty(); });
 
-    // Pega a conex„o do topo da pilha
+    // Pega a conex√£o do topo da pilha
     std::unique_ptr<SQLConnection> connection = std::move(m_pools[id].top());
     m_pools[id].pop();
 
-    // Retorna o invÛlucro RAII
+    // Retorna o inv√≥lucro RAII
     return PooledConnection(connection.release(), *this);
 }
 
@@ -70,18 +74,18 @@ void DatabasePool::returnConnection(SQLConnection* connection) {
     {
         std::lock_guard<std::mutex> lock(m_mutex);
 
-        // Encontra a qual pool esta conex„o pertence
+        // Encontra a qual pool esta conex√£o pertence
         EDatabaseID id = m_connectionToPoolMap[connection];
 
-        // Devolve a conex„o ao pool
+        // Devolve a conex√£o ao pool
         m_pools[id].push(std::unique_ptr<SQLConnection>(connection));
     }
-    // Notifica uma thread que est· esperando que uma conex„o est· disponÌvel
+    // Notifica uma thread que est√° esperando que uma conex√£o est√° dispon√≠vel
     m_condition.notify_one();
 }
 
 
-// --- ImplementaÁ„o do PooledConnection ---
+// --- Implementa√ß√£o do PooledConnection ---
 
 PooledConnection::PooledConnection(SQLConnection* connection, DatabasePool& pool)
     : m_connection(connection), m_pool(&pool) {}
@@ -94,7 +98,7 @@ PooledConnection::~PooledConnection() {
 
 PooledConnection::PooledConnection(PooledConnection&& other) noexcept
     : m_connection(other.m_connection), m_pool(other.m_pool) {
-    // Impede que o destrutor do objeto movido devolva a conex„o
+    // Impede que o destrutor do objeto movido devolva a conex√£o
     other.m_connection = nullptr;
     other.m_pool = nullptr;
 }

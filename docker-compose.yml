@@ -1,0 +1,17 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: pristontale-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: "PristonDev_2026!"
+    ports:
+      - "1433:1433"
+    volumes:
+      - pristontale-sql:/var/opt/mssql
+      - ./database:/docker-entrypoint-initdb.d:ro
+    restart: unless-stopped
+
+volumes:
+  pristontale-sql:

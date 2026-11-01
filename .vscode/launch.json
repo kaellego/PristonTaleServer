@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug GameServer",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\x64\\Debug\\GameServer.exe",
+      "cwd": "${workspaceFolder}\\src\\GameServer",
+      "preLaunchTask": "Build PristonTaleServer (Debug x64)",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    }
+  ]
+}
