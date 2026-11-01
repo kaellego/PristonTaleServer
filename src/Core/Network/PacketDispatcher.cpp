@@ -15,6 +15,7 @@
 #include "GameLogic/Handlers/ItemHandler.h"
 #include "GameLogic/Handlers/MovementHandler.h"
 #include "GameLogic/Handlers/CombatHandler.h"
+#include "GameLogic/Handlers/ChatHandler.h"
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/Services/InventoryService.h"
 #include "GameLogic/GameWorld.h"
@@ -76,6 +77,7 @@ void PacketDispatcher::registerHandlers() {
     auto combatHandler = std::make_shared<CombatHandler>(m_gameWorld, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::AttackData)] = combatHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::AttackData2)] = combatHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::ChatMessage)] = std::make_shared<ChatHandler>(m_gameWorld, m_logService);
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }

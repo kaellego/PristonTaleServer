@@ -180,6 +180,7 @@
     <ClInclude Include="GameLogic\Handlers\ItemHandler.h" />
     <ClInclude Include="GameLogic\Handlers\MovementHandler.h" />
     <ClInclude Include="GameLogic\Handlers\CombatHandler.h" />
+    <ClInclude Include="GameLogic\Handlers\ChatHandler.h" />
     <ClInclude Include="Network\PacketCipher.h" />
     <ClInclude Include="Network\PacketDispatcher.h" />
     <ClInclude Include="Network\LegacyPacketCodec.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="GameLogic\Handlers\ItemHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\MovementHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\CombatHandler.cpp" />
+    <ClCompile Include="GameLogic\Handlers\ChatHandler.cpp" />
     <ClCompile Include="Network\PacketCipher.cpp" />
     <ClCompile Include="Network\PacketDispatcher.cpp" />
     <ClCompile Include="Network\LegacyPacketCodec.cpp" />

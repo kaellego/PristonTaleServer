@@ -27,6 +27,12 @@ enum class Opcode : int32_t {
     FunctionResult = 187,
     ServerInfo = 96,
     EffectLowPet = 136,
+    AttackData = 36,
+    AttackDamage = 212,
+    AttackResult = 214,
+    DispDamage = 215,
+    AttackData2 = 216,
+    ChatMessageLegacy = 22,
 };
 
 #pragma pack(push, 1)
