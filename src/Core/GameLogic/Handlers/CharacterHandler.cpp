@@ -7,7 +7,7 @@
 #include "Logging/LogService.h"
 #include "GameLogic/GameWorld.h"
 #include <cstring>
-CharacterHandler::CharacterHandler(CharacterService &service, GameWorld& world, LogService &logService) : m_service(service), m_world(world), m_logService(logService) {}
+CharacterHandler::CharacterHandler(CharacterService &service, GameWorld &world, LogService &logService) : m_service(service), m_world(world), m_logService(logService) {}
 
 namespace
 {
@@ -67,11 +67,14 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
     strncpy_s(result.szName, sizeof(result.szName), name.c_str(), _TRUNCATE);
     const auto *body = reinterpret_cast<const uint8_t *>(&result) + sizeof(PacketHeader);
     std::vector<uint8_t> responseBody(body, body + sizeof(result) - sizeof(PacketHeader));
-    if (success && static_cast<Opcodes>(packet.header.opcode) == Opcodes::SelectCharacter) {
+    if (success && static_cast<Opcodes>(packet.header.opcode) == Opcodes::SelectCharacter)
+    {
         const auto *characterBytes = reinterpret_cast<const uint8_t *>(&*selectedCharacter);
         responseBody.insert(responseBody.end(), characterBytes, characterBytes + sizeof(CharacterData));
     }
     session->send(Packet(result.header.opcode, std::move(responseBody)));
+    if (success && static_cast<Opcodes>(packet.header.opcode) == Opcodes::SelectCharacter)
+        session->send(Packet(static_cast<uint32_t>(Opcodes::LegacyConnected)));
     if (success && static_cast<Opcodes>(packet.header.opcode) != Opcodes::SelectCharacter)
         sendCharacterList(session, m_service);
     m_logService.info("Operacao de personagem {} para {}: {}", success ? "aceita" : "rejeitada", session->getAccountName(), name);

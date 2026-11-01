@@ -15,14 +15,18 @@ enum class Opcode : int32_t {
     RecordData = 4,
     SetBlacklist = 39,
     PlayerInfo = 62,
+    TransPlayData = 31,
     ProcessInfo = 106,
+    NetworkQuality = 105,
     GetUserInfo = 8,
     SetUserInfo = 9,
     Version = 13,
+    ChatMessage = 22,
     FailConnect = 64,
     CheckIP = 108,
     FunctionResult = 187,
     ServerInfo = 96,
+    EffectLowPet = 136,
 };
 
 #pragma pack(push, 1)

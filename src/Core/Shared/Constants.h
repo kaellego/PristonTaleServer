@@ -8,13 +8,14 @@
 #include <iomanip>
 #include <algorithm>
 
-namespace Constants {
+namespace Constants
+{
 
-    // --- Configurações de Rede e Pacotes ---
+    // --- Configuraï¿½ï¿½es de Rede e Pacotes ---
     constexpr int MAX_PKTSIZ = 0x2000;
     constexpr int PKTHDR_ENCMAX = 0x10;
 
-    // --- Configurações de Jogo ---
+    // --- Configuraï¿½ï¿½es de Jogo ---
     constexpr int MAX_SKILL_ARRAY_DATA = 150;
     constexpr int MAX_COMMON_SKILL_INFO_DATA = 25;
     constexpr int SLOW_SPEED_BASE = 256;
@@ -26,52 +27,53 @@ namespace Constants {
     constexpr int POISON_DURATION_SEC = 30;
     constexpr int POISON_TICKRATE_MS = 1000;
 
-    //See https://docs.google.com/document/d/1V9Ozk5gN-RaBpgflo-8_1zZzde2h5y5np4n8r1t2Q9w/edit
-    // --- Constantes de Distância (Exemplo) ---
-    // Usar static constexpr torna os valores type-safe e com escopo.
+    // See https://docs.google.com/document/d/1V9Ozk5gN-RaBpgflo-8_1zZzde2h5y5np4n8r1t2Q9w/edit
+    //  --- Constantes de Distï¿½ncia (Exemplo) ---
+    //  Usar static constexpr torna os valores type-safe e com escopo.
     static constexpr int DISTANCE_XY_152_meters = 16777216; // (152 meters)  (((64*64)+(64*64)) * 2048)
-    static constexpr int DISTANCE_XY_107_meters = 8388608; // (107 meters)  (((64*64)+(64*64)) * 1024)
-    static constexpr int DISTANCE_XY_76_meters = 4194304; // ( 76 meters)  (((64*64)+(64*64)) *  512)
-    static constexpr int DISTANCE_XY_60_meters = 2621440; // ( 60 meters)  (((64*64)+(64*64)) *  320)
-    static constexpr int DISTANCE_XY_54_meters = 2097152; // ( 54 meters)  (((64*64)+(64*64)) *  256)
-    static constexpr int DISTANCE_XY_47_meters = 1638400; // ( 47 meters)  (((64*64)+(64*64)) *  200) iLureDistance uses this distance
-    static constexpr int DISTANCE_XY_41_meters = 1228800; // ( 41 meters)  (((64*64)+(64*64)) *  150)
-    static constexpr int DISTANCE_XY_38_meters = 1048576; // ( 38 meters)  (((64*64)+(64*64)) *  128)
-    static constexpr int DISTANCE_XY_33_meters = 819200; // ( 33 meters)  (((64*64)+(64*64)) *  100)
-    static constexpr int DISTANCE_XY_30_meters = 640000; // ( 30 meters)
-    static constexpr int DISTANCE_XY_27_meters = 524288; // ( 27 meters)  (((64*64)+(64*64)) *  64)
-    static constexpr int DISTANCE_XY_24_meters = 409600; // ( 24 meters)  (((64*64)+(64*64)) *  50)
-    static constexpr int DISTANCE_XY_20_meters = 291600; // ( 20 meters)
-    static constexpr int DISTANCE_XY_19_meters = 262144; // ( 19 meters)  (((64*64)+(64*64)) *  32)
-    static constexpr int DISTANCE_XY_15_meters = 164025; // ( 15 meters)
-    static constexpr int DISTANCE_XY_13_meters = 131072; // ( 13 meters)  (((64*64)+(64*64)) *  16)
-    static constexpr int DISTANCE_XY_10_meters = 65536; // ( 10 meters)  (((64*64)+(64*64)) *  8)
-    static constexpr int DISTANCE_XY_7_meters = 32768; // ( 7 meters)   (((64*64)+(64*64)) *  4)
-    static constexpr int DISTANCE_XY_5_meters = 16384; // ( 5 meters)   (((64*64)+(64*64)) *  2)
-    static constexpr int DISTANCE_XY_3_meters = 8192; // ( 3 meters)   (((64*64)+(64*64)) *  1)
-    static constexpr int DISTANCE_XY_05 = 4096; // ( 1.5 meters) (((64*64)+(64*64)) *  0.5)
-    static constexpr int DISTANCE_XY_025 = 2048; // ( 0.7 meters) (((64*64)+(64*64)) *  0.25)
+    static constexpr int DISTANCE_XY_107_meters = 8388608;  // (107 meters)  (((64*64)+(64*64)) * 1024)
+    static constexpr int DISTANCE_XY_76_meters = 4194304;   // ( 76 meters)  (((64*64)+(64*64)) *  512)
+    static constexpr int DISTANCE_XY_60_meters = 2621440;   // ( 60 meters)  (((64*64)+(64*64)) *  320)
+    static constexpr int DISTANCE_XY_54_meters = 2097152;   // ( 54 meters)  (((64*64)+(64*64)) *  256)
+    static constexpr int DISTANCE_XY_47_meters = 1638400;   // ( 47 meters)  (((64*64)+(64*64)) *  200) iLureDistance uses this distance
+    static constexpr int DISTANCE_XY_41_meters = 1228800;   // ( 41 meters)  (((64*64)+(64*64)) *  150)
+    static constexpr int DISTANCE_XY_38_meters = 1048576;   // ( 38 meters)  (((64*64)+(64*64)) *  128)
+    static constexpr int DISTANCE_XY_33_meters = 819200;    // ( 33 meters)  (((64*64)+(64*64)) *  100)
+    static constexpr int DISTANCE_XY_30_meters = 640000;    // ( 30 meters)
+    static constexpr int DISTANCE_XY_27_meters = 524288;    // ( 27 meters)  (((64*64)+(64*64)) *  64)
+    static constexpr int DISTANCE_XY_24_meters = 409600;    // ( 24 meters)  (((64*64)+(64*64)) *  50)
+    static constexpr int DISTANCE_XY_20_meters = 291600;    // ( 20 meters)
+    static constexpr int DISTANCE_XY_19_meters = 262144;    // ( 19 meters)  (((64*64)+(64*64)) *  32)
+    static constexpr int DISTANCE_XY_15_meters = 164025;    // ( 15 meters)
+    static constexpr int DISTANCE_XY_13_meters = 131072;    // ( 13 meters)  (((64*64)+(64*64)) *  16)
+    static constexpr int DISTANCE_XY_10_meters = 65536;     // ( 10 meters)  (((64*64)+(64*64)) *  8)
+    static constexpr int DISTANCE_XY_7_meters = 32768;      // ( 7 meters)   (((64*64)+(64*64)) *  4)
+    static constexpr int DISTANCE_XY_5_meters = 16384;      // ( 5 meters)   (((64*64)+(64*64)) *  2)
+    static constexpr int DISTANCE_XY_3_meters = 8192;       // ( 3 meters)   (((64*64)+(64*64)) *  1)
+    static constexpr int DISTANCE_XY_05 = 4096;             // ( 1.5 meters) (((64*64)+(64*64)) *  0.5)
+    static constexpr int DISTANCE_XY_025 = 2048;            // ( 0.7 meters) (((64*64)+(64*64)) *  0.25)
 
     static constexpr int DISTANCE_300 = 90000; //~11m
 
-    static constexpr int DISTANCE_MAX_UNIT_VIEWLIMIT = DISTANCE_XY_107_meters;; //107 meters
+    static constexpr int DISTANCE_MAX_UNIT_VIEWLIMIT = DISTANCE_XY_107_meters;
+    ; // 107 meters
 
-    static constexpr int DISTANCE_MAX_UNIT_OUTOFRANGE = DISTANCE_XY_60_meters;	//60 meters
-    static constexpr int DISTANCE_MAX_PLAYER_BASIC_VIEW = DISTANCE_XY_54_meters;	//54 meters
-    static constexpr int DISTANCE_MAX_UNIT_BASIC_VIEW = DISTANCE_XY_54_meters;	//54 meters
-    static constexpr int DISTANCE_MAX_PARTY = DISTANCE_XY_41_meters;	//41 meters
-    static constexpr int DISTANCE_MAX_CHATRANGE = DISTANCE_XY_41_meters;	//41 meters
-    static constexpr int DISTANCE_MAX_PLAYER_DETAILED_VIEW = DISTANCE_XY_33_meters;	//33 meters
-    static constexpr int DISTANCE_MAX_UNIT_DETAILED_VIEW = DISTANCE_XY_33_meters;	//33 meters
-    static constexpr int DISTANCE_MAX_PLAYER_BASIC_VIEW_RICT = DISTANCE_XY_33_meters;	//33 meters
-    static constexpr int DISTANCE_MAX_SKILL_VISUAL = DISTANCE_XY_24_meters;	//24 meters
-    static constexpr int DISTANCE_MAX_PET_RANGE = DISTANCE_XY_24_meters;	//24 meters
-    static constexpr int DISTANCE_MAX_PLAYER_DETAILED_VIEW_RICT = DISTANCE_XY_24_meters;	//24 meters
-    static constexpr int DISTANCE_MAX_BOSS = DISTANCE_XY_24_meters;	//24 meters
-    static constexpr int DISTANCE_MAX_SKILL_RANGE = DISTANCE_XY_24_meters;	//24 meters
-    static constexpr int DISTANCE_MAX_FROZENSANCTUARY_TREE = DISTANCE_XY_19_meters;	//13 meters
+    static constexpr int DISTANCE_MAX_UNIT_OUTOFRANGE = DISTANCE_XY_60_meters;           // 60 meters
+    static constexpr int DISTANCE_MAX_PLAYER_BASIC_VIEW = DISTANCE_XY_54_meters;         // 54 meters
+    static constexpr int DISTANCE_MAX_UNIT_BASIC_VIEW = DISTANCE_XY_54_meters;           // 54 meters
+    static constexpr int DISTANCE_MAX_PARTY = DISTANCE_XY_41_meters;                     // 41 meters
+    static constexpr int DISTANCE_MAX_CHATRANGE = DISTANCE_XY_41_meters;                 // 41 meters
+    static constexpr int DISTANCE_MAX_PLAYER_DETAILED_VIEW = DISTANCE_XY_33_meters;      // 33 meters
+    static constexpr int DISTANCE_MAX_UNIT_DETAILED_VIEW = DISTANCE_XY_33_meters;        // 33 meters
+    static constexpr int DISTANCE_MAX_PLAYER_BASIC_VIEW_RICT = DISTANCE_XY_33_meters;    // 33 meters
+    static constexpr int DISTANCE_MAX_SKILL_VISUAL = DISTANCE_XY_24_meters;              // 24 meters
+    static constexpr int DISTANCE_MAX_PET_RANGE = DISTANCE_XY_24_meters;                 // 24 meters
+    static constexpr int DISTANCE_MAX_PLAYER_DETAILED_VIEW_RICT = DISTANCE_XY_24_meters; // 24 meters
+    static constexpr int DISTANCE_MAX_BOSS = DISTANCE_XY_24_meters;                      // 24 meters
+    static constexpr int DISTANCE_MAX_SKILL_RANGE = DISTANCE_XY_24_meters;               // 24 meters
+    static constexpr int DISTANCE_MAX_FROZENSANCTUARY_TREE = DISTANCE_XY_19_meters;      // 13 meters
 
-    static constexpr int DISTANCE_MISC = 0x1000; //4096
+    static constexpr int DISTANCE_MISC = 0x1000; // 4096
     static constexpr int DISTANCE_MISC_Y = 300;
     static constexpr int DISTANCE_MISC_Y_EX = 1000;
 
@@ -81,34 +83,64 @@ namespace Constants {
 
 } // namespace Constants
 
-//Este arquivo conterá todos os enums, convertidos para o formato moderno enum class. 
-//Isso os torna mais seguros e fáceis de usar, sem poluir o escopo global.
+// Este arquivo conterï¿½ todos os enums, convertidos para o formato moderno enum class.
+// Isso os torna mais seguros e fï¿½ceis de usar, sem poluir o escopo global.
 
-namespace GameData {
+namespace GameData
+{
 
-    enum class CharacterType : int {
+    enum class CharacterType : int
+    {
         None = 0,
         NPC = 0x00,
         Monster = 0x01,
-        Player = 0x80 //smCHAR_STATE_PLAYER
+        Player = 0x80 // smCHAR_STATE_PLAYER
     };
 
-    enum class CharacterClass : int {
-        None = 0, Fighter = 1, Mechanician = 2, Archer = 3, Pikeman = 4, Atalanta = 5,
-        Knight = 6, Magician = 7, Priestess = 8, Assassin = 9, Shaman = 10,
+    enum class CharacterClass : int
+    {
+        None = 0,
+        Fighter = 1,
+        Mechanician = 2,
+        Archer = 3,
+        Pikeman = 4,
+        Atalanta = 5,
+        Knight = 6,
+        Magician = 7,
+        Priestess = 8,
+        Assassin = 9,
+        Shaman = 10,
     };
 
-    enum class MonsterType : int {
-        Normal = 0x00, Undead = 0x90, Mutant = 0x91, Demon = 0x92,
-        Neutral = 0x94, Summon = 0xA0, Pet = 0xA1
+    enum class MonsterType : int
+    {
+        Normal = 0x00,
+        Undead = 0x90,
+        Mutant = 0x91,
+        Demon = 0x92,
+        Neutral = 0x94,
+        Summon = 0xA0,
+        Pet = 0xA1
     };
 
-    enum class AttackProperty : short {
-        Unknown = -1, Undefined = 0, Organic = 1, Earth = 2, Fire = 3, Ice = 4,
-        Lightning = 5, Poison = 6, Water = 7, Wind = 8, Holy = 9, None = 15
+    enum class AttackProperty : short
+    {
+        Unknown = -1,
+        Undefined = 0,
+        Organic = 1,
+        Earth = 2,
+        Fire = 3,
+        Ice = 4,
+        Lightning = 5,
+        Poison = 6,
+        Water = 7,
+        Wind = 8,
+        Holy = 9,
+        None = 15
     };
 
-    enum class ItemFlag : uint8_t {
+    enum class ItemFlag : uint8_t
+    {
         None = 0,
         ForceAllowDrop = 1 << 0,
         TreasureHuntingMode = 1 << 1,
@@ -146,21 +178,22 @@ namespace GameData {
         Priestess = 1 << 11,
         Shaman = 1 << 12
     };
-    
+
 }
 
 /**
  * @enum class Opcodes
  * @brief Enum fortemente tipado para todos os opcodes de pacotes do servidor.
- * * Substitui o antigo enum global 'PacketsHeader', fornecendo segurança de tipos e escopo.
- * Para usar em uma instrução switch, faça o cast do opcode do pacote:
+ * * Substitui o antigo enum global 'PacketsHeader', fornecendo seguranï¿½a de tipos e escopo.
+ * Para usar em uma instruï¿½ï¿½o switch, faï¿½a o cast do opcode do pacote:
  * switch (static_cast<Opcodes>(packet.header.opcode)) { ... }
  */
-enum class Opcodes : uint32_t {
+enum class Opcodes : uint32_t
+{
     KeepAlive = 0x00,
-    
+
     // =================================================================================
-    // Net Server (Comunicação Inter-servidores)
+    // Net Server (Comunicaï¿½ï¿½o Inter-servidores)
     // =================================================================================
     NetIdentifier = 0x7F000001,
     NetExp = 0x7F000002,
@@ -224,7 +257,7 @@ enum class Opcodes : uint32_t {
     NetMimicEvent = 0x7F000073,
 
     // =================================================================================
-    // Login & Seleção de Personagem
+    // Login & Seleï¿½ï¿½o de Personagem
     // =================================================================================
     LoginUser = 0x48480001,
     AccountLoginCode = 0x48470023,
@@ -239,7 +272,7 @@ enum class Opcodes : uint32_t {
     RecordResult = 0x48470084,
 
     // =================================================================================
-    // Sistema & Conexão
+    // Sistema & ConexÃ£o
     // =================================================================================
     KeySet = 0x4847FFFF,
     Ping = 0x435A0007,
@@ -249,6 +282,8 @@ enum class Opcodes : uint32_t {
     SaveAndClose = 0x435A0011,
     Disconnect = 0x484700E6,
     Reconnect = 0x48478010,
+    LegacyNoop = 0x7F00FFFE,
+    LegacyConnected = 0x7F00FFFD,
     ReconnectLogin = 0x48478011,
     NetworkQuality = 0x484700E0,
     UpdateServerParam = 0x503220F0,
@@ -317,7 +352,7 @@ enum class Opcodes : uint32_t {
     Skill_HolyMind = 0x484700D3,
 
     // =================================================================================
-    // Itens, Inventário & Comércio
+    // Itens, Inventï¿½rio & Comï¿½rcio
     // =================================================================================
     PlayItem = 0x48470050,
     NewItem = 0x48470052,
@@ -433,7 +468,7 @@ enum class Opcodes : uint32_t {
     YahooMotion = 0x50320E10,
 
     // =================================================================================
-    // Anti-Cheat & Proteção
+    // Anti-Cheat & Proteï¿½ï¿½o
     // =================================================================================
     Crash = 0x4847FFFE,
     CrashData = 0x4847FFFD,
@@ -459,18 +494,20 @@ enum class Opcodes : uint32_t {
 /**
  * @brief Converte um valor de opcode para seu nome em string.
  */
-inline std::string getOpcodeName(uint32_t opcode) {
-    // Um mapa estático é inicializado apenas uma vez, de forma eficiente.
+inline std::string getOpcodeName(uint32_t opcode)
+{
+    // Um mapa estï¿½tico ï¿½ inicializado apenas uma vez, de forma eficiente.
     static const std::map<uint32_t, std::string> opcodeMap = {
-        { static_cast<uint32_t>(Opcodes::KeepAlive), "KeepAlive" },
-        { static_cast<uint32_t>(Opcodes::LoginUser), "LoginUser" },
-        { static_cast<uint32_t>(Opcodes::AccountLoginCode), "AccountLoginCode" },
-        { static_cast<uint32_t>(Opcodes::Ping), "Ping" },
+        {static_cast<uint32_t>(Opcodes::KeepAlive), "KeepAlive"},
+        {static_cast<uint32_t>(Opcodes::LoginUser), "LoginUser"},
+        {static_cast<uint32_t>(Opcodes::AccountLoginCode), "AccountLoginCode"},
+        {static_cast<uint32_t>(Opcodes::Ping), "Ping"},
         // Adicione outros mapeamentos aqui
     };
 
     auto it = opcodeMap.find(opcode);
-    if (it != opcodeMap.end()) {
+    if (it != opcodeMap.end())
+    {
         return it->second;
     }
     return "Opcode Desconhecido";
@@ -479,22 +516,26 @@ inline std::string getOpcodeName(uint32_t opcode) {
 /**
  * @brief Formata os primeiros bytes de um buffer para uma string hexadecimal.
  */
-inline std::string formatHex(const std::vector<uint8_t>& data, int count = 16) {
-    if (data.empty()) {
+inline std::string formatHex(const std::vector<uint8_t> &data, int count = 16)
+{
+    if (data.empty())
+    {
         return "[Vazio]";
     }
 
     std::stringstream hex_stream;
     hex_stream << std::hex << std::setfill('0');
 
-    // Com NOMINMAX definido, esta linha não será mais corrompida pela macro.
+    // Com NOMINMAX definido, esta linha nï¿½o serï¿½ mais corrompida pela macro.
     int bytes_to_show = std::min(static_cast<int>(data.size()), count);
 
-    for (int i = 0; i < bytes_to_show; ++i) {
+    for (int i = 0; i < bytes_to_show; ++i)
+    {
         hex_stream << std::setw(2) << static_cast<int>(data[i]) << " ";
     }
 
-    if (data.size() > static_cast<size_t>(count)) {
+    if (data.size() > static_cast<size_t>(count))
+    {
         hex_stream << "...";
     }
     return hex_stream.str();

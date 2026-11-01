@@ -4826,3 +4826,1986 @@
 2026-11-01 18:16:52 [INFO]   Usuario 'test' removido da lista de online. Total: 0
 2026-11-01 18:16:52 [INFO]   Sessao encerrada para um socket ja desconectado.
 2026-11-01 18:16:52 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:20:49 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:20:49 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:20:49 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:20:49 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:20:50 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:20:50 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:20:50 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 18:20:50 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:20:50 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:20:50 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:21:31 [INFO]   Nova sessao iniciada: 127.0.0.1:53761 (local 5055)
+2026-11-01 18:21:31 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:21:31 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:21:31 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:21:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:21:31 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:21:31 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 98168cb917d0...).
+2026-11-01 18:21:31 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:21:31 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:21:31 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:21:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:21:31 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:21:31 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:21:34 [INFO]   Nova sessao iniciada: 127.0.0.1:53767 (local 5056)
+2026-11-01 18:21:34 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:21:34 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:21:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:21:42 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 18:21:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:21:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:21:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:21:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:21:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:21:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:21:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:21:48 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:21:48 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:21:48 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:24:20 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:24:20 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:24:20 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:24:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:24:20 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:24:20 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:24:20 [INFO]   19 manipuladores de pacotes registrados.
+2026-11-01 18:24:20 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:24:20 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:24:20 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:25:03 [INFO]   Nova sessao iniciada: 127.0.0.1:59534 (local 5055)
+2026-11-01 18:25:03 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:25:03 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:25:03 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:25:03 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:25:03 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:25:03 [DEBUG]  Ticket assinado emitido para 'test' (assinatura c61c8937bc1f...).
+2026-11-01 18:25:03 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:25:03 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:25:03 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:25:03 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:25:03 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:25:03 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:25:05 [INFO]   Nova sessao iniciada: 127.0.0.1:59539 (local 5056)
+2026-11-01 18:25:05 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:25:05 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:25:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:25:10 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 18:25:10 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:25:10 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:25:10 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:25:10 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:25:10 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:25:10 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:25:11 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:25:15 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:25:15 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:25:15 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:27:10 [INFO]   Nova sessao iniciada: 127.0.0.1:22699 (local 5055)
+2026-11-01 18:27:10 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:27:10 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:27:10 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:27:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:27:10 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:27:10 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b2f111d99b65...).
+2026-11-01 18:27:10 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:27:10 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:27:10 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:27:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:27:10 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:27:10 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:27:12 [INFO]   Nova sessao iniciada: 127.0.0.1:49310 (local 5056)
+2026-11-01 18:27:12 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:27:12 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:27:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:27:17 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 18:27:17 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:27:17 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:27:17 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:27:17 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:27:17 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:27:17 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:27:18 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:27:22 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:27:22 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:27:22 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:30:17 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:30:17 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:30:17 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:30:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:30:17 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:30:17 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:30:17 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 18:30:17 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:30:17 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:30:17 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:30:40 [INFO]   Nova sessao iniciada: 127.0.0.1:23899 (local 5055)
+2026-11-01 18:30:40 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:30:40 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:30:40 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:30:40 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:30:40 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:30:40 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 5128b95659d8...).
+2026-11-01 18:30:40 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:30:40 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:30:40 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:30:40 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:30:40 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:30:40 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:30:41 [INFO]   Nova sessao iniciada: 127.0.0.1:23902 (local 5056)
+2026-11-01 18:30:41 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:30:41 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:30:47 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:30:47 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 18:30:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:30:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:30:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:30:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:30:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:30:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:30:47 [WARN]   Frame legado nao suportado: size=24, code=105, bytes=24 0 0 0
+2026-11-01 18:30:47 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:30:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:30:47 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:30:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:30:52 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:32:07 [INFO]   Nova sessao iniciada: 127.0.0.1:56852 (local 5055)
+2026-11-01 18:32:07 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:32:07 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:32:07 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:32:07 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:32:07 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:32:07 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 118343cea2bc...).
+2026-11-01 18:32:07 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:32:07 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:32:07 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:32:07 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:32:07 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:32:07 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:32:08 [INFO]   Nova sessao iniciada: 127.0.0.1:56858 (local 5056)
+2026-11-01 18:32:08 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:32:08 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:32:12 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:32:12 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:32:12 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:32:12 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:32:12 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:32:12 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:32:12 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:32:12 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:32:12 [WARN]   Frame legado nao suportado: size=24, code=105, bytes=24 0 0 0
+2026-11-01 18:32:12 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:32:12 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:32:12 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:32:13 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:32:17 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:34:00 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:34:00 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:34:00 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:34:00 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:34:00 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:34:00 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:34:00 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 18:34:00 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:34:00 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:34:00 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:34:38 [INFO]   Nova sessao iniciada: 127.0.0.1:43015 (local 5055)
+2026-11-01 18:34:38 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:34:38 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:34:38 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:34:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:34:38 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:34:38 [DEBUG]  Ticket assinado emitido para 'test' (assinatura ded33386b1df...).
+2026-11-01 18:34:38 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:34:38 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:34:38 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:34:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:34:38 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:34:38 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:34:40 [INFO]   Nova sessao iniciada: 127.0.0.1:43021 (local 5056)
+2026-11-01 18:34:40 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:34:40 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:34:44 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:34:44 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:34:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:34:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:34:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:34:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:34:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:34:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:34:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:34:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:34:45 [WARN]   Frame legado nao suportado: size=284, code=31, bytes=28 1 0 0
+2026-11-01 18:34:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:34:45 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:34:45 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:34:50 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:35:37 [INFO]   Nova sessao iniciada: 127.0.0.1:9891 (local 5055)
+2026-11-01 18:35:37 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:35:37 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:35:37 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:35:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:35:37 [WARN]   Tentativa de login para a conta test com hash de senha incorreto.
+2026-11-01 18:35:37 [WARN]   Login falhou para a conta [test]. Razao: -2
+2026-11-01 18:35:37 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:38:46 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:38:46 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:38:46 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:38:46 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:38:46 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:38:46 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:38:46 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 18:38:46 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:38:46 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:38:46 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:39:02 [INFO]   Nova sessao iniciada: 127.0.0.1:32018 (local 5055)
+2026-11-01 18:39:02 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:39:02 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:39:02 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:39:02 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:39:02 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:39:02 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 6242365f9b9c...).
+2026-11-01 18:39:02 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:39:02 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:39:02 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:39:02 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:39:02 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:39:02 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:39:03 [INFO]   Nova sessao iniciada: 127.0.0.1:32023 (local 5056)
+2026-11-01 18:39:03 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:39:03 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:39:08 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:39:08 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:39:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:39:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:39:08 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:39:08 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:39:08 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:39:08 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:39:09 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:39:14 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:39:14 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:39:14 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:41:42 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:41:42 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:41:42 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:41:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:41:42 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:41:42 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:41:42 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 18:41:42 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:41:42 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:41:42 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:41:57 [INFO]   Nova sessao iniciada: 127.0.0.1:35971 (local 5055)
+2026-11-01 18:41:57 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:41:57 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:41:57 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:41:57 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:41:57 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:41:57 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 3188b48dff2e...).
+2026-11-01 18:41:57 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:41:57 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:41:57 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:41:57 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:41:57 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:41:57 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:41:58 [INFO]   Nova sessao iniciada: 127.0.0.1:35557 (local 5056)
+2026-11-01 18:41:58 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:41:58 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:42:01 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:42:02 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:42:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:42:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:42:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:42:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:42:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:42:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:42:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:42:07 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:42:07 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:42:07 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:43:46 [INFO]   Nova sessao iniciada: 127.0.0.1:42601 (local 5055)
+2026-11-01 18:43:46 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:43:46 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:43:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:43:46 [INFO]   Nova sessao iniciada: 127.0.0.1:42602 (local 5056)
+2026-11-01 18:43:46 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:43:46 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:43:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:43:58 [INFO]   Nova sessao iniciada: 127.0.0.1:42629 (local 5055)
+2026-11-01 18:43:58 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:43:58 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:43:58 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:43:58 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:43:58 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:43:58 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 7e497045ee0b...).
+2026-11-01 18:43:58 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:43:58 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:43:58 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:43:58 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:43:59 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:43:59 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:44:00 [INFO]   Nova sessao iniciada: 127.0.0.1:42632 (local 5056)
+2026-11-01 18:44:00 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:44:00 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:44:04 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:44:04 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:44:04 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:44:04 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:44:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:44:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:44:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:44:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:44:05 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:44:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:44:09 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:44:09 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:47:07 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:47:07 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:47:07 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:47:07 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:47:07 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:47:07 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:47:07 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 18:47:07 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:47:07 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:47:07 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:47:26 [INFO]   Nova sessao iniciada: 127.0.0.1:42985 (local 5055)
+2026-11-01 18:47:26 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:47:26 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:47:26 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:47:26 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:47:26 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:47:26 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 5c316421cee1...).
+2026-11-01 18:47:26 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:47:26 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:47:26 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:47:26 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:47:26 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:47:26 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:47:27 [INFO]   Nova sessao iniciada: 127.0.0.1:42990 (local 5056)
+2026-11-01 18:47:27 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:47:27 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:47:31 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:47:31 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:47:31 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:47:31 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:47:31 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:47:31 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:47:31 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:47:31 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:47:32 [WARN]   Frame legado nao suportado: size=284, code=31, bytes=28 1 0 0
+2026-11-01 18:47:32 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:47:32 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:47:32 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:47:38 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:48:35 [INFO]   Nova sessao iniciada: 127.0.0.1:37081 (local 5055)
+2026-11-01 18:48:35 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:48:35 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:48:35 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:48:35 [INFO]   Nova sessao iniciada: 127.0.0.1:37082 (local 5056)
+2026-11-01 18:48:35 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:48:35 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:48:35 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:48:38 [INFO]   Nova sessao iniciada: 127.0.0.1:37097 (local 5055)
+2026-11-01 18:48:38 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:48:38 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:48:38 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:48:38 [INFO]   Nova sessao iniciada: 127.0.0.1:37098 (local 5056)
+2026-11-01 18:48:38 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:48:38 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:48:38 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:48:52 [INFO]   Nova sessao iniciada: 127.0.0.1:27042 (local 5055)
+2026-11-01 18:48:52 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:48:52 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:48:52 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:48:52 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:48:52 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:48:52 [DEBUG]  Ticket assinado emitido para 'test' (assinatura fec71088e104...).
+2026-11-01 18:48:52 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:48:52 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:48:52 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:48:52 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:48:52 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:48:52 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:48:54 [INFO]   Nova sessao iniciada: 127.0.0.1:10517 (local 5056)
+2026-11-01 18:48:54 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:48:54 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:48:58 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:48:58 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:48:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:48:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:48:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:48:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:48:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:48:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:48:59 [WARN]   Frame legado nao suportado: size=284, code=31, bytes=28 1 0 0
+2026-11-01 18:48:59 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:48:59 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:48:59 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:49:05 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:51:00 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:51:00 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:51:00 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:51:00 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:51:00 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:51:00 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:51:00 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 18:51:00 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:51:00 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:51:00 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:51:15 [INFO]   Nova sessao iniciada: 127.0.0.1:52434 (local 5055)
+2026-11-01 18:51:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:51:15 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:51:15 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:51:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:51:15 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:51:15 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e2de62a28abb...).
+2026-11-01 18:51:15 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:51:15 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:51:15 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:51:15 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:51:15 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:51:15 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:51:16 [INFO]   Nova sessao iniciada: 127.0.0.1:35362 (local 5056)
+2026-11-01 18:51:16 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:51:16 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:51:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:51:21 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:51:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:51:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:51:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:51:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:51:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:51:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:51:22 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:51:22 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:51:23 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:51:23 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:51:24 [WARN]   Frame legado nao suportado: size=268, code=31, bytes=12 1 0 0
+2026-11-01 18:51:24 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:51:24 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:51:30 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:52:33 [INFO]   Nova sessao iniciada: 127.0.0.1:52559 (local 5055)
+2026-11-01 18:52:33 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:52:33 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:52:33 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:52:33 [INFO]   Nova sessao iniciada: 127.0.0.1:52560 (local 5056)
+2026-11-01 18:52:33 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:52:33 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:52:33 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:52:36 [INFO]   Nova sessao iniciada: 127.0.0.1:52567 (local 5055)
+2026-11-01 18:52:36 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:52:36 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:52:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:52:36 [INFO]   Nova sessao iniciada: 127.0.0.1:52568 (local 5056)
+2026-11-01 18:52:36 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:52:36 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:52:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:52:51 [INFO]   Nova sessao iniciada: 127.0.0.1:9340 (local 5055)
+2026-11-01 18:52:51 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:52:51 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:52:51 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:52:51 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:52:51 [WARN]   Tentativa de login para a conta test com hash de senha incorreto.
+2026-11-01 18:52:51 [WARN]   Login falhou para a conta [test]. Razao: -2
+2026-11-01 18:52:51 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:57:36 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 18:57:36 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 18:57:36 [INFO]   Inicializando repositorio de itens...
+2026-11-01 18:57:36 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 18:57:36 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 18:57:36 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 18:57:36 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 18:57:36 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 18:57:36 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 18:57:36 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 18:58:01 [INFO]   Nova sessao iniciada: 127.0.0.1:33162 (local 5055)
+2026-11-01 18:58:01 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:58:01 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:58:01 [WARN]   Login falhou para a conta []. Razao: -1
+2026-11-01 18:58:01 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:58:05 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:58:22 [INFO]   Nova sessao iniciada: 127.0.0.1:10382 (local 5055)
+2026-11-01 18:58:22 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:58:22 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:58:22 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:58:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:58:22 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 18:58:22 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 81ad67bdcca6...).
+2026-11-01 18:58:22 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 18:58:22 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 18:58:22 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 18:58:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:58:22 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 18:58:22 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 18:58:23 [INFO]   Nova sessao iniciada: 127.0.0.1:10385 (local 5056)
+2026-11-01 18:58:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:58:23 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:58:29 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:58:29 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 18:58:29 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:58:29 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:58:29 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:58:29 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:58:29 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:58:29 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 18:58:29 [WARN]   Frame legado nao suportado: size=204, code=31, bytes=204 0 0 0
+2026-11-01 18:58:29 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 18:58:29 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 18:58:29 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:58:34 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:59:13 [INFO]   Nova sessao iniciada: 127.0.0.1:28912 (local 5055)
+2026-11-01 18:59:13 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:59:13 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:59:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:59:13 [INFO]   Nova sessao iniciada: 127.0.0.1:28913 (local 5056)
+2026-11-01 18:59:13 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:59:13 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:59:13 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:59:15 [INFO]   Nova sessao iniciada: 127.0.0.1:28920 (local 5055)
+2026-11-01 18:59:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:59:15 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:59:15 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:59:15 [INFO]   Nova sessao iniciada: 127.0.0.1:28921 (local 5056)
+2026-11-01 18:59:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:59:15 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:59:15 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:59:20 [INFO]   Nova sessao iniciada: 127.0.0.1:12260 (local 5055)
+2026-11-01 18:59:20 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:59:20 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:59:20 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:59:20 [INFO]   Nova sessao iniciada: 127.0.0.1:12261 (local 5056)
+2026-11-01 18:59:20 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:59:20 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 18:59:20 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 18:59:36 [INFO]   Nova sessao iniciada: 127.0.0.1:20408 (local 5055)
+2026-11-01 18:59:36 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 18:59:36 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 18:59:36 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 18:59:36 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 18:59:37 [WARN]   Tentativa de login para a conta test com hash de senha incorreto.
+2026-11-01 18:59:37 [WARN]   Login falhou para a conta [test]. Razao: -2
+2026-11-01 18:59:37 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:01:45 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:01:45 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:01:45 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:01:45 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:01:45 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:01:45 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:01:45 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 19:01:45 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:01:45 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:01:45 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:01:48 [INFO]   Nova sessao iniciada: 127.0.0.1:44942 (local 5055)
+2026-11-01 19:01:48 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:01:48 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:01:48 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:01:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:01:48 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:01:48 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 73504f5950bf...).
+2026-11-01 19:01:48 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:01:48 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:01:48 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:01:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:01:48 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:01:48 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:01:51 [INFO]   Nova sessao iniciada: 127.0.0.1:44956 (local 5056)
+2026-11-01 19:01:51 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:01:51 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:01:56 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:01:56 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 19:01:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:01:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:01:56 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:01:56 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:01:56 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:01:56 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:01:57 [WARN]   Frame legado nao suportado: size=204, code=31, bytes=204 0 0 0
+2026-11-01 19:01:57 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:01:57 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:01:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:03:05 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:03:05 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:03:05 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:03:05 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:03:05 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:03:05 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:03:05 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 19:03:05 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:03:05 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:03:05 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:04:35 [INFO]   Nova sessao iniciada: 127.0.0.1:45419 (local 5055)
+2026-11-01 19:04:35 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:04:35 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:04:35 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:04:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:04:35 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:04:35 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e4c2a55c905a...).
+2026-11-01 19:04:35 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:04:35 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:04:35 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:04:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:04:35 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:04:35 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:04:36 [INFO]   Nova sessao iniciada: 127.0.0.1:45425 (local 5056)
+2026-11-01 19:04:36 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:04:36 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:04:40 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:04:40 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 19:04:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:04:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:04:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:04:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:04:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:04:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:04:41 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:04:41 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:04:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:04:43 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:04:44 [WARN]   Frame legado nao suportado: size=268, code=31, bytes=12 1 0 0
+2026-11-01 19:04:44 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:04:44 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:04:48 [INFO]   Nova sessao iniciada: 127.0.0.1:58683 (local 5055)
+2026-11-01 19:04:48 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:04:48 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:04:48 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:04:48 [INFO]   Nova sessao iniciada: 127.0.0.1:58684 (local 5056)
+2026-11-01 19:04:48 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:04:48 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:04:48 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:04:49 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:04:54 [INFO]   Nova sessao iniciada: 127.0.0.1:58696 (local 5055)
+2026-11-01 19:04:54 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:04:54 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:04:54 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:04:54 [INFO]   Nova sessao iniciada: 127.0.0.1:58697 (local 5056)
+2026-11-01 19:04:54 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:04:54 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:04:54 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:05:01 [INFO]   Nova sessao iniciada: 127.0.0.1:54655 (local 5055)
+2026-11-01 19:05:01 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:05:01 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:05:01 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:05:01 [INFO]   Nova sessao iniciada: 127.0.0.1:54656 (local 5056)
+2026-11-01 19:05:01 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:05:01 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:05:01 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:05:14 [INFO]   Nova sessao iniciada: 127.0.0.1:52528 (local 5055)
+2026-11-01 19:05:14 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:05:14 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:05:14 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:05:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:05:14 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:05:14 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 8f141283f6e8...).
+2026-11-01 19:05:14 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:05:14 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:05:14 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:05:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:05:14 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:05:14 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:05:15 [INFO]   Nova sessao iniciada: 127.0.0.1:4265 (local 5056)
+2026-11-01 19:05:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:05:15 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:05:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:05:20 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 19:05:20 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:05:20 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:05:20 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:05:20 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:05:20 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:05:20 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:05:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:05:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:05:22 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:05:23 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:05:24 [WARN]   Frame legado nao suportado: size=268, code=31, bytes=12 1 0 0
+2026-11-01 19:05:24 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:05:24 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:05:29 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:07:17 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:07:17 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:07:17 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:07:17 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:07:17 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:07:17 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:07:17 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 19:07:17 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:07:17 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:07:17 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:07:30 [INFO]   Nova sessao iniciada: 127.0.0.1:16492 (local 5055)
+2026-11-01 19:07:30 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:07:30 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:07:30 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:07:30 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:07:30 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:07:30 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e6c68799e5c5...).
+2026-11-01 19:07:30 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:07:30 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:07:30 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:07:30 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:07:30 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:07:30 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:07:31 [INFO]   Nova sessao iniciada: 127.0.0.1:43660 (local 5056)
+2026-11-01 19:07:31 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:07:31 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:07:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:07:35 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 19:07:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:07:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:07:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:36 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:07:36 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:37 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:38 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:39 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:07:41 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:07:41 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:07:41 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:08:37 [INFO]   Nova sessao iniciada: 127.0.0.1:13597 (local 5055)
+2026-11-01 19:08:37 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:08:37 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:08:37 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:08:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:37 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:08:37 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e6bd7e03e206...).
+2026-11-01 19:08:37 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:08:37 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:08:37 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:08:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:37 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:08:37 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:08:39 [INFO]   Nova sessao iniciada: 127.0.0.1:46595 (local 5056)
+2026-11-01 19:08:39 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:08:39 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:08:49 [INFO]   Nova sessao iniciada: 127.0.0.1:18829 (local 5055)
+2026-11-01 19:08:49 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:08:49 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:08:49 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:08:49 [INFO]   Nova sessao iniciada: 127.0.0.1:18830 (local 5056)
+2026-11-01 19:08:49 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:08:49 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:08:49 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:08:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:55 [INFO]   Operacao de personagem aceita para test: da
+2026-11-01 19:08:57 [INFO]   Nova sessao iniciada: 127.0.0.1:18850 (local 5055)
+2026-11-01 19:08:57 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:08:57 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:08:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:08:57 [INFO]   Nova sessao iniciada: 127.0.0.1:18851 (local 5056)
+2026-11-01 19:08:57 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:08:57 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:08:57 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:08:58 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:08:58 [INFO]   Operacao de personagem aceita para test: da
+2026-11-01 19:08:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:08:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:08:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:08:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:08:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:08:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:08:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:08:59 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:00 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:00 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:01 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:02 [INFO]   Nova sessao iniciada: 127.0.0.1:18868 (local 5055)
+2026-11-01 19:09:02 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:09:02 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:09:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:09:02 [INFO]   Nova sessao iniciada: 127.0.0.1:18869 (local 5056)
+2026-11-01 19:09:02 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:09:02 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:09:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:09:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:03 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:09:03 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:09:03 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:09:14 [INFO]   Nova sessao iniciada: 127.0.0.1:15171 (local 5055)
+2026-11-01 19:09:14 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:09:14 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:09:14 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:09:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:09:14 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:09:14 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 1860a1409cf9...).
+2026-11-01 19:09:14 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:09:14 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:09:14 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:09:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:09:14 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:09:14 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:09:15 [INFO]   Nova sessao iniciada: 127.0.0.1:15177 (local 5056)
+2026-11-01 19:09:15 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:09:15 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:09:18 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:09:18 [INFO]   Operacao de personagem aceita para test: da
+2026-11-01 19:09:18 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:09:18 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:09:18 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:18 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:18 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:18 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:19 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:09:19 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:20 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:22 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:23 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:09:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:09:23 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:09:23 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:12:38 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:12:38 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:12:38 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:12:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:12:38 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:12:38 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:12:38 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 19:12:38 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:12:38 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:12:38 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:13:02 [INFO]   Nova sessao iniciada: 127.0.0.1:1840 (local 5055)
+2026-11-01 19:13:02 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:13:02 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:13:02 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:13:02 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:13:02 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:13:02 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 68cc2ffe1097...).
+2026-11-01 19:13:02 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:13:02 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:13:02 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:13:02 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:13:02 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:13:02 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:13:04 [INFO]   Nova sessao iniciada: 127.0.0.1:1846 (local 5056)
+2026-11-01 19:13:04 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:13:04 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:13:09 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:13:09 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 19:13:09 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:13:09 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:13:09 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:09 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:09 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:09 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:10 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:13:10 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:10 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:11 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:12 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:13 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:13:14 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:13:14 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:13:14 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:21 [INFO]   Nova sessao iniciada: 127.0.0.1:51179 (local 5055)
+2026-11-01 19:14:21 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:21 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:14:21 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:21 [INFO]   Nova sessao iniciada: 127.0.0.1:51180 (local 5056)
+2026-11-01 19:14:21 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:21 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:14:21 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:22 [INFO]   Nova sessao iniciada: 127.0.0.1:51188 (local 5055)
+2026-11-01 19:14:22 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:22 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:14:22 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:22 [INFO]   Nova sessao iniciada: 127.0.0.1:51189 (local 5056)
+2026-11-01 19:14:22 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:22 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:14:22 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:26 [INFO]   Nova sessao iniciada: 127.0.0.1:24922 (local 5055)
+2026-11-01 19:14:26 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:26 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:14:26 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:26 [INFO]   Nova sessao iniciada: 127.0.0.1:24923 (local 5056)
+2026-11-01 19:14:26 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:26 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:14:26 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:39 [INFO]   Nova sessao iniciada: 127.0.0.1:46573 (local 5055)
+2026-11-01 19:14:39 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:39 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:14:39 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:14:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:14:39 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:14:39 [DEBUG]  Ticket assinado emitido para 'test' (assinatura cf0c360ade50...).
+2026-11-01 19:14:39 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:14:39 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:14:39 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:14:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:14:39 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:14:39 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:14:41 [INFO]   Nova sessao iniciada: 127.0.0.1:46578 (local 5056)
+2026-11-01 19:14:41 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:14:41 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:14:44 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:14:44 [INFO]   Operacao de personagem aceita para test: da
+2026-11-01 19:14:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:14:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:14:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:45 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:14:46 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:48 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:49 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:14:49 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:14:49 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:14:49 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:16:33 [INFO]   Nova sessao iniciada: 127.0.0.1:58898 (local 5055)
+2026-11-01 19:16:33 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:16:33 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:16:33 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:16:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:16:33 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:16:33 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 0d5f68d7b857...).
+2026-11-01 19:16:33 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:16:33 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:16:33 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:16:33 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:16:33 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:16:33 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:16:42 [INFO]   Nova sessao iniciada: 127.0.0.1:58927 (local 5056)
+2026-11-01 19:16:42 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:16:42 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:16:47 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:16:47 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:16:47 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:16:50 [INFO]   Nova sessao iniciada: 127.0.0.1:58953 (local 5055)
+2026-11-01 19:16:50 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:16:50 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:16:50 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:16:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:16:50 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:16:50 [DEBUG]  Ticket assinado emitido para 'test' (assinatura e53ca5996e32...).
+2026-11-01 19:16:50 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:16:50 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:16:50 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:16:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:16:50 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:16:50 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:16:54 [INFO]   Nova sessao iniciada: 127.0.0.1:58977 (local 5056)
+2026-11-01 19:16:54 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:16:54 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:17:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:50 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:50 [INFO]   Operacao de personagem aceita para test: teste
+2026-11-01 19:17:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:55 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:55 [INFO]   Operacao de personagem aceita para test: dasd
+2026-11-01 19:17:58 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:58 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:58 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:59 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:17:59 [INFO]   Operacao de personagem aceita para test: da
+2026-11-01 19:18:05 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:18:05 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:18:05 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:18:28 [INFO]   Nova sessao iniciada: 127.0.0.1:51972 (local 5055)
+2026-11-01 19:18:28 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:18:28 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:18:28 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:18:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:18:28 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:18:28 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 97b4440337a0...).
+2026-11-01 19:18:28 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:18:28 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:18:28 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:18:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:18:28 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:18:28 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:18:29 [INFO]   Nova sessao iniciada: 127.0.0.1:20409 (local 5056)
+2026-11-01 19:18:29 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:18:29 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:18:35 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:18:35 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:18:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:18:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:18:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:18:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:18:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:18:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:18:36 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:18:36 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:18:37 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:18:38 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:18:38 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:18:38 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:18:38 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:20:25 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:20:25 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:20:25 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:20:25 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:20:25 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:20:25 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:20:25 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 19:20:25 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:20:25 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:20:25 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:20:42 [INFO]   Nova sessao iniciada: 127.0.0.1:58332 (local 5055)
+2026-11-01 19:20:42 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:20:42 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:20:42 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:20:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:20:42 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:20:42 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 31346520cccd...).
+2026-11-01 19:20:42 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:20:42 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:20:42 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:20:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:20:42 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:20:42 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:20:43 [INFO]   Nova sessao iniciada: 127.0.0.1:58338 (local 5056)
+2026-11-01 19:20:43 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:20:43 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:20:48 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:20:48 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:20:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:20:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:20:48 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:48 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:48 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:20:49 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:50 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:50 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:51 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:52 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:53 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:54 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:55 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:56 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:57 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:20:59 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:00 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:01 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:03 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:05 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:06 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:07 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:07 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:08 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:09 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:10 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:11 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:12 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:13 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:14 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:15 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:16 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:16 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:17 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:18 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:19 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:20 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:22 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:23 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:24 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:24 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:25 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:26 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:27 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:28 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:29 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:30 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:31 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:32 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:33 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:33 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:34 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:36 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:37 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:38 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:39 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:41 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:41 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:43 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:21:44 [WARN]   Frame legado nao suportado: size=332, code=136, bytes=76 1 0 0
+2026-11-01 19:21:44 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:21:44 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:21:45 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:22:10 [INFO]   Nova sessao iniciada: 127.0.0.1:13560 (local 5055)
+2026-11-01 19:22:10 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:22:10 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:22:10 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:22:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:22:10 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:22:10 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 819140b0c831...).
+2026-11-01 19:22:10 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:22:10 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:22:10 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:22:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:22:10 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:22:10 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:22:11 [INFO]   Nova sessao iniciada: 127.0.0.1:13563 (local 5056)
+2026-11-01 19:22:11 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:22:11 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:22:16 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:22:16 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:22:16 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:22:16 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:22:16 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:16 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:16 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:17 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:22:17 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:18 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:19 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:20 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:21 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:22 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:23 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:24 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:25 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:26 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:27 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:28 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:29 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:29 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:30 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:31 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:32 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:33 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:34 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:36 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:37 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:38 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:38 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:39 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:41 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:43 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:45 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:46 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:48 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:49 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:50 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:51 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:52 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:53 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:54 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:55 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:55 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:56 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:57 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:22:59 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:23:00 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:23:01 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:23:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:23:03 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:23:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:23:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:10 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:24:10 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:24:10 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:24:10 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:24:10 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:24:10 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:24:10 [INFO]   20 manipuladores de pacotes registrados.
+2026-11-01 19:24:10 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:24:10 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:24:10 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:24:28 [INFO]   Nova sessao iniciada: 127.0.0.1:14762 (local 5055)
+2026-11-01 19:24:28 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:24:28 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:24:28 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:24:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:24:28 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:24:28 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 517675996160...).
+2026-11-01 19:24:28 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:24:28 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:24:28 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:24:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:24:28 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:24:28 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:24:29 [INFO]   Nova sessao iniciada: 127.0.0.1:14765 (local 5056)
+2026-11-01 19:24:29 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:24:29 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:24:34 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:24:34 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:24:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:24:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:24:34 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:34 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:34 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:24:34 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:35 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:36 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:37 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:38 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:39 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:40 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:41 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:42 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:43 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:43 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:44 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:45 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:46 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:47 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:48 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:49 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:50 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:51 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:52 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:52 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:53 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:54 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:55 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:56 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:57 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:58 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:24:59 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:00 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:00 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:01 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:02 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:03 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:04 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:05 [WARN]   Pacote nao manipulado recebido do cliente 127.0.0.1. Opcode: 0x7f00fffe
+2026-11-01 19:25:06 [WARN]   Frame legado nao suportado: size=428, code=31, bytes=172 1 0 0
+2026-11-01 19:25:06 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:25:06 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:25:11 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:26:11 [INFO]   Nova sessao iniciada: 127.0.0.1:6310 (local 5055)
+2026-11-01 19:26:11 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:26:11 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:26:11 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:26:11 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:26:11 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:26:11 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 7edf404dcb48...).
+2026-11-01 19:26:11 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:26:11 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:26:11 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:26:11 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:26:11 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:26:11 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:26:12 [INFO]   Nova sessao iniciada: 127.0.0.1:6319 (local 5056)
+2026-11-01 19:26:12 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:26:12 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:26:24 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:26:24 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:26:24 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:26:28 [INFO]   Nova sessao iniciada: 127.0.0.1:18529 (local 5055)
+2026-11-01 19:26:28 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:26:28 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:26:28 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:26:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:26:28 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:26:28 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 232ad26bbafa...).
+2026-11-01 19:26:28 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:26:28 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:26:28 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:26:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:26:28 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:26:28 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:26:30 [INFO]   Nova sessao iniciada: 127.0.0.1:25486 (local 5056)
+2026-11-01 19:26:30 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:26:30 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:27:42 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:27:42 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:27:42 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:27:42 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:27:42 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:27:42 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:27:42 [INFO]   21 manipuladores de pacotes registrados.
+2026-11-01 19:27:42 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:27:42 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:27:42 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:28:03 [INFO]   Nova sessao iniciada: 127.0.0.1:37851 (local 5055)
+2026-11-01 19:28:03 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:28:03 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:28:03 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:28:03 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:03 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:28:03 [DEBUG]  Ticket assinado emitido para 'test' (assinatura f2345eebc94e...).
+2026-11-01 19:28:03 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:28:03 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:28:03 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:28:03 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:03 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:28:03 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:28:05 [INFO]   Nova sessao iniciada: 127.0.0.1:37856 (local 5056)
+2026-11-01 19:28:05 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:28:05 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:28:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:21 [INFO]   Operacao de personagem aceita para test: ue
+2026-11-01 19:28:24 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:28:24 [INFO]   Operacao de personagem aceita para test: ue
+2026-11-01 19:28:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:25 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:25 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:27 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:28 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:29 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:31 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:32 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:33 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:36 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:39 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:41 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:43 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:43 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:46 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:54 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:55 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:57 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:28:59 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:00 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:00 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:01 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:03 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:04 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:05 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:06 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:07 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:09 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:10 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:11 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:12 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:13 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:14 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:15 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:16 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:17 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:29:17 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:29:17 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:29:37 [INFO]   Nova sessao iniciada: 127.0.0.1:59880 (local 5055)
+2026-11-01 19:29:37 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:29:37 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:29:37 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:29:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:29:37 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:29:37 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 77d6ca65c562...).
+2026-11-01 19:29:37 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:29:37 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:29:37 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:29:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:29:37 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:29:37 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:29:39 [INFO]   Nova sessao iniciada: 127.0.0.1:5082 (local 5056)
+2026-11-01 19:29:39 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:29:39 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:29:44 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:29:44 [INFO]   Operacao de personagem aceita para test: ue
+2026-11-01 19:29:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:46 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:54 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:55 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:29:56 [WARN]   Frame legado invalido: 16
+2026-11-01 19:29:56 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:29:56 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:30:01 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:30:28 [INFO]   Nova sessao iniciada: 127.0.0.1:64042 (local 5055)
+2026-11-01 19:30:28 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:30:28 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:30:28 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:30:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:30:28 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:30:28 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 142bd95ba2e9...).
+2026-11-01 19:30:28 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:30:28 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:30:28 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:30:28 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:30:28 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:30:28 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:30:29 [INFO]   Nova sessao iniciada: 127.0.0.1:64047 (local 5056)
+2026-11-01 19:30:29 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:30:29 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:30:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:30:37 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:30:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:39 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:41 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:43 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:46 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:54 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:55 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:57 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:30:59 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:00 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:01 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:03 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:04 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:05 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:06 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:07 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:31:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:06 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:32:06 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:32:06 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:32:06 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:32:06 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:32:06 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:32:06 [INFO]   21 manipuladores de pacotes registrados.
+2026-11-01 19:32:06 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:32:06 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:32:06 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:32:19 [INFO]   Nova sessao iniciada: 127.0.0.1:13941 (local 5055)
+2026-11-01 19:32:19 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:32:19 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:32:19 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:32:19 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:32:19 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:32:19 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 3ec88198fe90...).
+2026-11-01 19:32:19 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:32:19 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:32:19 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:32:19 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:32:19 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:32:19 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:32:21 [INFO]   Nova sessao iniciada: 127.0.0.1:65156 (local 5056)
+2026-11-01 19:32:21 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:32:21 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:32:26 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:32:26 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:32:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:27 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:27 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:28 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:29 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:32:31 [WARN]   Frame legado invalido: 18
+2026-11-01 19:32:31 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:32:31 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:32:36 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:34:38 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:34:38 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:34:38 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:34:38 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:34:38 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:34:38 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:34:38 [INFO]   21 manipuladores de pacotes registrados.
+2026-11-01 19:34:38 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:34:38 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:34:38 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:34:39 [INFO]   Nova sessao iniciada: 127.0.0.1:40076 (local 5055)
+2026-11-01 19:34:39 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:34:39 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:34:39 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:34:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:34:39 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:34:39 [DEBUG]  Ticket assinado emitido para 'test' (assinatura c29489f8b923...).
+2026-11-01 19:34:39 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:34:39 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:34:39 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:34:39 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:34:39 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:34:39 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:34:43 [INFO]   Nova sessao iniciada: 127.0.0.1:40094 (local 5056)
+2026-11-01 19:34:43 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:34:43 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:34:49 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:34:49 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:34:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:34:51 [WARN]   Frame legado nao suportado: size=18, code=22, bytes=18 0 0 0
+2026-11-01 19:34:51 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:34:51 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:34:55 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:36:41 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:36:41 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:36:41 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:36:41 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:36:41 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:36:41 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:36:41 [INFO]   21 manipuladores de pacotes registrados.
+2026-11-01 19:36:41 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:36:41 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:36:41 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:36:44 [INFO]   Nova sessao iniciada: 127.0.0.1:20027 (local 5055)
+2026-11-01 19:36:44 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:36:44 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:36:44 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:36:44 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:36:44 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:36:44 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b96fc8e905ab...).
+2026-11-01 19:36:44 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:36:44 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:36:44 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:36:44 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:36:44 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:36:44 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:36:52 [INFO]   Nova sessao iniciada: 127.0.0.1:20043 (local 5056)
+2026-11-01 19:36:52 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:36:52 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:38:02 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:38:02 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:38:02 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:38:02 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:38:02 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:38:02 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:38:02 [INFO]   21 manipuladores de pacotes registrados.
+2026-11-01 19:38:02 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:38:02 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:38:02 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:38:14 [INFO]   Nova sessao iniciada: 127.0.0.1:2909 (local 5055)
+2026-11-01 19:38:14 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:38:14 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:38:14 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:38:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:38:14 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:38:14 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 853507795245...).
+2026-11-01 19:38:14 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:38:14 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:38:14 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:38:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:38:14 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:38:14 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:38:17 [INFO]   Nova sessao iniciada: 127.0.0.1:60853 (local 5056)
+2026-11-01 19:38:17 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:38:17 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:38:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:38:21 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:38:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:22 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:22 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:23 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:25 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:38:25 [WARN]   Frame legado nao suportado: size=18, code=22, bytes=18 0 0 0
+2026-11-01 19:38:25 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:38:25 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:38:30 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:40:21 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:40:21 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:40:21 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:40:21 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:40:21 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:40:21 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:40:21 [INFO]   21 manipuladores de pacotes registrados.
+2026-11-01 19:40:21 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:40:21 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:40:21 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:40:24 [INFO]   Nova sessao iniciada: 127.0.0.1:55012 (local 5055)
+2026-11-01 19:40:24 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:40:24 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:40:24 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:40:24 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:40:24 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:40:24 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 5e61497c90ca...).
+2026-11-01 19:40:24 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:40:24 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:40:24 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:40:24 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:40:24 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:40:24 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:40:25 [INFO]   Nova sessao iniciada: 127.0.0.1:55017 (local 5056)
+2026-11-01 19:40:25 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:40:25 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:40:30 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:40:30 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:40:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:31 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:31 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:32 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:33 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:36 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:39 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:41 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:43 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:46 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:54 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:55 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:40:57 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:41:28 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:44:20 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 19:44:20 [INFO]   ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: 5.
+2026-11-01 19:44:20 [INFO]   Inicializando repositorio de itens...
+2026-11-01 19:44:20 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='GameDB'
+2026-11-01 19:44:20 [INFO]   737 definicoes de itens carregadas.
+2026-11-01 19:44:20 [INFO]   Registrando manipuladores de pacotes...
+2026-11-01 19:44:20 [INFO]   21 manipuladores de pacotes registrados.
+2026-11-01 19:44:20 [INFO]   Todos os servicos foram construidos com sucesso.
+2026-11-01 19:44:20 [INFO]   Iniciando 32 threads de rede...
+2026-11-01 19:44:20 [INFO]   Servidor de rede em execucao. Iniciando loop principal do jogo.
+2026-11-01 19:44:22 [INFO]   Nova sessao iniciada: 127.0.0.1:53070 (local 5055)
+2026-11-01 19:44:22 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:44:22 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:44:22 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:44:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:44:22 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:44:22 [DEBUG]  Ticket assinado emitido para 'test' (assinatura b16e1a4f7623...).
+2026-11-01 19:44:22 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:44:22 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:44:22 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:44:22 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:44:23 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:44:23 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:44:23 [INFO]   Nova sessao iniciada: 127.0.0.1:53075 (local 5056)
+2026-11-01 19:44:23 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:44:23 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:44:30 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:44:30 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:44:30 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:45:52 [INFO]   Nova sessao iniciada: 127.0.0.1:64923 (local 5055)
+2026-11-01 19:45:52 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:45:52 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:45:52 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:45:52 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:45:52 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:45:52 [DEBUG]  Ticket assinado emitido para 'test' (assinatura f96780787659...).
+2026-11-01 19:45:52 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:45:52 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:45:52 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:45:52 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:45:52 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:45:52 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:45:55 [INFO]   Nova sessao iniciada: 127.0.0.1:64931 (local 5056)
+2026-11-01 19:45:55 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:45:55 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:46:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:46:02 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:46:02 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:46:46 [INFO]   Nova sessao iniciada: 127.0.0.1:30991 (local 5055)
+2026-11-01 19:46:46 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:46:46 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:46:46 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:46:46 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:46:47 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:46:47 [DEBUG]  Ticket assinado emitido para 'test' (assinatura fac3fc8c7a3b...).
+2026-11-01 19:46:47 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:46:47 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:46:47 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:46:47 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:46:47 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:46:47 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:46:48 [INFO]   Nova sessao iniciada: 127.0.0.1:30995 (local 5056)
+2026-11-01 19:46:48 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:46:48 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:46:51 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:46:51 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:46:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:54 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:55 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:57 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:46:59 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:00 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:00 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:01 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:03 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:04 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:05 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:06 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:07 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:09 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:09 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:10 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:11 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:12 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:13 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:14 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:15 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:16 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:16 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:17 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:18 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:19 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:20 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:22 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:23 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:25 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:25 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:27 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:28 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:29 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:31 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:32 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:33 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:36 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:39 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:41 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:43 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:46 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:54 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:55 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:57 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:58 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:59 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:47:59 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:00 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:01 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:02 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:03 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:04 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:05 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:06 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:07 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:08 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:09 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:10 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:11 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:12 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:13 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:14 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:15 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:16 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:17 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:17 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:18 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:19 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:20 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:21 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:22 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:23 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:24 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:25 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:25 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:26 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:27 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:28 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:29 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:30 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:31 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:32 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:33 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:34 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:35 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:36 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:39 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:41 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:43 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:46 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:48:54 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:48:54 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:48:54 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:49:14 [INFO]   Nova sessao iniciada: 127.0.0.1:31910 (local 5055)
+2026-11-01 19:49:14 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:49:14 [INFO]   Enviando confirmacao legada VERSION para LoginServer
+2026-11-01 19:49:14 [DEBUG]  Processando tentativa de login para a conta: 'test'
+2026-11-01 19:49:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:49:14 [INFO]   Login bem-sucedido para a conta: test
+2026-11-01 19:49:14 [DEBUG]  Ticket assinado emitido para 'test' (assinatura 1f795aa0fbc5...).
+2026-11-01 19:49:14 [INFO]   Usuario 'test' (ID: 1) adicionado a lista de online. Total: 1
+2026-11-01 19:49:14 [PACKET] -> Pacote Enviado: AccountLoginCode (Opcode: 0x48470023)
+2026-11-01 19:49:14 [INFO]   Enviando lista de personagens para a conta test
+2026-11-01 19:49:14 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:49:14 [PACKET] -> Pacote Enviado: UserInfo (Opcode: 0x48470086)
+2026-11-01 19:49:14 [PACKET] -> Pacote Enviado: ServerList (Opcode: 0x484700c0)
+2026-11-01 19:49:19 [INFO]   Nova sessao iniciada: 127.0.0.1:40169 (local 5056)
+2026-11-01 19:49:19 [DEBUG]  Sessao::start() <-> Aguardando frame legado
+2026-11-01 19:49:19 [INFO]   Enviando confirmacao legada VERSION para GameServer
+2026-11-01 19:49:37 [DEBUG]  SOCI ODBC driver='ODBC Driver 18 for SQL Server' host='127.0.0.1' database='UserDB'
+2026-11-01 19:49:37 [INFO]   Operacao de personagem aceita para test: sacer
+2026-11-01 19:49:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:37 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:39 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:39 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:40 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:41 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:42 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:43 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:44 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:45 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:46 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:46 [WARN]   Frame legado nao suportado: size=1800, code=4, bytes=8 7 0 0
+2026-11-01 19:49:46 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 19:49:47 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:48 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:49 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:50 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:51 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:52 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:53 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:54 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:55 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:56 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:57 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
+2026-11-01 19:49:57 [INFO]   Usuario 'test' removido da lista de online. Total: 0
+2026-11-01 19:49:57 [INFO]   Sessao encerrada para um socket ja desconectado.

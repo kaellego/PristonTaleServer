@@ -55,7 +55,7 @@ void ClientSession::do_read_legacy_length() {
             if (ec) { close(); return; }
             uint32_t length = 0;
             std::memcpy(&length, m_legacyLengthBuffer.data(), sizeof(length));
-            if (length < sizeof(LegacyGateway::Command) || length > LegacyPacketCodec::MaxFrameSize) {
+            if (length < sizeof(int32_t) * 2 || length > LegacyPacketCodec::MaxFrameSize) {
                 m_logService.warn("Frame legado invalido: {}", length);
                 close();
                 return;
