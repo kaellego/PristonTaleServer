@@ -376,21 +376,21 @@ namespace LegacyGateway
         {
             static constexpr uint32_t codes[] = {
                 0,
-                1u, // Fighter
-                2u, // Mechanician
-                3u, // Archer
-                4u, // Pikeman
-                6u, // Knight
-                5u, // Atalanta
-                8u, // Priestess
-                7u, // Magician
-                9u, // Assassin (extended clients)
+                1u,  // Fighter
+                2u,  // Mechanician
+                3u,  // Archer
+                4u,  // Pikeman
+                6u,  // Knight
+                5u,  // Atalanta
+                8u,  // Priestess
+                7u,  // Magician
+                9u,  // Assassin (extended clients)
                 10u, // Shaman (extended clients)
                 11u  // Martial Artist (extended clients)
             };
             return characterClass >= 1 && characterClass <= 11
-                ? codes[static_cast<size_t>(characterClass)]
-                : codes[1];
+                       ? codes[static_cast<size_t>(characterClass)]
+                       : codes[1];
         }
 
         struct LegacyClassRules
@@ -406,15 +406,15 @@ namespace LegacyGateway
         {
             static constexpr LegacyClassRules rules[12]{
                 {},
-                {70, 1, 3, 1, {1, 2}}, // Fighter
-                {65, 2, 2, 2, {2, 2}}, // Mechanician
-                {80, 3, 3, 2, {3, 1}}, // Archer
-                {75, 1, 3, 1, {1, 2}}, // Pikeman
+                {70, 1, 3, 1, {1, 2}},  // Fighter
+                {65, 2, 2, 2, {2, 2}},  // Mechanician
+                {80, 3, 3, 2, {3, 1}},  // Archer
+                {75, 1, 3, 1, {1, 2}},  // Pikeman
                 {190, 2, 2, 2, {1, 2}}, // Knight
                 {200, 2, 2, 2, {2, 1}}, // Atalanta
                 {200, 4, 1, 3, {3, 2}}, // Priestess
                 {190, 5, 1, 3, {3, 2}}, // Magician
-                {80, 3, 3, 2, {3, 1}}, // Assassin
+                {80, 3, 3, 2, {3, 1}},  // Assassin
                 {190, 5, 1, 3, {3, 2}}, // Shaman
                 {70, 1, 3, 1, {1, 2}}   // Martial Artist
             };
@@ -425,18 +425,30 @@ namespace LegacyGateway
         {
             switch (legacyJobCode)
             {
-            case 1: return 1; // Fighter
-            case 2: return 2; // Mechanician
-            case 3: return 3; // Archer
-            case 4: return 4; // Pikeman
-            case 5: return 6; // Atalanta
-            case 6: return 5; // Knight
-            case 7: return 8; // Magician
-            case 8: return 7; // Priestess
-            case 9: return 9; // Assassin
-            case 10: return 10; // Shaman
-            case 11: return 11; // Martial Artist
-            default: return 0;
+            case 1:
+                return 1; // Fighter
+            case 2:
+                return 2; // Mechanician
+            case 3:
+                return 3; // Archer
+            case 4:
+                return 4; // Pikeman
+            case 5:
+                return 6; // Atalanta
+            case 6:
+                return 5; // Knight
+            case 7:
+                return 8; // Magician
+            case 8:
+                return 7; // Priestess
+            case 9:
+                return 9; // Assassin
+            case 10:
+                return 10; // Shaman
+            case 11:
+                return 11; // Martial Artist
+            default:
+                return 0;
             }
         }
 
@@ -598,7 +610,7 @@ namespace LegacyGateway
                 PacketNpcClick click{};
                 click.objectSerial = static_cast<uint32_t>(command.wParam);
                 click.npcId = 0; // Resolve by serial; the legacy request has no NPC id.
-                const auto* body = reinterpret_cast<const uint8_t*>(&click);
+                const auto *body = reinterpret_cast<const uint8_t *>(&click);
                 return Packet(static_cast<uint32_t>(Opcodes::NpcUnitClick),
                               std::vector<uint8_t>(body, body + sizeof(click)));
             }
@@ -665,6 +677,23 @@ namespace LegacyGateway
                 return std::nullopt;
             modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
             break;
+        case Opcode::PartyChatMessage:
+            // OPCODE_PARTY_CHATMSG is a legacy control frame. Its exact text
+            // payload varies between client builds; validate the declared
+            // frame and discard it until party chat has a domain handler.
+            if (command.size != static_cast<int32_t>(payload.size()) ||
+                command.size < static_cast<int32_t>(sizeof(Command)) ||
+                command.size > 512)
+                return std::nullopt;
+            modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
+            break;
+        case Opcode::CommandUser:
+            // smTRANS_COMMAND_EX: only the fixed 40-byte layout reaches the
+            // GM service; authorization and command validation happen there.
+            if (command.size != 40 || payload.size() != 40)
+                return std::nullopt;
+            return Packet(static_cast<uint32_t>(Opcodes::NetGameMasterCommand),
+                          std::vector<uint8_t>(payload.begin() + sizeof(Command), payload.end()));
         case Opcode::GetUserInfo:
             return loginToModernPacket(payload);
         case Opcode::CheckIP:
@@ -701,7 +730,7 @@ namespace LegacyGateway
                 if (itemCode == 0 || request.itemCount <= 0 || request.itemCount > 2000000000)
                     return std::nullopt;
                 PacketNpcShopRequest modern{static_cast<int32_t>(itemCode), request.itemCount, 0};
-                const auto* bytes = reinterpret_cast<const uint8_t*>(&modern);
+                const auto *bytes = reinterpret_cast<const uint8_t *>(&modern);
                 return Packet(static_cast<uint32_t>(Opcodes::BuyItemNPCShop),
                               std::vector<uint8_t>(bytes, bytes + sizeof(modern)));
             }
@@ -716,7 +745,7 @@ namespace LegacyGateway
                 if (itemCode == 0)
                     return std::nullopt;
                 PacketNpcShopRequest modern{static_cast<int32_t>(itemCode), 1, 0};
-                const auto* bytes = reinterpret_cast<const uint8_t*>(&modern);
+                const auto *bytes = reinterpret_cast<const uint8_t *>(&modern);
                 return Packet(static_cast<uint32_t>(Opcodes::SellItemNPCShop),
                               std::vector<uint8_t>(bytes, bytes + sizeof(modern)));
             }
@@ -746,15 +775,15 @@ namespace LegacyGateway
                 {
                     if (command.size != static_cast<int32_t>(payload.size()))
                         return std::nullopt;
-                LegacySkillAttackData2 skill{};
-                std::memcpy(&skill, payload.data(), std::min(payload.size(), sizeof(skill)));
-                const size_t expected = offsetof(LegacySkillAttackData2, targetSerials) +
-                                        static_cast<size_t>(std::max(0, skill.targetCount)) * sizeof(uint32_t);
-                if (skill.destObjectSerial == 0 || skill.targetCount < 0 || skill.targetCount > 42 ||
-                    skill.attackSize < 0 || expected != payload.size())
-                    return std::nullopt;
-                modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
-                break;
+                    LegacySkillAttackData2 skill{};
+                    std::memcpy(&skill, payload.data(), std::min(payload.size(), sizeof(skill)));
+                    const size_t expected = offsetof(LegacySkillAttackData2, targetSerials) +
+                                            static_cast<size_t>(std::max(0, skill.targetCount)) * sizeof(uint32_t);
+                    if (skill.destObjectSerial == 0 || skill.targetCount < 0 || skill.targetCount > 42 ||
+                        skill.attackSize < 0 || expected != payload.size())
+                        return std::nullopt;
+                    modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
+                    break;
                 }
             }
             if (command.code == static_cast<int32_t>(Opcode::AttackData) &&
@@ -895,7 +924,7 @@ namespace LegacyGateway
                 return std::nullopt;
             int32_t result = 0;
             std::memcpy(&result, packet.body.data() + sizeof(uint32_t), sizeof(result));
-            if (result == 1) // LoginResult::Success
+            if (result == 1)                   // LoginResult::Success
                 return std::vector<uint8_t>{}; // Success is followed by server/character lists.
             Command command{sizeof(Command), static_cast<int32_t>(Opcode::FailConnect), 0, result, 0, 1};
             append(&command, sizeof(command));
@@ -937,7 +966,8 @@ namespace LegacyGateway
                 // The legacy client opens a new socket to the selected game
                 // server. Preserve the configured endpoint instead of sending
                 // it back to the login port.
-                const auto validPort = [](int32_t port) -> uint32_t {
+                const auto validPort = [](int32_t port) -> uint32_t
+                {
                     return port > 0 && port <= 65535 ? static_cast<uint32_t>(port) : 5056u;
                 };
                 legacy.servers[i].port1 = validPort(modern.sServers[i].iaPort[0]);
@@ -992,12 +1022,14 @@ namespace LegacyGateway
         }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::NpcData))
         {
-            if (packet.body.size() != sizeof(PacketNpcData)) return std::nullopt;
+            if (packet.body.size() != sizeof(PacketNpcData))
+                return std::nullopt;
             PacketNpcData npc{};
             std::memcpy(&npc, packet.body.data(), sizeof(npc));
             if (npc.npcId <= 0 || npc.objectSerial == 0 || npc.enabled == 0 ||
                 !isSafeString(npc.szName, sizeof(npc.szName)) ||
-                !isSafeString(npc.szModelName, sizeof(npc.szModelName))) return std::nullopt;
+                !isSafeString(npc.szModelName, sizeof(npc.szModelName)))
+                return std::nullopt;
 
             // O cliente legado só aloca o NPC ao receber PLAYDATAGROUP. O
             // PLAYERINFO sozinho é descartado porque ainda não existe um
@@ -1048,10 +1080,12 @@ namespace LegacyGateway
         }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::OpenNPC))
         {
-            if (packet.body.size() != sizeof(PacketNpcOpen)) return std::nullopt;
+            if (packet.body.size() != sizeof(PacketNpcOpen))
+                return std::nullopt;
             PacketNpcOpen opened{};
             std::memcpy(&opened, packet.body.data(), sizeof(opened));
-            if (opened.npcId <= 0 || opened.objectSerial == 0 || opened.mapId < 0) return std::nullopt;
+            if (opened.npcId <= 0 || opened.objectSerial == 0 || opened.mapId < 0)
+                return std::nullopt;
             // There is no confirmed generic legacy UI frame for this response.
             // The validated click is accepted, but no guessed frame is emitted.
             return std::vector<uint8_t>{};
@@ -1095,12 +1129,15 @@ namespace LegacyGateway
             std::memcpy(frame.data(), &frameSize, sizeof(frameSize));
             std::memcpy(frame.data() + sizeof(frameSize), &legacyCode, sizeof(legacyCode));
             std::memcpy(frame.data() + sizeof(int32_t) * 2, packet.body.data(), packet.body.size());
-            if (secondLayout) {
+            if (secondLayout)
+            {
                 LegacyAttackData2 attack{};
                 std::memcpy(&attack, frame.data(), sizeof(attack));
                 if (attack.destObjectSerial == 0 || attack.targetObjectSerial == 0 || attack.attackSize < 0)
                     return std::nullopt;
-            } else {
+            }
+            else
+            {
                 LegacyAttackData attack{};
                 std::memcpy(&attack, frame.data(), sizeof(attack));
                 if (attack.destObjectSerial == 0 || attack.targetObjectSerial == 0 || attack.attackSize < 0)
@@ -1126,7 +1163,8 @@ namespace LegacyGateway
             if (packet.body.size() != sizeof(uint32_t) + 256 ||
                 !isSafeString(reinterpret_cast<const char *>(packet.body.data() + sizeof(uint32_t)), 256))
                 return std::nullopt;
-            struct LegacyChatMessage {
+            struct LegacyChatMessage
+            {
                 int32_t size, code;
                 uint32_t ip, objectSerial;
                 char message[256];
@@ -1139,8 +1177,12 @@ namespace LegacyGateway
         }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::RegenChar))
         {
-            if (packet.body.size() != sizeof(int32_t) * 4) return std::nullopt;
-            struct LegacyRegen { int32_t length, header, unk, amount, unk3, unk4; } legacy{};
+            if (packet.body.size() != sizeof(int32_t) * 4)
+                return std::nullopt;
+            struct LegacyRegen
+            {
+                int32_t length, header, unk, amount, unk3, unk4;
+            } legacy{};
             legacy.length = sizeof(legacy);
             legacy.header = static_cast<int32_t>(Opcodes::RegenChar);
             std::memcpy(&legacy.unk, packet.body.data(), sizeof(int32_t) * 4);

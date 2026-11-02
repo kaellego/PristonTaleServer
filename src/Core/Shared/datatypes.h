@@ -578,6 +578,10 @@ struct Item {
     float       fHPRegen = 0.0f;
     float       fMPRegen = 0.0f;
     float       fSPRegen = 0.0f;
+    int32_t     itemType = 0, itemClass = 0;
+    int32_t     requiredLevel = 1;
+    int32_t     damageMin = 0, damageMax = 0, defense = 0, absorb = 0;
+    int32_t     durability = 0, maxDurability = 0;
     // ... preencha com todos os outros membros exatos do item
 };
 
@@ -595,6 +599,10 @@ struct CharacterData {
     float       fHPRegenBonus, fMPRegenBonus, fSPRegenBonus;
     int32_t     iStrength, iSpirit, iTalent, iAgility, iHealth;
     int32_t     iAttackMin, iAttackMax, iDefense;
+    int32_t     iAccuracy = 0, iAttackRating = 0, iCritical = 0, iAttackSpeed = 0;
+    int32_t     iAbsorption = 0, iBlockRating = 0, iMoveSpeed = 0, iSight = 0;
+    int32_t     iResistance[8]{};
+    int32_t     iAttackResistance[8]{};
     int32_t     iGold;
     Item        saEquipment[16];
     // ... preencha com todos os outros membros exatos do personagem

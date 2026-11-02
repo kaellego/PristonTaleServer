@@ -247,6 +247,15 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Item final : public ::google::proto
     kHpRegenFieldNumber = 7,
     kMpRegenFieldNumber = 8,
     kSpRegenFieldNumber = 9,
+    kItemTypeFieldNumber = 10,
+    kItemClassFieldNumber = 11,
+    kRequiredLevelFieldNumber = 12,
+    kDamageMinFieldNumber = 13,
+    kDamageMaxFieldNumber = 14,
+    kDefenseFieldNumber = 15,
+    kAbsorbFieldNumber = 16,
+    kDurabilityFieldNumber = 17,
+    kMaxDurabilityFieldNumber = 18,
   };
   // bytes item_name = 2;
   void clear_item_name() ;
@@ -343,11 +352,101 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Item final : public ::google::proto
   void _internal_set_sp_regen(float value);
 
   public:
+  // int32 item_type = 10;
+  void clear_item_type() ;
+  [[nodiscard]] ::int32_t item_type() const;
+  void set_item_type(::int32_t value);
+
+  private:
+  ::int32_t _internal_item_type() const;
+  void _internal_set_item_type(::int32_t value);
+
+  public:
+  // int32 item_class = 11;
+  void clear_item_class() ;
+  [[nodiscard]] ::int32_t item_class() const;
+  void set_item_class(::int32_t value);
+
+  private:
+  ::int32_t _internal_item_class() const;
+  void _internal_set_item_class(::int32_t value);
+
+  public:
+  // int32 required_level = 12;
+  void clear_required_level() ;
+  [[nodiscard]] ::int32_t required_level() const;
+  void set_required_level(::int32_t value);
+
+  private:
+  ::int32_t _internal_required_level() const;
+  void _internal_set_required_level(::int32_t value);
+
+  public:
+  // int32 damage_min = 13;
+  void clear_damage_min() ;
+  [[nodiscard]] ::int32_t damage_min() const;
+  void set_damage_min(::int32_t value);
+
+  private:
+  ::int32_t _internal_damage_min() const;
+  void _internal_set_damage_min(::int32_t value);
+
+  public:
+  // int32 damage_max = 14;
+  void clear_damage_max() ;
+  [[nodiscard]] ::int32_t damage_max() const;
+  void set_damage_max(::int32_t value);
+
+  private:
+  ::int32_t _internal_damage_max() const;
+  void _internal_set_damage_max(::int32_t value);
+
+  public:
+  // int32 defense = 15;
+  void clear_defense() ;
+  [[nodiscard]] ::int32_t defense() const;
+  void set_defense(::int32_t value);
+
+  private:
+  ::int32_t _internal_defense() const;
+  void _internal_set_defense(::int32_t value);
+
+  public:
+  // int32 absorb = 16;
+  void clear_absorb() ;
+  [[nodiscard]] ::int32_t absorb() const;
+  void set_absorb(::int32_t value);
+
+  private:
+  ::int32_t _internal_absorb() const;
+  void _internal_set_absorb(::int32_t value);
+
+  public:
+  // int32 durability = 17;
+  void clear_durability() ;
+  [[nodiscard]] ::int32_t durability() const;
+  void set_durability(::int32_t value);
+
+  private:
+  ::int32_t _internal_durability() const;
+  void _internal_set_durability(::int32_t value);
+
+  public:
+  // int32 max_durability = 18;
+  void clear_max_durability() ;
+  [[nodiscard]] ::int32_t max_durability() const;
+  void set_max_durability(::int32_t value);
+
+  private:
+  ::int32_t _internal_max_durability() const;
+  void _internal_set_max_durability(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:zeropt.Item)
  private:
   class _Internal;
   using ParseTableT_ =
-      ::google::protobuf::internal::TcParseTable<4, 9,
+      ::google::protobuf::internal::TcParseTable<5, 18,
                           0, 0,
                           2>;
   static constexpr ParseTableT_ InternalGenerateParseTable_(
@@ -385,6 +484,15 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Item final : public ::google::proto
     float hp_regen_;
     float mp_regen_;
     float sp_regen_;
+    ::int32_t item_type_;
+    ::int32_t item_class_;
+    ::int32_t required_level_;
+    ::int32_t damage_min_;
+    ::int32_t damage_max_;
+    ::int32_t defense_;
+    ::int32_t absorb_;
+    ::int32_t durability_;
+    ::int32_t max_durability_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1016,6 +1124,16 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED CharacterState final : public ::goo
     kAttackMaxFieldNumber = 27,
     kDefenseFieldNumber = 28,
     kGoldFieldNumber = 29,
+    kAccuracyFieldNumber = 31,
+    kResistanceFieldNumber = 39,
+    kAttackResistanceFieldNumber = 40,
+    kAttackRatingFieldNumber = 32,
+    kCriticalFieldNumber = 33,
+    kAttackSpeedFieldNumber = 34,
+    kAbsorptionFieldNumber = 35,
+    kBlockRatingFieldNumber = 36,
+    kMoveSpeedFieldNumber = 37,
+    kSightFieldNumber = 38,
   };
   // repeated .zeropt.Item equipment = 30;
   [[nodiscard]] int equipment_size() const;
@@ -1332,13 +1450,131 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED CharacterState final : public ::goo
   void _internal_set_gold(::int32_t value);
 
   public:
+  // int32 accuracy = 31;
+  void clear_accuracy() ;
+  [[nodiscard]] ::int32_t accuracy() const;
+  void set_accuracy(::int32_t value);
+
+  private:
+  ::int32_t _internal_accuracy() const;
+  void _internal_set_accuracy(::int32_t value);
+
+  public:
+  // repeated int32 resistance = 39;
+  [[nodiscard]] int resistance_size() const;
+  private:
+  int _internal_resistance_size() const;
+
+  public:
+  void clear_resistance() ;
+  [[nodiscard]] ::int32_t resistance(int index) const;
+  void set_resistance(int index, ::int32_t value);
+  void add_resistance(::int32_t value);
+  [[nodiscard]] const ::google::protobuf::RepeatedField<::int32_t>& resistance()
+      const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_resistance();
+
+  private:
+  const ::google::protobuf::RepeatedField<::int32_t>& _internal_resistance() const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_resistance();
+
+  public:
+  // repeated int32 attack_resistance = 40;
+  [[nodiscard]] int attack_resistance_size() const;
+  private:
+  int _internal_attack_resistance_size() const;
+
+  public:
+  void clear_attack_resistance() ;
+  [[nodiscard]] ::int32_t attack_resistance(int index) const;
+  void set_attack_resistance(int index, ::int32_t value);
+  void add_attack_resistance(::int32_t value);
+  [[nodiscard]] const ::google::protobuf::RepeatedField<::int32_t>& attack_resistance()
+      const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_attack_resistance();
+
+  private:
+  const ::google::protobuf::RepeatedField<::int32_t>& _internal_attack_resistance() const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_attack_resistance();
+
+  public:
+  // int32 attack_rating = 32;
+  void clear_attack_rating() ;
+  [[nodiscard]] ::int32_t attack_rating() const;
+  void set_attack_rating(::int32_t value);
+
+  private:
+  ::int32_t _internal_attack_rating() const;
+  void _internal_set_attack_rating(::int32_t value);
+
+  public:
+  // int32 critical = 33;
+  void clear_critical() ;
+  [[nodiscard]] ::int32_t critical() const;
+  void set_critical(::int32_t value);
+
+  private:
+  ::int32_t _internal_critical() const;
+  void _internal_set_critical(::int32_t value);
+
+  public:
+  // int32 attack_speed = 34;
+  void clear_attack_speed() ;
+  [[nodiscard]] ::int32_t attack_speed() const;
+  void set_attack_speed(::int32_t value);
+
+  private:
+  ::int32_t _internal_attack_speed() const;
+  void _internal_set_attack_speed(::int32_t value);
+
+  public:
+  // int32 absorption = 35;
+  void clear_absorption() ;
+  [[nodiscard]] ::int32_t absorption() const;
+  void set_absorption(::int32_t value);
+
+  private:
+  ::int32_t _internal_absorption() const;
+  void _internal_set_absorption(::int32_t value);
+
+  public:
+  // int32 block_rating = 36;
+  void clear_block_rating() ;
+  [[nodiscard]] ::int32_t block_rating() const;
+  void set_block_rating(::int32_t value);
+
+  private:
+  ::int32_t _internal_block_rating() const;
+  void _internal_set_block_rating(::int32_t value);
+
+  public:
+  // int32 move_speed = 37;
+  void clear_move_speed() ;
+  [[nodiscard]] ::int32_t move_speed() const;
+  void set_move_speed(::int32_t value);
+
+  private:
+  ::int32_t _internal_move_speed() const;
+  void _internal_set_move_speed(::int32_t value);
+
+  public:
+  // int32 sight = 38;
+  void clear_sight() ;
+  [[nodiscard]] ::int32_t sight() const;
+  void set_sight(::int32_t value);
+
+  private:
+  ::int32_t _internal_sight() const;
+  void _internal_set_sight(::int32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:zeropt.CharacterState)
  private:
   class _Internal;
   using ParseTableT_ =
-      ::google::protobuf::internal::TcParseTable<5, 30,
+      ::google::protobuf::internal::TcParseTable<5, 40,
                           1, 0,
-                          2>;
+                          7>;
   static constexpr ParseTableT_ InternalGenerateParseTable_(
       const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL class_data);
   friend class ::google::protobuf::internal::TcParser;
@@ -1363,7 +1599,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED CharacterState final : public ::goo
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
         const CharacterState& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::HasBits<2> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::RepeatedPtrField< ::zeropt::Item > equipment_;
     ::google::protobuf::internal::ArenaStringPtr name_;
@@ -1395,6 +1631,18 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED CharacterState final : public ::goo
     ::int32_t attack_max_;
     ::int32_t defense_;
     ::int32_t gold_;
+    ::int32_t accuracy_;
+    ::google::protobuf::RepeatedField<::int32_t> resistance_;
+    ::google::protobuf::RepeatedField<::int32_t> attack_resistance_;
+    ::int32_t attack_rating_;
+    ::int32_t critical_;
+    ::int32_t attack_speed_;
+    ::int32_t absorption_;
+    ::int32_t block_rating_;
+    ::int32_t move_speed_;
+    ::int32_t sight_;
+    ::google::protobuf::internal::CachedSize _resistance_cached_byte_size_;
+    ::google::protobuf::internal::CachedSize _attack_resistance_cached_byte_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1671,6 +1919,222 @@ inline float Item::_internal_sp_regen() const {
 inline void Item::_internal_set_sp_regen(float value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.sp_regen_ = value;
+}
+
+// int32 item_type = 10;
+inline void Item::clear_item_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.item_type_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00000200U);
+}
+inline ::int32_t Item::item_type() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.item_type)
+  return _internal_item_type();
+}
+inline void Item::set_item_type(::int32_t value) {
+  _internal_set_item_type(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000200U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.item_type)
+}
+inline ::int32_t Item::_internal_item_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.item_type_;
+}
+inline void Item::_internal_set_item_type(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.item_type_ = value;
+}
+
+// int32 item_class = 11;
+inline void Item::clear_item_class() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.item_class_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00000400U);
+}
+inline ::int32_t Item::item_class() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.item_class)
+  return _internal_item_class();
+}
+inline void Item::set_item_class(::int32_t value) {
+  _internal_set_item_class(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000400U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.item_class)
+}
+inline ::int32_t Item::_internal_item_class() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.item_class_;
+}
+inline void Item::_internal_set_item_class(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.item_class_ = value;
+}
+
+// int32 required_level = 12;
+inline void Item::clear_required_level() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.required_level_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00000800U);
+}
+inline ::int32_t Item::required_level() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.required_level)
+  return _internal_required_level();
+}
+inline void Item::set_required_level(::int32_t value) {
+  _internal_set_required_level(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000800U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.required_level)
+}
+inline ::int32_t Item::_internal_required_level() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.required_level_;
+}
+inline void Item::_internal_set_required_level(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.required_level_ = value;
+}
+
+// int32 damage_min = 13;
+inline void Item::clear_damage_min() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.damage_min_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00001000U);
+}
+inline ::int32_t Item::damage_min() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.damage_min)
+  return _internal_damage_min();
+}
+inline void Item::set_damage_min(::int32_t value) {
+  _internal_set_damage_min(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00001000U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.damage_min)
+}
+inline ::int32_t Item::_internal_damage_min() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.damage_min_;
+}
+inline void Item::_internal_set_damage_min(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.damage_min_ = value;
+}
+
+// int32 damage_max = 14;
+inline void Item::clear_damage_max() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.damage_max_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00002000U);
+}
+inline ::int32_t Item::damage_max() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.damage_max)
+  return _internal_damage_max();
+}
+inline void Item::set_damage_max(::int32_t value) {
+  _internal_set_damage_max(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00002000U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.damage_max)
+}
+inline ::int32_t Item::_internal_damage_max() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.damage_max_;
+}
+inline void Item::_internal_set_damage_max(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.damage_max_ = value;
+}
+
+// int32 defense = 15;
+inline void Item::clear_defense() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.defense_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00004000U);
+}
+inline ::int32_t Item::defense() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.defense)
+  return _internal_defense();
+}
+inline void Item::set_defense(::int32_t value) {
+  _internal_set_defense(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00004000U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.defense)
+}
+inline ::int32_t Item::_internal_defense() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.defense_;
+}
+inline void Item::_internal_set_defense(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.defense_ = value;
+}
+
+// int32 absorb = 16;
+inline void Item::clear_absorb() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.absorb_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00008000U);
+}
+inline ::int32_t Item::absorb() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.absorb)
+  return _internal_absorb();
+}
+inline void Item::set_absorb(::int32_t value) {
+  _internal_set_absorb(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00008000U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.absorb)
+}
+inline ::int32_t Item::_internal_absorb() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.absorb_;
+}
+inline void Item::_internal_set_absorb(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.absorb_ = value;
+}
+
+// int32 durability = 17;
+inline void Item::clear_durability() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.durability_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00010000U);
+}
+inline ::int32_t Item::durability() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.durability)
+  return _internal_durability();
+}
+inline void Item::set_durability(::int32_t value) {
+  _internal_set_durability(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00010000U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.durability)
+}
+inline ::int32_t Item::_internal_durability() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.durability_;
+}
+inline void Item::_internal_set_durability(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.durability_ = value;
+}
+
+// int32 max_durability = 18;
+inline void Item::clear_max_durability() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.max_durability_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00020000U);
+}
+inline ::int32_t Item::max_durability() const {
+  // @@protoc_insertion_point(field_get:zeropt.Item.max_durability)
+  return _internal_max_durability();
+}
+inline void Item::set_max_durability(::int32_t value) {
+  _internal_set_max_durability(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00020000U);
+  // @@protoc_insertion_point(field_set:zeropt.Item.max_durability)
+}
+inline ::int32_t Item::_internal_max_durability() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.max_durability_;
+}
+inline void Item::_internal_set_max_durability(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.max_durability_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -2466,6 +2930,300 @@ inline ::google::protobuf::RepeatedPtrField<::zeropt::Item>* PROTOBUF_NONNULL
 CharacterState::_internal_mutable_equipment() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.equipment_;
+}
+
+// int32 accuracy = 31;
+inline void CharacterState::clear_accuracy() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.accuracy_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x40000000U);
+}
+inline ::int32_t CharacterState::accuracy() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.accuracy)
+  return _internal_accuracy();
+}
+inline void CharacterState::set_accuracy(::int32_t value) {
+  _internal_set_accuracy(value);
+  SetHasBit(_impl_._has_bits_[0], 0x40000000U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.accuracy)
+}
+inline ::int32_t CharacterState::_internal_accuracy() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.accuracy_;
+}
+inline void CharacterState::_internal_set_accuracy(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.accuracy_ = value;
+}
+
+// int32 attack_rating = 32;
+inline void CharacterState::clear_attack_rating() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.attack_rating_ = 0;
+  ClearHasBit(_impl_._has_bits_[1], 0x00000002U);
+}
+inline ::int32_t CharacterState::attack_rating() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.attack_rating)
+  return _internal_attack_rating();
+}
+inline void CharacterState::set_attack_rating(::int32_t value) {
+  _internal_set_attack_rating(value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000002U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.attack_rating)
+}
+inline ::int32_t CharacterState::_internal_attack_rating() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.attack_rating_;
+}
+inline void CharacterState::_internal_set_attack_rating(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.attack_rating_ = value;
+}
+
+// int32 critical = 33;
+inline void CharacterState::clear_critical() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.critical_ = 0;
+  ClearHasBit(_impl_._has_bits_[1], 0x00000004U);
+}
+inline ::int32_t CharacterState::critical() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.critical)
+  return _internal_critical();
+}
+inline void CharacterState::set_critical(::int32_t value) {
+  _internal_set_critical(value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000004U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.critical)
+}
+inline ::int32_t CharacterState::_internal_critical() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.critical_;
+}
+inline void CharacterState::_internal_set_critical(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.critical_ = value;
+}
+
+// int32 attack_speed = 34;
+inline void CharacterState::clear_attack_speed() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.attack_speed_ = 0;
+  ClearHasBit(_impl_._has_bits_[1], 0x00000008U);
+}
+inline ::int32_t CharacterState::attack_speed() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.attack_speed)
+  return _internal_attack_speed();
+}
+inline void CharacterState::set_attack_speed(::int32_t value) {
+  _internal_set_attack_speed(value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000008U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.attack_speed)
+}
+inline ::int32_t CharacterState::_internal_attack_speed() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.attack_speed_;
+}
+inline void CharacterState::_internal_set_attack_speed(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.attack_speed_ = value;
+}
+
+// int32 absorption = 35;
+inline void CharacterState::clear_absorption() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.absorption_ = 0;
+  ClearHasBit(_impl_._has_bits_[1], 0x00000010U);
+}
+inline ::int32_t CharacterState::absorption() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.absorption)
+  return _internal_absorption();
+}
+inline void CharacterState::set_absorption(::int32_t value) {
+  _internal_set_absorption(value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000010U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.absorption)
+}
+inline ::int32_t CharacterState::_internal_absorption() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.absorption_;
+}
+inline void CharacterState::_internal_set_absorption(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.absorption_ = value;
+}
+
+// int32 block_rating = 36;
+inline void CharacterState::clear_block_rating() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.block_rating_ = 0;
+  ClearHasBit(_impl_._has_bits_[1], 0x00000020U);
+}
+inline ::int32_t CharacterState::block_rating() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.block_rating)
+  return _internal_block_rating();
+}
+inline void CharacterState::set_block_rating(::int32_t value) {
+  _internal_set_block_rating(value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000020U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.block_rating)
+}
+inline ::int32_t CharacterState::_internal_block_rating() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.block_rating_;
+}
+inline void CharacterState::_internal_set_block_rating(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.block_rating_ = value;
+}
+
+// int32 move_speed = 37;
+inline void CharacterState::clear_move_speed() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.move_speed_ = 0;
+  ClearHasBit(_impl_._has_bits_[1], 0x00000040U);
+}
+inline ::int32_t CharacterState::move_speed() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.move_speed)
+  return _internal_move_speed();
+}
+inline void CharacterState::set_move_speed(::int32_t value) {
+  _internal_set_move_speed(value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000040U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.move_speed)
+}
+inline ::int32_t CharacterState::_internal_move_speed() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.move_speed_;
+}
+inline void CharacterState::_internal_set_move_speed(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.move_speed_ = value;
+}
+
+// int32 sight = 38;
+inline void CharacterState::clear_sight() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.sight_ = 0;
+  ClearHasBit(_impl_._has_bits_[1], 0x00000080U);
+}
+inline ::int32_t CharacterState::sight() const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.sight)
+  return _internal_sight();
+}
+inline void CharacterState::set_sight(::int32_t value) {
+  _internal_set_sight(value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000080U);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.sight)
+}
+inline ::int32_t CharacterState::_internal_sight() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.sight_;
+}
+inline void CharacterState::_internal_set_sight(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.sight_ = value;
+}
+
+// repeated int32 resistance = 39;
+inline int CharacterState::_internal_resistance_size() const {
+  return _internal_resistance().size();
+}
+inline int CharacterState::resistance_size() const {
+  return _internal_resistance_size();
+}
+inline void CharacterState::clear_resistance() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.resistance_.Clear();
+  ClearHasBit(_impl_._has_bits_[0], 0x80000000U);
+}
+inline ::int32_t CharacterState::resistance(int index) const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.resistance)
+  return _internal_resistance().Get(index);
+}
+inline void CharacterState::set_resistance(int index, ::int32_t value) {
+  _internal_mutable_resistance()->Set(index, value);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.resistance)
+}
+inline void CharacterState::add_resistance(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_resistance()
+      ->InternalAddWithArena<const ::google::protobuf::MessageLite*>(
+          internal_visibility(), this, value);
+  SetHasBit(_impl_._has_bits_[0], 0x80000000U);
+  // @@protoc_insertion_point(field_add:zeropt.CharacterState.resistance)
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>& CharacterState::resistance() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:zeropt.CharacterState.resistance)
+  return _internal_resistance();
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL CharacterState::mutable_resistance()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x80000000U);
+  // @@protoc_insertion_point(field_mutable_list:zeropt.CharacterState.resistance)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_resistance();
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>&
+CharacterState::_internal_resistance() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.resistance_;
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL
+CharacterState::_internal_mutable_resistance() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.resistance_;
+}
+
+// repeated int32 attack_resistance = 40;
+inline int CharacterState::_internal_attack_resistance_size() const {
+  return _internal_attack_resistance().size();
+}
+inline int CharacterState::attack_resistance_size() const {
+  return _internal_attack_resistance_size();
+}
+inline void CharacterState::clear_attack_resistance() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.attack_resistance_.Clear();
+  ClearHasBit(_impl_._has_bits_[1], 0x00000001U);
+}
+inline ::int32_t CharacterState::attack_resistance(int index) const {
+  // @@protoc_insertion_point(field_get:zeropt.CharacterState.attack_resistance)
+  return _internal_attack_resistance().Get(index);
+}
+inline void CharacterState::set_attack_resistance(int index, ::int32_t value) {
+  _internal_mutable_attack_resistance()->Set(index, value);
+  // @@protoc_insertion_point(field_set:zeropt.CharacterState.attack_resistance)
+}
+inline void CharacterState::add_attack_resistance(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_attack_resistance()
+      ->InternalAddWithArena<const ::google::protobuf::MessageLite*>(
+          internal_visibility(), this, value);
+  SetHasBit(_impl_._has_bits_[1], 0x00000001U);
+  // @@protoc_insertion_point(field_add:zeropt.CharacterState.attack_resistance)
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>& CharacterState::attack_resistance() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:zeropt.CharacterState.attack_resistance)
+  return _internal_attack_resistance();
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL CharacterState::mutable_attack_resistance()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[1], 0x00000001U);
+  // @@protoc_insertion_point(field_mutable_list:zeropt.CharacterState.attack_resistance)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_attack_resistance();
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>&
+CharacterState::_internal_attack_resistance() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.attack_resistance_;
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL
+CharacterState::_internal_mutable_attack_resistance() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.attack_resistance_;
 }
 
 // -------------------------------------------------------------------

@@ -53,11 +53,11 @@ constexpr Item::ParseTableT_ Item::InternalGenerateParseTable_(const ::_pbi::Cla
     {
       PROTOBUF_FIELD_OFFSET(Item, _impl_._has_bits_),
       0, // no _extensions_
-      9, 120,  // max_field_number, fast_idx_mask
+      18, 248,  // max_field_number, fast_idx_mask
       offsetof(ParseTableT_, field_lookup_table),
-      4294966784,  // skipmap
+      4294705152,  // skipmap
       offsetof(ParseTableT_, field_entries),
-      9,  // num_field_entries
+      18,  // num_field_entries
       0,  // num_aux_entries
       offsetof(ParseTableT_, field_names),  // no aux_entries
       class_data,
@@ -104,6 +104,49 @@ constexpr Item::ParseTableT_ Item::InternalGenerateParseTable_(const ::_pbi::Cla
       {::_pbi::TcParser::FastF32S1,
        {77, 8, 0,
         PROTOBUF_FIELD_OFFSET(Item, _impl_.sp_regen_)}},
+      // int32 item_type = 10;
+      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Item, _impl_.item_type_), 9>(),
+       {80, 9, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.item_type_)}},
+      // int32 item_class = 11;
+      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Item, _impl_.item_class_), 10>(),
+       {88, 10, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.item_class_)}},
+      // int32 required_level = 12;
+      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Item, _impl_.required_level_), 11>(),
+       {96, 11, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.required_level_)}},
+      // int32 damage_min = 13;
+      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Item, _impl_.damage_min_), 12>(),
+       {104, 12, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.damage_min_)}},
+      // int32 damage_max = 14;
+      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Item, _impl_.damage_max_), 13>(),
+       {112, 13, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.damage_max_)}},
+      // int32 defense = 15;
+      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Item, _impl_.defense_), 14>(),
+       {120, 14, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.defense_)}},
+      // int32 absorb = 16;
+      {::_pbi::TcParser::FastV32S2,
+       {384, 15, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.absorb_)}},
+      // int32 durability = 17;
+      {::_pbi::TcParser::FastV32S2,
+       {392, 16, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.durability_)}},
+      // int32 max_durability = 18;
+      {::_pbi::TcParser::FastV32S2,
+       {400, 17, 0,
+        PROTOBUF_FIELD_OFFSET(Item, _impl_.max_durability_)}},
+      {::_pbi::TcParser::MiniParse, {}},
+      {::_pbi::TcParser::MiniParse, {}},
+      {::_pbi::TcParser::MiniParse, {}},
+      {::_pbi::TcParser::MiniParse, {}},
+      {::_pbi::TcParser::MiniParse, {}},
+      {::_pbi::TcParser::MiniParse, {}},
+      {::_pbi::TcParser::MiniParse, {}},
       {::_pbi::TcParser::MiniParse, {}},
       {::_pbi::TcParser::MiniParse, {}},
       {::_pbi::TcParser::MiniParse, {}},
@@ -131,6 +174,24 @@ constexpr Item::ParseTableT_ Item::InternalGenerateParseTable_(const ::_pbi::Cla
       {PROTOBUF_FIELD_OFFSET(Item, _impl_.mp_regen_), _Internal::kHasBitsOffset + 7, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
       // float sp_regen = 9;
       {PROTOBUF_FIELD_OFFSET(Item, _impl_.sp_regen_), _Internal::kHasBitsOffset + 8, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+      // int32 item_type = 10;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.item_type_), _Internal::kHasBitsOffset + 9, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 item_class = 11;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.item_class_), _Internal::kHasBitsOffset + 10, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 required_level = 12;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.required_level_), _Internal::kHasBitsOffset + 11, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 damage_min = 13;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.damage_min_), _Internal::kHasBitsOffset + 12, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 damage_max = 14;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.damage_max_), _Internal::kHasBitsOffset + 13, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 defense = 15;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.defense_), _Internal::kHasBitsOffset + 14, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 absorb = 16;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.absorb_), _Internal::kHasBitsOffset + 15, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 durability = 17;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.durability_), _Internal::kHasBitsOffset + 16, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 max_durability = 18;
+      {PROTOBUF_FIELD_OFFSET(Item, _impl_.max_durability_), _Internal::kHasBitsOffset + 17, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
     }},
     // no aux_entries
     {{
@@ -152,7 +213,16 @@ inline constexpr Item::Impl_::Impl_(
         version_{0u},
         hp_regen_{0},
         mp_regen_{0},
-        sp_regen_{0} {}
+        sp_regen_{0},
+        item_type_{0},
+        item_class_{0},
+        required_level_{0},
+        damage_min_{0},
+        damage_max_{0},
+        defense_{0},
+        absorb_{0},
+        durability_{0},
+        max_durability_{0} {}
 
 template <typename>
 constexpr Item::Item(::_pbi::ConstantInitialized,
@@ -572,11 +642,11 @@ constexpr CharacterState::ParseTableT_ CharacterState::InternalGenerateParseTabl
     {
       PROTOBUF_FIELD_OFFSET(CharacterState, _impl_._has_bits_),
       0, // no _extensions_
-      30, 248,  // max_field_number, fast_idx_mask
+      40, 248,  // max_field_number, fast_idx_mask
       offsetof(ParseTableT_, field_lookup_table),
-      3221225472,  // skipmap
+      0,  // skipmap
       offsetof(ParseTableT_, field_entries),
-      30,  // num_field_entries
+      40,  // num_field_entries
       1,  // num_aux_entries
       offsetof(ParseTableT_, aux_entries),
       class_data,
@@ -707,8 +777,13 @@ constexpr CharacterState::ParseTableT_ CharacterState::InternalGenerateParseTabl
       {::_pbi::TcParser::FastMtR2,
        {498, 0, 0,
         PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.equipment_)}},
-      {::_pbi::TcParser::MiniParse, {}},
+      // int32 accuracy = 31;
+      {::_pbi::TcParser::FastV32S2,
+       {504, 30, 0,
+        PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.accuracy_)}},
     }}, {{
+      33, 0, 1,
+      65280, 32,
       65535, 65535
     }}, {{
       // bytes name = 1;
@@ -771,6 +846,26 @@ constexpr CharacterState::ParseTableT_ CharacterState::InternalGenerateParseTabl
       {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.gold_), _Internal::kHasBitsOffset + 29, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
       // repeated .zeropt.Item equipment = 30;
       {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.equipment_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+      // int32 accuracy = 31;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.accuracy_), _Internal::kHasBitsOffset + 30, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 attack_rating = 32;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.attack_rating_), _Internal::kHasBitsOffset + 33, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 critical = 33;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.critical_), _Internal::kHasBitsOffset + 34, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 attack_speed = 34;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.attack_speed_), _Internal::kHasBitsOffset + 35, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 absorption = 35;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.absorption_), _Internal::kHasBitsOffset + 36, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 block_rating = 36;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.block_rating_), _Internal::kHasBitsOffset + 37, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 move_speed = 37;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.move_speed_), _Internal::kHasBitsOffset + 38, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 sight = 38;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.sight_), _Internal::kHasBitsOffset + 39, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // repeated int32 resistance = 39;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.resistance_), _Internal::kHasBitsOffset + 31, 0, (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
+      // repeated int32 attack_resistance = 40;
+      {PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.attack_resistance_), _Internal::kHasBitsOffset + 32, 0, (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
     }},
     {{
         #ifndef PROTOBUF_MESSAGE_GLOBALS
@@ -823,7 +918,25 @@ inline constexpr CharacterState::Impl_::Impl_(
         attack_min_{0},
         attack_max_{0},
         defense_{0},
-        gold_{0} {}
+        gold_{0},
+        accuracy_{0},
+        resistance_ { visibility, ::_pbi::InternalMetadataOffset::Build<
+            ::zeropt::CharacterState,
+            PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.resistance_)>()
+         }
+        ,
+        attack_resistance_ { visibility, ::_pbi::InternalMetadataOffset::Build<
+            ::zeropt::CharacterState,
+            PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.attack_resistance_)>()
+         }
+        ,
+        attack_rating_{0},
+        critical_{0},
+        attack_speed_{0},
+        absorption_{0},
+        block_rating_{0},
+        move_speed_{0},
+        sight_{0} {}
 
 template <typename>
 constexpr CharacterState::CharacterState(::_pbi::ConstantInitialized,
@@ -927,7 +1040,7 @@ const ::uint32_t
         protodesc_cold) = {
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_._has_bits_),
-        12, // hasbit index offset
+        21, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.item_id_),
         PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.item_name_),
         PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.quantity_),
@@ -937,6 +1050,15 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.hp_regen_),
         PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.mp_regen_),
         PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.sp_regen_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.item_type_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.item_class_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.required_level_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.damage_min_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.damage_max_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.defense_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.absorb_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.durability_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::Item, _impl_.max_durability_),
         1,
         0,
         2,
@@ -946,9 +1068,18 @@ const ::uint32_t
         6,
         7,
         8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_._has_bits_),
-        33, // hasbit index offset
+        43, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.name_),
         PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.level_),
         PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.experience_),
@@ -979,6 +1110,16 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.defense_),
         PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.gold_),
         PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.equipment_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.accuracy_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.attack_rating_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.critical_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.attack_speed_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.absorption_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.block_rating_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.move_speed_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.sight_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.resistance_),
+        PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.attack_resistance_),
         1,
         3,
         2,
@@ -1009,6 +1150,16 @@ const ::uint32_t
         28,
         29,
         0,
+        30,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        31,
+        32,
         0x081, // bitmap
         PROTOBUF_FIELD_OFFSET(::zeropt::InventoryState, _impl_._has_bits_),
         5, // hasbit index offset
@@ -1028,9 +1179,9 @@ const ::uint32_t
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         {0, sizeof(::zeropt::Item)},
-        {21, sizeof(::zeropt::CharacterState)},
-        {84, sizeof(::zeropt::InventoryState)},
-        {91, sizeof(::zeropt::WarehouseState)},
+        {39, sizeof(::zeropt::CharacterState)},
+        {122, sizeof(::zeropt::InventoryState)},
+        {129, sizeof(::zeropt::WarehouseState)},
 };
 static const ::_pbi::MessageGlobalsBase* PROTOBUF_NONNULL const
     file_message_globals[] = {
@@ -1041,34 +1192,44 @@ static const ::_pbi::MessageGlobalsBase* PROTOBUF_NONNULL const
 };
 const char descriptor_table_protodef_player_5fstate_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\022player_state.proto\022\006zeropt\"\245\001\n\004Item\022\017\n"
+    "\n\022player_state.proto\022\006zeropt\"\331\002\n\004Item\022\017\n"
     "\007item_id\030\001 \001(\005\022\021\n\titem_name\030\002 \001(\014\022\020\n\010qua"
     "ntity\030\003 \001(\005\022\016\n\006serial\030\004 \001(\004\022\020\n\010checksum\030"
     "\005 \001(\r\022\017\n\007version\030\006 \001(\r\022\020\n\010hp_regen\030\007 \001(\002"
-    "\022\020\n\010mp_regen\030\010 \001(\002\022\020\n\010sp_regen\030\t \001(\002\"\237\004\n"
-    "\016CharacterState\022\014\n\004name\030\001 \001(\014\022\r\n\005level\030\002"
-    " \001(\005\022\022\n\nexperience\030\003 \001(\003\022\020\n\010class_id\030\004 \001"
-    "(\005\022\016\n\006map_id\030\005 \001(\005\022\r\n\005pos_x\030\006 \001(\002\022\r\n\005pos"
-    "_y\030\007 \001(\002\022\r\n\005pos_z\030\010 \001(\002\022\n\n\002hp\030\t \001(\005\022\016\n\006m"
-    "ax_hp\030\n \001(\005\022\n\n\002mp\030\013 \001(\005\022\016\n\006max_mp\030\014 \001(\005\022"
-    "\013\n\003stm\030\r \001(\005\022\017\n\007max_stm\030\016 \001(\005\022\020\n\010hp_rege"
-    "n\030\017 \001(\002\022\020\n\010mp_regen\030\020 \001(\002\022\020\n\010sp_regen\030\021 "
-    "\001(\002\022\026\n\016hp_regen_bonus\030\022 \001(\002\022\026\n\016mp_regen_"
-    "bonus\030\023 \001(\002\022\026\n\016sp_regen_bonus\030\024 \001(\002\022\020\n\010s"
-    "trength\030\025 \001(\005\022\016\n\006spirit\030\026 \001(\005\022\016\n\006talent\030"
-    "\027 \001(\005\022\017\n\007agility\030\030 \001(\005\022\016\n\006health\030\031 \001(\005\022\022"
-    "\n\nattack_min\030\032 \001(\005\022\022\n\nattack_max\030\033 \001(\005\022\017"
-    "\n\007defense\030\034 \001(\005\022\014\n\004gold\030\035 \001(\005\022\037\n\tequipme"
-    "nt\030\036 \003(\0132\014.zeropt.Item\":\n\016InventoryState"
-    "\022\014\n\004gold\030\001 \001(\005\022\032\n\004item\030\002 \003(\0132\014.zeropt.It"
-    "em\":\n\016WarehouseState\022\014\n\004gold\030\001 \001(\005\022\032\n\004it"
-    "em\030\002 \003(\0132\014.zeropt.Itemb\006proto3"
+    "\022\020\n\010mp_regen\030\010 \001(\002\022\020\n\010sp_regen\030\t \001(\002\022\021\n\t"
+    "item_type\030\n \001(\005\022\022\n\nitem_class\030\013 \001(\005\022\026\n\016r"
+    "equired_level\030\014 \001(\005\022\022\n\ndamage_min\030\r \001(\005\022"
+    "\022\n\ndamage_max\030\016 \001(\005\022\017\n\007defense\030\017 \001(\005\022\016\n\006"
+    "absorb\030\020 \001(\005\022\022\n\ndurability\030\021 \001(\005\022\026\n\016max_"
+    "durability\030\022 \001(\005\"\354\005\n\016CharacterState\022\014\n\004n"
+    "ame\030\001 \001(\014\022\r\n\005level\030\002 \001(\005\022\022\n\nexperience\030\003"
+    " \001(\003\022\020\n\010class_id\030\004 \001(\005\022\016\n\006map_id\030\005 \001(\005\022\r"
+    "\n\005pos_x\030\006 \001(\002\022\r\n\005pos_y\030\007 \001(\002\022\r\n\005pos_z\030\010 "
+    "\001(\002\022\n\n\002hp\030\t \001(\005\022\016\n\006max_hp\030\n \001(\005\022\n\n\002mp\030\013 "
+    "\001(\005\022\016\n\006max_mp\030\014 \001(\005\022\013\n\003stm\030\r \001(\005\022\017\n\007max_"
+    "stm\030\016 \001(\005\022\020\n\010hp_regen\030\017 \001(\002\022\020\n\010mp_regen\030"
+    "\020 \001(\002\022\020\n\010sp_regen\030\021 \001(\002\022\026\n\016hp_regen_bonu"
+    "s\030\022 \001(\002\022\026\n\016mp_regen_bonus\030\023 \001(\002\022\026\n\016sp_re"
+    "gen_bonus\030\024 \001(\002\022\020\n\010strength\030\025 \001(\005\022\016\n\006spi"
+    "rit\030\026 \001(\005\022\016\n\006talent\030\027 \001(\005\022\017\n\007agility\030\030 \001"
+    "(\005\022\016\n\006health\030\031 \001(\005\022\022\n\nattack_min\030\032 \001(\005\022\022"
+    "\n\nattack_max\030\033 \001(\005\022\017\n\007defense\030\034 \001(\005\022\014\n\004g"
+    "old\030\035 \001(\005\022\037\n\tequipment\030\036 \003(\0132\014.zeropt.It"
+    "em\022\020\n\010accuracy\030\037 \001(\005\022\025\n\rattack_rating\030  "
+    "\001(\005\022\020\n\010critical\030! \001(\005\022\024\n\014attack_speed\030\" "
+    "\001(\005\022\022\n\nabsorption\030# \001(\005\022\024\n\014block_rating\030"
+    "$ \001(\005\022\022\n\nmove_speed\030% \001(\005\022\r\n\005sight\030& \001(\005"
+    "\022\022\n\nresistance\030\' \003(\005\022\031\n\021attack_resistanc"
+    "e\030( \003(\005\":\n\016InventoryState\022\014\n\004gold\030\001 \001(\005\022"
+    "\032\n\004item\030\002 \003(\0132\014.zeropt.Item\":\n\016Warehouse"
+    "State\022\014\n\004gold\030\001 \001(\005\022\032\n\004item\030\002 \003(\0132\014.zero"
+    "pt.Itemb\006proto3"
 };
 static ::absl::once_flag descriptor_table_player_5fstate_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_player_5fstate_2eproto = {
     false,
     false,
-    870,
+    1255,
     descriptor_table_protodef_player_5fstate_2eproto,
     "player_state.proto",
     &descriptor_table_player_5fstate_2eproto_once,
@@ -1118,9 +1279,9 @@ Item::Item(
                offsetof(Impl_, item_id_),
            reinterpret_cast<const char*>(&from._impl_) +
                offsetof(Impl_, item_id_),
-           offsetof(Impl_, sp_regen_) -
+           offsetof(Impl_, max_durability_) -
                offsetof(Impl_, item_id_) +
-               sizeof(Impl_::sp_regen_));
+               sizeof(Impl_::max_durability_));
 
   // @@protoc_insertion_point(copy_constructor:zeropt.Item)
 }
@@ -1134,9 +1295,9 @@ inline void Item::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   ::memset(reinterpret_cast<char*>(&_impl_) +
                offsetof(Impl_, item_id_),
            0,
-           offsetof(Impl_, sp_regen_) -
+           offsetof(Impl_, max_durability_) -
                offsetof(Impl_, item_id_) +
-               sizeof(Impl_::sp_regen_));
+               sizeof(Impl_::max_durability_));
 }
 Item::~Item() {
   // @@protoc_insertion_point(destructor:zeropt.Item)
@@ -1196,7 +1357,20 @@ PROTOBUF_NOINLINE void Item::Clear() {
                  reinterpret_cast<char*>(&this_._impl_.item_id_)) +
                  sizeof(_impl_.mp_regen_));
   }
-  this_._impl_.sp_regen_ = 0;
+  if (BatchCheckHasBit(cached_has_bits, 0x0000ff00U)) {
+    ::memset(&this_._impl_.sp_regen_, 0,
+             static_cast<::size_t>(
+                 reinterpret_cast<char*>(&this_._impl_.absorb_) -
+                 reinterpret_cast<char*>(&this_._impl_.sp_regen_)) +
+                 sizeof(_impl_.absorb_));
+  }
+  if (BatchCheckHasBit(cached_has_bits, 0x00030000U)) {
+    ::memset(&this_._impl_.durability_, 0,
+             static_cast<::size_t>(
+                 reinterpret_cast<char*>(&this_._impl_.max_durability_) -
+                 reinterpret_cast<char*>(&this_._impl_.durability_)) +
+                 sizeof(_impl_.max_durability_));
+  }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -1300,6 +1474,87 @@ PROTOBUF_NOINLINE void Item::Clear() {
     }
   }
 
+  // int32 item_type = 10;
+  if (CheckHasBit(cached_has_bits, 0x00000200U)) {
+    if (this_._internal_item_type() != 0) {
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<10>(
+              stream, this_._internal_item_type(), target);
+    }
+  }
+
+  // int32 item_class = 11;
+  if (CheckHasBit(cached_has_bits, 0x00000400U)) {
+    if (this_._internal_item_class() != 0) {
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<11>(
+              stream, this_._internal_item_class(), target);
+    }
+  }
+
+  // int32 required_level = 12;
+  if (CheckHasBit(cached_has_bits, 0x00000800U)) {
+    if (this_._internal_required_level() != 0) {
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<12>(
+              stream, this_._internal_required_level(), target);
+    }
+  }
+
+  // int32 damage_min = 13;
+  if (CheckHasBit(cached_has_bits, 0x00001000U)) {
+    if (this_._internal_damage_min() != 0) {
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<13>(
+              stream, this_._internal_damage_min(), target);
+    }
+  }
+
+  // int32 damage_max = 14;
+  if (CheckHasBit(cached_has_bits, 0x00002000U)) {
+    if (this_._internal_damage_max() != 0) {
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<14>(
+              stream, this_._internal_damage_max(), target);
+    }
+  }
+
+  // int32 defense = 15;
+  if (CheckHasBit(cached_has_bits, 0x00004000U)) {
+    if (this_._internal_defense() != 0) {
+      target =
+          ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<15>(
+              stream, this_._internal_defense(), target);
+    }
+  }
+
+  // int32 absorb = 16;
+  if (CheckHasBit(cached_has_bits, 0x00008000U)) {
+    if (this_._internal_absorb() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          16, this_._internal_absorb(), target);
+    }
+  }
+
+  // int32 durability = 17;
+  if (CheckHasBit(cached_has_bits, 0x00010000U)) {
+    if (this_._internal_durability() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          17, this_._internal_durability(), target);
+    }
+  }
+
+  // int32 max_durability = 18;
+  if (CheckHasBit(cached_has_bits, 0x00020000U)) {
+    if (this_._internal_max_durability() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          18, this_._internal_max_durability(), target);
+    }
+  }
+
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -1379,11 +1634,76 @@ PROTOBUF_NOINLINE void Item::Clear() {
       }
     }
   }
-   {
+  if (BatchCheckHasBit(cached_has_bits, 0x0000ff00U)) {
     // float sp_regen = 9;
     if (CheckHasBit(cached_has_bits, 0x00000100U)) {
       if (::absl::bit_cast<::uint32_t>(this_._internal_sp_regen()) != 0) {
         total_size += 5;
+      }
+    }
+    // int32 item_type = 10;
+    if (CheckHasBit(cached_has_bits, 0x00000200U)) {
+      if (this_._internal_item_type() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+            this_._internal_item_type());
+      }
+    }
+    // int32 item_class = 11;
+    if (CheckHasBit(cached_has_bits, 0x00000400U)) {
+      if (this_._internal_item_class() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+            this_._internal_item_class());
+      }
+    }
+    // int32 required_level = 12;
+    if (CheckHasBit(cached_has_bits, 0x00000800U)) {
+      if (this_._internal_required_level() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+            this_._internal_required_level());
+      }
+    }
+    // int32 damage_min = 13;
+    if (CheckHasBit(cached_has_bits, 0x00001000U)) {
+      if (this_._internal_damage_min() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+            this_._internal_damage_min());
+      }
+    }
+    // int32 damage_max = 14;
+    if (CheckHasBit(cached_has_bits, 0x00002000U)) {
+      if (this_._internal_damage_max() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+            this_._internal_damage_max());
+      }
+    }
+    // int32 defense = 15;
+    if (CheckHasBit(cached_has_bits, 0x00004000U)) {
+      if (this_._internal_defense() != 0) {
+        total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+            this_._internal_defense());
+      }
+    }
+    // int32 absorb = 16;
+    if (CheckHasBit(cached_has_bits, 0x00008000U)) {
+      if (this_._internal_absorb() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_absorb());
+      }
+    }
+  }
+  if (BatchCheckHasBit(cached_has_bits, 0x00030000U)) {
+    // int32 durability = 17;
+    if (CheckHasBit(cached_has_bits, 0x00010000U)) {
+      if (this_._internal_durability() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_durability());
+      }
+    }
+    // int32 max_durability = 18;
+    if (CheckHasBit(cached_has_bits, 0x00020000U)) {
+      if (this_._internal_max_durability() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_max_durability());
       }
     }
   }
@@ -1450,9 +1770,58 @@ void Item::MergeImpl(::google::protobuf::MessageLite& to_msg,
       }
     }
   }
-  if (CheckHasBit(cached_has_bits, 0x00000100U)) {
-    if (::absl::bit_cast<::uint32_t>(from._internal_sp_regen()) != 0) {
-      _this->_impl_.sp_regen_ = from._impl_.sp_regen_;
+  if (BatchCheckHasBit(cached_has_bits, 0x0000ff00U)) {
+    if (CheckHasBit(cached_has_bits, 0x00000100U)) {
+      if (::absl::bit_cast<::uint32_t>(from._internal_sp_regen()) != 0) {
+        _this->_impl_.sp_regen_ = from._impl_.sp_regen_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000200U)) {
+      if (from._internal_item_type() != 0) {
+        _this->_impl_.item_type_ = from._impl_.item_type_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000400U)) {
+      if (from._internal_item_class() != 0) {
+        _this->_impl_.item_class_ = from._impl_.item_class_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000800U)) {
+      if (from._internal_required_level() != 0) {
+        _this->_impl_.required_level_ = from._impl_.required_level_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00001000U)) {
+      if (from._internal_damage_min() != 0) {
+        _this->_impl_.damage_min_ = from._impl_.damage_min_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00002000U)) {
+      if (from._internal_damage_max() != 0) {
+        _this->_impl_.damage_max_ = from._impl_.damage_max_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00004000U)) {
+      if (from._internal_defense() != 0) {
+        _this->_impl_.defense_ = from._impl_.defense_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00008000U)) {
+      if (from._internal_absorb() != 0) {
+        _this->_impl_.absorb_ = from._impl_.absorb_;
+      }
+    }
+  }
+  if (BatchCheckHasBit(cached_has_bits, 0x00030000U)) {
+    if (CheckHasBit(cached_has_bits, 0x00010000U)) {
+      if (from._internal_durability() != 0) {
+        _this->_impl_.durability_ = from._impl_.durability_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00020000U)) {
+      if (from._internal_max_durability() != 0) {
+        _this->_impl_.max_durability_ = from._impl_.max_durability_;
+      }
     }
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -1476,8 +1845,8 @@ void Item::InternalSwap(Item* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.item_name_, &other->_impl_.item_name_, arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Item, _impl_.sp_regen_)
-      + sizeof(Item::_impl_.sp_regen_)
+      PROTOBUF_FIELD_OFFSET(Item, _impl_.max_durability_)
+      + sizeof(Item::_impl_.max_durability_)
       - PROTOBUF_FIELD_OFFSET(Item, _impl_.item_id_)>(
           reinterpret_cast<char*>(&_impl_.item_id_),
           reinterpret_cast<char*>(&other->_impl_.item_id_));
@@ -1509,7 +1878,21 @@ PROTOBUF_NDEBUG_INLINE CharacterState::Impl_::Impl_(
           , arena, from.equipment_
         }
         ,
-        name_(arena, from.name_) {}
+        name_(arena, from.name_),
+        resistance_ {
+          visibility, ::_pbi::InternalMetadataOffset::Build<
+              ::zeropt::CharacterState,
+              PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.resistance_)>()
+          , arena, from.resistance_
+        }
+        ,
+        attack_resistance_ {
+          visibility, ::_pbi::InternalMetadataOffset::Build<
+              ::zeropt::CharacterState,
+              PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.attack_resistance_)>()
+          , arena, from.attack_resistance_
+        }
+     {}
 
 CharacterState::CharacterState(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
@@ -1529,9 +1912,16 @@ CharacterState::CharacterState(
                offsetof(Impl_, experience_),
            reinterpret_cast<const char*>(&from._impl_) +
                offsetof(Impl_, experience_),
-           offsetof(Impl_, gold_) -
+           offsetof(Impl_, accuracy_) -
                offsetof(Impl_, experience_) +
-               sizeof(Impl_::gold_));
+               sizeof(Impl_::accuracy_));
+  ::memcpy(reinterpret_cast<char*>(&_impl_) +
+               offsetof(Impl_, attack_rating_),
+           reinterpret_cast<const char*>(&from._impl_) +
+               offsetof(Impl_, attack_rating_),
+           offsetof(Impl_, sight_) -
+               offsetof(Impl_, attack_rating_) +
+               sizeof(Impl_::sight_));
 
   // @@protoc_insertion_point(copy_constructor:zeropt.CharacterState)
 }
@@ -1543,16 +1933,32 @@ PROTOBUF_NDEBUG_INLINE CharacterState::Impl_::Impl_(
             PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.equipment_)>()
          }
         ,
-        name_(arena) {}
+        name_(arena),
+        resistance_ { visibility, ::_pbi::InternalMetadataOffset::Build<
+            ::zeropt::CharacterState,
+            PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.resistance_)>()
+         }
+        ,
+        attack_resistance_ { visibility, ::_pbi::InternalMetadataOffset::Build<
+            ::zeropt::CharacterState,
+            PROTOBUF_FIELD_OFFSET(::zeropt::CharacterState, _impl_.attack_resistance_)>()
+         }
+     {}
 
 inline void CharacterState::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char*>(&_impl_) +
                offsetof(Impl_, experience_),
            0,
-           offsetof(Impl_, gold_) -
+           offsetof(Impl_, accuracy_) -
                offsetof(Impl_, experience_) +
-               sizeof(Impl_::gold_));
+               sizeof(Impl_::accuracy_));
+  ::memset(reinterpret_cast<char*>(&_impl_) +
+               offsetof(Impl_, attack_rating_),
+           0,
+           offsetof(Impl_, sight_) -
+               offsetof(Impl_, attack_rating_) +
+               sizeof(Impl_::sight_));
 }
 CharacterState::~CharacterState() {
   // @@protoc_insertion_point(destructor:zeropt.CharacterState)
@@ -1631,12 +2037,26 @@ PROTOBUF_NOINLINE void CharacterState::Clear() {
                  reinterpret_cast<char*>(&this_._impl_.mp_regen_)) +
                  sizeof(_impl_.talent_));
   }
-  if (BatchCheckHasBit(cached_has_bits, 0x3f000000U)) {
+  if (BatchCheckHasBit(cached_has_bits, 0xff000000U)) {
     ::memset(&this_._impl_.agility_, 0,
              static_cast<::size_t>(
-                 reinterpret_cast<char*>(&this_._impl_.gold_) -
+                 reinterpret_cast<char*>(&this_._impl_.accuracy_) -
                  reinterpret_cast<char*>(&this_._impl_.agility_)) +
-                 sizeof(_impl_.gold_));
+                 sizeof(_impl_.accuracy_));
+    if (CheckHasBit(cached_has_bits, 0x80000000U)) {
+      _impl_.resistance_.Clear();
+    }
+  }
+  cached_has_bits = this_._impl_._has_bits_[1];
+  if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+    _impl_.attack_resistance_.Clear();
+  }
+  if (BatchCheckHasBit(cached_has_bits, 0x000000feU)) {
+    ::memset(&this_._impl_.attack_rating_, 0,
+             static_cast<::size_t>(
+                 reinterpret_cast<char*>(&this_._impl_.sight_) -
+                 reinterpret_cast<char*>(&this_._impl_.attack_rating_)) +
+                 sizeof(_impl_.sight_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -1933,6 +2353,103 @@ PROTOBUF_NOINLINE void CharacterState::Clear() {
     }
   }
 
+  // int32 accuracy = 31;
+  if (CheckHasBit(cached_has_bits, 0x40000000U)) {
+    if (this_._internal_accuracy() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          31, this_._internal_accuracy(), target);
+    }
+  }
+
+  cached_has_bits = this_._impl_._has_bits_[1];
+  // int32 attack_rating = 32;
+  if (CheckHasBit(cached_has_bits, 0x00000002U)) {
+    if (this_._internal_attack_rating() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          32, this_._internal_attack_rating(), target);
+    }
+  }
+
+  // int32 critical = 33;
+  if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+    if (this_._internal_critical() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          33, this_._internal_critical(), target);
+    }
+  }
+
+  // int32 attack_speed = 34;
+  if (CheckHasBit(cached_has_bits, 0x00000008U)) {
+    if (this_._internal_attack_speed() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          34, this_._internal_attack_speed(), target);
+    }
+  }
+
+  // int32 absorption = 35;
+  if (CheckHasBit(cached_has_bits, 0x00000010U)) {
+    if (this_._internal_absorption() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          35, this_._internal_absorption(), target);
+    }
+  }
+
+  // int32 block_rating = 36;
+  if (CheckHasBit(cached_has_bits, 0x00000020U)) {
+    if (this_._internal_block_rating() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          36, this_._internal_block_rating(), target);
+    }
+  }
+
+  // int32 move_speed = 37;
+  if (CheckHasBit(cached_has_bits, 0x00000040U)) {
+    if (this_._internal_move_speed() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          37, this_._internal_move_speed(), target);
+    }
+  }
+
+  // int32 sight = 38;
+  if (CheckHasBit(cached_has_bits, 0x00000080U)) {
+    if (this_._internal_sight() != 0) {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+          38, this_._internal_sight(), target);
+    }
+  }
+
+  cached_has_bits = this_._impl_._has_bits_[0];
+  // repeated int32 resistance = 39;
+  if (CheckHasBit(cached_has_bits, 0x80000000U)) {
+    {
+      int byte_size = this_._impl_._resistance_cached_byte_size_.Get();
+      if (byte_size > 0) {
+        target = stream->WriteInt32Packed(
+            39, this_._internal_resistance(), byte_size, target);
+      }
+    }
+  }
+
+  cached_has_bits = this_._impl_._has_bits_[1];
+  // repeated int32 attack_resistance = 40;
+  if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+    {
+      int byte_size = this_._impl_._attack_resistance_cached_byte_size_.Get();
+      if (byte_size > 0) {
+        target = stream->WriteInt32Packed(
+            40, this_._internal_attack_resistance(), byte_size, target);
+      }
+    }
+  }
+
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -2121,7 +2638,7 @@ PROTOBUF_NOINLINE void CharacterState::Clear() {
       }
     }
   }
-  if (BatchCheckHasBit(cached_has_bits, 0x3f000000U)) {
+  if (BatchCheckHasBit(cached_has_bits, 0xff000000U)) {
     // int32 agility = 24;
     if (CheckHasBit(cached_has_bits, 0x01000000U)) {
       if (this_._internal_agility() != 0) {
@@ -2162,6 +2679,79 @@ PROTOBUF_NOINLINE void CharacterState::Clear() {
       if (this_._internal_gold() != 0) {
         total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
                                         this_._internal_gold());
+      }
+    }
+    // int32 accuracy = 31;
+    if (CheckHasBit(cached_has_bits, 0x40000000U)) {
+      if (this_._internal_accuracy() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_accuracy());
+      }
+    }
+    // repeated int32 resistance = 39;
+    if (CheckHasBit(cached_has_bits, 0x80000000U)) {
+      total_size +=
+          ::_pbi::WireFormatLite::Int32SizeWithPackedTagSize(
+              this_._internal_resistance(), 2,
+              this_._impl_._resistance_cached_byte_size_);
+    }
+  }
+  cached_has_bits = this_._impl_._has_bits_[1];
+  if (BatchCheckHasBit(cached_has_bits, 0x000000ffU)) {
+    // repeated int32 attack_resistance = 40;
+    if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+      total_size +=
+          ::_pbi::WireFormatLite::Int32SizeWithPackedTagSize(
+              this_._internal_attack_resistance(), 2,
+              this_._impl_._attack_resistance_cached_byte_size_);
+    }
+    // int32 attack_rating = 32;
+    if (CheckHasBit(cached_has_bits, 0x00000002U)) {
+      if (this_._internal_attack_rating() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_attack_rating());
+      }
+    }
+    // int32 critical = 33;
+    if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+      if (this_._internal_critical() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_critical());
+      }
+    }
+    // int32 attack_speed = 34;
+    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
+      if (this_._internal_attack_speed() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_attack_speed());
+      }
+    }
+    // int32 absorption = 35;
+    if (CheckHasBit(cached_has_bits, 0x00000010U)) {
+      if (this_._internal_absorption() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_absorption());
+      }
+    }
+    // int32 block_rating = 36;
+    if (CheckHasBit(cached_has_bits, 0x00000020U)) {
+      if (this_._internal_block_rating() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_block_rating());
+      }
+    }
+    // int32 move_speed = 37;
+    if (CheckHasBit(cached_has_bits, 0x00000040U)) {
+      if (this_._internal_move_speed() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_move_speed());
+      }
+    }
+    // int32 sight = 38;
+    if (CheckHasBit(cached_has_bits, 0x00000080U)) {
+      if (this_._internal_sight() != 0) {
+        total_size += 2 + ::_pbi::WireFormatLite::Int32Size(
+                                        this_._internal_sight());
       }
     }
   }
@@ -2313,7 +2903,7 @@ void CharacterState::MergeImpl(::google::protobuf::MessageLite& to_msg,
       }
     }
   }
-  if (BatchCheckHasBit(cached_has_bits, 0x3f000000U)) {
+  if (BatchCheckHasBit(cached_has_bits, 0xff000000U)) {
     if (CheckHasBit(cached_has_bits, 0x01000000U)) {
       if (from._internal_agility() != 0) {
         _this->_impl_.agility_ = from._impl_.agility_;
@@ -2344,8 +2934,57 @@ void CharacterState::MergeImpl(::google::protobuf::MessageLite& to_msg,
         _this->_impl_.gold_ = from._impl_.gold_;
       }
     }
+    if (CheckHasBit(cached_has_bits, 0x40000000U)) {
+      if (from._internal_accuracy() != 0) {
+        _this->_impl_.accuracy_ = from._impl_.accuracy_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x80000000U)) {
+      _this->_internal_mutable_resistance()->MergeFrom(from._internal_resistance());
+    }
   }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  cached_has_bits = from._impl_._has_bits_[1];
+  if (BatchCheckHasBit(cached_has_bits, 0x000000ffU)) {
+    if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+      _this->_internal_mutable_attack_resistance()->MergeFrom(from._internal_attack_resistance());
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000002U)) {
+      if (from._internal_attack_rating() != 0) {
+        _this->_impl_.attack_rating_ = from._impl_.attack_rating_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000004U)) {
+      if (from._internal_critical() != 0) {
+        _this->_impl_.critical_ = from._impl_.critical_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000008U)) {
+      if (from._internal_attack_speed() != 0) {
+        _this->_impl_.attack_speed_ = from._impl_.attack_speed_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000010U)) {
+      if (from._internal_absorption() != 0) {
+        _this->_impl_.absorption_ = from._impl_.absorption_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000020U)) {
+      if (from._internal_block_rating() != 0) {
+        _this->_impl_.block_rating_ = from._impl_.block_rating_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000040U)) {
+      if (from._internal_move_speed() != 0) {
+        _this->_impl_.move_speed_ = from._impl_.move_speed_;
+      }
+    }
+    if (CheckHasBit(cached_has_bits, 0x00000080U)) {
+      if (from._internal_sight() != 0) {
+        _this->_impl_.sight_ = from._impl_.sight_;
+      }
+    }
+  }
+  _this->_impl_._has_bits_.Or(from._impl_._has_bits_);
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
 }
@@ -2364,14 +3003,23 @@ void CharacterState::InternalSwap(CharacterState* PROTOBUF_RESTRICT PROTOBUF_NON
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_._has_bits_[1], other->_impl_._has_bits_[1]);
   _impl_.equipment_.InternalSwap(&other->_impl_.equipment_);
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, &other->_impl_.name_, arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.gold_)
-      + sizeof(CharacterState::_impl_.gold_)
+      PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.accuracy_)
+      + sizeof(CharacterState::_impl_.accuracy_)
       - PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.experience_)>(
           reinterpret_cast<char*>(&_impl_.experience_),
           reinterpret_cast<char*>(&other->_impl_.experience_));
+  _impl_.resistance_.InternalSwap(&other->_impl_.resistance_);
+  _impl_.attack_resistance_.InternalSwap(&other->_impl_.attack_resistance_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.sight_)
+      + sizeof(CharacterState::_impl_.sight_)
+      - PROTOBUF_FIELD_OFFSET(CharacterState, _impl_.attack_rating_)>(
+          reinterpret_cast<char*>(&_impl_.attack_rating_),
+          reinterpret_cast<char*>(&other->_impl_.attack_rating_));
 }
 
 ::google::protobuf::Metadata CharacterState::GetMetadata() const {

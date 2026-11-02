@@ -76,6 +76,16 @@ public:
         m_npcs.emplace(npc.objectSerial, std::move(npc));
         return true;
     }
+    std::optional<NpcEntity> gmSpawnNpc(int npcId, int mapId, MapPosition position) {
+        if (npcId <= 0 || mapId < 0 || mapId > 255 || !std::isfinite(position.x) ||
+            !std::isfinite(position.y) || !std::isfinite(position.z)) return std::nullopt;
+        NpcEntity npc{};
+        npc.id = npcId; npc.objectSerial = 0x82000000u | static_cast<uint32_t>(m_nextNpcSerial.fetch_add(1));
+        npc.mapId = mapId; npc.position = position; npc.name = "GM_NPC";
+        npc.modelName = "char\\npc\\TN-005\\TN-005.ini";
+        if (!registerNpc(npc)) return std::nullopt;
+        return npc;
+    }
     std::vector<NpcEntity> npcsForMap(int mapId) const {
         std::vector<NpcEntity> result;
         std::lock_guard lock(m_mutex);
@@ -160,12 +170,15 @@ public:
         ++m_nextEntityId;
         return gameSession;
     }
-    void leave(const std::string& accountName) {
+    void leave(const std::string& accountName, const std::shared_ptr<ClientSession>& client = {}) {
         std::optional<CharacterData> snapshot;
         {
             std::lock_guard lock(m_mutex);
             auto session = m_sessions.find(accountName);
             if (session == m_sessions.end()) return;
+            // LoginServer and GameServer use different sockets. Closing the
+            // former must not remove the active gameplay session.
+            if (client && session->second->client() != client) return;
             const auto entity = m_entities.find(session->second->entityId());
             if (entity != m_entities.end()) {
                 CharacterData data = session->second->characterData();
@@ -205,6 +218,20 @@ public:
     }
     std::optional<int> entityIdForAccount(const std::string& accountName) const {
         std::lock_guard lock(m_mutex); auto it = m_sessions.find(accountName); return it == m_sessions.end() ? std::nullopt : std::optional<int>(it->second->entityId());
+    }
+    bool gmHeal(const std::string& accountName) {
+        std::optional<CharacterData> save;
+        std::lock_guard lock(m_mutex); auto s = m_sessions.find(accountName); if (s == m_sessions.end()) return false;
+        auto e = m_entities.find(s->second->entityId()); if (e == m_entities.end()) return false;
+        e->second.health = e->second.maxHealth; e->second.mana = e->second.maxMana; e->second.stamina = e->second.maxStamina; e->second.alive = true;
+        auto data = s->second->characterData(); applyRuntimeState(data, e->second); s->second->setCharacterData(data); save = data;
+        if (m_persist) m_persist(accountName, *save); return true;
+    }
+    bool gmWarp(const std::string& accountName, int mapId, MapPosition position) {
+        if (mapId < 0 || mapId > 255 || !std::isfinite(position.x) || !std::isfinite(position.y) || !std::isfinite(position.z)) return false;
+        std::optional<CharacterData> save; std::lock_guard lock(m_mutex); auto s=m_sessions.find(accountName); if(s==m_sessions.end()) return false;
+        auto e=m_entities.find(s->second->entityId()); if(e==m_entities.end()) return false; e->second.mapId=mapId; e->second.position=position;
+        auto data=s->second->characterData(); applyRuntimeState(data,e->second); s->second->setCharacterData(data); save=data; if(m_persist) m_persist(accountName,*save); return true;
     }
     bool ownsObjectSerial(int entityId, uint32_t objectSerial) const {
         std::lock_guard lock(m_mutex);
@@ -313,6 +340,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<GameSession>> m_sessions;
     std::unordered_map<int, MapEntity> m_entities;
     std::unordered_map<uint32_t, NpcEntity> m_npcs;
+    std::atomic<uint32_t> m_nextNpcSerial{1};
     int m_nextEntityId = 1;
     int m_nextDropId = 1;
     std::unordered_map<int, WorldDrop> m_drops;

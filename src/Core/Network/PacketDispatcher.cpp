@@ -17,6 +17,7 @@
 #include "GameLogic/Handlers/CombatHandler.h"
 #include "GameLogic/Handlers/ChatHandler.h"
 #include "GameLogic/Handlers/NpcHandler.h"
+#include "GameLogic/Handlers/GameMasterHandler.h"
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/Services/InventoryService.h"
 #include "GameLogic/GameWorld.h"
@@ -89,6 +90,8 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::NpcUnitClick)] = npcHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::BuyItemNPCShop)] = npcHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::SellItemNPCShop)] = npcHandler;
+    auto gmHandler = std::make_shared<GameMasterHandler>(m_userService, m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NetGameMasterCommand)] = gmHandler;
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }
@@ -120,6 +123,6 @@ bool PacketDispatcher::transferLegacySessionByIp(std::shared_ptr<ClientSession> 
 }
 
 void PacketDispatcher::sessionClosed(std::shared_ptr<ClientSession> session) {
-    m_gameWorld.leave(session->getAccountName());
+    m_gameWorld.leave(session->getAccountName(), session);
     m_userService.removeUser(std::move(session));
 }

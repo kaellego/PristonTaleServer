@@ -38,6 +38,8 @@ enum class Opcode : int32_t {
     DispDamage = 215,
     AttackData2 = 216,
     ChatMessageLegacy = 22,
+    PartyChatMessage = 34,
+    CommandUser = 81,
 };
 
 #pragma pack(push, 1)

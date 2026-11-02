@@ -12,6 +12,15 @@ message Item {
   float hp_regen = 7;
   float mp_regen = 8;
   float sp_regen = 9;
+  int32 item_type = 10;
+  int32 item_class = 11;
+  int32 required_level = 12;
+  int32 damage_min = 13;
+  int32 damage_max = 14;
+  int32 defense = 15;
+  int32 absorb = 16;
+  int32 durability = 17;
+  int32 max_durability = 18;
 }
 
 message CharacterState {
@@ -45,6 +54,16 @@ message CharacterState {
   int32 defense = 28;
   int32 gold = 29;
   repeated Item equipment = 30;
+  int32 accuracy = 31;
+  int32 attack_rating = 32;
+  int32 critical = 33;
+  int32 attack_speed = 34;
+  int32 absorption = 35;
+  int32 block_rating = 36;
+  int32 move_speed = 37;
+  int32 sight = 38;
+  repeated int32 resistance = 39;
+  repeated int32 attack_resistance = 40;
 }
 
 message InventoryState { int32 gold = 1; repeated Item item = 2; }

@@ -12,6 +12,10 @@
 #include <stdexcept>
 
 namespace {
+bool hasV2Envelope(const std::vector<uint8_t>& bytes) {
+    return bytes.size() >= 4 && bytes[0] == 'Z' && bytes[1] == 'P' && bytes[2] == 'T' && bytes[3] == '2';
+}
+
 constexpr char Base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 std::optional<std::vector<uint8_t>> decodeBase64(const std::string& text) {
@@ -161,7 +165,7 @@ std::optional<CharacterData> PlayerStateSqlRepository::loadCharacter(const std::
     const auto blob = loadBlob(1, name);
     if (!blob) return std::nullopt;
     auto value = PlayerStateProto::decodeCharacter(blob->bytes);
-    if (value && blob->version < 2) saveCharacter(*value);
+    if (value && (blob->version < 2 || !hasV2Envelope(blob->bytes))) saveCharacter(*value);
     return value;
 }
 
@@ -189,7 +193,7 @@ std::optional<InventoryData> PlayerStateSqlRepository::loadInventory(const std::
     if (!blob) return std::nullopt;
     auto result = PlayerStateProto::decodeInventory(blob->bytes);
     if (!result || !validateItems(result->saItem)) return std::nullopt;
-    if (blob->version < 2) saveInventory(character, *result);
+    if (blob->version < 2 || !hasV2Envelope(blob->bytes)) saveInventory(character, *result);
     return result;
 }
 
@@ -208,7 +212,7 @@ std::optional<WarehouseData> PlayerStateSqlRepository::loadWarehouse(const std::
     if (!blob) return std::nullopt;
     auto result = PlayerStateProto::decodeWarehouse(blob->bytes);
     if (!result || !validateItems(result->saItem)) return std::nullopt;
-    if (blob->version < 2) saveWarehouse(account, *result);
+    if (blob->version < 2 || !hasV2Envelope(blob->bytes)) saveWarehouse(account, *result);
     return result;
 }
 

@@ -175,6 +175,7 @@
     <ClInclude Include="GameLogic\Handlers\LoginHandler.h" />
     <ClInclude Include="GameLogic\ItemRepository.h" />
     <ClInclude Include="GameLogic\NpcRepository.h" />
+    <ClInclude Include="GameLogic\NpcShopRepository.h" />
     <ClInclude Include="GameLogic\InventorySqlRepository.h" />
     <ClInclude Include="GameLogic\ItemPolicy.h" />
     <ClInclude Include="GameLogic\PlayerRepository.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="GameLogic\Handlers\LoginHandler.cpp" />
     <ClCompile Include="GameLogic\ItemRepository.cpp" />
     <ClCompile Include="GameLogic\NpcRepository.cpp" />
+    <ClCompile Include="GameLogic\NpcShopRepository.cpp" />
     <ClCompile Include="GameLogic\InventorySqlRepository.cpp" />
     <ClCompile Include="GameLogic\ItemPolicy.cpp" />
     <ClCompile Include="GameLogic\PlayerRepository.cpp" />
@@ -252,6 +254,7 @@
     <ClCompile Include="GameLogic\Handlers\CombatHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\ChatHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\NpcHandler.cpp" />
+    <ClCompile Include="GameLogic\Handlers\GameMasterHandler.cpp" />
     <ClCompile Include="GameLogic\LegacyItemData.cpp" />
     <ClCompile Include="Network\PacketCipher.cpp" />
     <ClCompile Include="Network\PacketDispatcher.cpp" />

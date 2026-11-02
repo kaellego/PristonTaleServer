@@ -29,6 +29,7 @@ public:
     bool transferSession(const std::string& accountName, const std::shared_ptr<ClientSession>& session);
     bool transferSessionByIp(const std::shared_ptr<ClientSession>& session);
     bool banAccount(const std::string& accountName, const std::string& reason);
+    bool isGameMaster(const std::string& accountName) const;
 
 private:
     LogService& m_logService;

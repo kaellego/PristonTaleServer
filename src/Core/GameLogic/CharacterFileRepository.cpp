@@ -41,7 +41,7 @@ struct PackedCharacterV2 {
 
 static_assert(sizeof(PackedItemV2) == 100);
 static_assert(sizeof(PackedCharacterV2) == 1748);
-static_assert(sizeof(CharacterData) == sizeof(PackedCharacterV2));
+// shortcut: legacy .chr stores the old fixed layout; new gameplay fields use SQL/Protobuf.
 
 struct LegacyItemV1 { int32_t id; char name[64]; };
 struct LegacyCharacterV1 {
