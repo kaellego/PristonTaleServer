@@ -8,6 +8,7 @@ extern/soci/
 extern/soci-install/
 build/
 $install/
+vcpkg-installed/
 
 *.obj
 *.exe

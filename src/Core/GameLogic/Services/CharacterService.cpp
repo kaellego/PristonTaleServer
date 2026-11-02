@@ -6,6 +6,7 @@
 
 #include <cctype>
 #include <algorithm>
+#include "Utils/SafeString.h"
 
 CharacterService::CharacterService(DatabasePool& dbPool, PlayerRepository& playerRepo, LogService& logService)
     : m_dbPool(dbPool),
@@ -20,6 +21,35 @@ bool validCharacterName(const std::string& name) {
         return std::isalnum(c) || c == '_' || c == '-';
     });
 }
+
+CharacterData defaultCharacter(const std::string& name) {
+    CharacterData character{};
+    copyFixed(character.szName, name);
+    character.iLevel = 1;
+    character.iClass = 1;
+    character.iHP = character.iMaxHP = 100;
+    character.iMP = character.iMaxMP = 100;
+    character.iSTM = character.iMaxSTM = 100;
+    character.iStrength = character.iSpirit = character.iTalent = character.iAgility = character.iHealth = 1;
+    character.iAttackMin = character.iAttackMax = 10;
+    return character;
+}
+}
+
+std::optional<CharacterData> CharacterService::loadOrRecoverCharacter(const std::string& characterName) const {
+    if (auto character = m_playerRepository.loadCharacter(characterName)) return character;
+    if (m_playerRepository.characterFileExists(characterName)) {
+        m_logService.warn("Arquivo .chr invalido para '{}'; recuperacao automatica bloqueada para preservar os dados.", characterName);
+        return std::nullopt;
+    }
+
+    auto recovered = defaultCharacter(characterName);
+    if (!m_playerRepository.saveCharacter(recovered)) {
+        m_logService.error("Nao foi possivel criar o arquivo .chr recuperado para '{}'.", characterName);
+        return std::nullopt;
+    }
+    m_logService.warn("Personagem '{}' recuperado do banco sem .chr; classe inicial padrao 1 aplicada.", characterName);
+    return recovered;
 }
 
 std::vector<CharacterData> CharacterService::getCharacterList(const std::string& accountName) {
@@ -27,9 +57,9 @@ std::vector<CharacterData> CharacterService::getCharacterList(const std::string&
     try {
         Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
         for (const auto& charName : orm.findCharacterNames(accountName)) {
-            auto charData = m_playerRepository.loadCharacter(charName);
+            auto charData = loadOrRecoverCharacter(charName);
             if (charData) characterList.push_back(*charData);
-            else m_logService.warn("Personagem '{}' encontrado no DB, mas o arquivo .chr nao foi encontrado.", charName);
+            else m_logService.warn("Personagem '{}' nao pode ser carregado com seguranca.", charName);
         }
     } catch (const std::exception& e) {
         m_logService.error("Erro de ORM em getCharacterList para a conta {}: {}", accountName, e.what());
@@ -50,16 +80,8 @@ bool CharacterService::createCharacter(const std::string& accountName, const std
         m_logService.warn("Criacao rejeitada para {}: personagem '{}' ja existe.", accountName, characterName);
         return false;
     }
-    CharacterData character{};
-    strncpy_s(character.szName, sizeof(character.szName), characterName.c_str(), _TRUNCATE);
-    character.iLevel = 1;
-    character.liEXP = 0;
+    CharacterData character = defaultCharacter(characterName);
     character.iClass = characterClass;
-    character.iMapId = 0;
-    character.iHP = character.iMaxHP = 100;
-    character.iMP = character.iMaxMP = 100;
-    character.iStrength = character.iSpirit = character.iTalent = character.iAgility = character.iHealth = 1;
-    character.iAttackMin = character.iAttackMax = 10; character.iDefense = 0;
     if (!m_playerRepository.saveCharacter(character)) {
         m_logService.error("Criacao rejeitada para {}: falha ao salvar o arquivo de '{}'.", accountName, characterName);
         return false;
@@ -84,7 +106,7 @@ std::optional<CharacterData> CharacterService::selectCharacter(const std::string
     if (accountName.empty() || !validCharacterName(characterName)) return std::nullopt;
     Orm orm(m_dbPool, m_logService, m_dbPool.dialect());
     if (!orm.characterBelongsTo(accountName, characterName)) return std::nullopt;
-    return m_playerRepository.loadCharacter(characterName);
+    return loadOrRecoverCharacter(characterName);
 }
 
 bool CharacterService::ownsCharacter(const std::string& accountName, const std::string& characterName) const {

@@ -3,6 +3,7 @@
 #include "Logging/LogService.h"
 #include "Database/SQLConnection.h"
 #include "Utils/Dice.h"
+#include "Utils/SafeString.h"
 #include <iostream>
 #include <cmath>
 
@@ -21,7 +22,7 @@ void ItemRepository::loadItemDefinitions() {
         if (code <= 0 || name.empty()) continue;
         DefinitionItem definition{};
         definition.sItem.sItemID = code;
-        strncpy_s(definition.sItem.szItemName, sizeof(definition.sItem.szItemName), name.c_str(), _TRUNCATE);
+        copyFixed(definition.sItem.szItemName, name);
         m_itemDefs.emplace(code, definition);
     }
     m_logService.info("{} definicoes de itens carregadas.", m_itemDefs.size());

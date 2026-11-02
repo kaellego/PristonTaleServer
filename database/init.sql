@@ -18,8 +18,12 @@ IF OBJECT_ID('dbo.CharacterInfo', 'U') IS NULL
 CREATE TABLE dbo.CharacterInfo (
     Name varchar(31) PRIMARY KEY,
     AccountName varchar(32) NOT NULL,
-    Experience bigint NOT NULL DEFAULT 0
+    Experience bigint NOT NULL DEFAULT 0,
+    StateVersion int NOT NULL DEFAULT 1,
+    StateUpdatedAt datetime2 NOT NULL DEFAULT sysdatetime()
 );
+IF COL_LENGTH('dbo.CharacterInfo', 'StateVersion') IS NULL ALTER TABLE dbo.CharacterInfo ADD StateVersion int NOT NULL CONSTRAINT DF_CharacterInfo_StateVersion DEFAULT 1;
+IF COL_LENGTH('dbo.CharacterInfo', 'StateUpdatedAt') IS NULL ALTER TABLE dbo.CharacterInfo ADD StateUpdatedAt datetime2 NOT NULL CONSTRAINT DF_CharacterInfo_StateUpdatedAt DEFAULT sysdatetime();
 IF OBJECT_ID('dbo.CharacterInventory', 'U') IS NULL
 CREATE TABLE dbo.CharacterInventory (
     CharacterName varchar(31) NOT NULL,
@@ -48,6 +52,34 @@ CREATE TABLE dbo.AccountWarehouse (
     CONSTRAINT CK_AccountWarehouse_Slot CHECK (SlotIndex >= 0 AND SlotIndex < 405),
     CONSTRAINT CK_AccountWarehouse_Quantity CHECK (Quantity > 0)
 );
+IF OBJECT_ID('dbo.PlayerStateProto', 'U') IS NULL
+CREATE TABLE dbo.PlayerStateProto (
+    StateType tinyint NOT NULL,
+    OwnerKey varchar(32) NOT NULL,
+    ChunkIndex int NOT NULL,
+    ChunkData varbinary(max) NOT NULL,
+    StateVersion int NOT NULL DEFAULT 1,
+    StateMac varbinary(32) NULL,
+    StateUpdatedAt datetime2 NOT NULL DEFAULT sysdatetime(),
+    CONSTRAINT PK_PlayerStateProto PRIMARY KEY (StateType, OwnerKey, ChunkIndex),
+    CONSTRAINT CK_PlayerStateProto_Type CHECK (StateType IN (1, 2, 3)),
+    CONSTRAINT CK_PlayerStateProto_Chunk CHECK (ChunkIndex >= 0)
+);
+IF EXISTS (
+    SELECT 1 FROM sys.columns
+    WHERE object_id = OBJECT_ID('dbo.PlayerStateProto')
+      AND name = 'ChunkData'
+      AND system_type_id IN (167, 175, 231, 239)
+)
+BEGIN
+    EXEC(N'ALTER TABLE dbo.PlayerStateProto ADD ChunkDataBinary varbinary(max) NULL');
+    EXEC(N'UPDATE dbo.PlayerStateProto SET ChunkDataBinary = CONVERT(varbinary(max), ChunkData)');
+    EXEC(N'ALTER TABLE dbo.PlayerStateProto ALTER COLUMN ChunkDataBinary varbinary(max) NOT NULL');
+    EXEC(N'ALTER TABLE dbo.PlayerStateProto DROP COLUMN ChunkData');
+    EXEC(N'EXEC sp_rename ''dbo.PlayerStateProto.ChunkDataBinary'', ''ChunkData'', ''COLUMN''');
+END;
+IF COL_LENGTH('dbo.PlayerStateProto', 'StateMac') IS NULL
+    ALTER TABLE dbo.PlayerStateProto ADD StateMac varbinary(32) NULL;
 IF COL_LENGTH('dbo.CharacterInventory', 'ItemSerial') IS NULL ALTER TABLE dbo.CharacterInventory ADD ItemSerial bigint NOT NULL CONSTRAINT DF_CharacterInventory_ItemSerial DEFAULT 0;
 IF COL_LENGTH('dbo.CharacterInventory', 'ItemChecksum') IS NULL ALTER TABLE dbo.CharacterInventory ADD ItemChecksum int NOT NULL CONSTRAINT DF_CharacterInventory_ItemChecksum DEFAULT 0;
 IF COL_LENGTH('dbo.CharacterInventory', 'ItemVersion') IS NULL ALTER TABLE dbo.CharacterInventory ADD ItemVersion int NOT NULL CONSTRAINT DF_CharacterInventory_ItemVersion DEFAULT 1;
@@ -92,6 +124,33 @@ SET LegacyCode = 'BEGINNER', RequiredLevel = 1, EquipmentSlot = 0, JobCodeMask =
 WHERE ItemCode = 1;
 IF OBJECT_ID('dbo.GameMasters', 'U') IS NULL
 CREATE TABLE dbo.GameMasters (ID int IDENTITY PRIMARY KEY, AccountID varchar(32), Password varchar(30), Type int NOT NULL DEFAULT 0, active bit NOT NULL DEFAULT 1);
+GO
+
+IF OBJECT_ID('dbo.NpcList', 'U') IS NULL
+CREATE TABLE dbo.NpcList (
+    NpcId int NOT NULL PRIMARY KEY,
+    LegacyFile varchar(128) NOT NULL UNIQUE,
+    DisplayName nvarchar(63) NOT NULL,
+    ModelName varchar(127) NOT NULL,
+    EventCode int NOT NULL DEFAULT 0,
+    Enabled bit NOT NULL DEFAULT 1,
+    SourceFile varchar(260) NULL
+);
+IF OBJECT_ID('dbo.NpcSpawn', 'U') IS NULL
+CREATE TABLE dbo.NpcSpawn (
+    SpawnId int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    NpcId int NOT NULL,
+    MapId int NOT NULL,
+    SourceMap varchar(128) NOT NULL,
+    X int NULL,
+    Y int NULL,
+    Z int NULL,
+    AngleY int NOT NULL DEFAULT 0,
+    Enabled bit NOT NULL DEFAULT 0,
+    CONSTRAINT FK_NpcSpawn_NpcList FOREIGN KEY (NpcId) REFERENCES dbo.NpcList(NpcId),
+    CONSTRAINT UQ_NpcSpawn_Source UNIQUE (NpcId, MapId, SourceMap),
+    CONSTRAINT CK_NpcSpawn_EnabledCoordinates CHECK (Enabled = 0 OR (X IS NOT NULL AND Y IS NOT NULL AND Z IS NOT NULL))
+);
 GO
 
 USE LogDB;

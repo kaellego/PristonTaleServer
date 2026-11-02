@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Shared/datatypes.h"
+#include "GameLogic/PlayerStateSqlRepository.h"
 #include <optional>
 #include <string>
 
@@ -8,7 +9,7 @@ class DatabasePool;
 
 class InventorySqlRepository {
 public:
-    explicit InventorySqlRepository(DatabasePool& pool) : m_pool(pool) {}
+    explicit InventorySqlRepository(DatabasePool& pool) : m_state(pool) {}
 
     std::optional<InventoryData> loadInventory(const std::string& character) const;
     std::optional<WarehouseData> loadWarehouse(const std::string& account) const;
@@ -17,5 +18,5 @@ public:
     bool saveInventoryAndWarehouse(const std::string& character, const InventoryData& inventory, const std::string& account, const WarehouseData& warehouse) const;
 
 private:
-    DatabasePool& m_pool;
+    PlayerStateSqlRepository m_state;
 };

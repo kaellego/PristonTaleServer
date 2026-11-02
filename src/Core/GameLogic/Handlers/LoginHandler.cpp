@@ -2,6 +2,7 @@
 #include "GameLogic/Services/AccountService.h"
 #include "Network/ClientSession.h"
 #include "Shared/datatypes.h"
+#include "Utils/SafeString.h"
 #include "Shared/GlobalState.h"
 #include "Logging/LogService.h"
 #include "Shared/Constants.h"
@@ -73,7 +74,7 @@ void LoginHandler::handle(std::shared_ptr<ClientSession> session, const Packet &
         PacketAccountLoginCode responseStruct{};
         responseStruct.header.opcode = static_cast<uint32_t>(Opcodes::AccountLoginCode);
         responseStruct.iCode = static_cast<int>(Log::LoginResult::WrongVersion); // Supondo que WrongVersion exista
-        strncpy_s(responseStruct.szMessage, "Game version is incorrect please update", sizeof(responseStruct.szMessage) - 1);
+        copyFixed(responseStruct.szMessage, "Game version is incorrect please update");
 
         const size_t bodySize = sizeof(PacketAccountLoginCode) - sizeof(PacketHeader);
         const uint8_t *bodyPtr = reinterpret_cast<const uint8_t *>(&responseStruct) + sizeof(PacketHeader);

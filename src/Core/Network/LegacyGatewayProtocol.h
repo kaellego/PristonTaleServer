@@ -13,8 +13,12 @@ namespace LegacyGateway {
 enum class Opcode : int32_t {
     Connected = 3,
     RecordData = 4,
+    PlayData1 = 28,
+    PlayDataGroup = 32,
     SetBlacklist = 39,
     PlayerInfo = 62,
+    GetPlayerInfo = 63,
+    AddNpc = 88,
     TransPlayData = 31,
     ProcessInfo = 106,
     NetworkQuality = 105,

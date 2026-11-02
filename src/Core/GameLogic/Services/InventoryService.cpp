@@ -1,4 +1,4 @@
-﻿#include "GameLogic/Services/InventoryService.h"
+#include "GameLogic/Services/InventoryService.h"
 #include "GameLogic/PlayerRepository.h"
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/ItemPolicy.h"
@@ -27,15 +27,11 @@ std::optional<WarehouseData> InventoryService::loadWarehouseData(const std::stri
 
 bool InventoryService::saveInventoryData(const std::string& character, const InventoryData& data) const {
     if (!m_sqlRepository) return m_players.saveInventory(character, data);
-    if (!m_sqlRepository->saveInventory(character, data)) return false;
-    m_players.deleteInventory(character);
-    return true;
+    return m_sqlRepository->saveInventory(character, data);
 }
 bool InventoryService::saveWarehouseData(const std::string& account, const WarehouseData& data) const {
     if (!m_sqlRepository) return m_players.saveWarehouse(account, data);
-    if (!m_sqlRepository->saveWarehouse(account, data)) return false;
-    m_players.deleteWarehouse(account);
-    return true;
+    return m_sqlRepository->saveWarehouse(account, data);
 }
 
 InventoryService::~InventoryService() {

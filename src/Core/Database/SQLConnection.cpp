@@ -1,6 +1,5 @@
 ﻿#include "Database/SQLConnection.h"
 #include <vector>
-#include <iostream>
 
 SQLConnection::SQLConnection(const std::string& connectionString) {
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
@@ -42,6 +41,7 @@ SQLConnection::SQLConnection(const std::string& connectionString) {
 
 SQLConnection::~SQLConnection() {
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
+    reset();
     // Libera os handles na ordem inversa da alocação
     if (m_statement != SQL_NULL_HANDLE) {
         SQLFreeHandle(SQL_HANDLE_STMT, m_statement);
@@ -70,7 +70,7 @@ void SQLConnection::prepare(const std::string& query) {
 void SQLConnection::execute() {
     std::lock_guard<std::recursive_mutex> lock(m_mutex);
     SQLRETURN ret = SQLExecute(m_statement);
-    if (!SQL_SUCCEEDED(ret)) {
+    if (!SQL_SUCCEEDED(ret) && ret != SQL_NO_DATA) {
         handleError(SQL_HANDLE_STMT, m_statement, "Falha ao executar a instrucao.");
     }
 }
@@ -80,6 +80,7 @@ void SQLConnection::beginTransaction() {
     if (!SQL_SUCCEEDED(SQLSetConnectAttr(m_connection, SQL_ATTR_AUTOCOMMIT,
         reinterpret_cast<SQLPOINTER>(SQL_AUTOCOMMIT_OFF), 0)))
         handleError(SQL_HANDLE_DBC, m_connection, "Nao foi possivel iniciar a transacao.");
+    m_transactionActive = true;
 }
 
 void SQLConnection::commit() {
@@ -88,6 +89,7 @@ void SQLConnection::commit() {
         handleError(SQL_HANDLE_DBC, m_connection, "Nao foi possivel confirmar a transacao.");
     SQLSetConnectAttr(m_connection, SQL_ATTR_AUTOCOMMIT,
         reinterpret_cast<SQLPOINTER>(SQL_AUTOCOMMIT_ON), 0);
+    m_transactionActive = false;
 }
 
 void SQLConnection::rollback() {
@@ -96,6 +98,18 @@ void SQLConnection::rollback() {
         handleError(SQL_HANDLE_DBC, m_connection, "Nao foi possivel desfazer a transacao.");
     SQLSetConnectAttr(m_connection, SQL_ATTR_AUTOCOMMIT,
         reinterpret_cast<SQLPOINTER>(SQL_AUTOCOMMIT_ON), 0);
+    m_transactionActive = false;
+}
+
+void SQLConnection::reset() {
+    std::lock_guard<std::recursive_mutex> lock(m_mutex);
+    if (m_connection != SQL_NULL_HANDLE && m_transactionActive) {
+        SQLEndTran(SQL_HANDLE_DBC, m_connection, SQL_ROLLBACK);
+        SQLSetConnectAttr(m_connection, SQL_ATTR_AUTOCOMMIT,
+            reinterpret_cast<SQLPOINTER>(SQL_AUTOCOMMIT_ON), 0);
+        m_transactionActive = false;
+    }
+    if (m_statement != SQL_NULL_HANDLE) clearStatement();
 }
 
 bool SQLConnection::fetch() {
@@ -118,19 +132,24 @@ void SQLConnection::clearStatement() {
 
     // Limpa o buffer de strings para a próxima consulta
     m_stringParamBuffer.clear();
+    m_parameterIndicators.clear();
 }
 
 void SQLConnection::handleError(unsigned int handleType, SQLHANDLE handle, const std::string& context) {
-    SQLCHAR sqlstate[6];
-    SQLINTEGER nativeError;
-    SQLCHAR messageText[SQL_MAX_MESSAGE_LENGTH];
-    SQLSMALLINT textLength;
+    SQLCHAR sqlstate[6]{};
+    SQLINTEGER nativeError = 0;
+    SQLCHAR messageText[SQL_MAX_MESSAGE_LENGTH]{};
+    SQLSMALLINT textLength = 0;
     std::string errorMsg = "[ODBC Error] " + context + "\n";
 
-    SQLGetDiagRec(handleType, handle, 1, sqlstate, &nativeError, messageText, sizeof(messageText), &textLength);
+    const auto diagnostic = SQLGetDiagRec(handleType, handle, 1, sqlstate, &nativeError, messageText,
+                                         static_cast<SQLSMALLINT>(sizeof(messageText)), &textLength);
+    if (!SQL_SUCCEEDED(diagnostic)) {
+        throw std::runtime_error(errorMsg + "  Sem diagnostico ODBC disponivel.");
+    }
 
-    errorMsg += "  SQLSTATE: " + std::string(reinterpret_cast<const char*>(sqlstate)) + "\n";
-    errorMsg += "  Message: " + std::string(reinterpret_cast<const char*>(messageText));
+    errorMsg += "  SQLSTATE: " + std::string(reinterpret_cast<const char*>(sqlstate), 5) + "\n";
+    errorMsg += "  Message: " + std::string(reinterpret_cast<const char*>(messageText), textLength);
 
     // A exceção fará com que o destrutor seja chamado (se o objeto foi totalmente construído),
     // garantindo a limpeza dos recursos.

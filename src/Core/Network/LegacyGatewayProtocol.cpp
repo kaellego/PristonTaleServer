@@ -1,8 +1,10 @@
 #include "Network/LegacyGatewayProtocol.h"
 #include "Shared/Constants.h"
 #include "Shared/datatypes.h"
+#include "Utils/SafeString.h"
 
 #include <algorithm>
+#include <cctype>
 #include <cstring>
 
 namespace LegacyGateway
@@ -78,7 +80,8 @@ namespace LegacyGateway
             uint32_t blessCastleMaster, elementaryQuestLog;
             uint32_t primeItemTimes[12];
             int32_t totalSubExp, totalMoney, totalExp;
-            char masterId[32];
+            char masterId[21];
+            uint8_t masterIdPadding[3];
             LegacyQuestInfo questInfo;
             LegacyLastQuestInfo lastQuestInfo;
             uint32_t serverId;
@@ -104,6 +107,23 @@ namespace LegacyGateway
             int16_t angle[4];
             int16_t stickItems[4];
             uint32_t targetSerial;
+        };
+
+        struct LegacyPlayData
+        {
+            int32_t size, code;
+            uint32_t objectSerial;
+            int32_t x, y, z;
+            int16_t angle[4];
+            uint32_t frame;
+            uint32_t autoCharacterCode;
+        };
+
+        struct LegacyPlayDataGroup
+        {
+            int32_t size, code;
+            int32_t playDataCount;
+            uint32_t sendCode;
         };
 
         struct LegacyTransPlayData
@@ -150,15 +170,29 @@ namespace LegacyGateway
             int16_t area[2];
             int32_t temp[4];
         };
+
+        struct LegacyNpcInfo
+        {
+            int32_t size, code;
+            LegacyCharacterInfo character;
+            uint32_t objectSerial;
+            int32_t x, y, z;
+            int32_t ax, ay, az;
+            int32_t state;
+        };
 #pragma pack(pop)
 
         static_assert(sizeof(LegacyCharacterInfo) == 464);
-        static_assert(sizeof(LegacyGameSaveInfo) == 512);
+        static_assert(sizeof(LegacyGameSaveInfo) == 504);
+        static_assert(sizeof(LegacyRecordPrefix) == 1768);
         static_assert(sizeof(LegacyPlayBuff) == 36);
+        static_assert(sizeof(LegacyPlayData) == 40);
+        static_assert(sizeof(LegacyPlayDataGroup) == 16);
         static_assert(sizeof(LegacyTransPlayData) == 44);
         static_assert(sizeof(LegacyTransPlayBuff) == 40);
         static_assert(sizeof(LegacyAttackData) == 52);
         static_assert(sizeof(LegacyAttackData2) == 92);
+        static_assert(sizeof(LegacyNpcInfo) == 504);
 
         uint32_t characterReformCode(const LegacyCharacterInfo &character)
         {
@@ -211,10 +245,10 @@ namespace LegacyGateway
                 "char\\tmABCD\\a001.ini",  // 2: Mechanician
                 "char\\tmABCD\\d001.ini",  // 3: Archer
                 "char\\tmABCD\\c001.ini",  // 4: Pikeman
-                "char\\tmABCD\\mb001.ini", // 5: Atalanta
-                "char\\tmABCD\\ma001.ini", // 6: Knight
-                "char\\tmABCD\\md001.ini", // 7: Magician
-                "char\\tmABCD\\mc001.ini", // 8: Priestess
+                "char\\tmABCD\\ma001.ini", // 5: Knight
+                "char\\tmABCD\\mb001.ini", // 6: Atalanta
+                "char\\tmABCD\\mc001.ini", // 7: Priestess
+                "char\\tmABCD\\md001.ini", // 8: Magician
                 "char\\tmABCD\\e001.ini",  // 9: Assassin
                 "char\\tmABCD\\me001.ini", // 10: Shaman
                 "char\\tmABCD\\f001.ini"   // 11: Martial Artist
@@ -231,10 +265,10 @@ namespace LegacyGateway
                 "char\\tmABCD\\tmh-a01.inf", // 2: Mechanician
                 "char\\tmABCD\\tfh-D01.inf", // 3: Archer
                 "char\\tmABCD\\tmh-c01.inf", // 4: Pikeman
-                "char\\tmABCD\\Mfh-B01.inf", // 5: Atalanta
-                "char\\tmABCD\\Mmh-A01.inf", // 6: Knight
-                "char\\tmABCD\\Mmh-D01.inf", // 7: Magician
-                "char\\tmABCD\\Mfh-C01.inf", // 8: Priestess
+                "char\\tmABCD\\Mmh-A01.inf", // 5: Knight
+                "char\\tmABCD\\Mfh-B01.inf", // 6: Atalanta
+                "char\\tmABCD\\Mfh-C01.inf", // 7: Priestess
+                "char\\tmABCD\\Mmh-D01.inf", // 8: Magician
                 "char\\tmABCD\\tfh-e01.inf", // 9: Assassin
                 "char\\tmABCD\\Mmh-e01.inf", // 10: Shaman
                 "char\\tmABCD\\tfh-f01.inf"  // 11: Martial Artist (Artista Marcial)
@@ -263,6 +297,78 @@ namespace LegacyGateway
             return characterClass >= 1 && characterClass <= 11 ? models[characterClass - 1] : models[0];
         }
 
+        // CharacterData stores the project's class order. The original
+        // client expects the legacy display/job code, not JobBitCode.
+        uint32_t legacyJobCodeForClass(int characterClass)
+        {
+            static constexpr uint32_t codes[] = {
+                0,
+                1u, // Fighter
+                2u, // Mechanician
+                3u, // Archer
+                4u, // Pikeman
+                6u, // Knight
+                5u, // Atalanta
+                8u, // Priestess
+                7u, // Magician
+                9u, // Assassin (extended clients)
+                10u, // Shaman (extended clients)
+                11u  // Martial Artist (extended clients)
+            };
+            return characterClass >= 1 && characterClass <= 11
+                ? codes[static_cast<size_t>(characterClass)]
+                : codes[1];
+        }
+
+        int internalClassForLegacyJobCode(int legacyJobCode)
+        {
+            switch (legacyJobCode)
+            {
+            case 1: return 1; // Fighter
+            case 2: return 2; // Mechanician
+            case 3: return 3; // Archer
+            case 4: return 4; // Pikeman
+            case 5: return 6; // Atalanta
+            case 6: return 5; // Knight
+            case 7: return 8; // Magician
+            case 8: return 7; // Priestess
+            case 9: return 9; // Assassin
+            case 10: return 10; // Shaman
+            case 11: return 11; // Martial Artist
+            default: return 0;
+            }
+        }
+
+        bool validLegacyCharacterName(const char *value, size_t capacity)
+        {
+            if (!value || capacity == 0 || std::memchr(value, '\0', capacity) == nullptr)
+                return false;
+            const auto length = strnlen_s(value, capacity);
+            if (length == 0 || length >= 32)
+                return false;
+            for (size_t i = 0; i < length; ++i)
+            {
+                const auto ch = static_cast<unsigned char>(value[i]);
+                if (!std::isalnum(ch) && ch != '_' && ch != '-')
+                    return false;
+            }
+            return true;
+        }
+
+        bool copyLegacyCharacterName(char *destination, size_t destinationSize,
+                                     const std::vector<uint8_t> &payload,
+                                     size_t sourceOffset)
+        {
+            if (!destination || destinationSize == 0 || sourceOffset + 32 > payload.size())
+                return false;
+            const auto *source = reinterpret_cast<const char *>(payload.data() + sourceOffset);
+            if (!validLegacyCharacterName(source, 32))
+                return false;
+            std::memset(destination, 0, destinationSize);
+            std::memcpy(destination, source, std::min(destinationSize - 1, std::strlen(source)));
+            return true;
+        }
+
         std::vector<uint8_t> characterRecordPayload(const CharacterData &character)
         {
             LegacyRecordPrefix record{};
@@ -270,12 +376,12 @@ namespace LegacyGateway
             record.size = static_cast<int32_t>(sizeof(record));
             std::memcpy(record.header, "RC 1.50", 7);
             std::memcpy(record.character.name, character.szName, sizeof(record.character.name));
-            strncpy_s(record.character.modelName, modelBodyForClass(character.iClass), _TRUNCATE);
-            strncpy_s(record.character.modelName2, modelFaceForClass(character.iClass), _TRUNCATE);
+            copyFixed(record.character.modelName, modelBodyForClass(character.iClass));
+            copyFixed(record.character.modelName2, modelFaceForClass(character.iClass));
             record.character.objectSerial = 0x10000000u + static_cast<uint32_t>(std::hash<std::string>{}(character.szName));
             record.character.state = 0x80; // smCHAR_STATE_USER
             record.character.brood = 0xA0; // smCHAR_MONSTER_USER
-            record.character.jobCode = static_cast<uint32_t>(character.iClass);
+            record.character.jobCode = legacyJobCodeForClass(character.iClass);
             record.character.level = std::max(1, character.iLevel);
             record.character.strength = character.iStrength;
             record.character.spirit = character.iSpirit;
@@ -302,9 +408,9 @@ namespace LegacyGateway
             record.save.posZ = static_cast<int32_t>(character.fPosZ);
             record.save.totalMoney = character.iGold;
 
-            // TRANS_RECORD_DATAS is: size, code, count, total, transSize,
-            // followed immediately by the serialized TRANS_RECORD_DATA.
-            std::vector<uint8_t> frame(sizeof(record) + 20, 0);
+            // The legacy transport reserves 32 bytes before the record data;
+            // this matches rsRECORD_DBASE::SendRecordDataToClient().
+            std::vector<uint8_t> frame(sizeof(record) + 32, 0);
             const int32_t frameSize = static_cast<int32_t>(frame.size());
             const int32_t total = 1;
             const int32_t dataSize = static_cast<int32_t>(sizeof(record));
@@ -346,8 +452,9 @@ namespace LegacyGateway
         {
             // TRANS_RECORD_DATAS: five integers, serialized record and 12 legacy padding bytes.
             if (command.size != static_cast<int32_t>(payload.size()) || command.size < 32 ||
-                command.lParam < 0 || command.wParam <= 0 || command.wParam > 64 ||
-                command.lParam >= command.wParam || command.sParam <= 0 ||
+                command.lParam < 0 || command.lParam > 64 || command.wParam < 0 || command.wParam > 64 ||
+                (command.wParam != 0 && command.lParam >= command.wParam) ||
+                (command.wParam == 0 && command.lParam != 0) || command.sParam <= 0 ||
                 command.sParam > command.size - 32)
                 return std::nullopt;
             modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
@@ -366,6 +473,18 @@ namespace LegacyGateway
                 return std::nullopt;
             modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
             break;
+        case Opcode::GetPlayerInfo:
+            if (command.size != sizeof(Command) || payload.size() != sizeof(Command) ||
+                static_cast<uint32_t>(command.wParam) == 0)
+                return std::nullopt;
+            {
+                PacketNpcClick click{};
+                click.objectSerial = static_cast<uint32_t>(command.wParam);
+                click.npcId = 0; // Resolve by serial; the legacy request has no NPC id.
+                const auto* body = reinterpret_cast<const uint8_t*>(&click);
+                return Packet(static_cast<uint32_t>(Opcodes::NpcUnitClick),
+                              std::vector<uint8_t>(body, body + sizeof(click)));
+            }
         case Opcode::TransPlayData:
         {
             // smTRANS_PLAYDATA (44) + smTRANS_PLAYBUFF (40 each) + smEFFECT_ITEM (32 each).
@@ -488,15 +607,20 @@ namespace LegacyGateway
                     // Older clients leave LParam at zero. Keep that client
                     // compatible, but never accept a class outside the game
                     // range when an updated client supplies it.
+                    modern.LParam = internalClassForLegacyJobCode(modern.LParam);
                     if (modern.LParam == 0)
-                        modern.LParam = 1;
-                    else if (modern.LParam < 1 || modern.LParam > 11)
                         return std::nullopt;
                 }
                 if (command.code != 5)
                     std::memcpy(modern.szAccount, payload.data() + 20, 21);
-                const auto *name = reinterpret_cast<const char *>(payload.data() + (command.code == 5 ? 20 : 41));
-                std::memcpy(modern.szName, name, sizeof(modern.szName));
+                const size_t nameOffset = command.code == 5 ? 20 : 41;
+                bool nameCopied = copyLegacyCharacterName(modern.szName, sizeof(modern.szName), payload, nameOffset);
+                // Some compatible clients serialize the command without the
+                // account field. Accept only that exact alternate offset.
+                if (!nameCopied && command.code != 5)
+                    nameCopied = copyLegacyCharacterName(modern.szName, sizeof(modern.szName), payload, 20);
+                if (!nameCopied)
+                    return std::nullopt;
                 const auto *body = reinterpret_cast<const uint8_t *>(&modern) + sizeof(PacketHeader);
                 return Packet(modern.header.opcode,
                               std::vector<uint8_t>(body, body + sizeof(modern) - sizeof(PacketHeader)));
@@ -607,16 +731,20 @@ namespace LegacyGateway
             legacy.code = static_cast<int32_t>(Opcode::ServerInfo);
             std::memcpy(legacy.name, modern.szServerName, sizeof(legacy.name));
             legacy.clanCount = 0;
-            legacy.count = std::min(modern.iGameServers, 8);
+            // PacketServerList possui somente quatro entradas; nunca use o
+            // limite maior do frame legado para indexar o pacote moderno.
+            legacy.count = std::clamp(modern.iGameServers, 0, 4);
             for (int i = 0; i < legacy.count; ++i)
             {
                 std::memcpy(legacy.servers[i].name, modern.sServers[i].szName, sizeof(legacy.servers[i].name));
                 std::memcpy(legacy.servers[i].ip1, modern.sServers[i].szaIP[0], sizeof(legacy.servers[i].ip1));
                 std::memcpy(legacy.servers[i].ip2, modern.sServers[i].szaIP[1], sizeof(legacy.servers[i].ip2));
                 std::memcpy(legacy.servers[i].ip3, modern.sServers[i].szaIP[2], sizeof(legacy.servers[i].ip3));
-                legacy.servers[i].port1 = modern.sServers[i].iaPort[0];
-                legacy.servers[i].port2 = modern.sServers[i].iaPort[1];
-                legacy.servers[i].port3 = modern.sServers[i].iaPort[2];
+                // This process exposes the legacy login/data socket as the
+                // single endpoint used by the original client after selection.
+                legacy.servers[i].port1 = 5055;
+                legacy.servers[i].port2 = 5055;
+                legacy.servers[i].port3 = 5055;
             }
             append(&legacy, sizeof(legacy));
         }
@@ -651,7 +779,7 @@ namespace LegacyGateway
                 std::memcpy(dst.name, src.szName, sizeof(dst.name));
                 std::memcpy(dst.model, src.szModelName, sizeof(dst.model));
                 std::memcpy(dst.model2, src.szModelName2, sizeof(dst.model2));
-                dst.job = src.JobCode;
+                dst.job = legacyJobCodeForClass(src.JobCode);
                 dst.level = src.iLevel;
                 dst.brood = src.Brood;
                 dst.armor = src.dwArmorCode;
@@ -662,6 +790,68 @@ namespace LegacyGateway
             }
             append(&legacy, sizeof(legacy));
         }
+        else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::NpcData))
+        {
+            if (packet.body.size() != sizeof(PacketNpcData)) return std::nullopt;
+            PacketNpcData npc{};
+            std::memcpy(&npc, packet.body.data(), sizeof(npc));
+            if (npc.npcId <= 0 || npc.objectSerial == 0 || npc.enabled == 0 ||
+                !isSafeString(npc.szName, sizeof(npc.szName)) ||
+                !isSafeString(npc.szModelName, sizeof(npc.szModelName))) return std::nullopt;
+
+            // O cliente legado só aloca o NPC ao receber PLAYDATAGROUP. O
+            // PLAYERINFO sozinho é descartado porque ainda não existe um
+            // slot em chrOtherPlayer para recebê-lo.
+            if (requestCode != static_cast<int32_t>(Opcode::GetPlayerInfo))
+            {
+                LegacyPlayDataGroup group{
+                    static_cast<int32_t>(sizeof(LegacyPlayDataGroup) + sizeof(LegacyPlayData)),
+                    static_cast<int32_t>(Opcode::PlayDataGroup), 1, 0x80000000u};
+                LegacyPlayData play{};
+                play.size = sizeof(play);
+                play.code = static_cast<int32_t>(Opcode::PlayData1);
+                play.objectSerial = npc.objectSerial;
+                play.x = npc.x;
+                play.y = npc.y;
+                play.z = npc.z;
+                play.angle[1] = static_cast<int16_t>(npc.angleY);
+                play.autoCharacterCode = npc.objectSerial;
+                append(&group, sizeof(group));
+                append(&play, sizeof(play));
+                return payload;
+            }
+
+            LegacyNpcInfo legacy{};
+            legacy.size = sizeof(legacy);
+            legacy.code = static_cast<int32_t>(Opcode::PlayerInfo);
+            legacy.character.objectSerial = npc.objectSerial;
+            legacy.character.state = 0; // smCHAR_STATE_NPC
+            legacy.character.brood = 0xA0;
+            legacy.character.level = 1;
+            legacy.character.life[0] = legacy.character.life[1] = 100;
+            legacy.character.mana[0] = legacy.character.mana[1] = 100;
+            legacy.character.stamina[0] = legacy.character.stamina[1] = 100;
+            legacy.character.weight[1] = 100;
+            legacy.character.moveSpeed = 250;
+            std::memcpy(legacy.character.name, npc.szName, sizeof(legacy.character.name));
+            std::memcpy(legacy.character.modelName, npc.szModelName, sizeof(legacy.character.modelName));
+            legacy.objectSerial = npc.objectSerial;
+            legacy.x = npc.x;
+            legacy.y = npc.y;
+            legacy.z = npc.z;
+            legacy.ay = npc.angleY;
+            append(&legacy, sizeof(legacy));
+        }
+        else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::OpenNPC))
+        {
+            if (packet.body.size() != sizeof(PacketNpcOpen)) return std::nullopt;
+            PacketNpcOpen opened{};
+            std::memcpy(&opened, packet.body.data(), sizeof(opened));
+            if (opened.npcId <= 0 || opened.objectSerial == 0 || opened.mapId < 0) return std::nullopt;
+            // There is no confirmed generic legacy UI frame for this response.
+            // The validated click is accepted, but no guessed frame is emitted.
+            return std::vector<uint8_t>{};
+        }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::RecordResult) ||
                  packet.header.opcode == static_cast<uint32_t>(Opcodes::FailRecordData))
         {
@@ -670,7 +860,10 @@ namespace LegacyGateway
             PacketRecordResult result{};
             std::memcpy(reinterpret_cast<uint8_t *>(&result) + sizeof(PacketHeader), packet.body.data(),
                         sizeof(result) - sizeof(PacketHeader));
-            if (packet.header.opcode == static_cast<uint32_t>(Opcodes::RecordResult) && requestCode == 5 &&
+            // A resposta de selecao ja carrega o personagem completo. Nao dependa
+            // do requestCode aqui: o cliente envia keep-alive logo depois da
+            // selecao e esse valor pode ter sido atualizado antes da resposta.
+            if (packet.header.opcode == static_cast<uint32_t>(Opcodes::RecordResult) &&
                 result.Result != 0 && packet.body.size() >= sizeof(PacketRecordResult) - sizeof(PacketHeader) + sizeof(CharacterData))
             {
                 CharacterData character{};

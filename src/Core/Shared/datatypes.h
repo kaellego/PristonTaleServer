@@ -620,6 +620,22 @@ struct PacketItemUse { PacketHeader header; int32_t inventorySlot; int32_t equip
 struct PacketWarehouseTransfer { PacketHeader header; int32_t inventorySlot; int32_t warehouseSlot; int32_t quantity; int32_t toWarehouse; };
 struct PacketDropRequest { PacketHeader header; int32_t inventorySlot; int32_t quantity; };
 struct PacketDropPickup { PacketHeader header; int32_t dropId; };
+struct PacketNpcData {
+    int32_t npcId;
+    uint32_t objectSerial;
+    int32_t mapId;
+    int32_t x, y, z;
+    int32_t angleY;
+    int32_t eventCode;
+    int32_t enabled;
+    char szName[32];
+    char szModelName[64];
+};
+struct PacketNpcClick { uint32_t objectSerial; int32_t npcId; };
+struct PacketNpcOpen { int32_t npcId; uint32_t objectSerial; int32_t eventCode; int32_t mapId; };
+static_assert(sizeof(PacketNpcData) == 132);
+static_assert(sizeof(PacketNpcClick) == 8);
+static_assert(sizeof(PacketNpcOpen) == 16);
 
 // Estrutura para uma definição de item carregada da tabela ItemList do banco de dados.
 struct DefinitionItem {

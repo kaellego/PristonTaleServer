@@ -44,11 +44,57 @@ struct MapEntity {
 };
 struct CombatResult { bool hit = false; bool targetDefeated = false; int damage = 0; int targetHealth = 0; };
 struct WorldDrop { int id = 0; int mapId = 0; MapPosition position{}; Item item{}; std::chrono::steady_clock::time_point expiresAt{}; };
+struct NpcEntity {
+    int id = 0;
+    uint32_t objectSerial = 0;
+    int mapId = 0;
+    MapPosition position{};
+    int angleY = 0;
+    std::string name;
+    std::string modelName;
+    int eventCode = 0;
+    bool enabled = true;
+};
 
 class GameWorld {
 public:
     using PersistenceCallback = std::function<void(const std::string&, CharacterData)>;
     void setPersistenceCallback(PersistenceCallback callback) { m_persist = std::move(callback); }
+    bool registerNpc(NpcEntity npc) {
+        if (npc.id <= 0 || npc.objectSerial == 0 || npc.name.empty() || npc.modelName.empty() ||
+            npc.name.size() >= 32 || npc.modelName.size() >= 64 || !std::isfinite(npc.position.x) ||
+            !std::isfinite(npc.position.y) || !std::isfinite(npc.position.z)) return false;
+        std::lock_guard lock(m_mutex);
+        if (m_npcs.size() >= 512 || m_npcs.contains(npc.objectSerial)) return false;
+        m_npcs.emplace(npc.objectSerial, std::move(npc));
+        return true;
+    }
+    std::vector<NpcEntity> npcsForMap(int mapId) const {
+        std::vector<NpcEntity> result;
+        std::lock_guard lock(m_mutex);
+        for (const auto& [serial, npc] : m_npcs)
+            if (npc.enabled && npc.mapId == mapId) result.push_back(npc);
+        return result;
+    }
+    std::optional<NpcEntity> interactNpc(int entityId, int npcId, uint32_t objectSerial) const {
+        std::lock_guard lock(m_mutex);
+        const auto player = m_entities.find(entityId);
+        if (player == m_entities.end() || !player->second.alive || objectSerial == 0) return std::nullopt;
+        const NpcEntity* npc = nullptr;
+        if (npcId > 0) {
+            for (const auto& [serial, candidate] : m_npcs)
+                if (candidate.id == npcId && candidate.objectSerial == objectSerial) { npc = &candidate; break; }
+        } else {
+            for (const auto& [serial, candidate] : m_npcs)
+                if (candidate.objectSerial == objectSerial) { npc = &candidate; break; }
+        }
+        if (!npc || !npc->enabled || npc->objectSerial != objectSerial || npc->mapId != player->second.mapId)
+            return std::nullopt;
+        const auto& p = player->second.position;
+        const float dx = p.x - npc->position.x, dy = p.y - npc->position.y, dz = p.z - npc->position.z;
+        if (dx * dx + dy * dy + dz * dz > 36.0f) return std::nullopt;
+        return *npc;
+    }
     std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName, const CharacterData& character, std::weak_ptr<ClientSession> client = {}) {
         auto gameSession = std::make_shared<GameSession>(accountId, accountName, characterName, std::move(client));
         std::lock_guard lock(m_mutex);
@@ -56,7 +102,24 @@ public:
             m_entities.erase(existing->second->entityId());
         gameSession->setEntityId(m_nextEntityId);
         m_sessions[accountName] = gameSession;
-        MapEntity entity{m_nextEntityId, accountId}; entity.position = {character.fPosX, character.fPosY, character.fPosZ}; entity.mapId = character.iMapId; entity.health = std::clamp(character.iHP, 0, std::max(1, character.iMaxHP)); entity.maxHealth = std::max(1, character.iMaxHP); entity.mana = std::clamp(character.iMP, 0, std::max(0, character.iMaxMP)); entity.maxMana = std::max(0, character.iMaxMP); entity.stamina = std::clamp(character.iSTM, 0, std::max(1, character.iMaxSTM)); entity.maxStamina = std::max(1, character.iMaxSTM); entity.hpRegen = character.fHPRegen + character.fHPRegenBonus; entity.mpRegen = character.fMPRegen + character.fMPRegenBonus; entity.spRegen = character.fSPRegen + character.fSPRegenBonus; for (const auto& item : character.saEquipment) { entity.hpRegen += item.fHPRegen; entity.mpRegen += item.fMPRegen; entity.spRegen += item.fSPRegen; } entity.nextRegen = std::chrono::steady_clock::now() + std::chrono::seconds(1); entity.attack = std::max(1, character.iAttackMax); entity.defense = character.iDefense; entity.alive = entity.health > 0; m_entities[m_nextEntityId] = entity;
+        MapEntity entity{m_nextEntityId, accountId};
+        entity.position = {character.fPosX, character.fPosY, character.fPosZ};
+        entity.mapId = character.iMapId;
+        entity.maxHealth = character.iMaxHP > 1 ? character.iMaxHP : 100;
+        entity.health = character.iMaxHP > 1 ? std::clamp(character.iHP, 0, entity.maxHealth) : entity.maxHealth;
+        entity.maxMana = character.iMaxMP > 1 ? character.iMaxMP : 100;
+        entity.mana = character.iMaxMP > 1 ? std::clamp(character.iMP, 0, entity.maxMana) : entity.maxMana;
+        entity.maxStamina = character.iMaxSTM > 1 ? character.iMaxSTM : 100;
+        entity.stamina = character.iMaxSTM > 1 ? std::clamp(character.iSTM, 0, entity.maxStamina) : entity.maxStamina;
+        entity.hpRegen = character.fHPRegen + character.fHPRegenBonus;
+        entity.mpRegen = character.fMPRegen + character.fMPRegenBonus;
+        entity.spRegen = character.fSPRegen + character.fSPRegenBonus;
+        for (const auto& item : character.saEquipment) { entity.hpRegen += item.fHPRegen; entity.mpRegen += item.fMPRegen; entity.spRegen += item.fSPRegen; }
+        entity.nextRegen = std::chrono::steady_clock::now() + std::chrono::seconds(1);
+        entity.attack = std::max(1, character.iAttackMax);
+        entity.defense = character.iDefense;
+        entity.alive = entity.health > 0;
+        m_entities[m_nextEntityId] = entity;
         ++m_nextEntityId;
         return gameSession;
     }
@@ -176,6 +239,7 @@ private:
     mutable std::mutex m_mutex;
     std::unordered_map<std::string, std::shared_ptr<GameSession>> m_sessions;
     std::unordered_map<int, MapEntity> m_entities;
+    std::unordered_map<uint32_t, NpcEntity> m_npcs;
     int m_nextEntityId = 1;
     int m_nextDropId = 1;
     std::unordered_map<int, WorldDrop> m_drops;

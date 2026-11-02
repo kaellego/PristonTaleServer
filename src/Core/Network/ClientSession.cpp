@@ -58,6 +58,12 @@ void ClientSession::start() {
     m_logService.info("Enviando confirmacao legada VERSION para {}", m_gameEndpoint ? "GameServer" : "LoginServer");
     m_legacy_write_queue.push_back(LegacyGateway::gameServerReadyPayload());
     do_legacy_write();
+    if (m_gameEndpoint) {
+        // The original client may wait for VERSION before sending its first
+        // command, so bind the short-lived game socket before reading it.
+        if (m_packet_dispatcher.transferLegacySessionByIp(shared_from_this()))
+            m_logService.info("Sessao do GameServer vinculada por IP antes do primeiro pacote.");
+    }
     do_read_legacy_length();
 }
 
@@ -65,7 +71,11 @@ void ClientSession::do_read_legacy_length() {
     auto self = shared_from_this();
     boost::asio::async_read(m_socket, boost::asio::buffer(m_legacyLengthBuffer),
         [this, self](boost::system::error_code ec, std::size_t) {
-            if (ec) { close(); return; }
+            if (ec) {
+                m_logService.warn("Leitura do tamanho legado falhou ({}): {}", m_gameEndpoint ? "GameServer" : "LoginServer", ec.message());
+                close();
+                return;
+            }
             uint32_t length = 0;
             std::memcpy(&length, m_legacyLengthBuffer.data(), sizeof(length));
             if (length < sizeof(int32_t) * 2 || length > LegacyPacketCodec::MaxFrameSize) {
@@ -84,7 +94,11 @@ void ClientSession::do_read_legacy_frame() {
     boost::asio::async_read(m_socket,
         boost::asio::buffer(m_legacyFrame.data() + sizeof(uint32_t), m_legacyFrame.size() - sizeof(uint32_t)),
         [this, self](boost::system::error_code ec, std::size_t) {
-            if (ec) { close(); return; }
+            if (ec) {
+                m_logService.warn("Leitura do frame legado falhou ({}): {}", m_gameEndpoint ? "GameServer" : "LoginServer", ec.message());
+                close();
+                return;
+            }
 
             auto packet = m_legacyAdapter.decode(m_legacyFrame);
             if (!packet) {
@@ -218,7 +232,10 @@ void ClientSession::do_read_body() {
 }
 
 void ClientSession::send(Packet packet) {
-    if (auto legacy = LegacyGateway::toLegacyPayload(packet, m_legacySendCounter + 1, m_legacyRequestCode); legacy) {
+    // Capture the request that caused this response before a subsequent
+    // keep-alive can overwrite m_legacyRequestCode on the read callback.
+    const int32_t requestCode = m_legacyRequestCode;
+    if (auto legacy = LegacyGateway::toLegacyPayload(packet, m_legacySendCounter + 1, requestCode); legacy) {
         if (legacy->empty()) return; // Successful legacy login has no response frame.
         m_legacySendCounter++;
         auto frame = std::move(*legacy);

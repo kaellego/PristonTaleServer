@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package zeropt;
+
+message Item {
+  int32 item_id = 1;
+  bytes item_name = 2;
+  int32 quantity = 3;
+  uint64 serial = 4;
+  uint32 checksum = 5;
+  uint32 version = 6;
+  float hp_regen = 7;
+  float mp_regen = 8;
+  float sp_regen = 9;
+}
+
+message CharacterState {
+  bytes name = 1;
+  int32 level = 2;
+  int64 experience = 3;
+  int32 class_id = 4;
+  int32 map_id = 5;
+  float pos_x = 6;
+  float pos_y = 7;
+  float pos_z = 8;
+  int32 hp = 9;
+  int32 max_hp = 10;
+  int32 mp = 11;
+  int32 max_mp = 12;
+  int32 stm = 13;
+  int32 max_stm = 14;
+  float hp_regen = 15;
+  float mp_regen = 16;
+  float sp_regen = 17;
+  float hp_regen_bonus = 18;
+  float mp_regen_bonus = 19;
+  float sp_regen_bonus = 20;
+  int32 strength = 21;
+  int32 spirit = 22;
+  int32 talent = 23;
+  int32 agility = 24;
+  int32 health = 25;
+  int32 attack_min = 26;
+  int32 attack_max = 27;
+  int32 defense = 28;
+  int32 gold = 29;
+  repeated Item equipment = 30;
+}
+
+message InventoryState { int32 gold = 1; repeated Item item = 2; }
+message WarehouseState { int32 gold = 1; repeated Item item = 2; }

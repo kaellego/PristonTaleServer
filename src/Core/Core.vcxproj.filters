@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Arquivos de Origem">
@@ -49,6 +49,21 @@
       <Filter>Arquivos de Origem\Database</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic\PlayerRepository.h">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\PlayerStateProto.h">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\Generated\player_state.pb.h">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\PlayerStateSqlRepository.h">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\CharacterFileRepository.h">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\StorageFileRepository.h">
       <Filter>Arquivos de Origem\GameLogic</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic\ItemRepository.h">
@@ -108,6 +123,9 @@
     <ClInclude Include="Utils\picosha2.h">
       <Filter>Arquivos de Origem\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\HmacSha256.h">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="GameLogic\Handlers\KeepAliveHandler.h">
       <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
     </ClInclude>
@@ -137,6 +155,21 @@
     <ClCompile Include="GameLogic\PlayerRepository.cpp">
       <Filter>Arquivos de Origem\GameLogic</Filter>
     </ClCompile>
+    <ClCompile Include="GameLogic\PlayerStateProto.cpp">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\Generated\player_state.pb.cc">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\PlayerStateSqlRepository.cpp">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\CharacterFileRepository.cpp">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="GameLogic\StorageFileRepository.cpp">
+      <Filter>Arquivos de Origem\GameLogic</Filter>
+    </ClCompile>
     <ClCompile Include="GameLogic\ItemRepository.cpp">
       <Filter>Arquivos de Origem\GameLogic</Filter>
     </ClCompile>
@@ -159,6 +192,9 @@
       <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
     </ClCompile>
     <ClCompile Include="Utils\INIReader.cpp">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\HmacSha256.cpp">
       <Filter>Arquivos de Origem\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Network\Server.cpp">

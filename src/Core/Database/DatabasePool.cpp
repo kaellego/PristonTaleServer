@@ -10,11 +10,20 @@ namespace { const char* databaseName(EDatabaseID id) {
 } }
 
 DatabasePool::DatabasePool(const ServerConfig& config, LogService& logService, size_t poolSizePerDb) : m_logService(logService) {
+    if (poolSizePerDb == 0) throw std::invalid_argument("O pool de banco deve ter pelo menos uma conexao por banco.");
     const auto& db = config.getDatabaseConfig();
     m_driver = db.driver; m_host = db.host; m_user = db.user; m_password = db.password;
     m_dialect = detectDatabaseDialect(m_driver);
     if (m_dialect == DatabaseDialect::Unknown) throw std::runtime_error("Driver ODBC nao suportado: " + m_driver);
-    m_logService.info("ODBC configurado para os bancos; conexoes sob demanda com SQL_DRIVER_NOPROMPT; workers logicos: {}.", poolSizePerDb);
+    for (const auto database : { EDatabaseID::GameDB, EDatabaseID::LogDB, EDatabaseID::UserDB_Primary }) {
+        auto& state = m_pools[poolIndex(database)];
+        state.owned.reserve(poolSizePerDb);
+        for (size_t i = 0; i < poolSizePerDb; ++i) {
+            state.owned.push_back(std::make_unique<SQLConnection>(connectionString(database)));
+            state.available.push_back(state.owned.back().get());
+        }
+    }
+    m_logService.info("Pool ODBC inicializado: {} conexoes por banco; acesso limitado por fila.", poolSizePerDb);
 }
 
 std::string DatabasePool::connectionString(EDatabaseID id) const {
@@ -25,6 +34,35 @@ std::string DatabasePool::connectionString(EDatabaseID id) const {
     return std::format("DRIVER={{{}}};SERVER={},1433;DATABASE={};UID={};PWD={};TrustServerCertificate=yes;", driver, m_host, name, m_user, m_password);
 }
 
-std::unique_ptr<SQLConnection> DatabasePool::createConnection(EDatabaseID id) const {
-    return std::make_unique<SQLConnection>(connectionString(id));
+std::size_t DatabasePool::poolIndex(EDatabaseID id) {
+    switch (id) {
+    case EDatabaseID::GameDB: return 0;
+    case EDatabaseID::LogDB: return 1;
+    case EDatabaseID::UserDB_Primary: return 2;
+    default: throw std::invalid_argument("Banco invalido para o pool.");
+    }
+}
+
+DatabasePool::Connection DatabasePool::createConnection(EDatabaseID id) const {
+    auto& state = m_pools[poolIndex(id)];
+    std::unique_lock lock(state.mutex);
+    state.availableCondition.wait(lock, [&state] { return !state.available.empty(); });
+    auto* connection = state.available.front();
+    state.available.pop_front();
+    return Connection(connection, ConnectionDeleter{ this, id });
+}
+
+void DatabasePool::releaseConnection(EDatabaseID id, SQLConnection* connection) const noexcept {
+    if (!connection) return;
+    auto& state = m_pools[poolIndex(id)];
+    try { connection->reset(); } catch (...) { /* a conexao sera reutilizada apos rollback best-effort */ }
+    {
+        std::lock_guard lock(state.mutex);
+        state.available.push_back(connection);
+    }
+    state.availableCondition.notify_one();
+}
+
+void DatabasePool::ConnectionDeleter::operator()(SQLConnection* connection) const noexcept {
+    if (pool) pool->releaseConnection(database, connection);
 }

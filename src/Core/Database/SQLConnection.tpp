@@ -1,4 +1,4 @@
-// Este arquivo deve ser incluÌdo no final de SQLConnection.h
+// Este arquivo deve ser inclu√≠do no final de SQLConnection.h
 
 #include <type_traits> // Para std::is_integral_v, etc.
 
@@ -37,21 +37,28 @@ void SQLConnection::bindParameter(SQLUSMALLINT index, const T& value) {
         cType = SQL_C_CHAR;
         sqlType = SQL_VARCHAR;
 
-        // 1. Adiciona uma cÛpia da string ao nosso buffer de membro.
+        // 1. Adiciona uma c√≥pia da string ao nosso buffer de membro.
         m_stringParamBuffer.push_back(value);
         
-        // 2. Pega o ponteiro para a ⁄LTIMA string adicionada (a cÛpia).
-        //    std::list garante que este ponteiro permanecer· v·lido.
+        // 2. Pega o ponteiro para a √öLTIMA string adicionada (a c√≥pia).
+        //    std::list garante que este ponteiro permanecer√° v√°lido.
         ptr = (SQLPOINTER)m_stringParamBuffer.back().c_str();
 
         // 3. Define o indicador de tamanho para SQL_NTS (Null-Terminated String).
         indicator = SQL_NTS;
+    } else if constexpr (std::is_same_v<T, std::vector<uint8_t>>) {
+        cType = SQL_C_BINARY;
+        sqlType = value.size() > 8000 ? SQL_LONGVARBINARY : SQL_VARBINARY;
+        ptr = value.empty() ? nullptr : (SQLPOINTER)value.data();
+        size = static_cast<SQLLEN>(value.size());
+        indicator = static_cast<SQLLEN>(value.size());
     } else {
-        // static_assert ir· falhar a compilaÁ„o se um tipo n„o suportado for usado.
+        // static_assert ir√° falhar a compila√ß√£o se um tipo n√£o suportado for usado.
         static_assert(sizeof(T) == -1, "Tipo de dado nao suportado para SQLConnection::bindParameter");
     }
 
-    SQLRETURN ret = SQLBindParameter(m_statement, index, SQL_PARAM_INPUT, cType, sqlType, size, 0, ptr, 0, &indicator);   
+    m_parameterIndicators.push_back(indicator);
+    SQLRETURN ret = SQLBindParameter(m_statement, index, SQL_PARAM_INPUT, cType, sqlType, size, 0, ptr, 0, &m_parameterIndicators.back());
     if (!SQL_SUCCEEDED(ret)) {
         handleError(SQL_HANDLE_STMT, m_statement, "Falha ao associar (bind) parametro " + std::to_string(index));
     }
@@ -74,6 +81,7 @@ std::optional<T> SQLConnection::getData(SQLUSMALLINT index) {
     else if constexpr (std::is_floating_point_v<T> && sizeof(T) == 4) { cType = SQL_C_FLOAT; }
     else if constexpr (std::is_floating_point_v<T> && sizeof(T) == 8) { cType = SQL_C_DOUBLE; }
     else if constexpr (std::is_same_v<T, std::string>) { cType = SQL_C_CHAR; bufferLength = 2048; /* Tamanho maximo do buffer para strings */ }
+    else if constexpr (std::is_same_v<T, std::vector<uint8_t>>) { cType = SQL_C_BINARY; bufferLength = 1024 * 1024; }
     else { static_assert(sizeof(T) == -1, "Tipo de dado nao suportado para SQLConnection::getData"); }
 
     std::vector<char> buffer(bufferLength > 0 ? bufferLength : 0);
@@ -82,17 +90,20 @@ std::optional<T> SQLConnection::getData(SQLUSMALLINT index) {
     SQLRETURN ret = SQLGetData(m_statement, index, cType, ptr, bufferLength, &indicator);
 
     if (ret == SQL_NO_DATA) {
-        return std::nullopt; // N„o h· mais linhas
+        return std::nullopt; // N√£o h√° mais linhas
     } else if (!SQL_SUCCEEDED(ret)) {
         handleError(SQL_HANDLE_STMT, m_statement, "Falha ao obter dados (getData) da coluna " + std::to_string(index));
     }
 
     if (indicator == SQL_NULL_DATA) {
-        return std::nullopt; // O valor na coluna È NULL
+        return std::nullopt; // O valor na coluna √© NULL
     }
     
     if constexpr (std::is_same_v<T, std::string>) {
         return std::string(buffer.data());
+    } else if constexpr (std::is_same_v<T, std::vector<uint8_t>>) {
+        if (indicator < 0 || indicator > bufferLength) return std::nullopt;
+        return std::vector<uint8_t>(buffer.begin(), buffer.begin() + static_cast<std::size_t>(indicator));
     } else {
         return result;
     }

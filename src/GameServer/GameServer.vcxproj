@@ -55,7 +55,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup>
     <BoostRoot Condition="'$(BoostRoot)' == ''">C:\boost</BoostRoot>
+    <ProtobufRoot Condition="'$(ProtobufRoot)' == ''">$(SolutionDir)vcpkg-installed\x64-windows</ProtobufRoot>
   </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProtobufRoot)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
@@ -136,8 +145,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)extern\boost\stage\lib;$(SolutionDir)extern\soci-install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>soci_core_4_1.lib;soci_odbc_4_1.lib;odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)extern\boost\stage\lib;$(SolutionDir)extern\soci-install\lib;$(ProtobufRoot)\debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprotobufd.lib;abseil_dll.lib;soci_core_4_1.lib;soci_odbc_4_1.lib;odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -157,8 +166,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)extern\boost\stage\lib;$(SolutionDir)extern\soci-install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>soci_core_4_1.lib;soci_odbc_4_1.lib;odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)extern\boost\stage\lib;$(SolutionDir)extern\soci-install\lib;$(ProtobufRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprotobuf.lib;abseil_dll.lib;soci_core_4_1.lib;soci_odbc_4_1.lib;odbc32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -170,6 +179,15 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <Target Name="CopyProtobufRuntime" AfterTargets="Build">
+    <ItemGroup>
+      <ProtobufRuntime Include="$(ProtobufRoot)\debug\bin\libprotobufd.dll" Condition="'$(Configuration)'=='Debug' and Exists('$(ProtobufRoot)\debug\bin\libprotobufd.dll')" />
+      <ProtobufRuntime Include="$(ProtobufRoot)\debug\bin\abseil_dll.dll" Condition="'$(Configuration)'=='Debug' and Exists('$(ProtobufRoot)\debug\bin\abseil_dll.dll')" />
+      <ProtobufRuntime Include="$(ProtobufRoot)\bin\libprotobuf.dll" Condition="'$(Configuration)'!='Debug' and Exists('$(ProtobufRoot)\bin\libprotobuf.dll')" />
+      <ProtobufRuntime Include="$(ProtobufRoot)\bin\abseil_dll.dll" Condition="'$(Configuration)'!='Debug' and Exists('$(ProtobufRoot)\bin\abseil_dll.dll')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ProtobufRuntime)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 #include <string>
 #include <vector>
@@ -29,6 +29,7 @@ public:
     void beginTransaction();
     void commit();
     void rollback();
+    void reset();
     bool fetch();
 
     template<typename T>
@@ -46,6 +47,9 @@ private:
     // --- A CORREÇÃO PRINCIPAL ---
     // Buffer para manter os parâmetros de string vivos durante a consulta
     std::list<std::string> m_stringParamBuffer;
+    // ODBC mantém este ponteiro até SQLExecute; ele não pode apontar para a pilha de bindParameter().
+    std::list<SQLLEN> m_parameterIndicators;
+    bool m_transactionActive = false;
 };
 
 #include "Database/SQLConnection.tpp"

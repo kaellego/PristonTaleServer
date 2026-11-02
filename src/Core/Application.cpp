@@ -1,4 +1,4 @@
-﻿#include "Application.h"
+#include "Application.h"
 
 #include "Logging/LogService.h"
 #include "GameLogic/Services/AccountService.h"
@@ -72,7 +72,7 @@ void Application::buildServices()
 
     // --- ETAPA 2: ServiÃ§os de dados ---
     m_dbPool = std::make_unique<DatabasePool>(*m_config, *m_logService);
-    m_playerRepository = std::make_unique<PlayerRepository>(runtimeFile("Data").string());
+    m_playerRepository = std::make_unique<PlayerRepository>(runtimeFile("Data").string(), m_dbPool.get());
     m_gameWorld.setPersistenceCallback([this](const std::string& name, CharacterData data) {
         auto current = m_playerRepository->loadCharacter(name);
         if (!current) return;
@@ -80,6 +80,16 @@ void Application::buildServices()
         current->iHP = data.iHP; current->iMaxHP = data.iMaxHP; current->iMP = data.iMP; current->iMaxMP = data.iMaxMP; current->iSTM = data.iSTM; current->iMaxSTM = data.iMaxSTM;
         m_playerRepository->saveCharacter(*current);
     });
+    m_npcRepository = std::make_unique<NpcRepository>(*m_dbPool, *m_logService);
+    const auto loadedNpcs = m_npcRepository->loadEnabledSpawns(m_gameWorld);
+    if (loadedNpcs == 0) {
+        // Fallback only until GameDB receives real MapNPC coordinates.
+        const bool first = m_gameWorld.registerNpc(NpcEntity{3, 0x81000003u, 0, {0.0f, 0.0f, 0.0f}, 0,
+                                          "AcaciaShop", "char\\npc\\TN-005\\TN-005.smd", 0, true});
+        const bool second = m_gameWorld.registerNpc(NpcEntity{10, 0x8100000Au, 0, {12.0f, 0.0f, 0.0f}, 0,
+                                          "CaveKeeper", "char\\npc\\TN-001\\TN-001.smd", 0, true});
+        m_logService->info("Fallback de NPCs registrado no mapa 0: {}", (first ? 1 : 0) + (second ? 1 : 0));
+    }
     m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);
     m_itemPolicy = std::make_unique<ItemPolicy>(*m_dbPool);
 

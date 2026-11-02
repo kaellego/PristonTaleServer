@@ -1,4 +1,5 @@
 #include "Database/Orm.h"
+#include "Utils/SafeString.h"
 #include "Database/DatabasePool.h"
 #include "Database/SQLConnection.h"
 #include "Logging/LogService.h"
@@ -11,8 +12,8 @@ std::optional<SQLUser> Orm::findUser(const std::string& accountName) const {
     db->bindParameter(1, accountName); db->execute(); if (!db->fetch()) return std::nullopt;
     SQLUser user{}; user.iID = db->getData<int>(1).value_or(0);
     auto name = db->getData<std::string>(2).value_or(""); auto password = db->getData<std::string>(3).value_or("");
-    strncpy_s(user.szAccountName, sizeof(user.szAccountName), name.c_str(), _TRUNCATE);
-    strncpy_s(user.szPassword, sizeof(user.szPassword), password.c_str(), _TRUNCATE);
+    copyFixed(user.szAccountName, name);
+    copyFixed(user.szPassword, password);
     user.iFlag = db->getData<int>(4).value_or(0); user.iBanStatus = static_cast<EBanStatus>(db->getData<int>(5).value_or(0)); user.bIsMuted = db->getData<int>(6).value_or(0) != 0;
     return user;
 }

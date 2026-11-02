@@ -78,7 +78,10 @@ bool UserService::transferSessionByIp(const std::shared_ptr<ClientSession>& sess
         accountName = name;
         ++matches;
     }
-    if (matches != 1) return false;
+    if (matches != 1) {
+        m_logService.warn("Transferencia GameServer rejeitada para IP '{}': {} sessoes autenticadas encontradas.", remoteIp, matches);
+        return false;
+    }
 
     session->authenticate(source->getAccountId(), accountName, source->getTicket(),
         std::chrono::steady_clock::now() + std::chrono::minutes(15));

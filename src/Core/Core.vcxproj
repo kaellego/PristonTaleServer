@@ -55,7 +55,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup>
     <BoostRoot Condition="'$(BoostRoot)' == ''">C:\boost</BoostRoot>
+    <ProtobufRoot Condition="'$(ProtobufRoot)' == ''">$(SolutionDir)vcpkg-installed\x64-windows</ProtobufRoot>
   </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProtobufRoot)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Label="Shared">
@@ -168,9 +174,15 @@
     <ClInclude Include="GameLogic\Handlers\KeepAliveHandler.h" />
     <ClInclude Include="GameLogic\Handlers\LoginHandler.h" />
     <ClInclude Include="GameLogic\ItemRepository.h" />
+    <ClInclude Include="GameLogic\NpcRepository.h" />
     <ClInclude Include="GameLogic\InventorySqlRepository.h" />
     <ClInclude Include="GameLogic\ItemPolicy.h" />
     <ClInclude Include="GameLogic\PlayerRepository.h" />
+    <ClInclude Include="GameLogic\PlayerStateProto.h" />
+    <ClInclude Include="GameLogic\PlayerStateSqlRepository.h" />
+    <ClInclude Include="GameLogic\Generated\player_state.pb.h" />
+    <ClInclude Include="GameLogic\CharacterFileRepository.h" />
+    <ClInclude Include="GameLogic\StorageFileRepository.h" />
     <ClInclude Include="GameLogic\Services\AccountService.h" />
     <ClInclude Include="Logging\LogEvents.h" />
     <ClInclude Include="Logging\LogService.h" />
@@ -182,6 +194,7 @@
     <ClInclude Include="GameLogic\Handlers\MovementHandler.h" />
     <ClInclude Include="GameLogic\Handlers\CombatHandler.h" />
     <ClInclude Include="GameLogic\Handlers\ChatHandler.h" />
+    <ClInclude Include="GameLogic\Handlers\NpcHandler.h" />
     <ClInclude Include="GameLogic\LegacyItemData.h" />
     <ClInclude Include="Network\PacketCipher.h" />
     <ClInclude Include="Network\PacketDispatcher.h" />
@@ -199,6 +212,8 @@
     <ClInclude Include="Utils\ini.h" />
     <ClInclude Include="Utils\INIReader.h" />
     <ClInclude Include="Utils\picosha2.h" />
+    <ClInclude Include="Utils\SafeString.h" />
+    <ClInclude Include="Utils\HmacSha256.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database\DatabaseDialect.h" />
@@ -212,9 +227,15 @@
     <ClCompile Include="GameLogic\Handlers\KeepAliveHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\LoginHandler.cpp" />
     <ClCompile Include="GameLogic\ItemRepository.cpp" />
+    <ClCompile Include="GameLogic\NpcRepository.cpp" />
     <ClCompile Include="GameLogic\InventorySqlRepository.cpp" />
     <ClCompile Include="GameLogic\ItemPolicy.cpp" />
     <ClCompile Include="GameLogic\PlayerRepository.cpp" />
+    <ClCompile Include="GameLogic\PlayerStateProto.cpp" />
+    <ClCompile Include="GameLogic\PlayerStateSqlRepository.cpp" />
+    <ClCompile Include="GameLogic\Generated\player_state.pb.cc" />
+    <ClCompile Include="GameLogic\CharacterFileRepository.cpp" />
+    <ClCompile Include="GameLogic\StorageFileRepository.cpp" />
     <ClCompile Include="GameLogic\Services\AccountService.cpp" />
     <ClCompile Include="Logging\LogEvents.cpp" />
     <ClCompile Include="Logging\LogService.cpp" />
@@ -226,6 +247,7 @@
     <ClCompile Include="GameLogic\Handlers\MovementHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\CombatHandler.cpp" />
     <ClCompile Include="GameLogic\Handlers\ChatHandler.cpp" />
+    <ClCompile Include="GameLogic\Handlers\NpcHandler.cpp" />
     <ClCompile Include="GameLogic\LegacyItemData.cpp" />
     <ClCompile Include="Network\PacketCipher.cpp" />
     <ClCompile Include="Network\PacketDispatcher.cpp" />
@@ -238,6 +260,7 @@
     <ClCompile Include="GameLogic\Services\UserService.cpp" />
     <ClCompile Include="Utils\ini.c" />
     <ClCompile Include="Utils\INIReader.cpp" />
+    <ClCompile Include="Utils\HmacSha256.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

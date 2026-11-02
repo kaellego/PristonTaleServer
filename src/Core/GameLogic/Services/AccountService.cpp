@@ -1,4 +1,5 @@
 #include "GameLogic/Services/AccountService.h"
+#include "Utils/SafeString.h"
 #include "Database/DatabasePool.h"
 #include "Network/ClientSession.h"
 #include "Config/ServerConfig.h"
@@ -25,8 +26,8 @@ const char* modelBodyForClass(int characterClass) {
     static constexpr std::array<const char*, 11> names{
         "char\\tmABCD\\b001.ini", "char\\tmABCD\\a001.ini",
         "char\\tmABCD\\d001.ini", "char\\tmABCD\\c001.ini",
-        "char\\tmABCD\\mb001.ini", "char\\tmABCD\\ma001.ini",
-        "char\\tmABCD\\md001.ini", "char\\tmABCD\\mc001.ini",
+        "char\\tmABCD\\ma001.ini", "char\\tmABCD\\mb001.ini",
+        "char\\tmABCD\\mc001.ini", "char\\tmABCD\\md001.ini",
         "char\\tmABCD\\e001.ini", "char\\tmABCD\\me001.ini",
         "char\\tmABCD\\f001.ini"};
     return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
@@ -37,8 +38,8 @@ const char* modelFaceForClass(int characterClass) {
     static constexpr std::array<const char*, 11> names{
         "char\\tmABCD\\tmh-b01.inf", "char\\tmABCD\\tmh-a01.inf",
         "char\\tmABCD\\tfh-D01.inf", "char\\tmABCD\\tmh-c01.inf",
-        "char\\tmABCD\\Mfh-B01.inf", "char\\tmABCD\\Mmh-A01.inf",
-        "char\\tmABCD\\Mmh-D01.inf", "char\\tmABCD\\Mfh-C01.inf",
+        "char\\tmABCD\\Mmh-A01.inf", "char\\tmABCD\\Mfh-B01.inf",
+        "char\\tmABCD\\Mfh-C01.inf", "char\\tmABCD\\Mmh-D01.inf",
         "char\\tmABCD\\tfh-e01.inf", "char\\tmABCD\\Mmh-e01.inf",
         "char\\tmABCD\\tfh-f01.inf"};
     return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
@@ -193,19 +194,20 @@ void AccountService::sendServerList(std::shared_ptr<ClientSession> session, int 
     const auto& loginServerInfo = m_serverConfig.getThisServerInfo();
 
     serverListPacket.header.opcode = static_cast<uint32_t>(Opcodes::ServerList);
-    // CORRIGIDO: strncpy_s precisa do tamanho do buffer de destino
-    strncpy_s(serverListPacket.szServerName, sizeof(serverListPacket.szServerName), loginServerInfo.name.c_str(), _TRUNCATE);
+    copyFixed(serverListPacket.szServerName, loginServerInfo.name);
     serverListPacket.iTicket = ticket;
     serverListPacket.dwTime = GetTickCount();
 
     int gameServerCount = 0;
+    constexpr int maxGameServers = static_cast<int>(sizeof(serverListPacket.sServers) /
+                                                    sizeof(serverListPacket.sServers[0]));
     for (const auto& serverInfo : allServers) {
-        if (serverInfo.isGameServer && gameServerCount < 4) {
+        if (serverInfo.isGameServer && gameServerCount < maxGameServers) {
             auto& destServer = serverListPacket.sServers[gameServerCount];
-            strncpy_s(destServer.szName, sizeof(destServer.szName), serverInfo.name.c_str(), _TRUNCATE);
-            strncpy_s(destServer.szaIP[0], sizeof(destServer.szaIP[0]), serverInfo.publicIp.c_str(), _TRUNCATE);
-            strncpy_s(destServer.szaIP[1], sizeof(destServer.szaIP[1]), serverInfo.networkIp.c_str(), _TRUNCATE);
-            strncpy_s(destServer.szaIP[2], sizeof(destServer.szaIP[2]), serverInfo.publicIp.c_str(), _TRUNCATE);
+            copyFixed(destServer.szName, serverInfo.name);
+            copyFixed(destServer.szaIP[0], serverInfo.publicIp);
+            copyFixed(destServer.szaIP[1], serverInfo.networkIp);
+            copyFixed(destServer.szaIP[2], serverInfo.publicIp);
             destServer.iaPort[0] = serverInfo.port;
             destServer.iaPort[1] = serverInfo.port;
             destServer.iaPort[2] = serverInfo.port;
@@ -261,7 +263,7 @@ void AccountService::sendLoginResult(std::shared_ptr<ClientSession> session, Log
     PacketAccountLoginCode responseStruct{};
     responseStruct.header.opcode = static_cast<uint32_t>(Opcodes::AccountLoginCode);
     responseStruct.iCode = static_cast<int>(code);
-    strncpy_s(responseStruct.szMessage, message.c_str(), sizeof(responseStruct.szMessage) - 1);
+    copyFixed(responseStruct.szMessage, message);
     const size_t bodySize = sizeof(PacketAccountLoginCode) - sizeof(PacketHeader);
     const uint8_t* bodyPtr = reinterpret_cast<const uint8_t*>(&responseStruct) + sizeof(PacketHeader);
     std::vector<uint8_t> body(bodyPtr, bodyPtr + bodySize);
@@ -278,7 +280,7 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
 
     PacketUserInfo userInfoPacket{};
     userInfoPacket.header.opcode = static_cast<uint32_t>(Opcodes::UserInfo);
-    strncpy_s(userInfoPacket.szUserID, accountName.c_str(), sizeof(userInfoPacket.szUserID));
+    copyFixed(userInfoPacket.szUserID, accountName);
     userInfoPacket.CharCount = static_cast<int>(std::min<size_t>(charList.size(), 6));
 
     for (size_t i = 0; i < charList.size() && i < 6; ++i) {
@@ -286,11 +288,11 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         auto& destChar = userInfoPacket.sCharacterData[i];
 
         // Copia os dados do CharacterData (do arquivo .chr) para a struct do pacote
-        strncpy_s(destChar.szName, charData.szName, sizeof(destChar.szName));
+        copyFixed(destChar.szName, charData.szName);
         destChar.iLevel = charData.iLevel;
         destChar.JobCode = charData.iClass;
-        strncpy_s(destChar.szModelName, sizeof(destChar.szModelName), modelBodyForClass(charData.iClass), _TRUNCATE);
-        strncpy_s(destChar.szModelName2, sizeof(destChar.szModelName2), modelFaceForClass(charData.iClass), _TRUNCATE);
+        copyFixed(destChar.szModelName, modelBodyForClass(charData.iClass));
+        copyFixed(destChar.szModelName2, modelFaceForClass(charData.iClass));
         destChar.Brood = 0;
         destChar.dwArmorCode = 0;
         destChar.StartField = 0;

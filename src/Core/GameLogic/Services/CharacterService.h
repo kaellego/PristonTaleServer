@@ -33,6 +33,8 @@ public:
     bool ownsCharacter(const std::string& accountName, const std::string& characterName) const;
 
 private:
+    std::optional<CharacterData> loadOrRecoverCharacter(const std::string& characterName) const;
+
     DatabasePool& m_dbPool;
     PlayerRepository& m_playerRepository;
     LogService& m_logService;

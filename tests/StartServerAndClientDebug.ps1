@@ -5,7 +5,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$serverDir = Join-Path $root 'src\GameServer'
+$serverDir = Join-Path $root 'x64\Debug'
 $serverExe = Join-Path $root 'x64\Debug\GameServer.exe'
 $clientDir = 'C:\Users\weeel\Desktop\ZeroPT-Client'
 $clientExe = Join-Path $clientDir 'Game.exe'
@@ -20,28 +20,27 @@ Remove-Item -LiteralPath $report -Force -ErrorAction SilentlyContinue
 
 $serverOut = Join-Path $serverDir 'GameServer.stdout.log'
 $serverErr = Join-Path $serverDir 'GameServer.stderr.log'
+$legacyData = Join-Path $root 'src\GameServer\Data'
+$runtimeData = Join-Path $serverDir 'Data'
+foreach ($folder in @('Character', 'Inventory', 'Warehouse')) {
+    $sourceFolder = Join-Path $legacyData $folder
+    $targetFolder = Join-Path $runtimeData $folder
+    if (Test-Path -LiteralPath $sourceFolder) {
+        New-Item -ItemType Directory -Force -Path $targetFolder | Out-Null
+        Get-ChildItem -LiteralPath $sourceFolder -File | ForEach-Object {
+            $target = Join-Path $targetFolder $_.Name
+            if (-not (Test-Path -LiteralPath $target)) {
+                Copy-Item -LiteralPath $_.FullName -Destination $target
+            }
+        }
+    }
+}
 $server = Start-Process $serverExe -WorkingDirectory $serverDir -RedirectStandardOutput $serverOut -RedirectStandardError $serverErr -PassThru
 Start-Sleep -Seconds 5
 
 $client = Start-Process $clientExe -WorkingDirectory $clientDir -WindowStyle Normal -PassThru
-for ($i = 0; $i -lt 20 -and $client.MainWindowHandle -eq 0; $i++) {
-    Start-Sleep -Milliseconds 250
-    $client.Refresh()
-}
-if ($client.MainWindowHandle -ne 0) {
-    if (-not ('ClientWindow' -as [type])) {
-        Add-Type @"
-using System;
-using System.Runtime.InteropServices;
-public static class ClientWindow {
-    [DllImport("user32.dll")] public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
-    [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
-}
-"@
-    [ClientWindow]::ShowWindowAsync($client.MainWindowHandle, 9) | Out-Null
-    [ClientWindow]::SetForegroundWindow($client.MainWindowHandle) | Out-Null
-}
-}
+Start-Sleep -Seconds 2
+$client.Refresh()
 $started = Get-Date
 
 "Inicio: $started" | Set-Content -LiteralPath $report -Encoding UTF8

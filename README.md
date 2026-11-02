@@ -41,7 +41,10 @@ As responsabilidades principais são:
 - movimentação básica de jogadores com validação de entidade, distância e células próximas;
 - combate básico com validação de atacante, alvo, alcance e dano;
 - carregamento inicial do personagem, posição, atributos, vida, mana, ouro e equipamentos;
-- carregamento do catálogo de itens a partir de `ItemList`.
+- carregamento do catálogo de itens a partir de `ItemList`;
+- núcleo de NPCs: registro por mapa, envio legado `OPCODE_ADD_NPC` e clique validado por sessão, serial e distância;
+- catálogo de 123 definições e 105 associações de mapa importáveis de `ZeroPT-Server\GameServer\NPC`/`Field`;
+- carregamento de NPCs habilitados a partir de `GameDB.dbo.NpcList` e `GameDB.dbo.NpcSpawn`, aceitando várias instâncias do mesmo NPC.
 
 Os handlers atualmente registrados cobrem keep-alive, login, ping, personagens, inventário/warehouse, movimentação e combate moderno. Isso não significa que todos os opcodes declarados no legado estejam implementados.
 
@@ -73,13 +76,57 @@ Na cópia atual de `ZeroPT-Client`, os arquivos de corpo `.ini` usados pelos nom
 
 ## Banco de dados e persistência
 
+### Estado de jogador no SQL/Protobuf
+
+O estado canônico de personagem, inventário e warehouse agora é salvo em
+`UserDB.dbo.PlayerStateProto`. O payload usa o wire format do Protobuf definido
+em [`database/player_state.proto`](database/player_state.proto) e é salvo
+diretamente como `VARBINARY(MAX)`. Registros antigos em chunks/Base64 continuam
+sendo lidos como versão 1 e são convertidos para o formato binário na próxima
+gravação. O codec oficial é gerado por `protoc` a partir de
+[`database/player_state.proto`](database/player_state.proto) e os arquivos
+gerados ficam versionados em `src/Core/GameLogic/Generated`.
+
+Cada blob versão 2 recebe `StateMac`, um HMAC-SHA-256 calculado sobre
+`StateType`, `OwnerKey` e o payload Protobuf. A chave vem exclusivamente de
+`ZEROPT_ITEM_SECRET` e deve ter pelo menos 32 caracteres; ela não deve ser
+gravada no Git nem compartilhada com o cliente.
+
+Os arquivos `.chr` e `.dat` são usados somente como fonte de migração legada
+quando ainda não existe estado SQL. Depois da migração, novas gravações vão
+somente para SQL; os arquivos antigos não são apagados automaticamente para
+permitir backup e recuperação. Exclusão explícita de personagem remove também
+o estado legado correspondente.
+
+Inventário e warehouse são gravados em uma única transação SQL quando a
+operação altera os dois lados. O cliente nunca fornece autoridade sobre serial,
+checksum, proprietário, quantidade ou dinheiro: esses campos são normalizados
+e validados no servidor antes da persistência.
+
+Protobuf é apenas serialização, não criptografia nem autenticação. A proteção
+contra cliente adulterado depende de validação server-side, segredo externo de
+integridade dos itens, nonce/sequence do protocolo e controle de acesso ao SQL.
+O `DatabasePool` mantém conexões físicas reutilizáveis por banco e limita o
+acesso concorrente por fila. Registros versão 1 sem MAC continuam aceitos apenas
+para migração; novas gravações e versões 2 sem MAC válido são rejeitadas.
+
 O servidor usa SQL Server por ODBC/SOCI. As tabelas iniciais ficam em [`database/init.sql`](database/init.sql). A configuração de conexão fica em `server.ini` e não deve conter credenciais reais versionadas.
 
 A implementação atual combina:
 
-- banco de dados para contas, vínculos de personagens e catálogo de itens;
-- arquivos legados para personagens, inventário e warehouse;
-- `PlayerRepository` para carregar, salvar e migrar esses arquivos.
+- banco de dados para contas, vínculos, catálogo de itens e estado Protobuf;
+- arquivos legados somente como origem de migração e backup;
+- `PlayerRepository` para carregar o estado SQL e migrar arquivos ainda não importados.
+
+### Catálogo e posicionamento de NPCs
+
+Os backups em `ZeroPT-DataBase\DataBase` não possuem `NPCList` nem `MapNPC`. O catálogo disponível está nos arquivos legados do servidor. Para importá-lo:
+
+```powershell
+.\database\import-npc.ps1
+```
+
+O script é idempotente e cria `NpcList`/`NpcSpawn`. Sem um CSV de coordenadas `MapNPC`, as instâncias ficam desabilitadas deliberadamente; isso evita espalhar NPCs em coordenadas inventadas. Para habilitar spawns reais, use `-MapNpcCsv` com as colunas `SourceMap,LegacyFile,MapId,X,Y,Z,AngleY,Enabled`.
 
 Essa combinação ainda não é uma transação única. Uma falha entre a gravação no banco e a gravação do arquivo pode exigir reconciliação manual. A estrutura `Item` e parte de `CharacterData` ainda não representam todos os campos do cliente original; quests, skills, pets, timers e progressos avançados continuam pendentes.
 
@@ -91,12 +138,25 @@ Pré-requisitos:
 - MSBuild;
 - Boost.Asio e dependências configuradas;
 - ODBC Driver 18 for SQL Server, ou driver compatível configurado;
-- banco de dados criado e inicializado com `database/init.sql`.
+- banco de dados criado e inicializado com `database/init.sql`;
+- Protobuf instalado pelo vcpkg; o repositório inclui `vcpkg.json`.
 
 No PowerShell, a compilação Debug x64 pode ser feita com:
 
 ```powershell
 .\build.ps1 -Configuration Debug -Platform x64
+```
+
+Se a dependência ainda não estiver instalada:
+
+```powershell
+C:\vcpkg\vcpkg.exe install --x-install-root=vcpkg-installed --triplet x64-windows
+```
+
+Defina o segredo antes de iniciar o servidor:
+
+```powershell
+$env:ZEROPT_ITEM_SECRET = 'substitua-por-um-segredo-com-32-caracteres-ou-mais'
 ```
 
 O executável é gerado em `x64\Debug\GameServer.exe`.
@@ -116,7 +176,9 @@ Ainda não existe um teste de integração completo que valide, com o cliente or
 - [ ] Implementar respostas legadas completas para login, servidores e personagens;
 - [ ] Corrigir e validar os pacotes legados de dano `ATTACK_DAMAGE`, `DISP_DAMAGE` e `ATTACK_RESULT`;
 - [ ] Implementar skills e efeitos persistidos;
-- [ ] Implementar NPCs, lojas e drops;
+- [x] Implementar o núcleo de NPCs e interação segura;
+- [x] Importar o catálogo de NPCs e carregar spawns habilitados do `GameDB`;
+- [ ] Implementar lojas, NPCs com eventos e drops de NPC;
 - [ ] Implementar quests e progresso de quests;
 - [ ] Implementar party, raid, trade e comunicação de clã;
 - [ ] Implementar eventos, coin shop e comunicação entre servidores;
