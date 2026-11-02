@@ -151,6 +151,47 @@ CREATE TABLE dbo.NpcSpawn (
     CONSTRAINT UQ_NpcSpawn_Source UNIQUE (NpcId, MapId, SourceMap),
     CONSTRAINT CK_NpcSpawn_EnabledCoordinates CHECK (Enabled = 0 OR (X IS NOT NULL AND Y IS NOT NULL AND Z IS NOT NULL))
 );
+IF OBJECT_ID('dbo.NpcShop', 'U') IS NULL
+CREATE TABLE dbo.NpcShop (
+    ShopId int IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    NpcId int NOT NULL,
+    ShopName nvarchar(63) NOT NULL,
+    Enabled bit NOT NULL DEFAULT 1,
+    CONSTRAINT FK_NpcShop_NpcList FOREIGN KEY (NpcId) REFERENCES dbo.NpcList(NpcId),
+    CONSTRAINT UQ_NpcShop_Npc UNIQUE (NpcId)
+);
+IF OBJECT_ID('dbo.NpcShopItem', 'U') IS NULL
+CREATE TABLE dbo.NpcShopItem (
+    ShopId int NOT NULL,
+    ItemCode int NOT NULL,
+    BuyPrice bigint NOT NULL,
+    SellPrice bigint NOT NULL DEFAULT 0,
+    Stock int NULL,
+    MaxQuantity int NOT NULL DEFAULT 2000000000,
+    RequiredLevel int NOT NULL DEFAULT 1,
+    Enabled bit NOT NULL DEFAULT 1,
+    CONSTRAINT PK_NpcShopItem PRIMARY KEY (ShopId, ItemCode),
+    CONSTRAINT FK_NpcShopItem_Shop FOREIGN KEY (ShopId) REFERENCES dbo.NpcShop(ShopId),
+    CONSTRAINT FK_NpcShopItem_Item FOREIGN KEY (ItemCode) REFERENCES dbo.ItemList(ItemCode),
+    CONSTRAINT CK_NpcShopItem_Prices CHECK (BuyPrice >= 0 AND SellPrice >= 0),
+    CONSTRAINT CK_NpcShopItem_Quantity CHECK (MaxQuantity > 0 AND (Stock IS NULL OR Stock >= 0))
+);
+CREATE INDEX IX_NpcShopItem_Enabled ON dbo.NpcShopItem (ShopId, Enabled, ItemCode);
+IF OBJECT_ID('dbo.NpcDrop', 'U') IS NULL
+CREATE TABLE dbo.NpcDrop (
+    NpcId int NOT NULL,
+    ItemCode int NOT NULL,
+    DropChancePermille int NOT NULL,
+    MinQuantity int NOT NULL DEFAULT 1,
+    MaxQuantity int NOT NULL DEFAULT 1,
+    Enabled bit NOT NULL DEFAULT 1,
+    CONSTRAINT PK_NpcDrop PRIMARY KEY (NpcId, ItemCode),
+    CONSTRAINT FK_NpcDrop_NpcList FOREIGN KEY (NpcId) REFERENCES dbo.NpcList(NpcId),
+    CONSTRAINT FK_NpcDrop_Item FOREIGN KEY (ItemCode) REFERENCES dbo.ItemList(ItemCode),
+    CONSTRAINT CK_NpcDrop_Chance CHECK (DropChancePermille BETWEEN 0 AND 1000),
+    CONSTRAINT CK_NpcDrop_Quantity CHECK (MinQuantity > 0 AND MaxQuantity >= MinQuantity)
+);
+CREATE INDEX IX_NpcDrop_Enabled ON dbo.NpcDrop (NpcId, Enabled);
 GO
 
 USE LogDB;

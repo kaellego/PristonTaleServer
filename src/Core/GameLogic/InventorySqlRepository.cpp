@@ -20,3 +20,7 @@ bool InventorySqlRepository::saveWarehouse(const std::string& account, const War
 bool InventorySqlRepository::saveInventoryAndWarehouse(const std::string& character, const InventoryData& inventory, const std::string& account, const WarehouseData& warehouse) const {
     return m_state.saveInventoryAndWarehouse(character, inventory, account, warehouse);
 }
+
+bool InventorySqlRepository::saveCharacterAndInventory(const CharacterData& character, const InventoryData& inventory) const {
+    return m_state.saveCharacterAndInventory(character, inventory);
+}

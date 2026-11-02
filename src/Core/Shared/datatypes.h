@@ -633,9 +633,13 @@ struct PacketNpcData {
 };
 struct PacketNpcClick { uint32_t objectSerial; int32_t npcId; };
 struct PacketNpcOpen { int32_t npcId; uint32_t objectSerial; int32_t eventCode; int32_t mapId; };
+// Server-authoritative shop request. The legacy sITEM payload is converted to
+// this compact form; client supplied price/checksum/pointers are discarded.
+struct PacketNpcShopRequest { int32_t itemCode; int32_t quantity; uint32_t npcSerial; };
 static_assert(sizeof(PacketNpcData) == 132);
 static_assert(sizeof(PacketNpcClick) == 8);
 static_assert(sizeof(PacketNpcOpen) == 16);
+static_assert(sizeof(PacketNpcShopRequest) == 12);
 
 // Estrutura para uma definição de item carregada da tabela ItemList do banco de dados.
 struct DefinitionItem {

@@ -3,6 +3,7 @@
 #include <mutex>
 #include <string>
 #include <memory>
+#include "Shared/datatypes.h"
 
 class ClientSession;
 
@@ -15,6 +16,8 @@ public:
     const std::string& characterName() const noexcept { return m_characterName; }
     void setEntityId(int id) noexcept { m_entityId = id; }
     int entityId() const noexcept { return m_entityId; }
+    void setCharacterData(const CharacterData& data) { std::lock_guard lock(m_mutex); m_characterData = data; }
+    CharacterData characterData() const { std::lock_guard lock(m_mutex); return m_characterData; }
     void update() { std::lock_guard lock(m_mutex); m_lastUpdate = std::chrono::steady_clock::now(); }
     std::shared_ptr<ClientSession> client() const { std::lock_guard lock(m_mutex); return m_client.lock(); }
 private:
@@ -23,6 +26,7 @@ private:
     std::string m_accountName;
     std::string m_characterName;
     std::weak_ptr<ClientSession> m_client;
+    CharacterData m_characterData{};
     std::chrono::steady_clock::time_point m_lastUpdate;
     mutable std::mutex m_mutex;
 };

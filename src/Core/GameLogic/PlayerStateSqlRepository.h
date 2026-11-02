@@ -29,6 +29,7 @@ public:
     bool deleteWarehouse(const std::string& account) const;
     bool saveInventoryAndWarehouse(const std::string& character, const InventoryData& inventory,
                                    const std::string& account, const WarehouseData& warehouse) const;
+    bool saveCharacterAndInventory(const CharacterData& character, const InventoryData& inventory) const;
 
 private:
     struct LoadedBlob {

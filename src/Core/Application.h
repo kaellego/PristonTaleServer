@@ -12,6 +12,7 @@
 #include "Database/DatabasePool.h"
 #include "GameLogic/ItemRepository.h"
 #include "GameLogic/NpcRepository.h"
+#include "GameLogic/NpcShopRepository.h"
 #include "GameLogic/ItemPolicy.h"
 #include "GameLogic/PlayerRepository.h"
 #include "Network/PacketDispatcher.h"
@@ -46,6 +47,7 @@ private:
     std::unique_ptr<DatabasePool> m_dbPool;
     std::unique_ptr<ItemRepository> m_itemRepository;
     std::unique_ptr<NpcRepository> m_npcRepository;
+    std::unique_ptr<NpcShopRepository> m_npcShopRepository;
     std::unique_ptr<ItemPolicy> m_itemPolicy;
     std::unique_ptr<PlayerRepository> m_playerRepository;
 

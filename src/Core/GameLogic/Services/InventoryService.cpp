@@ -4,6 +4,7 @@
 #include "GameLogic/ItemPolicy.h"
 #include "GameLogic/InventorySqlRepository.h"
 #include <algorithm>
+#include <limits>
 #include <utility>
 
 InventoryService::InventoryService(PlayerRepository& players, CharacterService& characters, ItemPolicy& itemPolicy, InventorySqlRepository* sqlRepository)
@@ -162,5 +163,69 @@ void InventoryService::addItem(const std::string& account, const std::string& ch
         if (item.iQuantity > 0) for (auto& slot : inventory.saItem) if (slot.sItemID == 0) { slot = item; break; }
         if (item.iQuantity > 0 || !saveInventoryData(character, inventory)) { callback(false, {}); return; }
         callback(true, inventory);
+    });
+}
+
+void InventoryService::buyNpcItem(const std::string& account, const std::string& character, int itemCode,
+                                  int quantity, int64_t unitPrice, InventoryCallback callback) {
+    enqueue([this, account, character, itemCode, quantity, unitPrice, callback = std::move(callback)]() mutable {
+        if (!m_sqlRepository || itemCode <= 0 || quantity <= 0 || quantity > 2000000000 || unitPrice < 0 ||
+            quantity > std::numeric_limits<int64_t>::max() / std::max<int64_t>(1, unitPrice) ||
+            !m_characters.ownsCharacter(account, character)) { callback(false, {}); return; }
+        auto state = m_players.loadCharacter(character);
+        auto inventory = loadInventoryData(character);
+        if (!state || !inventory) { callback(false, {}); return; }
+        const int64_t total = unitPrice * quantity;
+        if (total > state->iGold || total > std::numeric_limits<int32_t>::max()) { callback(false, {}); return; }
+        Item item{}; item.sItemID = itemCode; item.iQuantity = quantity;
+        bool inserted = false;
+        for (auto& slot : inventory->saItem) {
+            if (slot.sItemID == itemCode) {
+                const int current = slot.iQuantity > 0 ? slot.iQuantity : 1;
+                if (current > 2000000000 - quantity) { callback(false, {}); return; }
+                slot.iQuantity = current + quantity; inserted = true; break;
+            }
+        }
+        if (!inserted) for (auto& slot : inventory->saItem) if (slot.sItemID == 0) { slot = item; inserted = true; break; }
+        if (!inserted) { callback(false, {}); return; }
+        const auto oldState = *state;
+        state->iGold -= static_cast<int32_t>(total);
+        if (!m_sqlRepository->saveCharacterAndInventory(*state, *inventory)) {
+            m_players.saveCharacter(oldState);
+            callback(false, {}); return;
+        }
+        callback(true, *inventory);
+    });
+}
+
+void InventoryService::sellNpcItem(const std::string& account, const std::string& character, int itemCode,
+                                   int quantity, int64_t unitPrice, InventoryCallback callback) {
+    enqueue([this, account, character, itemCode, quantity, unitPrice, callback = std::move(callback)]() mutable {
+        if (!m_sqlRepository || itemCode <= 0 || quantity <= 0 || unitPrice < 0 ||
+            quantity > std::numeric_limits<int64_t>::max() / std::max<int64_t>(1, unitPrice) ||
+            !m_characters.ownsCharacter(account, character)) { callback(false, {}); return; }
+        auto state = m_players.loadCharacter(character);
+        auto inventory = loadInventoryData(character);
+        if (!state || !inventory) { callback(false, {}); return; }
+        int remaining = quantity;
+        for (auto& slot : inventory->saItem) {
+            if (slot.sItemID != itemCode) continue;
+            const int available = slot.iQuantity > 0 ? slot.iQuantity : 1;
+            const int used = std::min(remaining, available);
+            remaining -= used;
+            slot.iQuantity = available - used;
+            if (slot.iQuantity == 0) slot = {};
+            if (remaining == 0) break;
+        }
+        if (remaining != 0) { callback(false, {}); return; }
+        const int64_t total = unitPrice * quantity;
+        if (total > std::numeric_limits<int32_t>::max() - state->iGold) { callback(false, {}); return; }
+        const auto oldState = *state;
+        state->iGold += static_cast<int32_t>(total);
+        if (!m_sqlRepository->saveCharacterAndInventory(*state, *inventory)) {
+            m_players.saveCharacter(oldState);
+            callback(false, {}); return;
+        }
+        callback(true, *inventory);
     });
 }

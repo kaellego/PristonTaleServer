@@ -171,6 +171,74 @@ namespace LegacyGateway
             int32_t temp[4];
         };
 
+        // Layouts from smPacket.h. The target array is variable-length on the
+        // wire; only the advertised prefix plus TargetCount serials is sent.
+        struct LegacySkillAttackData
+        {
+            int32_t size, code;
+            uint32_t destObjectSerial;
+            int32_t x, y, z;
+            int32_t attackState, attackSize, power;
+            uint32_t checkSum;
+            int32_t targetCount;
+            uint32_t targetSerials[42];
+        };
+
+        struct LegacySkillAttackData2
+        {
+            int32_t size, code;
+            uint32_t destObjectSerial;
+            uint32_t checkSum;
+            int32_t x, y, z;
+            int32_t attackState, attackSize;
+            int16_t power[2], power2[2], critical[2];
+            int32_t skillCode;
+            uint32_t time;
+            int32_t attackCount;
+            int16_t motionCount[2];
+            uint32_t weaponCode;
+            int16_t area[2];
+            int32_t temp[4];
+            uint32_t mainTargetObject;
+            int32_t targetCount;
+            uint32_t targetSerials[42];
+        };
+
+        // x86 wire representation of the legacy sITEM. The two DirectDraw
+        // members are handles/pointers in the original process and are never
+        // dereferenced by this server.
+        struct LegacyItemWire32
+        {
+            uint32_t code;
+            uint8_t itemNameIndex[32];
+            uint8_t lastCategory[16];
+            int32_t width, height;
+            uint8_t itemFilePath[64];
+            uint32_t itemClass;
+            uint8_t dropItem[64];
+            uint32_t modelPosition;
+            int32_t soundIndex, weaponClass, flags, x, y, setX, setY;
+            uint32_t lpItem;
+            int32_t itemPosition, potionCount, notUseFlag, sellPrice, oldX, oldY;
+            uint32_t lpTempItem;
+            uint8_t itemInfo[532];
+        };
+
+        struct LegacyBuyShopItem
+        {
+            int32_t size, code;
+            LegacyItemWire32 item;
+            int32_t itemCount;
+        };
+
+        struct LegacySellShopItem
+        {
+            int32_t size, code;
+            uint8_t itemInfo[532];
+            int32_t x, y, z;
+            uint32_t securityCode[4];
+        };
+
         struct LegacyNpcInfo
         {
             int32_t size, code;
@@ -192,6 +260,11 @@ namespace LegacyGateway
         static_assert(sizeof(LegacyTransPlayBuff) == 40);
         static_assert(sizeof(LegacyAttackData) == 52);
         static_assert(sizeof(LegacyAttackData2) == 92);
+        static_assert(sizeof(LegacySkillAttackData) == 212);
+        static_assert(sizeof(LegacySkillAttackData2) == 264);
+        static_assert(sizeof(LegacyItemWire32) == 788);
+        static_assert(sizeof(LegacyBuyShopItem) == 800);
+        static_assert(sizeof(LegacySellShopItem) == 568);
         static_assert(sizeof(LegacyNpcInfo) == 504);
 
         uint32_t characterReformCode(const LegacyCharacterInfo &character)
@@ -616,6 +689,74 @@ namespace LegacyGateway
             modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
             break;
         default:
+            if (command.code == 194) // OPCODE_SHOPTITEM / TRANS_BUY_SHOPITEM
+            {
+                if (payload.size() != sizeof(LegacyBuyShopItem) || command.size != static_cast<int32_t>(payload.size()))
+                    return std::nullopt;
+                LegacyBuyShopItem request{};
+                std::memcpy(&request, payload.data(), sizeof(request));
+                // sITEMINFO::CODE is at offset 24 inside the x86 sITEMINFO.
+                uint32_t itemCode = 0;
+                std::memcpy(&itemCode, request.item.itemInfo + 24, sizeof(itemCode));
+                if (itemCode == 0 || request.itemCount <= 0 || request.itemCount > 2000000000)
+                    return std::nullopt;
+                PacketNpcShopRequest modern{static_cast<int32_t>(itemCode), request.itemCount, 0};
+                const auto* bytes = reinterpret_cast<const uint8_t*>(&modern);
+                return Packet(static_cast<uint32_t>(Opcodes::BuyItemNPCShop),
+                              std::vector<uint8_t>(bytes, bytes + sizeof(modern)));
+            }
+            if (command.code == 195) // OPCODE_SHOP_SELLITEM / TRANS_ITEMINFO
+            {
+                if (payload.size() != sizeof(LegacySellShopItem) || command.size != static_cast<int32_t>(payload.size()))
+                    return std::nullopt;
+                LegacySellShopItem request{};
+                std::memcpy(&request, payload.data(), sizeof(request));
+                uint32_t itemCode = 0;
+                std::memcpy(&itemCode, request.itemInfo + 24, sizeof(itemCode));
+                if (itemCode == 0)
+                    return std::nullopt;
+                PacketNpcShopRequest modern{static_cast<int32_t>(itemCode), 1, 0};
+                const auto* bytes = reinterpret_cast<const uint8_t*>(&modern);
+                return Packet(static_cast<uint32_t>(Opcodes::SellItemNPCShop),
+                              std::vector<uint8_t>(bytes, bytes + sizeof(modern)));
+            }
+            // Skill attack frames are accepted only as structurally valid
+            // control traffic until the server-side skill catalog is present.
+            // They must not reach gameplay with client-supplied damage.
+            if (command.code == 41) // OPCODE_SKIL_ATTACKDATA
+            {
+                if (payload.size() < offsetof(LegacySkillAttackData, targetSerials) ||
+                    command.size != static_cast<int32_t>(payload.size()))
+                    return std::nullopt;
+                LegacySkillAttackData skill{};
+                std::memcpy(&skill, payload.data(), std::min(payload.size(), sizeof(skill)));
+                const size_t expected = offsetof(LegacySkillAttackData, targetSerials) +
+                                        static_cast<size_t>(std::max(0, skill.targetCount)) * sizeof(uint32_t);
+                if (skill.destObjectSerial == 0 || skill.targetCount < 0 || skill.targetCount > 42 ||
+                    skill.attackSize < 0 || expected != payload.size())
+                    return std::nullopt;
+                modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
+                break;
+            }
+            if (command.code == 216) // OPCODE_ATTACKDATA2 carrying skill data
+            {
+                // 92-byte frames are the ordinary TRANS_ATTACKDATA2 and are
+                // handled below; only the larger skill layout enters here.
+                if (payload.size() >= offsetof(LegacySkillAttackData2, targetSerials))
+                {
+                    if (command.size != static_cast<int32_t>(payload.size()))
+                        return std::nullopt;
+                LegacySkillAttackData2 skill{};
+                std::memcpy(&skill, payload.data(), std::min(payload.size(), sizeof(skill)));
+                const size_t expected = offsetof(LegacySkillAttackData2, targetSerials) +
+                                        static_cast<size_t>(std::max(0, skill.targetCount)) * sizeof(uint32_t);
+                if (skill.destObjectSerial == 0 || skill.targetCount < 0 || skill.targetCount > 42 ||
+                    skill.attackSize < 0 || expected != payload.size())
+                    return std::nullopt;
+                modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
+                break;
+                }
+            }
             if (command.code == static_cast<int32_t>(Opcode::AttackData) &&
                 command.size == static_cast<int32_t>(sizeof(LegacyAttackData)) &&
                 payload.size() >= sizeof(LegacyAttackData))

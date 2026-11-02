@@ -20,6 +20,7 @@
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/Services/InventoryService.h"
 #include "GameLogic/GameWorld.h"
+#include "GameLogic/NpcShopRepository.h"
 
 #include <iostream>
 
@@ -33,7 +34,8 @@ PacketDispatcher::PacketDispatcher(
     UserService& userService,
     CharacterService& characterService,
     InventoryService& inventoryService,
-    GameWorld& gameWorld
+    GameWorld& gameWorld,
+    NpcShopRepository& npcShopRepository
 
 ) :
     m_globalState(state),
@@ -44,7 +46,8 @@ PacketDispatcher::PacketDispatcher(
     m_userService(userService),
     m_characterService(characterService),
     m_inventoryService(inventoryService),
-    m_gameWorld(gameWorld)
+    m_gameWorld(gameWorld),
+    m_npcShopRepository(npcShopRepository)
 {
     m_logService.info("Registrando manipuladores de pacotes...");
     registerHandlers();
@@ -82,7 +85,10 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::AttackData)] = combatHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::AttackData2)] = combatHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::ChatMessage)] = std::make_shared<ChatHandler>(m_gameWorld, m_logService);
-    m_handlers[static_cast<uint32_t>(Opcodes::NpcUnitClick)] = std::make_shared<NpcHandler>(m_gameWorld, m_logService);
+    auto npcHandler = std::make_shared<NpcHandler>(m_gameWorld, m_inventoryService, m_npcShopRepository, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::NpcUnitClick)] = npcHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::BuyItemNPCShop)] = npcHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::SellItemNPCShop)] = npcHandler;
     // Adicione outros handlers aqui conforme for implementando...
     // Ex: m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = std::make_unique<SelectCharacterHandler>(...);
 }

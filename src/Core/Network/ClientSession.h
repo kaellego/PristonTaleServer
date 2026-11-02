@@ -48,6 +48,9 @@ public:
     bool ticketExpired() const { return std::chrono::steady_clock::now() >= m_ticketExpiresAt; }
     void renewTicket(std::chrono::steady_clock::time_point expiresAt) { m_ticketExpiresAt = expiresAt; }
     bool acceptItemOperation(uint32_t opcode, const std::vector<uint8_t>& body);
+    void setNpcContext(int npcId, uint32_t serial) { m_npcId = npcId; m_npcSerial = serial; }
+    int npcContextId() const { return m_npcId; }
+    uint32_t npcContextSerial() const { return m_npcSerial; }
 
 private:
     void do_read_header();
@@ -66,6 +69,8 @@ private:
     int m_ticket = 0;
     std::chrono::steady_clock::time_point m_ticketExpiresAt{};
     std::string m_characterName;
+    int m_npcId = 0;
+    uint32_t m_npcSerial = 0;
     uint32_t m_verifiedLoginPackets = 0;
     std::mutex m_operationMutex;
     std::unordered_map<uint64_t, std::chrono::steady_clock::time_point> m_recentItemOperations;

@@ -19,6 +19,7 @@ class UserService;
 class CharacterService;
 class InventoryService;
 class GameWorld;
+class NpcShopRepository;
 
 class IPacketHandler {
 public:
@@ -38,7 +39,8 @@ public:
         UserService& userService,
         CharacterService& characterService,
         InventoryService& inventoryService,
-        GameWorld& gameWorld
+        GameWorld& gameWorld,
+        NpcShopRepository& npcShopRepository
     );
 
     void dispatch(std::shared_ptr<ClientSession> session, const Packet& packet);
@@ -59,6 +61,7 @@ private:
     CharacterService& m_characterService;
     InventoryService& m_inventoryService;
     GameWorld& m_gameWorld;
+    NpcShopRepository& m_npcShopRepository;
 
     std::map<uint32_t, std::shared_ptr<IPacketHandler>> m_handlers;
 };

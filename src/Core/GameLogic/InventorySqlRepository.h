@@ -16,6 +16,7 @@ public:
     bool saveInventory(const std::string& character, const InventoryData& data) const;
     bool saveWarehouse(const std::string& account, const WarehouseData& data) const;
     bool saveInventoryAndWarehouse(const std::string& character, const InventoryData& inventory, const std::string& account, const WarehouseData& warehouse) const;
+    bool saveCharacterAndInventory(const CharacterData& character, const InventoryData& inventory) const;
 
 private:
     PlayerStateSqlRepository m_state;

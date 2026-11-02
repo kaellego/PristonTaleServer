@@ -235,3 +235,23 @@ bool PlayerStateSqlRepository::saveInventoryAndWarehouse(const std::string& char
         return ok;
     } catch (...) { return false; }
 }
+
+bool PlayerStateSqlRepository::saveCharacterAndInventory(const CharacterData& character, const InventoryData& inventory) const {
+    try {
+        auto normalizedCharacter = character;
+        auto normalizedInventory = inventory;
+        normalizeItems(normalizedCharacter.saEquipment);
+        normalizeItems(normalizedInventory.saItem);
+        auto db = m_pool.createConnection(EDatabaseID::UserDB_Primary);
+        db->beginTransaction();
+        const auto name = sqlOwner(std::string(normalizedCharacter.szName));
+        const bool ok = saveBlob(*db, 1, name, PlayerStateProto::encode(normalizedCharacter)) &&
+                        saveBlob(*db, 2, name, PlayerStateProto::encode(normalizedInventory));
+        if (ok) {
+            db->prepare("UPDATE dbo.CharacterInfo SET Experience=" + std::to_string(normalizedCharacter.liEXP) + ", StateUpdatedAt=sysdatetime() WHERE Name='" + name + "'");
+            db->execute();
+            db->commit();
+        } else db->rollback();
+        return ok;
+    } catch (...) { return false; }
+}

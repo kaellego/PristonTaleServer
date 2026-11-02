@@ -74,20 +74,23 @@ void Application::buildServices()
     m_dbPool = std::make_unique<DatabasePool>(*m_config, *m_logService);
     m_playerRepository = std::make_unique<PlayerRepository>(runtimeFile("Data").string(), m_dbPool.get());
     m_gameWorld.setPersistenceCallback([this](const std::string& name, CharacterData data) {
-        auto current = m_playerRepository->loadCharacter(name);
-        if (!current) return;
-        current->iMapId = data.iMapId; current->fPosX = data.fPosX; current->fPosY = data.fPosY; current->fPosZ = data.fPosZ;
-        current->iHP = data.iHP; current->iMaxHP = data.iMaxHP; current->iMP = data.iMP; current->iMaxMP = data.iMaxMP; current->iSTM = data.iSTM; current->iMaxSTM = data.iMaxSTM;
-        m_playerRepository->saveCharacter(*current);
+        // GameWorld owns the complete session snapshot. Saving it directly
+        // prevents movement/regen from rebuilding a zeroed character record.
+        if (data.szName[0] == '\0')
+            std::memcpy(data.szName, name.c_str(), std::min(name.size(), sizeof(data.szName) - 1));
+        m_playerRepository->saveCharacter(data);
     });
     m_npcRepository = std::make_unique<NpcRepository>(*m_dbPool, *m_logService);
+    m_npcShopRepository = std::make_unique<NpcShopRepository>(*m_dbPool);
     const auto loadedNpcs = m_npcRepository->loadEnabledSpawns(m_gameWorld);
     if (loadedNpcs == 0) {
         // Fallback only until GameDB receives real MapNPC coordinates.
         const bool first = m_gameWorld.registerNpc(NpcEntity{3, 0x81000003u, 0, {0.0f, 0.0f, 0.0f}, 0,
-                                          "AcaciaShop", "char\\npc\\TN-005\\TN-005.ini", 0, true});
+                                          "AcaciaShop", "char\\npc\\TN-005\\TN-005.ini", 0,
+                                          100, 100, 0, 0, false, true});
         const bool second = m_gameWorld.registerNpc(NpcEntity{10, 0x8100000Au, 0, {3072.0f, 0.0f, 0.0f}, 0,
-                                          "CaveKeeper", "char\\npc\\TN-001\\TN-001.ini", 0, true});
+                                          "CaveKeeper", "char\\npc\\TN-001\\TN-001.ini", 0,
+                                          100, 100, 0, 0, false, true});
         m_logService->info("Fallback de NPCs registrado no mapa 0: {}", (first ? 1 : 0) + (second ? 1 : 0));
     }
     m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);
@@ -116,7 +119,8 @@ void Application::buildServices()
         *m_userService,
         *m_characterService,
         *m_inventoryService,
-        m_gameWorld);
+        m_gameWorld,
+        *m_npcShopRepository);
 
     const auto &serverInfo = m_config->getThisServerInfo();
     uint8_t gameXorKey = m_config->getXorKey();

@@ -54,6 +54,11 @@ struct NpcEntity {
     std::string name;
     std::string modelName;
     int eventCode = 0;
+    int health = 100;
+    int maxHealth = 100;
+    int dropItemCode = 0;
+    int dropQuantity = 0;
+    bool inCombat = false;
     bool enabled = true;
 };
 
@@ -64,7 +69,8 @@ public:
     bool registerNpc(NpcEntity npc) {
         if (npc.id <= 0 || npc.objectSerial == 0 || npc.name.empty() || npc.modelName.empty() ||
             npc.name.size() >= 32 || npc.modelName.size() >= 64 || !std::isfinite(npc.position.x) ||
-            !std::isfinite(npc.position.y) || !std::isfinite(npc.position.z)) return false;
+            !std::isfinite(npc.position.y) || !std::isfinite(npc.position.z) || npc.maxHealth <= 0 ||
+            npc.health < 0 || npc.health > npc.maxHealth || npc.dropQuantity < 0) return false;
         std::lock_guard lock(m_mutex);
         if (m_npcs.size() >= 512 || m_npcs.contains(npc.objectSerial)) return false;
         m_npcs.emplace(npc.objectSerial, std::move(npc));
@@ -103,8 +109,30 @@ public:
         if (dx * dx + dy * dy + dz * dz > npcInteractionRadius * npcInteractionRadius) return std::nullopt;
         return *npc;
     }
+    bool damageNpc(uint32_t objectSerial, int damage, int& remainingHealth) {
+        if (damage <= 0) return false;
+        std::lock_guard lock(m_mutex);
+        auto it = m_npcs.find(objectSerial);
+        if (it == m_npcs.end() || !it->second.enabled || it->second.health <= 0) return false;
+        it->second.inCombat = true;
+        it->second.health = std::max(0, it->second.health - damage);
+        remainingHealth = it->second.health;
+        if (remainingHealth == 0) it->second.inCombat = false;
+        return true;
+    }
+    std::optional<Item> npcDrop(uint32_t objectSerial) const {
+        std::lock_guard lock(m_mutex);
+        const auto it = m_npcs.find(objectSerial);
+        if (it == m_npcs.end() || it->second.health != 0 || it->second.dropItemCode <= 0 || it->second.dropQuantity <= 0)
+            return std::nullopt;
+        Item drop{};
+        drop.sItemID = it->second.dropItemCode;
+        drop.iQuantity = it->second.dropQuantity;
+        return drop;
+    }
     std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName, const CharacterData& character, std::weak_ptr<ClientSession> client = {}) {
         auto gameSession = std::make_shared<GameSession>(accountId, accountName, characterName, std::move(client));
+        gameSession->setCharacterData(character);
         std::lock_guard lock(m_mutex);
         if (auto existing = m_sessions.find(accountName); existing != m_sessions.end())
             m_entities.erase(existing->second->entityId());
@@ -140,19 +168,8 @@ public:
             if (session == m_sessions.end()) return;
             const auto entity = m_entities.find(session->second->entityId());
             if (entity != m_entities.end()) {
-                CharacterData data{};
-                const auto& characterName = session->second->characterName();
-                std::memcpy(data.szName, characterName.c_str(), std::min(characterName.size(), sizeof(data.szName) - 1));
-                data.iMapId = entity->second.mapId;
-                data.fPosX = entity->second.position.x;
-                data.fPosY = entity->second.position.y;
-                data.fPosZ = entity->second.position.z;
-                data.iHP = entity->second.health;
-                data.iMaxHP = entity->second.maxHealth;
-                data.iMP = entity->second.mana;
-                data.iMaxMP = entity->second.maxMana;
-                data.iSTM = entity->second.stamina;
-                data.iMaxSTM = entity->second.maxStamina;
+                CharacterData data = session->second->characterData();
+                applyRuntimeState(data, entity->second);
                 snapshot = data;
                 m_entities.erase(entity);
             }
@@ -176,11 +193,9 @@ public:
             it->second.position = destination;
             for (const auto& [name, session] : m_sessions) {
                 if (session->entityId() != entityId) continue;
-                CharacterData data{};
-                const auto& characterName = session->characterName();
-                std::memcpy(data.szName, characterName.c_str(), std::min(characterName.size(), sizeof(data.szName) - 1));
-                data.iMapId = it->second.mapId; data.fPosX = destination.x; data.fPosY = destination.y; data.fPosZ = destination.z;
-                data.iHP = it->second.health; data.iMaxHP = it->second.maxHealth; data.iMP = it->second.mana; data.iMaxMP = it->second.maxMana; data.iSTM = it->second.stamina; data.iMaxSTM = it->second.maxStamina;
+                CharacterData data = session->characterData();
+                applyRuntimeState(data, it->second);
+                session->setCharacterData(data);
                 snapshot = data;
                 break;
             }
@@ -268,7 +283,10 @@ public:
                 const bool changed = e.health != oldHealth || e.mana != oldMana || e.stamina != oldStamina;
                 if (changed) {
                     if (auto client = session->client()) notifications.emplace_back(std::move(client), e.health - oldHealth);
-                    CharacterData saved{}; const auto& characterName = session->characterName(); std::memcpy(saved.szName, characterName.c_str(), std::min(characterName.size(), sizeof(saved.szName) - 1)); saved.iMapId = e.mapId; saved.fPosX = e.position.x; saved.fPosY = e.position.y; saved.fPosZ = e.position.z; saved.iHP = e.health; saved.iMaxHP = e.maxHealth; saved.iMP = e.mana; saved.iMaxMP = e.maxMana; saved.iSTM = e.stamina; saved.iMaxSTM = e.maxStamina; saves.emplace_back(characterName, saved);
+                    CharacterData saved = session->characterData();
+                    applyRuntimeState(saved, e);
+                    session->setCharacterData(saved);
+                    saves.emplace_back(session->characterName(), std::move(saved));
                 }
             }
             for (auto it = m_drops.begin(); it != m_drops.end();) it = it->second.expiresAt <= now ? m_drops.erase(it) : std::next(it);
@@ -278,6 +296,19 @@ public:
     }
     std::size_t size() const { std::lock_guard lock(m_mutex); return m_sessions.size(); }
 private:
+    static void applyRuntimeState(CharacterData& data, const MapEntity& entity) {
+        data.iMapId = entity.mapId;
+        data.fPosX = entity.position.x;
+        data.fPosY = entity.position.y;
+        data.fPosZ = entity.position.z;
+        data.iHP = std::clamp(entity.health, 0, entity.maxHealth);
+        data.iMaxHP = entity.maxHealth;
+        data.iMP = std::clamp(entity.mana, 0, entity.maxMana);
+        data.iMaxMP = entity.maxMana;
+        data.iSTM = std::clamp(entity.stamina, 0, entity.maxStamina);
+        data.iMaxSTM = entity.maxStamina;
+    }
+
     mutable std::mutex m_mutex;
     std::unordered_map<std::string, std::shared_ptr<GameSession>> m_sessions;
     std::unordered_map<int, MapEntity> m_entities;

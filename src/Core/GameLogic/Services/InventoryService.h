@@ -32,6 +32,10 @@ public:
     void transferItem(const std::string& account, const std::string& character, int inventorySlot, int warehouseSlot, int quantity, bool toWarehouse, TransferCallback callback);
     void dropItem(const std::string& account, const std::string& character, int inventorySlot, int quantity, ItemCallback callback);
     void addItem(const std::string& account, const std::string& character, Item item, InventoryCallback callback);
+    void buyNpcItem(const std::string& account, const std::string& character, int itemCode, int quantity,
+                    int64_t unitPrice, InventoryCallback callback);
+    void sellNpcItem(const std::string& account, const std::string& character, int itemCode, int quantity,
+                     int64_t unitPrice, InventoryCallback callback);
 
 private:
     std::optional<InventoryData> loadInventoryData(const std::string& character) const;
