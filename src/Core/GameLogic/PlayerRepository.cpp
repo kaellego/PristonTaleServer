@@ -18,6 +18,34 @@ namespace
         int32_t attackMin, attackMax, defense, gold;
         LegacyItemV1 equipment[16];
     };
+    // Older .chr files contain the same character header followed by a
+    // different item payload.  The header is enough to expose the character
+    // safely; equipment is rebuilt empty until its legacy layout is mapped.
+    struct LegacyCharacterPrefix {
+        char name[32]; int32_t level; int64_t experience; int32_t characterClass; int32_t mapId;
+        float x, y, z; int32_t hp, maxHp, mp, maxMp;
+        int32_t strength, spirit, talent, agility, health;
+        int32_t attackMin, attackMax, defense, gold;
+    };
+
+    CharacterData convertLegacyPrefix(const LegacyCharacterPrefix& legacy)
+    {
+        CharacterData character{};
+        std::memcpy(character.szName, legacy.name, sizeof(character.szName));
+        character.iLevel = std::clamp(legacy.level, 1, 150);
+        character.liEXP = std::max<int64_t>(0, legacy.experience);
+        character.iClass = std::clamp(legacy.characterClass, 1, 11);
+        character.iMapId = legacy.mapId;
+        character.fPosX = legacy.x; character.fPosY = legacy.y; character.fPosZ = legacy.z;
+        character.iHP = std::max(1, legacy.hp); character.iMaxHP = std::max(character.iHP, legacy.maxHp);
+        character.iMP = std::max(0, legacy.mp); character.iMaxMP = std::max(character.iMP, legacy.maxMp);
+        character.iStrength = std::max(1, legacy.strength); character.iSpirit = std::max(1, legacy.spirit);
+        character.iTalent = std::max(1, legacy.talent); character.iAgility = std::max(1, legacy.agility);
+        character.iHealth = std::max(1, legacy.health);
+        character.iAttackMin = std::max(0, legacy.attackMin); character.iAttackMax = std::max(character.iAttackMin, legacy.attackMax);
+        character.iDefense = std::max(0, legacy.defense); character.iGold = std::max(0, legacy.gold);
+        return character;
+    }
     struct LegacyWarehouseV1 { int32_t gold; LegacyItemV1 items[405]; };
     struct LegacyInventoryV1 { int32_t gold; LegacyItemV1 items[PLAYER_INVENTORY_SLOTS]; };
 
@@ -65,11 +93,10 @@ void PlayerRepository::migrateLegacyCharacters() {
         LegacyCharacterData legacy{};
         std::ifstream input(entry.path(), std::ios::binary);
         if (!input.read(reinterpret_cast<char*>(&legacy), sizeof(legacy))) continue;
-        CharacterData upgraded{};
-        std::memcpy(upgraded.szName, legacy.szName, sizeof(upgraded.szName));
-        upgraded.iLevel = std::max(1, legacy.iLevel);
-        upgraded.liEXP = std::max<int64_t>(0, legacy.liEXP);
-        upgraded.iClass = std::clamp(legacy.iClass, 1, 11);
+        LegacyCharacterPrefix prefix{};
+        std::memcpy(prefix.name, legacy.szName, sizeof(prefix.name));
+        prefix.level = legacy.iLevel; prefix.experience = legacy.liEXP; prefix.characterClass = legacy.iClass;
+        CharacterData upgraded = convertLegacyPrefix(prefix);
         upgraded.iHP = upgraded.iMaxHP = 100;
         upgraded.iMP = upgraded.iMaxMP = 100;
         upgraded.iStrength = upgraded.iSpirit = upgraded.iTalent = upgraded.iAgility = upgraded.iHealth = 1;
@@ -108,6 +135,11 @@ std::optional<CharacterData> PlayerRepository::loadCharacter(const std::string& 
         charData.iAttackMax = legacy.attackMax; charData.iDefense = legacy.defense; charData.iGold = legacy.gold;
         for (size_t i = 0; i < std::size(charData.saEquipment); ++i) charData.saEquipment[i] = convertItem(legacy.equipment[i]);
         return charData;
+    }
+    if (size == 1204 || size == 1268) {
+        LegacyCharacterPrefix legacy{};
+        if (!file.read(reinterpret_cast<char*>(&legacy), sizeof(legacy))) return std::nullopt;
+        return convertLegacyPrefix(legacy);
     }
     if (size != static_cast<std::streamsize>(sizeof(CharacterData))) return std::nullopt;
     if (file.read(reinterpret_cast<char*>(&charData), sizeof(CharacterData))) {
@@ -192,6 +224,16 @@ bool PlayerRepository::saveInventory(const std::string& characterName, const Inv
     fs::create_directories(fs::path(m_basePath) / "Inventory");
     return writeAtomically(fs::path(m_basePath) / "Inventory" / (characterName + ".dat"),
                            &inventoryData, sizeof(InventoryData));
+}
+
+bool PlayerRepository::deleteInventory(const std::string& characterName) const {
+    std::lock_guard lock(m_mutex);
+    return fs::remove(fs::path(m_basePath) / "Inventory" / (characterName + ".dat"));
+}
+
+bool PlayerRepository::deleteWarehouse(const std::string& accountName) const {
+    std::lock_guard lock(m_mutex);
+    return fs::remove(fs::path(m_warehousePath) / (accountName + ".dat"));
 }
 
 std::vector<std::string> PlayerRepository::getAllCharacterNames() const {

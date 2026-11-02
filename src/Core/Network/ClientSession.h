@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Network/Packet.h"
 #include "Network/LegacyPacketAdapter.h"
@@ -10,7 +10,9 @@
 #include <atomic>
 #include <array>
 #include <chrono>
-#include <string> // Necessário para std::string
+#include <string> // Necessario para std::string
+#include <unordered_map>
+#include <mutex>
 
 // Forward declarations
 class PacketDispatcher;
@@ -26,12 +28,12 @@ public:
     void close();
     boost::asio::ip::tcp::socket& socket();
 
-    // --- NOVOS MÉTODOS DE AUTENTICAÇÃO ---
+    // --- NOVOS MÃ‰TODOS DE AUTENTICAÃ‡ÃƒO ---
 
     /**
-     * @brief Define a sessão como autenticada, armazenando os dados da conta.
-     * @param accountId O ID numérico da conta.
-     * @param accountName O nome de usuário da conta.
+     * @brief Define a sessÃ£o como autenticada, armazenando os dados da conta.
+     * @param accountId O ID numÃ©rico da conta.
+     * @param accountName O nome de usuÃ¡rio da conta.
      */
     void authenticate(int accountId, const std::string& accountName, int ticket, std::chrono::steady_clock::time_point expiresAt);
 
@@ -45,6 +47,7 @@ public:
     int getTicket() const { return m_ticket; }
     bool ticketExpired() const { return std::chrono::steady_clock::now() >= m_ticketExpiresAt; }
     void renewTicket(std::chrono::steady_clock::time_point expiresAt) { m_ticketExpiresAt = expiresAt; }
+    bool acceptItemOperation(uint32_t opcode, const std::vector<uint8_t>& body);
 
 private:
     void do_read_header();
@@ -64,6 +67,8 @@ private:
     std::chrono::steady_clock::time_point m_ticketExpiresAt{};
     std::string m_characterName;
     uint32_t m_verifiedLoginPackets = 0;
+    std::mutex m_operationMutex;
+    std::unordered_map<uint64_t, std::chrono::steady_clock::time_point> m_recentItemOperations;
 
     // Outros membros...
     boost::asio::ip::tcp::socket m_socket;

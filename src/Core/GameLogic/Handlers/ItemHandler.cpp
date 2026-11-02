@@ -26,6 +26,12 @@ void ItemHandler::handle(std::shared_ptr<ClientSession> session, const Packet &p
         return;
     }
     const auto op = static_cast<Opcodes>(packet.header.opcode);
+    if (op == Opcodes::NetPlayerInventory || op == Opcodes::NetOpenWarehouse || op == Opcodes::NetOpenWarehouseSeasonal ||
+        op == Opcodes::RecvWarehouse || op == Opcodes::SendWarehouse || op == Opcodes::ItemSlotHandle ||
+        op == Opcodes::UseItemCode || op == Opcodes::CheckItemUseSlot || op == Opcodes::CheckItemUseSlotEx ||
+        op == Opcodes::NetWarehouseTransfer || op == Opcodes::NetDropItem || op == Opcodes::NetPickupDrop) {
+        if (!session->acceptItemOperation(packet.header.opcode, packet.body)) return;
+    }
     if (op == Opcodes::NetPlayerInventory)
     {
         m_inventory.loadInventory(session->getAccountName(), session->getCharacterName(), [session, opcode = packet.header.opcode](bool ok, InventoryData data) {

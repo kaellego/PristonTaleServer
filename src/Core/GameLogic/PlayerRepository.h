@@ -28,6 +28,8 @@ public:
     bool saveWarehouse(const std::string& accountName, const WarehouseData& warehouseData) const;
     std::optional<InventoryData> loadInventory(const std::string& characterName) const;
     bool saveInventory(const std::string& characterName, const InventoryData& inventoryData) const;
+    bool deleteInventory(const std::string& characterName) const;
+    bool deleteWarehouse(const std::string& accountName) const;
     std::vector<std::string> getAllCharacterNames() const;
 
 private:

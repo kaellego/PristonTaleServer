@@ -7140,3 +7140,5 @@
 2026-11-01 20:57:38 [PACKET] Pacote Keep-Alive (0x0000) recebido do cliente 127.0.0.1
 2026-11-01 20:57:39 [INFO]   Usuario 'test' removido da lista de online. Total: 0
 2026-11-01 20:57:39 [INFO]   Sessao encerrada para um socket ja desconectado.
+2026-11-01 21:11:17 [INFO]   Inicializando a aplicacao do servidor...
+2026-11-01 21:11:17 [ERROR]  Erro na fase 1: ZEROPT_ITEM_SECRET deve conter pelo menos 32 caracteres.

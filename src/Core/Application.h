@@ -21,6 +21,7 @@
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/Services/UserService.h"
 #include "GameLogic/Services/InventoryService.h"
+#include "GameLogic/InventorySqlRepository.h"
 #include "GameLogic/EventQueue.h"
 #include "GameLogic/GameWorld.h"
 
@@ -51,6 +52,7 @@ private:
     std::unique_ptr<UserService> m_userService;
     std::unique_ptr<AccountService> m_accountService;
     std::unique_ptr<InventoryService> m_inventoryService;
+    std::unique_ptr<InventorySqlRepository> m_inventorySqlRepository;
     EventQueue m_gameEvents;
     GameWorld m_gameWorld;
 

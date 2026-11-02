@@ -1,4 +1,4 @@
-#include "Network/ClientSession.h"
+﻿#include "Network/ClientSession.h"
 #include "Network/PacketDispatcher.h"
 #include "Logging/LogService.h"
 #include "Network/PacketScrambler.h"
@@ -28,6 +28,19 @@ ClientSession::~ClientSession() {
         m_logService.info("Sessao encerrada para um socket ja desconectado.");
     }
 }
+bool ClientSession::acceptItemOperation(uint32_t opcode, const std::vector<uint8_t>& body) {
+    uint64_t fingerprint = 1469598103934665603ull ^ opcode;
+    for (const auto byte : body) { fingerprint ^= byte; fingerprint *= 1099511628211ull; }
+    const auto now = std::chrono::steady_clock::now();
+    std::lock_guard lock(m_operationMutex);
+    for (auto it = m_recentItemOperations.begin(); it != m_recentItemOperations.end();) {
+        if (now - it->second > std::chrono::seconds(3)) it = m_recentItemOperations.erase(it); else ++it;
+    }
+    if (m_recentItemOperations.contains(fingerprint)) return false;
+    if (m_recentItemOperations.size() >= 256) return false;
+    m_recentItemOperations.emplace(fingerprint, now);
+    return true;
+}
 
 boost::asio::ip::tcp::socket& ClientSession::socket() {
     return m_socket;
@@ -39,8 +52,8 @@ void ClientSession::start() {
     }
     catch (...) { return; }
 
-    // O cliente legado não entende o pacote de chave moderno. O gateway
-    // começa pelo frame legado e só encaminha payloads validados.
+    // O cliente legado nÃ£o entende o pacote de chave moderno. O gateway
+    // comeÃ§a pelo frame legado e sÃ³ encaminha payloads validados.
     m_logService.debug("Sessao::start() <-> Aguardando frame legado");
     m_logService.info("Enviando confirmacao legada VERSION para {}", m_gameEndpoint ? "GameServer" : "LoginServer");
     m_legacy_write_queue.push_back(LegacyGateway::gameServerReadyPayload());
@@ -149,7 +162,7 @@ void ClientSession::do_read_header() {
                     do_read_body();
                 }
                 else {
-                    // Log com o valor "scrambled", pois ainda não descriptografamos
+                    // Log com o valor "scrambled", pois ainda nÃ£o descriptografamos
                     m_logService.error("Tamanho de pacote (scrambled) invalido: {}. Desconectando.", m_read_header.length);
                     close();
                 }
@@ -183,7 +196,7 @@ void ClientSession::do_read_body() {
                     return;
                 }
 
-                // --- A NOVA LÓGICA DE LOG DETALHADO ---
+                // --- A NOVA LÃ“GICA DE LOG DETALHADO ---
                 std::string opcodeName = getOpcodeName(received_packet.header.opcode);
                 std::string hexDump = formatHex(received_packet.body);
 
@@ -287,3 +300,4 @@ void ClientSession::authenticate(int accountId, const std::string& accountName, 
     m_ticket = ticket;
     m_ticketExpiresAt = expiresAt;
 }
+

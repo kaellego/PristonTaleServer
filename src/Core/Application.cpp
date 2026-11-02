@@ -1,4 +1,4 @@
-#include "Application.h"
+﻿#include "Application.h"
 
 #include "Logging/LogService.h"
 #include "GameLogic/Services/AccountService.h"
@@ -10,13 +10,26 @@
 #include <chrono>
 #include <boost/asio/signal_set.hpp>
 #include <csignal>
+#include <cstdlib>
+#include <filesystem>
+#include <windows.h>
+#include "GameLogic/ItemIntegrity.h"
+
+namespace {
+    std::filesystem::path runtimeFile(const char* name) {
+        char modulePath[MAX_PATH]{};
+        const DWORD length = GetModuleFileNameA(nullptr, modulePath, MAX_PATH);
+        if (length == 0 || length >= MAX_PATH) return std::filesystem::path(name);
+        return std::filesystem::path(modulePath).parent_path() / name;
+    }
+}
 
 Application::Application() : m_isRunning(false)
 {
-    // A criação do LogService precisa vir antes de qualquer chamada a ele.
-    // É uma boa prática inicializar o GlobalState primeiro, pois outros podem depender dele.
+    // A criaÃ§Ã£o do LogService precisa vir antes de qualquer chamada a ele.
+    // Ã‰ uma boa prÃ¡tica inicializar o GlobalState primeiro, pois outros podem depender dele.
     m_globalState = std::make_unique<GlobalState>();
-    m_logService = std::make_unique<LogService>("ServerLog.txt", *m_globalState);
+    m_logService = std::make_unique<LogService>(runtimeFile("ServerLog.txt").string(), *m_globalState);
 
     m_logService->info("Inicializando a aplicacao do servidor...");
 
@@ -28,19 +41,19 @@ Application::Application() : m_isRunning(false)
     catch (const std::exception &e)
     {
         int fase = 1;
-        // A primeira {} será substituída por 'fase', a segunda por e.what().
+        // A primeira {} serÃ¡ substituÃ­da por 'fase', a segunda por e.what().
         m_logService->error("Erro na fase {}: {}", fase, e.what());
 
-        // Relança a exceção para que o main() possa capturá-la e encerrar
-        // de forma limpa, permitindo que o usuário veja a mensagem no console.
+        // RelanÃ§a a exceÃ§Ã£o para que o main() possa capturÃ¡-la e encerrar
+        // de forma limpa, permitindo que o usuÃ¡rio veja a mensagem no console.
         throw;
     }
 }
 
 void Application::buildServices()
 {
-    // --- ETAPA 1: Serviços base (sem dependências complexas) ---
-    m_config = std::make_unique<ServerConfig>("server.ini");
+    // --- ETAPA 1: ServiÃ§os base (sem dependÃªncias complexas) ---
+    m_config = std::make_unique<ServerConfig>(runtimeFile("server.ini").string());
 
     // m_logService->info("Versao do Jogo: {}", m_config->getGameVersion());
     // m_logService->info("Chave XOR Calculada: 0x{:02x}", m_config->getXorKey());
@@ -49,17 +62,33 @@ void Application::buildServices()
     m_globalState->isGameServer = m_config->getThisServerInfo().isGameServer;
     m_globalState->isLoginServer = m_config->getThisServerInfo().isLoginServer;
 
-    // --- ETAPA 2: Serviços de dados ---
+    char* itemSecret = nullptr;
+    size_t itemSecretLength = 0;
+    _dupenv_s(&itemSecret, &itemSecretLength, "ZEROPT_ITEM_SECRET");
+    if (!itemSecret || itemSecretLength < 32)
+        throw std::runtime_error("ZEROPT_ITEM_SECRET deve conter pelo menos 32 caracteres.");
+    ItemIntegrity::setSecret(itemSecret);
+    free(itemSecret);
+
+    // --- ETAPA 2: ServiÃ§os de dados ---
     m_dbPool = std::make_unique<DatabasePool>(*m_config, *m_logService);
-    m_playerRepository = std::make_unique<PlayerRepository>("./Data"); // Supondo que a pasta Data está no diretório do executável
+    m_playerRepository = std::make_unique<PlayerRepository>(runtimeFile("Data").string());
+    m_gameWorld.setPersistenceCallback([this](const std::string& name, CharacterData data) {
+        auto current = m_playerRepository->loadCharacter(name);
+        if (!current) return;
+        current->iMapId = data.iMapId; current->fPosX = data.fPosX; current->fPosY = data.fPosY; current->fPosZ = data.fPosZ;
+        current->iHP = data.iHP; current->iMaxHP = data.iMaxHP; current->iMP = data.iMP; current->iMaxMP = data.iMaxMP; current->iSTM = data.iSTM; current->iMaxSTM = data.iMaxSTM;
+        m_playerRepository->saveCharacter(*current);
+    });
     m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);
     m_itemPolicy = std::make_unique<ItemPolicy>(*m_dbPool);
 
-    // --- ETAPA 3: Serviço de lógica de jogo ---
+    // --- ETAPA 3: ServiÃ§o de lÃ³gica de jogo ---
     m_characterService = std::make_unique<CharacterService>(*m_dbPool, *m_playerRepository, *m_logService);
     m_userService = std::make_unique<UserService>(*m_dbPool, *m_logService);
     m_accountService = std::make_unique<AccountService>(*m_dbPool, *m_characterService, *m_userService, *m_logService, *m_config);
-    m_inventoryService = std::make_unique<InventoryService>(*m_playerRepository, *m_characterService, *m_itemPolicy);
+    m_inventorySqlRepository = std::make_unique<InventorySqlRepository>(*m_dbPool);
+    m_inventoryService = std::make_unique<InventoryService>(*m_playerRepository, *m_characterService, *m_itemPolicy, m_inventorySqlRepository.get());
 
     // --- ETAPA 4: Rede e Despacho de Pacotes ---
     m_io_context = std::make_shared<boost::asio::io_context>();
@@ -102,7 +131,7 @@ void Application::run()
     m_isRunning = true;
 
     // --- Inicia as Threads de Rede ---
-    // Cria um pool de threads para processar as operações de I/O de rede.
+    // Cria um pool de threads para processar as operaÃ§Ãµes de I/O de rede.
     const auto thread_count = std::max(1u, std::thread::hardware_concurrency());
     std::vector<std::thread> network_threads;
     network_threads.reserve(thread_count);
@@ -117,7 +146,7 @@ void Application::run()
     m_logService->info("Servidor de rede em execucao. Iniciando loop principal do jogo.");
 
     // --- Inicia o Loop Principal do Jogo (Game Loop) ---
-    // Este loop roda na thread principal e é responsável pelos ticks de lógica.
+    // Este loop roda na thread principal e Ã© responsÃ¡vel pelos ticks de lÃ³gica.
     mainLoop();
 
     requestShutdown();
@@ -136,7 +165,7 @@ void Application::run()
 void Application::requestShutdown()
 {
     if (!m_isRunning.exchange(false)) return;
-    m_logService->info("Solicitação de encerramento recebida; iniciando shutdown gracioso.");
+    m_logService->info("SolicitaÃ§Ã£o de encerramento recebida; iniciando shutdown gracioso.");
     if (m_networkServer) m_networkServer->stop();
     if (m_gameNetworkServer) m_gameNetworkServer->stop();
     if (m_signals) m_signals->cancel();
@@ -153,22 +182,23 @@ void Application::mainLoop()
     {
         m_gameEvents.process();
         m_gameWorld.update();
-        // Para encerrar o servidor de forma limpa, você precisaria de um mecanismo
+        // Para encerrar o servidor de forma limpa, vocÃª precisaria de um mecanismo
         // para definir m_isRunning como false (ex: um comando no console).
 
-        // Atualiza o tick count global (se estiver usando a função do Windows)
+        // Atualiza o tick count global (se estiver usando a funÃ§Ã£o do Windows)
         // m_globalState->tickCount = GetTickCount();
 
         // --- Logica do Jogo executada a cada tick ---
-        // Aqui você chamaria os métodos de update dos seus outros serviços de lógica, como o GameWorld, UnitServer, MapServer, etc.
+        // Aqui vocÃª chamaria os mÃ©todos de update dos seus outros serviÃ§os de lÃ³gica, como o GameWorld, UnitServer, MapServer, etc.
         // Ex:
         // m_unitServer->update();
         // m_mapServer->update();
 
-        // Dorme até o proximo tick para controlar o FPS do servidor
+        // Dorme atÃ© o proximo tick para controlar o FPS do servidor
         next_tick += tick_interval;
         std::this_thread::sleep_until(next_tick);
     }
 
     requestShutdown();
 }
+

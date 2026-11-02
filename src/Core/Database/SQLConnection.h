@@ -1,8 +1,8 @@
-#pragma once
+Ôªø#pragma once
 
 #include <string>
 #include <vector>
-#include <list> // Usaremos std::list para garantir que os ponteiros para os elementos n„o sejam invalidados
+#include <list> // Usaremos std::list para garantir que os ponteiros para os elementos n√£o sejam invalidados
 #include <stdexcept>
 #include <optional>
 #include <mutex>
@@ -21,11 +21,14 @@ public:
 
     void prepare(const std::string& query);
 
-    // A assinatura n„o muda, mas a implementaÁ„o interna sim
+    // A assinatura n√£o muda, mas a implementa√ß√£o interna sim
     template<typename T>
     void bindParameter(SQLUSMALLINT index, const T& value);
 
     void execute();
+    void beginTransaction();
+    void commit();
+    void rollback();
     bool fetch();
 
     template<typename T>
@@ -40,8 +43,8 @@ private:
     SQLHANDLE m_statement = SQL_NULL_HANDLE;
     std::recursive_mutex m_mutex;
 
-    // --- A CORRE«√O PRINCIPAL ---
-    // Buffer para manter os par‚metros de string vivos durante a consulta
+    // --- A CORRE√á√ÉO PRINCIPAL ---
+    // Buffer para manter os par√¢metros de string vivos durante a consulta
     std::list<std::string> m_stringParamBuffer;
 };
 

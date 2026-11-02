@@ -11,8 +11,11 @@
 #include "Network/Packet.h"
 #include "Network/ClientSession.h"
 #include "Shared/datatypes.h"
+#include "Shared/Constants.h"
 #include <vector>
 #include <chrono>
+#include <functional>
+#include <cstring>
 
 class ClientSession;
 
@@ -24,6 +27,17 @@ struct MapEntity {
     int mapId = 0;
     int health = 100;
     int maxHealth = 100;
+    int mana = 100;
+    int maxMana = 100;
+    int stamina = 100;
+    int maxStamina = 100;
+    float hpRegen = 0.0f;
+    float mpRegen = 0.0f;
+    float spRegen = 0.0f;
+    float hpRemainder = 0.0f;
+    float mpRemainder = 0.0f;
+    float spRemainder = 0.0f;
+    std::chrono::steady_clock::time_point nextRegen{};
     int attack = 10;
     int defense = 0;
     bool alive = true;
@@ -33,6 +47,8 @@ struct WorldDrop { int id = 0; int mapId = 0; MapPosition position{}; Item item{
 
 class GameWorld {
 public:
+    using PersistenceCallback = std::function<void(const std::string&, CharacterData)>;
+    void setPersistenceCallback(PersistenceCallback callback) { m_persist = std::move(callback); }
     std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName, const CharacterData& character, std::weak_ptr<ClientSession> client = {}) {
         auto gameSession = std::make_shared<GameSession>(accountId, accountName, characterName, std::move(client));
         std::lock_guard lock(m_mutex);
@@ -40,7 +56,7 @@ public:
             m_entities.erase(existing->second->entityId());
         gameSession->setEntityId(m_nextEntityId);
         m_sessions[accountName] = gameSession;
-        MapEntity entity{m_nextEntityId, accountId}; entity.position = {character.fPosX, character.fPosY, character.fPosZ}; entity.mapId = character.iMapId; entity.health = character.iHP; entity.maxHealth = character.iMaxHP; entity.attack = std::max(1, character.iAttackMax); entity.defense = character.iDefense; entity.alive = entity.health > 0; m_entities[m_nextEntityId] = entity;
+        MapEntity entity{m_nextEntityId, accountId}; entity.position = {character.fPosX, character.fPosY, character.fPosZ}; entity.mapId = character.iMapId; entity.health = std::clamp(character.iHP, 0, std::max(1, character.iMaxHP)); entity.maxHealth = std::max(1, character.iMaxHP); entity.mana = std::clamp(character.iMP, 0, std::max(0, character.iMaxMP)); entity.maxMana = std::max(0, character.iMaxMP); entity.stamina = std::clamp(character.iSTM, 0, std::max(1, character.iMaxSTM)); entity.maxStamina = std::max(1, character.iMaxSTM); entity.hpRegen = character.fHPRegen + character.fHPRegenBonus; entity.mpRegen = character.fMPRegen + character.fMPRegenBonus; entity.spRegen = character.fSPRegen + character.fSPRegenBonus; for (const auto& item : character.saEquipment) { entity.hpRegen += item.fHPRegen; entity.mpRegen += item.fMPRegen; entity.spRegen += item.fSPRegen; } entity.nextRegen = std::chrono::steady_clock::now() + std::chrono::seconds(1); entity.attack = std::max(1, character.iAttackMax); entity.defense = character.iDefense; entity.alive = entity.health > 0; m_entities[m_nextEntityId] = entity;
         ++m_nextEntityId;
         return gameSession;
     }
@@ -51,12 +67,26 @@ public:
     }
     bool moveEntity(int entityId, MapPosition destination) {
         if (!std::isfinite(destination.x) || !std::isfinite(destination.y) || !std::isfinite(destination.z)) return false;
-        std::lock_guard lock(m_mutex);
-        auto it = m_entities.find(entityId); if (it == m_entities.end() || !it->second.alive) return false;
-        const auto& p = it->second.position;
-        const float dx = destination.x - p.x, dy = destination.y - p.y, dz = destination.z - p.z;
-        if (dx * dx + dy * dy + dz * dz > 400.0f) return false;
-        it->second.position = destination; return true;
+        std::optional<CharacterData> snapshot;
+        {
+            std::lock_guard lock(m_mutex);
+            auto it = m_entities.find(entityId); if (it == m_entities.end() || !it->second.alive) return false;
+            const auto& p = it->second.position;
+            const float dx = destination.x - p.x, dy = destination.y - p.y, dz = destination.z - p.z;
+            if (dx * dx + dy * dy + dz * dz > 400.0f) return false;
+            it->second.position = destination;
+            for (const auto& [name, session] : m_sessions) {
+                if (session->entityId() != entityId) continue;
+                CharacterData data{};
+                std::memcpy(data.szName, name.c_str(), std::min(name.size(), sizeof(data.szName) - 1));
+                data.iMapId = it->second.mapId; data.fPosX = destination.x; data.fPosY = destination.y; data.fPosZ = destination.z;
+                data.iHP = it->second.health; data.iMaxHP = it->second.maxHealth; data.iMP = it->second.mana; data.iMaxMP = it->second.maxMana; data.iSTM = it->second.stamina; data.iMaxSTM = it->second.maxStamina;
+                snapshot = data;
+                break;
+            }
+        }
+        if (snapshot && m_persist) m_persist(std::string(snapshot->szName), *snapshot);
+        return true;
     }
     std::optional<int> entityIdForAccount(const std::string& accountName) const {
         std::lock_guard lock(m_mutex); auto it = m_sessions.find(accountName); return it == m_sessions.end() ? std::nullopt : std::optional<int>(it->second->entityId());
@@ -114,10 +144,32 @@ public:
     }
     void restoreDrop(Item item, int entityId) { spawnDrop(entityId, item); }
     void update() {
-        std::lock_guard lock(m_mutex);
-        for (auto& [name, session] : m_sessions) session->update();
+        std::vector<std::pair<std::string, CharacterData>> saves;
+        std::vector<std::pair<std::shared_ptr<ClientSession>, int>> notifications;
         const auto now = std::chrono::steady_clock::now();
-        for (auto it = m_drops.begin(); it != m_drops.end();) it = it->second.expiresAt <= now ? m_drops.erase(it) : std::next(it);
+        {
+            std::lock_guard lock(m_mutex);
+            for (auto& [name, session] : m_sessions) session->update();
+            for (auto& [name, session] : m_sessions) {
+                auto it = m_entities.find(session->entityId());
+                if (it == m_entities.end() || !it->second.alive || now < it->second.nextRegen) continue;
+                auto& e = it->second; e.nextRegen = now + std::chrono::seconds(1);
+                const int oldHealth = e.health;
+                const int oldMana = e.mana;
+                const int oldStamina = e.stamina;
+                e.hpRemainder += std::max(0.0f, e.hpRegen); e.mpRemainder += std::max(0.0f, e.mpRegen); e.spRemainder += std::max(0.0f, e.spRegen);
+                e.health = std::min(e.maxHealth, e.health + static_cast<int>(e.hpRemainder)); e.mana = std::min(e.maxMana, e.mana + static_cast<int>(e.mpRemainder)); e.stamina = std::min(e.maxStamina, e.stamina + static_cast<int>(e.spRemainder));
+                e.hpRemainder -= static_cast<int>(e.hpRemainder); e.mpRemainder -= static_cast<int>(e.mpRemainder); e.spRemainder -= static_cast<int>(e.spRemainder);
+                const bool changed = e.health != oldHealth || e.mana != oldMana || e.stamina != oldStamina;
+                if (changed) {
+                    if (auto client = session->client()) notifications.emplace_back(std::move(client), e.health - oldHealth);
+                    CharacterData saved{}; std::memcpy(saved.szName, name.c_str(), std::min(name.size(), sizeof(saved.szName) - 1)); saved.iMapId = e.mapId; saved.fPosX = e.position.x; saved.fPosY = e.position.y; saved.fPosZ = e.position.z; saved.iHP = e.health; saved.iMaxHP = e.maxHealth; saved.iMP = e.mana; saved.iMaxMP = e.maxMana; saved.iSTM = e.stamina; saved.iMaxSTM = e.maxStamina; saves.emplace_back(name, saved);
+                }
+            }
+            for (auto it = m_drops.begin(); it != m_drops.end();) it = it->second.expiresAt <= now ? m_drops.erase(it) : std::next(it);
+        }
+        for (auto& [client, amount] : notifications) { std::vector<uint8_t> body(sizeof(int32_t) * 4); std::memcpy(body.data() + sizeof(int32_t), &amount, sizeof(amount)); client->send(Packet(static_cast<uint32_t>(Opcodes::RegenChar), std::move(body))); }
+        if (m_persist) for (auto& [name, data] : saves) m_persist(name, std::move(data));
     }
     std::size_t size() const { std::lock_guard lock(m_mutex); return m_sessions.size(); }
 private:
@@ -127,4 +179,5 @@ private:
     int m_nextEntityId = 1;
     int m_nextDropId = 1;
     std::unordered_map<int, WorldDrop> m_drops;
+    PersistenceCallback m_persist;
 };

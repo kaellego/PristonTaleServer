@@ -572,6 +572,12 @@ struct Item {
     int32_t     sItemID;
     char        szItemName[64];
     int32_t     iQuantity;
+    uint64_t    serial;
+    uint32_t    checksum;
+    uint32_t    version;
+    float       fHPRegen = 0.0f;
+    float       fMPRegen = 0.0f;
+    float       fSPRegen = 0.0f;
     // ... preencha com todos os outros membros exatos do item
 };
 
@@ -584,6 +590,9 @@ struct CharacterData {
     int32_t     iMapId;
     float       fPosX, fPosY, fPosZ;
     int32_t     iHP, iMaxHP, iMP, iMaxMP;
+    int32_t     iSTM, iMaxSTM;
+    float       fHPRegen, fMPRegen, fSPRegen;
+    float       fHPRegenBonus, fMPRegenBonus, fSPRegenBonus;
     int32_t     iStrength, iSpirit, iTalent, iAgility, iHealth;
     int32_t     iAttackMin, iAttackMax, iDefense;
     int32_t     iGold;

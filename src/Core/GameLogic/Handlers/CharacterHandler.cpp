@@ -88,6 +88,16 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
     default:
         return;
     }
+
+    // The legacy client removes the character from its local list before
+    // sending DELRECORDDATA; the original server sends no response here.
+    if (static_cast<Opcodes>(packet.header.opcode) == Opcodes::DeleteCharacter)
+    {
+        m_logService.info("Operacao de personagem {} para {}: {} (classe {})", success ? "aceita" : "rejeitada",
+                          session->getAccountName(), name, command.LParam);
+        return;
+    }
+
     PacketRecordResult result{};
     result.header.opcode = static_cast<uint32_t>(success ? Opcodes::RecordResult : Opcodes::FailRecordData);
     result.Result = success ? 1 : 0;
@@ -100,8 +110,6 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
         responseBody.insert(responseBody.end(), characterBytes, characterBytes + sizeof(CharacterData));
     }
     session->send(Packet(result.header.opcode, std::move(responseBody)));
-    if (success && static_cast<Opcodes>(packet.header.opcode) == Opcodes::SelectCharacter)
-        session->send(Packet(static_cast<uint32_t>(Opcodes::LegacyConnected)));
     if (success && static_cast<Opcodes>(packet.header.opcode) != Opcodes::SelectCharacter)
         sendCharacterList(session, m_service);
     m_logService.info("Operacao de personagem {} para {}: {} (classe {})", success ? "aceita" : "rejeitada",

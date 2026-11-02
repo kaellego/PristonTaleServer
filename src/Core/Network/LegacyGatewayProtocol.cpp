@@ -302,7 +302,9 @@ namespace LegacyGateway
             record.save.posZ = static_cast<int32_t>(character.fPosZ);
             record.save.totalMoney = character.iGold;
 
-            std::vector<uint8_t> frame(sizeof(record) + 32, 0);
+            // TRANS_RECORD_DATAS is: size, code, count, total, transSize,
+            // followed immediately by the serialized TRANS_RECORD_DATA.
+            std::vector<uint8_t> frame(sizeof(record) + 20, 0);
             const int32_t frameSize = static_cast<int32_t>(frame.size());
             const int32_t total = 1;
             const int32_t dataSize = static_cast<int32_t>(sizeof(record));
@@ -401,14 +403,21 @@ namespace LegacyGateway
             modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
             break;
         case Opcode::ChatMessage:
-            // TRANS_CHATMESSAGE: size, code, IP, object serial and 256-byte message.
-            if (command.size != 272 || payload.size() != 272 ||
-                !isSafeString(reinterpret_cast<const char *>(payload.data() + 16), 256))
+            // The client sends normal chat as the compact form:
+            // size, code, text (size = strlen(text) + 9). Server-originated
+            // TRANS_CHATMESSAGE uses the 272-byte extended form.
+            if (command.size != static_cast<int32_t>(payload.size()) || command.size < 9 || command.size > 272)
                 return std::nullopt;
             {
                 std::vector<uint8_t> body(sizeof(uint32_t) + 256);
-                std::memcpy(body.data(), payload.data() + 12, sizeof(uint32_t));
-                std::memcpy(body.data() + sizeof(uint32_t), payload.data() + 16, 256);
+                const size_t textOffset = payload.size() == 272 ? 16 : 8;
+                const size_t textCapacity = payload.size() - textOffset;
+                if (!isSafeString(reinterpret_cast<const char *>(payload.data() + textOffset), textCapacity))
+                    return std::nullopt;
+                if (payload.size() == 272)
+                    std::memcpy(body.data(), payload.data() + 12, sizeof(uint32_t));
+                const size_t textLength = std::min(textCapacity, body.size() - sizeof(uint32_t));
+                std::memcpy(body.data() + sizeof(uint32_t), payload.data() + textOffset, textLength);
                 return Packet(static_cast<uint32_t>(Opcodes::ChatMessage), body);
             }
         case Opcode::GetUserInfo:
@@ -702,6 +711,15 @@ namespace LegacyGateway
             legacy.code = static_cast<int32_t>(Opcode::ChatMessageLegacy);
             std::memcpy(&legacy.objectSerial, packet.body.data(), sizeof(legacy.objectSerial));
             std::memcpy(legacy.message, packet.body.data() + sizeof(uint32_t), sizeof(legacy.message));
+            append(&legacy, sizeof(legacy));
+        }
+        else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::RegenChar))
+        {
+            if (packet.body.size() != sizeof(int32_t) * 4) return std::nullopt;
+            struct LegacyRegen { int32_t length, header, unk, amount, unk3, unk4; } legacy{};
+            legacy.length = sizeof(legacy);
+            legacy.header = static_cast<int32_t>(Opcodes::RegenChar);
+            std::memcpy(&legacy.unk, packet.body.data(), sizeof(int32_t) * 4);
             append(&legacy, sizeof(legacy));
         }
         else

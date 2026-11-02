@@ -6,11 +6,13 @@
 #include <mutex>
 #include <queue>
 #include <string>
+#include <optional>
 #include <thread>
 
 class CharacterService;
 class PlayerRepository;
 class ItemPolicy;
+class InventorySqlRepository;
 
 class InventoryService {
 public:
@@ -19,7 +21,7 @@ public:
     using TransferCallback = std::function<void(bool, InventoryData, WarehouseData)>;
     using ItemCallback = std::function<void(bool, InventoryData, Item)>;
 
-    InventoryService(PlayerRepository& players, CharacterService& characters, ItemPolicy& itemPolicy);
+    InventoryService(PlayerRepository& players, CharacterService& characters, ItemPolicy& itemPolicy, InventorySqlRepository* sqlRepository = nullptr);
     ~InventoryService();
     InventoryService(const InventoryService&) = delete;
 
@@ -32,12 +34,17 @@ public:
     void addItem(const std::string& account, const std::string& character, Item item, InventoryCallback callback);
 
 private:
+    std::optional<InventoryData> loadInventoryData(const std::string& character) const;
+    std::optional<WarehouseData> loadWarehouseData(const std::string& account) const;
+    bool saveInventoryData(const std::string& character, const InventoryData& data) const;
+    bool saveWarehouseData(const std::string& account, const WarehouseData& data) const;
     void workerLoop();
     void enqueue(std::function<void()> task);
 
     PlayerRepository& m_players;
     CharacterService& m_characters;
     ItemPolicy& m_itemPolicy;
+    InventorySqlRepository* m_sqlRepository = nullptr;
     std::queue<std::function<void()>> m_tasks;
     std::mutex m_mutex;
     std::condition_variable m_condition;

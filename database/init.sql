@@ -20,6 +20,40 @@ CREATE TABLE dbo.CharacterInfo (
     AccountName varchar(32) NOT NULL,
     Experience bigint NOT NULL DEFAULT 0
 );
+IF OBJECT_ID('dbo.CharacterInventory', 'U') IS NULL
+CREATE TABLE dbo.CharacterInventory (
+    CharacterName varchar(31) NOT NULL,
+    SlotIndex int NOT NULL,
+    ItemCode int NOT NULL,
+    ItemName varchar(64) NOT NULL DEFAULT '',
+    Quantity int NOT NULL DEFAULT 1,
+    ItemSerial bigint NOT NULL DEFAULT 0,
+    ItemChecksum int NOT NULL DEFAULT 0,
+    ItemVersion int NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CharacterInventory PRIMARY KEY (CharacterName, SlotIndex),
+    CONSTRAINT CK_CharacterInventory_Slot CHECK (SlotIndex >= 0 AND SlotIndex < 60),
+    CONSTRAINT CK_CharacterInventory_Quantity CHECK (Quantity > 0)
+);
+IF OBJECT_ID('dbo.AccountWarehouse', 'U') IS NULL
+CREATE TABLE dbo.AccountWarehouse (
+    AccountName varchar(32) NOT NULL,
+    SlotIndex int NOT NULL,
+    ItemCode int NOT NULL,
+    ItemName varchar(64) NOT NULL DEFAULT '',
+    Quantity int NOT NULL DEFAULT 1,
+    ItemSerial bigint NOT NULL DEFAULT 0,
+    ItemChecksum int NOT NULL DEFAULT 0,
+    ItemVersion int NOT NULL DEFAULT 1,
+    CONSTRAINT PK_AccountWarehouse PRIMARY KEY (AccountName, SlotIndex),
+    CONSTRAINT CK_AccountWarehouse_Slot CHECK (SlotIndex >= 0 AND SlotIndex < 405),
+    CONSTRAINT CK_AccountWarehouse_Quantity CHECK (Quantity > 0)
+);
+IF COL_LENGTH('dbo.CharacterInventory', 'ItemSerial') IS NULL ALTER TABLE dbo.CharacterInventory ADD ItemSerial bigint NOT NULL CONSTRAINT DF_CharacterInventory_ItemSerial DEFAULT 0;
+IF COL_LENGTH('dbo.CharacterInventory', 'ItemChecksum') IS NULL ALTER TABLE dbo.CharacterInventory ADD ItemChecksum int NOT NULL CONSTRAINT DF_CharacterInventory_ItemChecksum DEFAULT 0;
+IF COL_LENGTH('dbo.CharacterInventory', 'ItemVersion') IS NULL ALTER TABLE dbo.CharacterInventory ADD ItemVersion int NOT NULL CONSTRAINT DF_CharacterInventory_ItemVersion DEFAULT 1;
+IF COL_LENGTH('dbo.AccountWarehouse', 'ItemSerial') IS NULL ALTER TABLE dbo.AccountWarehouse ADD ItemSerial bigint NOT NULL CONSTRAINT DF_AccountWarehouse_ItemSerial DEFAULT 0;
+IF COL_LENGTH('dbo.AccountWarehouse', 'ItemChecksum') IS NULL ALTER TABLE dbo.AccountWarehouse ADD ItemChecksum int NOT NULL CONSTRAINT DF_AccountWarehouse_ItemChecksum DEFAULT 0;
+IF COL_LENGTH('dbo.AccountWarehouse', 'ItemVersion') IS NULL ALTER TABLE dbo.AccountWarehouse ADD ItemVersion int NOT NULL CONSTRAINT DF_AccountWarehouse_ItemVersion DEFAULT 1;
 GO
 
 USE GameDB;
