@@ -36,6 +36,12 @@ namespace
             ? models[static_cast<size_t>(characterClass - 1)] : models[0];
     }
 
+    uint32_t legacyJobCodeForClass(int characterClass)
+    {
+        static constexpr uint32_t codes[12] = {0, 1, 2, 3, 4, 6, 5, 8, 7, 9, 10, 11};
+        return characterClass >= 1 && characterClass <= 11 ? codes[characterClass] : codes[1];
+    }
+
     void sendCharacterList(const std::shared_ptr<ClientSession> &session, CharacterService &service)
     {
         PacketUserInfo response{};
@@ -47,9 +53,12 @@ namespace
         {
             copyFixed(response.sCharacterData[i].szName, characters[i].szName);
             response.sCharacterData[i].iLevel = characters[i].iLevel;
-            response.sCharacterData[i].JobCode = characters[i].iClass;
+            response.sCharacterData[i].JobCode = legacyJobCodeForClass(characters[i].iClass);
             copyFixed(response.sCharacterData[i].szModelName, modelBodyForClass(characters[i].iClass));
             copyFixed(response.sCharacterData[i].szModelName2, modelFaceForClass(characters[i].iClass));
+            response.sCharacterData[i].StartField = characters[i].iMapId;
+            response.sCharacterData[i].PosX = static_cast<int32_t>(characters[i].fPosX);
+            response.sCharacterData[i].PosZ = static_cast<int32_t>(characters[i].fPosZ);
         }
         const auto *body = reinterpret_cast<const uint8_t *>(&response) + sizeof(PacketHeader);
         session->send(Packet(response.header.opcode, std::vector<uint8_t>(body, body + sizeof(response) - sizeof(PacketHeader))));

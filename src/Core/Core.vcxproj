@@ -231,9 +231,13 @@
     <ClCompile Include="GameLogic\InventorySqlRepository.cpp" />
     <ClCompile Include="GameLogic\ItemPolicy.cpp" />
     <ClCompile Include="GameLogic\PlayerRepository.cpp" />
-    <ClCompile Include="GameLogic\PlayerStateProto.cpp" />
+    <ClCompile Include="GameLogic\PlayerStateProto.cpp">
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
     <ClCompile Include="GameLogic\PlayerStateSqlRepository.cpp" />
-    <ClCompile Include="GameLogic\Generated\player_state.pb.cc" />
+    <ClCompile Include="GameLogic\Generated\player_state.pb.cc">
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
     <ClCompile Include="GameLogic\CharacterFileRepository.cpp" />
     <ClCompile Include="GameLogic\StorageFileRepository.cpp" />
     <ClCompile Include="GameLogic\Services\AccountService.cpp" />

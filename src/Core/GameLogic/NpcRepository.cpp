@@ -10,6 +10,15 @@
 #include <exception>
 #include <string>
 
+namespace {
+std::string clientPatternPath(std::string model)
+{
+    if (model.size() >= 4 && model.compare(model.size() - 4, 4, ".smd") == 0)
+        model.replace(model.size() - 4, 4, ".ini");
+    return model;
+}
+}
+
 std::size_t NpcRepository::loadEnabledSpawns(GameWorld& world) const
 {
     try
@@ -48,10 +57,14 @@ std::size_t NpcRepository::loadEnabledSpawns(GameWorld& world) const
             npc.id = npcId;
             npc.objectSerial = 0x81000000u | static_cast<uint32_t>(spawnId);
             npc.mapId = mapId;
-            npc.position = {static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)};
+            // MapNPC stores coordinates in map units; the legacy client uses
+            // the fixed-point world scale used by Fortress (one unit = 256).
+            constexpr float legacyCoordinateScale = 256.0f;
+            npc.position = {x * legacyCoordinateScale, y * legacyCoordinateScale,
+                            z * legacyCoordinateScale};
             npc.angleY = angleY;
             npc.name = name;
-            npc.modelName = model;
+            npc.modelName = clientPatternPath(model);
             npc.eventCode = eventCode;
             npc.enabled = true;
             if (world.registerNpc(std::move(npc))) ++loaded;

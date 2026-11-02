@@ -23,6 +23,7 @@ struct MapPosition { float x = 0.0f; float y = 0.0f; float z = 0.0f; };
 struct MapEntity {
     int id = 0;
     int accountId = 0;
+    uint32_t objectSerial = 0;
     MapPosition position{};
     int mapId = 0;
     int health = 100;
@@ -91,8 +92,15 @@ public:
         if (!npc || !npc->enabled || npc->objectSerial != objectSerial || npc->mapId != player->second.mapId)
             return std::nullopt;
         const auto& p = player->second.position;
+        // The legacy PLAYERINFO request carries only a serial. Its cached
+        // integer coordinates may be stale; map and serial validation above
+        // remain authoritative.
+        if (npcId == 0) return *npc;
         const float dx = p.x - npc->position.x, dy = p.y - npc->position.y, dz = p.z - npc->position.z;
-        if (dx * dx + dy * dy + dz * dz > 36.0f) return std::nullopt;
+        // O cliente legado envia coordenadas inteiras; o alcance visual do NPC
+        // é maior que a precisão desse pacote e não deve rejeitar cliques válidos.
+        constexpr float npcInteractionRadius = 36.0f * 256.0f;
+        if (dx * dx + dy * dy + dz * dz > npcInteractionRadius * npcInteractionRadius) return std::nullopt;
         return *npc;
     }
     std::shared_ptr<GameSession> enter(int accountId, const std::string& accountName, const std::string& characterName, const CharacterData& character, std::weak_ptr<ClientSession> client = {}) {
@@ -103,14 +111,15 @@ public:
         gameSession->setEntityId(m_nextEntityId);
         m_sessions[accountName] = gameSession;
         MapEntity entity{m_nextEntityId, accountId};
+        entity.objectSerial = 0x10000000u + static_cast<uint32_t>(std::hash<std::string>{}(characterName));
         entity.position = {character.fPosX, character.fPosY, character.fPosZ};
         entity.mapId = character.iMapId;
-        entity.maxHealth = character.iMaxHP > 1 ? character.iMaxHP : 100;
-        entity.health = character.iMaxHP > 1 ? std::clamp(character.iHP, 0, entity.maxHealth) : entity.maxHealth;
-        entity.maxMana = character.iMaxMP > 1 ? character.iMaxMP : 100;
-        entity.mana = character.iMaxMP > 1 ? std::clamp(character.iMP, 0, entity.maxMana) : entity.maxMana;
-        entity.maxStamina = character.iMaxSTM > 1 ? character.iMaxSTM : 100;
-        entity.stamina = character.iMaxSTM > 1 ? std::clamp(character.iSTM, 0, entity.maxStamina) : entity.maxStamina;
+        entity.maxHealth = std::max(100, character.iMaxHP);
+        entity.health = character.iHP > 0 ? std::clamp(character.iHP, 1, entity.maxHealth) : entity.maxHealth;
+        entity.maxMana = std::max(100, character.iMaxMP);
+        entity.mana = character.iMP > 0 ? std::clamp(character.iMP, 1, entity.maxMana) : entity.maxMana;
+        entity.maxStamina = std::max(100, character.iMaxSTM);
+        entity.stamina = character.iSTM > 0 ? std::clamp(character.iSTM, 1, entity.maxStamina) : entity.maxStamina;
         entity.hpRegen = character.fHPRegen + character.fHPRegenBonus;
         entity.mpRegen = character.fMPRegen + character.fMPRegenBonus;
         entity.spRegen = character.fSPRegen + character.fSPRegenBonus;
@@ -124,9 +133,32 @@ public:
         return gameSession;
     }
     void leave(const std::string& accountName) {
-        std::lock_guard lock(m_mutex);
-        auto session = m_sessions.find(accountName);
-        if (session != m_sessions.end()) { m_entities.erase(session->second->entityId()); m_sessions.erase(session); }
+        std::optional<CharacterData> snapshot;
+        {
+            std::lock_guard lock(m_mutex);
+            auto session = m_sessions.find(accountName);
+            if (session == m_sessions.end()) return;
+            const auto entity = m_entities.find(session->second->entityId());
+            if (entity != m_entities.end()) {
+                CharacterData data{};
+                const auto& characterName = session->second->characterName();
+                std::memcpy(data.szName, characterName.c_str(), std::min(characterName.size(), sizeof(data.szName) - 1));
+                data.iMapId = entity->second.mapId;
+                data.fPosX = entity->second.position.x;
+                data.fPosY = entity->second.position.y;
+                data.fPosZ = entity->second.position.z;
+                data.iHP = entity->second.health;
+                data.iMaxHP = entity->second.maxHealth;
+                data.iMP = entity->second.mana;
+                data.iMaxMP = entity->second.maxMana;
+                data.iSTM = entity->second.stamina;
+                data.iMaxSTM = entity->second.maxStamina;
+                snapshot = data;
+                m_entities.erase(entity);
+            }
+            m_sessions.erase(session);
+        }
+        if (snapshot && m_persist) m_persist(std::string(snapshot->szName), *snapshot);
     }
     bool moveEntity(int entityId, MapPosition destination) {
         if (!std::isfinite(destination.x) || !std::isfinite(destination.y) || !std::isfinite(destination.z)) return false;
@@ -136,12 +168,17 @@ public:
             auto it = m_entities.find(entityId); if (it == m_entities.end() || !it->second.alive) return false;
             const auto& p = it->second.position;
             const float dx = destination.x - p.x, dy = destination.y - p.y, dz = destination.z - p.z;
-            if (dx * dx + dy * dy + dz * dz > 400.0f) return false;
+            // Legacy coordinates use the client's fixed-point world scale. A
+            // 20-unit limit rejected normal movement and left the old spawn
+            // location in persistence.
+            constexpr float maxMovementStep = 4096.0f;
+            if (dx * dx + dy * dy + dz * dz > maxMovementStep * maxMovementStep) return false;
             it->second.position = destination;
             for (const auto& [name, session] : m_sessions) {
                 if (session->entityId() != entityId) continue;
                 CharacterData data{};
-                std::memcpy(data.szName, name.c_str(), std::min(name.size(), sizeof(data.szName) - 1));
+                const auto& characterName = session->characterName();
+                std::memcpy(data.szName, characterName.c_str(), std::min(characterName.size(), sizeof(data.szName) - 1));
                 data.iMapId = it->second.mapId; data.fPosX = destination.x; data.fPosY = destination.y; data.fPosZ = destination.z;
                 data.iHP = it->second.health; data.iMaxHP = it->second.maxHealth; data.iMP = it->second.mana; data.iMaxMP = it->second.maxMana; data.iSTM = it->second.stamina; data.iMaxSTM = it->second.maxStamina;
                 snapshot = data;
@@ -153,6 +190,11 @@ public:
     }
     std::optional<int> entityIdForAccount(const std::string& accountName) const {
         std::lock_guard lock(m_mutex); auto it = m_sessions.find(accountName); return it == m_sessions.end() ? std::nullopt : std::optional<int>(it->second->entityId());
+    }
+    bool ownsObjectSerial(int entityId, uint32_t objectSerial) const {
+        std::lock_guard lock(m_mutex);
+        auto it = m_entities.find(entityId);
+        return it != m_entities.end() && it->second.objectSerial == objectSerial;
     }
     void broadcastNearby(const std::string& exceptAccount, int sourceEntityId, const Packet& packet, float radius = 120.0f) const {
         std::vector<std::shared_ptr<ClientSession>> clients;
@@ -226,7 +268,7 @@ public:
                 const bool changed = e.health != oldHealth || e.mana != oldMana || e.stamina != oldStamina;
                 if (changed) {
                     if (auto client = session->client()) notifications.emplace_back(std::move(client), e.health - oldHealth);
-                    CharacterData saved{}; std::memcpy(saved.szName, name.c_str(), std::min(name.size(), sizeof(saved.szName) - 1)); saved.iMapId = e.mapId; saved.fPosX = e.position.x; saved.fPosY = e.position.y; saved.fPosZ = e.position.z; saved.iHP = e.health; saved.iMaxHP = e.maxHealth; saved.iMP = e.mana; saved.iMaxMP = e.maxMana; saved.iSTM = e.stamina; saved.iMaxSTM = e.maxStamina; saves.emplace_back(name, saved);
+                    CharacterData saved{}; const auto& characterName = session->characterName(); std::memcpy(saved.szName, characterName.c_str(), std::min(characterName.size(), sizeof(saved.szName) - 1)); saved.iMapId = e.mapId; saved.fPosX = e.position.x; saved.fPosY = e.position.y; saved.fPosZ = e.position.z; saved.iHP = e.health; saved.iMaxHP = e.maxHealth; saved.iMP = e.mana; saved.iMaxMP = e.maxMana; saved.iSTM = e.stamina; saved.iMaxSTM = e.maxStamina; saves.emplace_back(characterName, saved);
                 }
             }
             for (auto it = m_drops.begin(); it != m_drops.end();) it = it->second.expiresAt <= now ? m_drops.erase(it) : std::next(it);

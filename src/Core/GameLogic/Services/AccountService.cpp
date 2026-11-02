@@ -45,6 +45,11 @@ const char* modelFaceForClass(int characterClass) {
     return characterClass >= 1 && characterClass <= static_cast<int>(names.size())
         ? names[static_cast<size_t>(characterClass - 1)] : names[0];
 }
+
+uint32_t legacyJobCodeForClass(int characterClass) {
+    static constexpr uint32_t codes[12] = {0, 1, 2, 3, 4, 6, 5, 8, 7, 9, 10, 11};
+    return characterClass >= 1 && characterClass <= 11 ? codes[characterClass] : codes[1];
+}
 }
 
 AccountService::AccountService(DatabasePool& dbPool, CharacterService& charService, UserService& userService, LogService& logService, const ServerConfig& serverConfig)
@@ -290,12 +295,12 @@ void AccountService::sendCharacterList(std::shared_ptr<ClientSession> session, c
         // Copia os dados do CharacterData (do arquivo .chr) para a struct do pacote
         copyFixed(destChar.szName, charData.szName);
         destChar.iLevel = charData.iLevel;
-        destChar.JobCode = charData.iClass;
+        destChar.JobCode = legacyJobCodeForClass(charData.iClass);
         copyFixed(destChar.szModelName, modelBodyForClass(charData.iClass));
         copyFixed(destChar.szModelName2, modelFaceForClass(charData.iClass));
         destChar.Brood = 0;
         destChar.dwArmorCode = 0;
-        destChar.StartField = 0;
+        destChar.StartField = charData.iMapId;
         destChar.PosX = static_cast<int32_t>(charData.fPosX);
         destChar.PosZ = static_cast<int32_t>(charData.fPosZ);
         std::fill(std::begin(destChar.dwTemp), std::end(destChar.dwTemp), 0);

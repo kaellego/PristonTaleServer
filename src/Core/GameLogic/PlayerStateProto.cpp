@@ -3,11 +3,31 @@
 #include "GameLogic/Generated/player_state.pb.h"
 
 #include <cstring>
+#include <algorithm>
+#include <cmath>
 #include <string>
 
 namespace PlayerStateProto {
 namespace {
 constexpr std::size_t MaxBlob = 1024 * 1024;
+
+void normalizeVitals(CharacterData& value) {
+    if (value.iClass < 1 || value.iClass > 11) value.iClass = 1;
+    value.iLevel = std::clamp(value.iLevel, 1, 150);
+    if (!std::isfinite(value.fPosX)) value.fPosX = 0.0f;
+    if (!std::isfinite(value.fPosY)) value.fPosY = 0.0f;
+    if (!std::isfinite(value.fPosZ)) value.fPosZ = 0.0f;
+    if (value.iMapId < 0 || value.iMapId > 255) value.iMapId = 0;
+    if (value.iMaxHP < 100) value.iMaxHP = 100;
+    if (value.iMaxMP < 100) value.iMaxMP = 100;
+    if (value.iMaxSTM < 100) value.iMaxSTM = 100;
+    if (value.iHP <= 0) value.iHP = value.iMaxHP;
+    if (value.iMP <= 0) value.iMP = value.iMaxMP;
+    if (value.iSTM <= 0) value.iSTM = value.iMaxSTM;
+    value.iHP = std::clamp(value.iHP, 0, value.iMaxHP);
+    value.iMP = std::clamp(value.iMP, 0, value.iMaxMP);
+    value.iSTM = std::clamp(value.iSTM, 0, value.iMaxSTM);
+}
 
 std::size_t textSize(const char* value, std::size_t capacity) {
     std::size_t size = 0;
@@ -110,6 +130,7 @@ std::optional<CharacterData> decodeCharacter(const std::vector<uint8_t>& bytes) 
     if (message.equipment_size() > static_cast<int>(std::size(value.saEquipment))) return std::nullopt;
     for (int i = 0; i < message.equipment_size(); ++i)
         if (!decodeItem(message.equipment(i), value.saEquipment[static_cast<std::size_t>(i)])) return std::nullopt;
+    normalizeVitals(value);
     return value;
 }
 

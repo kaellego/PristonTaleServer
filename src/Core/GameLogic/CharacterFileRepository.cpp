@@ -62,22 +62,16 @@ void normalizeVitals(CharacterData& character) {
     if (character.iClass < 1 || character.iClass > 11) character.iClass = 1;
     character.iLevel = std::clamp(character.iLevel, 1, 150);
 
-    if (character.iMaxHP <= 1) {
-        character.iMaxHP = 100;
-        if (character.iHP <= 0) character.iHP = character.iMaxHP;
-    }
+    if (character.iMaxHP < 100) character.iMaxHP = 100;
+    if (character.iHP <= 0) character.iHP = character.iMaxHP;
     character.iHP = std::clamp(character.iHP, 0, character.iMaxHP);
 
-    if (character.iMaxMP <= 1) {
-        character.iMaxMP = 100;
-        if (character.iMP <= 0) character.iMP = character.iMaxMP;
-    }
+    if (character.iMaxMP < 100) character.iMaxMP = 100;
+    if (character.iMP <= 0) character.iMP = character.iMaxMP;
     character.iMP = std::clamp(character.iMP, 0, character.iMaxMP);
 
-    if (character.iMaxSTM <= 1) {
-        character.iMaxSTM = 100;
-        if (character.iSTM <= 0) character.iSTM = character.iMaxSTM;
-    }
+    if (character.iMaxSTM < 100) character.iMaxSTM = 100;
+    if (character.iSTM <= 0) character.iSTM = character.iMaxSTM;
     character.iSTM = std::clamp(character.iSTM, 0, character.iMaxSTM);
 }
 

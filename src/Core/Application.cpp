@@ -85,9 +85,9 @@ void Application::buildServices()
     if (loadedNpcs == 0) {
         // Fallback only until GameDB receives real MapNPC coordinates.
         const bool first = m_gameWorld.registerNpc(NpcEntity{3, 0x81000003u, 0, {0.0f, 0.0f, 0.0f}, 0,
-                                          "AcaciaShop", "char\\npc\\TN-005\\TN-005.smd", 0, true});
-        const bool second = m_gameWorld.registerNpc(NpcEntity{10, 0x8100000Au, 0, {12.0f, 0.0f, 0.0f}, 0,
-                                          "CaveKeeper", "char\\npc\\TN-001\\TN-001.smd", 0, true});
+                                          "AcaciaShop", "char\\npc\\TN-005\\TN-005.ini", 0, true});
+        const bool second = m_gameWorld.registerNpc(NpcEntity{10, 0x8100000Au, 0, {3072.0f, 0.0f, 0.0f}, 0,
+                                          "CaveKeeper", "char\\npc\\TN-001\\TN-001.ini", 0, true});
         m_logService->info("Fallback de NPCs registrado no mapa 0: {}", (first ? 1 : 0) + (second ? 1 : 0));
     }
     m_itemRepository = std::make_unique<ItemRepository>(*m_dbPool, *m_logService);

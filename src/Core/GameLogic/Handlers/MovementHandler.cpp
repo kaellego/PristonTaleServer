@@ -16,7 +16,9 @@ void MovementHandler::handle(std::shared_ptr<ClientSession> session, const Packe
     const auto x = *reinterpret_cast<const int32_t*>(packet.body.data() + 4);
     const auto y = *reinterpret_cast<const int32_t*>(packet.body.data() + 8);
     const auto z = *reinterpret_cast<const int32_t*>(packet.body.data() + 12);
-    if (objectSerial != *entityId || !std::isfinite(static_cast<double>(x)) || !std::isfinite(static_cast<double>(y)) || !std::isfinite(static_cast<double>(z))) { session->close(); return; }
+    if (!m_world.ownsObjectSerial(*entityId, static_cast<uint32_t>(objectSerial)) ||
+        !std::isfinite(static_cast<double>(x)) || !std::isfinite(static_cast<double>(y)) ||
+        !std::isfinite(static_cast<double>(z))) { session->close(); return; }
 
     const MapPosition destination{static_cast<float>(x), static_cast<float>(y), static_cast<float>(z)};
     if (!m_world.moveEntity(*entityId, destination)) return;

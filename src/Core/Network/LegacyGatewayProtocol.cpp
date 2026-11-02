@@ -394,11 +394,20 @@ namespace LegacyGateway
             record.character.moveSpeed = 250;
             record.character.defense = character.iDefense;
             record.character.weight[1] = 100;
-            record.character.life[0] = static_cast<int16_t>(std::clamp(character.iHP, 0, 32767));
-            record.character.life[1] = static_cast<int16_t>(std::clamp(character.iMaxHP, 1, 32767));
-            record.character.mana[0] = static_cast<int16_t>(std::clamp(character.iMP, 0, 32767));
-            record.character.mana[1] = static_cast<int16_t>(std::clamp(character.iMaxMP, 1, 32767));
-            record.character.stamina[0] = record.character.stamina[1] = 100;
+            const int hpMax = std::max(100, character.iMaxHP);
+            const int mpMax = std::max(100, character.iMaxMP);
+            record.character.life[0] = static_cast<int16_t>(std::clamp(character.iHP > 0 ? character.iHP : hpMax, 1, 32767));
+            record.character.life[1] = static_cast<int16_t>(std::clamp(hpMax, 1, 32767));
+            record.character.mana[0] = static_cast<int16_t>(std::clamp(character.iMP > 0 ? character.iMP : mpMax, 1, 32767));
+            record.character.mana[1] = static_cast<int16_t>(std::clamp(mpMax, 1, 32767));
+            const int stmMax = std::max(100, character.iMaxSTM);
+            record.character.stamina[0] = static_cast<int16_t>(std::clamp(character.iSTM > 0 ? character.iSTM : stmMax, 1, 32767));
+            record.character.stamina[1] = static_cast<int16_t>(std::clamp(stmMax, 1, 32767));
+            std::fill(std::begin(record.character.resistance), std::end(record.character.resistance), int16_t{85});
+            std::fill(std::begin(record.character.attackResistance), std::end(record.character.attackResistance), int16_t{85});
+            record.character.lifeRegen = character.fHPRegen + character.fHPRegenBonus;
+            record.character.manaRegen = character.fMPRegen + character.fMPRegenBonus;
+            record.character.staminaRegen = character.fSPRegen + character.fSPRegenBonus;
             record.character.money = character.iGold;
             record.character.version[0] = 1;
             record.character.reformCode = characterReformCode(record.character);
@@ -740,11 +749,15 @@ namespace LegacyGateway
                 std::memcpy(legacy.servers[i].ip1, modern.sServers[i].szaIP[0], sizeof(legacy.servers[i].ip1));
                 std::memcpy(legacy.servers[i].ip2, modern.sServers[i].szaIP[1], sizeof(legacy.servers[i].ip2));
                 std::memcpy(legacy.servers[i].ip3, modern.sServers[i].szaIP[2], sizeof(legacy.servers[i].ip3));
-                // This process exposes the legacy login/data socket as the
-                // single endpoint used by the original client after selection.
-                legacy.servers[i].port1 = 5055;
-                legacy.servers[i].port2 = 5055;
-                legacy.servers[i].port3 = 5055;
+                // The legacy client opens a new socket to the selected game
+                // server. Preserve the configured endpoint instead of sending
+                // it back to the login port.
+                const auto validPort = [](int32_t port) -> uint32_t {
+                    return port > 0 && port <= 65535 ? static_cast<uint32_t>(port) : 5056u;
+                };
+                legacy.servers[i].port1 = validPort(modern.sServers[i].iaPort[0]);
+                legacy.servers[i].port2 = validPort(modern.sServers[i].iaPort[1]);
+                legacy.servers[i].port3 = validPort(modern.sServers[i].iaPort[2]);
             }
             append(&legacy, sizeof(legacy));
         }
@@ -779,7 +792,9 @@ namespace LegacyGateway
                 std::memcpy(dst.name, src.szName, sizeof(dst.name));
                 std::memcpy(dst.model, src.szModelName, sizeof(dst.model));
                 std::memcpy(dst.model2, src.szModelName2, sizeof(dst.model2));
-                dst.job = legacyJobCodeForClass(src.JobCode);
+                // AccountService/CharacterHandler already expose the legacy
+                // display code in JobCode. Mapping it again swaps classes 5-8.
+                dst.job = src.JobCode;
                 dst.level = src.iLevel;
                 dst.brood = src.Brood;
                 dst.armor = src.dwArmorCode;
@@ -835,6 +850,10 @@ namespace LegacyGateway
             legacy.character.moveSpeed = 250;
             std::memcpy(legacy.character.name, npc.szName, sizeof(legacy.character.name));
             std::memcpy(legacy.character.modelName, npc.szModelName, sizeof(legacy.character.modelName));
+            // Fortress fills only the NPC body model. An empty second model
+            // prevents the legacy loader from trying to load the body twice.
+            legacy.character.resistance[0] = 85;
+            legacy.character.resistance[1] = 85;
             legacy.objectSerial = npc.objectSerial;
             legacy.x = npc.x;
             legacy.y = npc.y;
