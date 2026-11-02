@@ -624,9 +624,10 @@ namespace LegacyGateway
                 std::memcpy(&attack, payload.data(), sizeof(attack));
                 if (attack.destObjectSerial == 0 || attack.targetObjectSerial == 0 || attack.attackSize < 0)
                     return std::nullopt;
-                std::vector<uint8_t> body(sizeof(uint32_t) * 2);
-                std::memcpy(body.data(), &attack.destObjectSerial, sizeof(uint32_t));
-                std::memcpy(body.data() + sizeof(uint32_t), &attack.targetObjectSerial, sizeof(uint32_t));
+                // Keep the complete legacy layout so nearby legacy clients
+                // receive the original coordinates, state and checksums.
+                std::vector<uint8_t> body(sizeof(attack) - sizeof(int32_t) * 2);
+                std::memcpy(body.data(), payload.data() + sizeof(int32_t) * 2, body.size());
                 return Packet(static_cast<uint32_t>(Opcodes::AttackData), body);
             }
             if (command.code == static_cast<int32_t>(Opcode::AttackData2) &&
@@ -637,9 +638,8 @@ namespace LegacyGateway
                 std::memcpy(&attack, payload.data(), sizeof(attack));
                 if (attack.destObjectSerial == 0 || attack.targetObjectSerial == 0 || attack.attackSize < 0)
                     return std::nullopt;
-                std::vector<uint8_t> body(sizeof(uint32_t) * 2);
-                std::memcpy(body.data(), &attack.destObjectSerial, sizeof(uint32_t));
-                std::memcpy(body.data() + sizeof(uint32_t), &attack.targetObjectSerial, sizeof(uint32_t));
+                std::vector<uint8_t> body(sizeof(attack) - sizeof(int32_t) * 2);
+                std::memcpy(body.data(), payload.data() + sizeof(int32_t) * 2, body.size());
                 return Packet(static_cast<uint32_t>(Opcodes::AttackData2), body);
             }
             // The legacy client uses GETRECORDDATA (opcode 5) on the login/data
@@ -939,6 +939,33 @@ namespace LegacyGateway
             Command legacy{sizeof(Command), responseCode,
                            0, result.Result, 0, 0};
             append(&legacy, sizeof(legacy));
+        }
+        else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::AttackData) ||
+                 packet.header.opcode == static_cast<uint32_t>(Opcodes::AttackData2))
+        {
+            const bool secondLayout = packet.header.opcode == static_cast<uint32_t>(Opcodes::AttackData2);
+            const size_t fullSize = secondLayout ? sizeof(LegacyAttackData2) : sizeof(LegacyAttackData);
+            if (packet.body.size() != fullSize - sizeof(int32_t) * 2)
+                return std::nullopt;
+            std::vector<uint8_t> frame(fullSize, 0);
+            const int32_t legacyCode = secondLayout ? static_cast<int32_t>(Opcode::AttackData2)
+                                                    : static_cast<int32_t>(Opcode::AttackData);
+            const int32_t frameSize = static_cast<int32_t>(fullSize);
+            std::memcpy(frame.data(), &frameSize, sizeof(frameSize));
+            std::memcpy(frame.data() + sizeof(frameSize), &legacyCode, sizeof(legacyCode));
+            std::memcpy(frame.data() + sizeof(int32_t) * 2, packet.body.data(), packet.body.size());
+            if (secondLayout) {
+                LegacyAttackData2 attack{};
+                std::memcpy(&attack, frame.data(), sizeof(attack));
+                if (attack.destObjectSerial == 0 || attack.targetObjectSerial == 0 || attack.attackSize < 0)
+                    return std::nullopt;
+            } else {
+                LegacyAttackData attack{};
+                std::memcpy(&attack, frame.data(), sizeof(attack));
+                if (attack.destObjectSerial == 0 || attack.targetObjectSerial == 0 || attack.attackSize < 0)
+                    return std::nullopt;
+            }
+            return frame;
         }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::AttackResult) ||
                  packet.header.opcode == static_cast<uint32_t>(Opcodes::LastAttackDamage))

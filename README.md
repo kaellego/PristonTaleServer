@@ -2,7 +2,35 @@
 
 Servidor de jogo em C++20, baseado na refatoração do código legado do Priston Tale. O projeto separa rede, serviços de aplicação, runtime do jogo e infraestrutura de persistência.
 
-> Status: base funcional para testes de login, personagens, inventário, warehouse, movimentação e combate simplificado. O protocolo legado e os sistemas avançados do jogo ainda estão em evolução.
+> Status: base funcional para testes de login, personagens, inventário, warehouse, movimentação, combate simplificado e NPCs de fallback. Antes de produção, ainda é obrigatório corrigir a persistência completa do personagem, autenticar o handoff para o GameServer e concluir os layouts legados.
+
+## Estado atual e riscos prioritários
+
+O servidor já inicializa, autentica contas, transfere sessões entre as portas
+`5055` e `5056`, carrega personagens, executa movimentação/combate básico e
+valida operações de itens. Isso ainda não representa uma implementação completa
+do cliente original.
+
+Os riscos que devem ser tratados antes de adicionar novos sistemas são:
+
+1. `GameWorld` atualmente monta snapshots parciais durante movimento,
+   regeneração e desconexão. Persistir esses snapshots pode sobrescrever classe,
+   nível, atributos, ouro, equipamentos e regeneração.
+2. O handoff para a porta `5056` ainda usa associação por IP em parte do fluxo.
+   O ticket precisa ser um token assinado, com expiração e nonce validados no
+   GameServer; calcular uma assinatura e descartá-la não autentica a sessão.
+3. Falhas de leitura do SQL, blob inválido e estado inexistente ainda precisam
+   ser estados distintos. Um erro temporário do banco não deve fazer o servidor
+   voltar automaticamente para `.chr`/`.dat` antigos.
+4. Inventário ou warehouse SQL vazios devem continuar sendo estados válidos; a
+   ausência de itens não pode disparar fallback para arquivos legados.
+5. Criação e exclusão ainda alteram `CharacterInfo`, `PlayerStateProto` e os
+   arquivos legados em etapas separadas. É necessário concluir a transação SQL e
+   a política de backup/limpeza antes de considerar o fluxo atômico.
+
+O log `0 NPCs carregados do GameDB` significa que o servidor está usando os NPCs
+de fallback do mapa 0. Spawns reais só devem ser habilitados depois da importação
+de coordenadas válidas e da instalação dos modelos no cliente.
 
 ## Arquitetura
 
@@ -128,7 +156,13 @@ Os backups em `ZeroPT-DataBase\DataBase` não possuem `NPCList` nem `MapNPC`. O 
 
 O script é idempotente e cria `NpcList`/`NpcSpawn`. Sem um CSV de coordenadas `MapNPC`, as instâncias ficam desabilitadas deliberadamente; isso evita espalhar NPCs em coordenadas inventadas. Para habilitar spawns reais, use `-MapNpcCsv` com as colunas `SourceMap,LegacyFile,MapId,X,Y,Z,AngleY,Enabled`.
 
-Essa combinação ainda não é uma transação única. Uma falha entre a gravação no banco e a gravação do arquivo pode exigir reconciliação manual. A estrutura `Item` e parte de `CharacterData` ainda não representam todos os campos do cliente original; quests, skills, pets, timers e progressos avançados continuam pendentes.
+O estado SQL de inventário e personagem já possui transações próprias, mas o
+fluxo completo ainda não é atômico com `CharacterInfo` nem com a limpeza dos
+arquivos legados. Uma falha entre essas etapas pode exigir reconciliação manual.
+Além disso, `GameWorld` precisa persistir o estado completo, e não snapshots
+parciais. A estrutura `Item` e parte de `CharacterData` ainda não representam
+todos os campos do cliente original; quests, skills, pets, timers e progressos
+avançados continuam pendentes.
 
 ## Compilação
 
@@ -172,6 +206,11 @@ Ainda não existe um teste de integração completo que valide, com o cliente or
 
 ## Pendências do roadmap
 
+- [ ] Persistir o `CharacterData` completo em movimento, regeneração e desconexão;
+- [ ] Diferenciar SQL indisponível, blob inválido e estado inexistente antes de usar arquivos legados;
+- [ ] Impedir fallback de inventário/warehouse SQL quando o estado válido estiver vazio;
+- [ ] Usar ticket HMAC com nonce e expiração no handoff LoginServer → GameServer;
+- [ ] Tornar `CharacterInfo`, `PlayerStateProto` e a política de arquivos legados consistentes em criação/exclusão;
 - [ ] Mapear todos os layouts reais do protocolo legado em `smTRANS_COMMAND`;
 - [ ] Implementar respostas legadas completas para login, servidores e personagens;
 - [ ] Corrigir e validar os pacotes legados de dano `ATTACK_DAMAGE`, `DISP_DAMAGE` e `ATTACK_RESULT`;
@@ -187,6 +226,11 @@ Ainda não existe um teste de integração completo que valide, com o cliente or
 - [ ] Importar e validar os metadados reais de classe, nível e slot de todos os itens;
 - [ ] Adicionar suporte visual das classes 9–11 ao cliente e instalar os assets corretos;
 - [ ] Executar testes end-to-end com o cliente legado e testes de carga prolongados.
+
+O teste de protocolo existente não substitui o teste com o cliente original. O
+fluxo end-to-end ainda precisa cobrir login, seleção de servidor, seleção e
+exclusão de personagem, reconexão após reinício, NPCs, itens, warehouse,
+combate, desconexão durante gravação, replay e 100 ou mais conexões simultâneas.
 
 ## Segurança e operação
 
