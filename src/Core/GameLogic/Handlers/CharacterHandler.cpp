@@ -156,6 +156,10 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
     }
     if (success && static_cast<Opcodes>(packet.header.opcode) != Opcodes::SelectCharacter)
         sendCharacterList(session, m_service);
+    const int loggedClass = selectedCharacter ? selectedCharacter->iClass
+                                               : (static_cast<Opcodes>(packet.header.opcode) == Opcodes::CreateCharacter
+                                                      ? command.LParam
+                                                      : 0);
     m_logService.info("Operacao de personagem {} para {}: {} (classe {})", success ? "aceita" : "rejeitada",
-                      session->getAccountName(), name, command.LParam);
+                      session->getAccountName(), name, loggedClass);
 }

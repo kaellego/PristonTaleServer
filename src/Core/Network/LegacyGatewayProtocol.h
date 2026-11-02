@@ -26,6 +26,7 @@ enum class Opcode : int32_t {
     SetUserInfo = 9,
     Version = 13,
     ChatMessage = 22,
+    SaveThrowMoney = 71,
     FailConnect = 64,
     CheckIP = 108,
     FunctionResult = 187,
@@ -68,6 +69,8 @@ struct LoginPacket {
     char mac[30];
 };
 #pragma pack(pop)
+
+static_assert(sizeof(Command) == 24, "Legacy smTRANS_COMMAND layout changed");
 
 std::optional<Packet> toModernPacket(const std::vector<uint8_t>& payload);
 std::optional<Packet> loginToModernPacket(const std::vector<uint8_t>& payload);

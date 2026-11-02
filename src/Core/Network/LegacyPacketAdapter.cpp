@@ -6,12 +6,14 @@
 #include <cstring>
 
 bool LegacyPacketAdapter::validFrame(const std::vector<uint8_t>& payload) {
-    if (payload.size() < sizeof(LegacyGateway::Command) || payload.size() > Constants::MAX_PKTSIZ)
+    // Chat messages are the only supported legacy frame shorter than a full
+    // smTRANS_COMMAND: size, opcode, and a null-terminated message.
+    if (payload.size() < sizeof(int32_t) * 2 || payload.size() > Constants::MAX_PKTSIZ)
         return false;
 
     int32_t declaredSize = 0;
     std::memcpy(&declaredSize, payload.data(), sizeof(declaredSize));
-    return declaredSize >= static_cast<int32_t>(sizeof(LegacyGateway::Command)) &&
+    return declaredSize >= static_cast<int32_t>(sizeof(int32_t) * 2) &&
            declaredSize == static_cast<int32_t>(payload.size());
 }
 

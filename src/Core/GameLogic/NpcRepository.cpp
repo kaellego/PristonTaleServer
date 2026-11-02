@@ -6,6 +6,7 @@
 #include "Logging/LogService.h"
 
 #include <algorithm>
+#include <cctype>
 #include <cstdint>
 #include <exception>
 #include <string>
@@ -13,8 +14,13 @@
 namespace {
 std::string clientPatternPath(std::string model)
 {
-    if (model.size() >= 4 && model.compare(model.size() - 4, 4, ".smd") == 0)
+    if (model.size() >= 4) {
+        auto extension = model.substr(model.size() - 4);
+        std::transform(extension.begin(), extension.end(), extension.begin(),
+                       [](unsigned char ch) { return static_cast<char>(std::tolower(ch)); });
+        if (extension == ".smd" || extension == ".inx")
         model.replace(model.size() - 4, 4, ".ini");
+    }
     return model;
 }
 }

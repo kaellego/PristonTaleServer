@@ -320,6 +320,34 @@ namespace LegacyGateway
                 : codes[1];
         }
 
+        struct LegacyClassRules
+        {
+            int sight;
+            int lifeFunction;
+            int manaFunction;
+            int staminaFunction;
+            int damageFunction[2];
+        };
+
+        LegacyClassRules legacyClassRulesForClass(int characterClass)
+        {
+            static constexpr LegacyClassRules rules[12]{
+                {},
+                {70, 1, 3, 1, {1, 2}}, // Fighter
+                {65, 2, 2, 2, {2, 2}}, // Mechanician
+                {80, 3, 3, 2, {3, 1}}, // Archer
+                {75, 1, 3, 1, {1, 2}}, // Pikeman
+                {190, 2, 2, 2, {1, 2}}, // Knight
+                {200, 2, 2, 2, {2, 1}}, // Atalanta
+                {200, 4, 1, 3, {3, 2}}, // Priestess
+                {190, 5, 1, 3, {3, 2}}, // Magician
+                {80, 3, 3, 2, {3, 1}}, // Assassin
+                {190, 5, 1, 3, {3, 2}}, // Shaman
+                {70, 1, 3, 1, {1, 2}}   // Martial Artist
+            };
+            return rules[characterClass >= 1 && characterClass <= 11 ? characterClass : 1];
+        }
+
         int internalClassForLegacyJobCode(int legacyJobCode)
         {
             switch (legacyJobCode)
@@ -382,6 +410,13 @@ namespace LegacyGateway
             record.character.state = 0x80; // smCHAR_STATE_USER
             record.character.brood = 0xA0; // smCHAR_MONSTER_USER
             record.character.jobCode = legacyJobCodeForClass(character.iClass);
+            const auto classRules = legacyClassRulesForClass(character.iClass);
+            record.character.sight = classRules.sight;
+            record.character.lifeFunction = classRules.lifeFunction;
+            record.character.manaFunction = classRules.manaFunction;
+            record.character.staminaFunction = classRules.staminaFunction;
+            record.character.damageFunction[0] = static_cast<int16_t>(classRules.damageFunction[0]);
+            record.character.damageFunction[1] = static_cast<int16_t>(classRules.damageFunction[1]);
             record.character.level = std::max(1, character.iLevel);
             record.character.strength = character.iStrength;
             record.character.spirit = character.iSpirit;
@@ -440,7 +475,7 @@ namespace LegacyGateway
 
     std::optional<Packet> toModernPacket(const std::vector<uint8_t> &payload)
     {
-        if (payload.size() < sizeof(Command) || payload.size() > Constants::MAX_PKTSIZ)
+        if (payload.size() < sizeof(int32_t) * 2 || payload.size() > Constants::MAX_PKTSIZ)
             return std::nullopt;
 
         Command command{};
@@ -548,6 +583,15 @@ namespace LegacyGateway
                 std::memcpy(body.data() + sizeof(uint32_t), payload.data() + textOffset, textLength);
                 return Packet(static_cast<uint32_t>(Opcodes::ChatMessage), body);
             }
+        case Opcode::SaveThrowMoney:
+            // The original client sends this to persist its current money on
+            // the data server. Never trust it as an authoritative gold update;
+            // the modern server persists gold through its own inventory path.
+            if (command.size != static_cast<int32_t>(sizeof(Command)) ||
+                payload.size() != sizeof(Command) || command.wParam < 0)
+                return std::nullopt;
+            modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
+            break;
         case Opcode::GetUserInfo:
             return loginToModernPacket(payload);
         case Opcode::CheckIP:
