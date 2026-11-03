@@ -1,11 +1,14 @@
 #include "Network/LegacyGatewayProtocol.h"
+#include "Network/LegacyPacketCodec.h"
 #include "Shared/Constants.h"
 #include "Shared/datatypes.h"
 #include "Utils/SafeString.h"
 
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <cstring>
+#include <limits>
 
 namespace LegacyGateway
 {
@@ -137,6 +140,13 @@ namespace LegacyGateway
             uint8_t updateInfo[4], eventInfo[4];
         };
 
+        struct LegacyPlayPosition
+        {
+            int32_t size, code;
+            int32_t area, x, y, z;
+            int16_t hp[2];
+        };
+
         struct LegacyTransPlayBuff
         {
             int32_t buffCount;
@@ -239,6 +249,19 @@ namespace LegacyGateway
             uint32_t securityCode[4];
         };
 
+        // TRANS_USINGITEM / OPCODE_INVEN_POSITION2. The client reports item
+        // positions as control traffic; these values never mutate inventory.
+        struct LegacyInventoryPosition
+        {
+            int32_t size, code;
+            int32_t itemCount;
+            struct Entry
+            {
+                uint32_t itemCode;
+                int16_t performance[8];
+            } items[16];
+        };
+
         struct LegacyNpcInfo
         {
             int32_t size, code;
@@ -257,6 +280,7 @@ namespace LegacyGateway
         static_assert(sizeof(LegacyPlayData) == 40);
         static_assert(sizeof(LegacyPlayDataGroup) == 16);
         static_assert(sizeof(LegacyTransPlayData) == 44);
+        static_assert(sizeof(LegacyPlayPosition) == 28);
         static_assert(sizeof(LegacyTransPlayBuff) == 40);
         static_assert(sizeof(LegacyAttackData) == 52);
         static_assert(sizeof(LegacyAttackData2) == 92);
@@ -265,7 +289,95 @@ namespace LegacyGateway
         static_assert(sizeof(LegacyItemWire32) == 788);
         static_assert(sizeof(LegacyBuyShopItem) == 800);
         static_assert(sizeof(LegacySellShopItem) == 568);
+        static_assert(sizeof(LegacyInventoryPosition) == 332);
         static_assert(sizeof(LegacyNpcInfo) == 504);
+
+        constexpr size_t LegacyItemInfoSize = 532;
+
+        template <typename T>
+        void writeLegacyItemField(std::array<uint8_t, LegacyItemInfoSize>& item, size_t offset, T value)
+        {
+            if (offset + sizeof(T) <= item.size())
+                std::memcpy(item.data() + offset, &value, sizeof(T));
+        }
+
+        std::vector<uint8_t> encodeLegacyShopItem(const PacketNpcShopListEntry& source, int itemKind)
+        {
+            std::array<uint8_t, LegacyItemInfoSize> item{};
+            const int32_t itemSize = static_cast<int32_t>(LegacyItemInfoSize);
+            const int32_t price = static_cast<int32_t>(std::clamp<int64_t>(source.buyPrice, 0, std::numeric_limits<int32_t>::max()));
+            const int32_t level = std::clamp(source.requiredLevel, 1, 2000);
+            const int16_t durability = 100;
+            const uint32_t allJobs = 0xFFFFFFFFu;
+            const uint32_t kind = static_cast<uint32_t>(itemKind);
+
+            // Offsets are the x86 sITEMINFO layout from sinItem.h. No pointer
+            // from the client is copied into this definition.
+            writeLegacyItemField(item, 0, itemSize);
+            writeLegacyItemField(item, 20, durability);
+            writeLegacyItemField(item, 22, durability);
+            writeLegacyItemField(item, 24, static_cast<uint32_t>(source.itemCode));
+            std::memcpy(item.data() + 28, source.itemName, std::min<size_t>(32, sizeof(source.itemName)));
+            writeLegacyItemField(item, 64, price);
+            writeLegacyItemField(item, 72, 1);
+            writeLegacyItemField(item, 168, level);
+            writeLegacyItemField(item, 200, durability);
+            writeLegacyItemField(item, 204, price);
+            writeLegacyItemField(item, 244, allJobs);
+            writeLegacyItemField(item, 468, kind);
+
+            std::vector<uint8_t> compressed(LegacyItemInfoSize * 2 + 16, 0);
+            size_t sourceOffset = 0;
+            size_t destinationOffset = sizeof(uint32_t);
+            while (sourceOffset < item.size() && destinationOffset < compressed.size()) {
+                const uint8_t first = item[sourceOffset];
+                const uint8_t second = sourceOffset + 1 < item.size() ? item[sourceOffset + 1] : first;
+                if (first == 0 && second == 0) {
+                    size_t count = 0;
+                    while (sourceOffset < item.size() && item[sourceOffset] == 0 && count < 0x7F) {
+                        ++sourceOffset;
+                        ++count;
+                    }
+                    compressed[destinationOffset++] = static_cast<uint8_t>(count | 0x80);
+                } else {
+                    const size_t marker = destinationOffset++;
+                    size_t count = 0;
+                    while (sourceOffset < item.size() && destinationOffset < compressed.size() && count < 0x7F) {
+                        const uint8_t current = item[sourceOffset];
+                        const uint8_t next = sourceOffset + 1 < item.size() ? item[sourceOffset + 1] : current;
+                        if (current == 0 && next == 0)
+                            break;
+                        compressed[destinationOffset++] = current;
+                        ++sourceOffset;
+                        ++count;
+                    }
+                    compressed[marker] = static_cast<uint8_t>(count);
+                }
+            }
+            const int32_t compressedSize = static_cast<int32_t>(destinationOffset);
+            std::memcpy(compressed.data(), &compressedSize, sizeof(compressedSize));
+            compressed.resize(destinationOffset);
+            return compressed;
+        }
+
+        uint32_t legacyAttackChecksum(const LegacyAttackData2& attack)
+        {
+            uint32_t checksum = static_cast<uint32_t>(attack.code);
+            checksum += static_cast<uint32_t>(attack.x ^ attack.y ^ attack.z);
+            checksum += static_cast<uint32_t>(attack.attackCount) ^ attack.time;
+
+            uint32_t value = 0;
+            std::memcpy(&value, attack.power, sizeof(value));
+            checksum ^= value;
+            std::memcpy(&value, attack.power2, sizeof(value));
+            checksum ^= value;
+            std::memcpy(&value, attack.critical, sizeof(value));
+            checksum ^= value;
+            std::memcpy(&value, attack.motionCount, sizeof(value));
+            checksum ^= value;
+            checksum += static_cast<uint32_t>(attack.skillCode);
+            return checksum ^ 0x68098051u;
+        }
 
         uint32_t characterReformCode(const LegacyCharacterInfo &character)
         {
@@ -558,6 +670,37 @@ namespace LegacyGateway
         return value != nullptr && std::memchr(value, '\0', capacity) != nullptr;
     }
 
+    bool decodeClientAttackData2(std::vector<uint8_t>& payload, uint32_t objectSerial)
+    {
+        if (payload.size() != sizeof(int32_t) * 23 || objectSerial == 0)
+            return false;
+
+        int32_t frameSize = 0;
+        int32_t code = 0;
+        std::memcpy(&frameSize, payload.data(), sizeof(frameSize));
+        std::memcpy(&code, payload.data() + sizeof(frameSize), sizeof(code));
+        if (frameSize != static_cast<int32_t>(payload.size()) ||
+            code != static_cast<int32_t>(Opcode::AttackDamage))
+            return false;
+
+        const uint32_t wordCount = static_cast<uint32_t>(payload.size() / sizeof(uint32_t));
+        uint32_t encodedState = (static_cast<uint32_t>(code) ^ (static_cast<uint32_t>(code) << 7)) + wordCount * 6604u;
+        uint32_t counter = (static_cast<uint32_t>(code) + objectSerial) & 0xFFCFu;
+        const uint32_t increment = counter & 0x3Cu;
+
+        // The original client encodes every DWORD after size/code in place.
+        for (uint32_t index = 2; index < wordCount; ++index)
+        {
+            uint32_t encoded = 0;
+            std::memcpy(&encoded, payload.data() + index * sizeof(uint32_t), sizeof(encoded));
+            const uint32_t decoded = encoded ^ (counter << 13) ^ encodedState;
+            std::memcpy(payload.data() + index * sizeof(uint32_t), &decoded, sizeof(decoded));
+            encodedState = encoded;
+            counter += counter + increment;
+        }
+        return true;
+    }
+
     std::optional<Packet> toModernPacket(const std::vector<uint8_t> &payload)
     {
         if (payload.size() < sizeof(int32_t) * 2 || payload.size() > Constants::MAX_PKTSIZ)
@@ -600,8 +743,22 @@ namespace LegacyGateway
             // smTRNAS_PLAYERINFO uses the 32-bit legacy smCHAR_INFO layout: 504 bytes.
             if (command.size != 504 || payload.size() != 504)
                 return std::nullopt;
-            modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
-            break;
+            {
+                LegacyNpcInfo player{};
+                std::memcpy(&player, payload.data(), sizeof(player));
+
+                // This is the player's own initial position. The serial in a
+                // legacy PLAYERINFO frame may be zero or stale during server
+                // selection, so never use it to select an entity. MovementHandler
+                // binds LegacyPosition to the authenticated session instead.
+                const int32_t area = -1;
+                std::vector<uint8_t> movement(sizeof(int32_t) * 4);
+                std::memcpy(movement.data(), &player.x, sizeof(player.x));
+                std::memcpy(movement.data() + sizeof(int32_t), &player.y, sizeof(player.y));
+                std::memcpy(movement.data() + sizeof(int32_t) * 2, &player.z, sizeof(player.z));
+                std::memcpy(movement.data() + sizeof(int32_t) * 3, &area, sizeof(area));
+                return Packet(static_cast<uint32_t>(Opcodes::LegacyPosition), std::move(movement));
+            }
         case Opcode::GetPlayerInfo:
             if (command.size != sizeof(Command) || payload.size() != sizeof(Command) ||
                 static_cast<uint32_t>(command.wParam) == 0)
@@ -643,6 +800,26 @@ namespace LegacyGateway
             std::memcpy(movement.data() + 4, &playBuff.playBuff.x, sizeof(int32_t) * 3);
             return Packet(static_cast<uint32_t>(Opcodes::PlayData), movement);
         }
+        case Opcode::Position:
+        {
+            // TRANS_PLAYPOS is the movement frame emitted by the original
+            // client. It contains no trusted object serial; the session owns
+            // the entity that receives the position.
+            if (command.size != static_cast<int32_t>(sizeof(LegacyPlayPosition)) ||
+                payload.size() != sizeof(LegacyPlayPosition))
+                return std::nullopt;
+            LegacyPlayPosition position{};
+            std::memcpy(&position, payload.data(), sizeof(position));
+            if (position.area < -1 || position.area > 255)
+                return std::nullopt;
+
+            std::vector<uint8_t> movement(sizeof(int32_t) * 4);
+            std::memcpy(movement.data(), &position.x, sizeof(position.x));
+            std::memcpy(movement.data() + sizeof(int32_t), &position.y, sizeof(position.y));
+            std::memcpy(movement.data() + sizeof(int32_t) * 2, &position.z, sizeof(position.z));
+            std::memcpy(movement.data() + sizeof(int32_t) * 3, &position.area, sizeof(position.area));
+            return Packet(static_cast<uint32_t>(Opcodes::LegacyPosition), movement);
+        }
         case Opcode::ProcessInfo:
             // TRANS_CHATMESSAGE carries two DWORDs followed by a bounded process path.
             if (command.size != static_cast<int32_t>(payload.size()) || command.size < 17 ||
@@ -678,15 +855,31 @@ namespace LegacyGateway
             modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
             break;
         case Opcode::PartyChatMessage:
-            // OPCODE_PARTY_CHATMSG is a legacy control frame. Its exact text
-            // payload varies between client builds; validate the declared
-            // frame and discard it until party chat has a domain handler.
             if (command.size != static_cast<int32_t>(payload.size()) ||
-                command.size < static_cast<int32_t>(sizeof(Command)) ||
+                command.size < 9 ||
                 command.size > 512)
                 return std::nullopt;
-            modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
-            break;
+            // Some client builds send GM slash commands through the party
+            // chat opcode. Accept only a slash command; ordinary party chat
+            // remains rejected until its full domain layout is implemented.
+            {
+                size_t textOffset = payload.size();
+                for (size_t i = 8; i < payload.size(); ++i) {
+                    if (payload[i] == '/') { textOffset = i; break; }
+                }
+                if (textOffset == payload.size())
+                    return Packet(static_cast<uint32_t>(Opcodes::LegacyNoop));
+                std::vector<uint8_t> body(sizeof(uint32_t) + 256, 0);
+                size_t textLength = 0;
+                while (textOffset + textLength < payload.size() && textLength < 255) {
+                    const auto ch = payload[textOffset + textLength];
+                    if (ch == 0 || std::isspace(ch) || !std::isprint(ch)) break;
+                    ++textLength;
+                }
+                if (textLength < 2) return Packet(static_cast<uint32_t>(Opcodes::LegacyNoop));
+                std::memcpy(body.data() + sizeof(uint32_t), payload.data() + textOffset, textLength);
+                return Packet(static_cast<uint32_t>(Opcodes::ChatMessage), body);
+            }
         case Opcode::CommandUser:
             // smTRANS_COMMAND_EX: only the fixed 40-byte layout reaches the
             // GM service; authorization and command validation happen there.
@@ -708,6 +901,14 @@ namespace LegacyGateway
             if (command.size != sizeof(Command) || payload.size() < sizeof(Command))
                 return std::nullopt;
             return Packet(static_cast<uint32_t>(Opcodes::KeepAlive));
+        case Opcode::WarningBlinkAtt:
+            // The confirmed client layout is smTRANS_COMMAND (24 bytes). A
+            // 92-byte frame with this opcode is not a known gameplay packet.
+            if (command.size != static_cast<int32_t>(sizeof(Command)) ||
+                payload.size() != sizeof(Command))
+                return std::nullopt;
+            modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
+            break;
         case Opcode::EffectLowPet:
             // Legacy movement may carry a low-level-pet effect command. The
             // modern server has no pet state yet, but the bounded command must
@@ -715,6 +916,21 @@ namespace LegacyGateway
             if (command.size != static_cast<int32_t>(payload.size()) || command.size < static_cast<int32_t>(sizeof(Command)) ||
                 command.size > 512)
                 return std::nullopt;
+            modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
+            break;
+        case Opcode::InventoryPosition:
+        case Opcode::InventoryPosition2:
+            // Never trust the client copy as an inventory update. Accept only
+            // the exact fixed layout so valid clients are not disconnected.
+            if (command.size != static_cast<int32_t>(sizeof(LegacyInventoryPosition)) ||
+                payload.size() != sizeof(LegacyInventoryPosition))
+                return std::nullopt;
+            {
+                LegacyInventoryPosition inventory{};
+                std::memcpy(&inventory, payload.data(), sizeof(inventory));
+                if (inventory.itemCount < 0 || inventory.itemCount > 16)
+                    return std::nullopt;
+            }
             modernOpcode = static_cast<uint32_t>(Opcodes::LegacyNoop);
             break;
         default:
@@ -799,6 +1015,21 @@ namespace LegacyGateway
                 std::vector<uint8_t> body(sizeof(attack) - sizeof(int32_t) * 2);
                 std::memcpy(body.data(), payload.data() + sizeof(int32_t) * 2, body.size());
                 return Packet(static_cast<uint32_t>(Opcodes::AttackData), body);
+            }
+            if (command.code == static_cast<int32_t>(Opcode::AttackDamage) &&
+                command.size == static_cast<int32_t>(sizeof(LegacyAttackData2)) &&
+                payload.size() == sizeof(LegacyAttackData2))
+            {
+                LegacyAttackData2 attack{};
+                std::memcpy(&attack, payload.data(), sizeof(attack));
+                if (attack.code != static_cast<int32_t>(Opcode::AttackDamage) ||
+                    attack.destObjectSerial == 0 || attack.targetObjectSerial == 0 ||
+                    attack.attackSize < 0 || attack.attackCount < 0 || attack.attackCount > 256 ||
+                    attack.checkSum != legacyAttackChecksum(attack))
+                    return std::nullopt;
+                std::vector<uint8_t> body(sizeof(attack) - sizeof(int32_t) * 2);
+                std::memcpy(body.data(), payload.data() + sizeof(int32_t) * 2, body.size());
+                return Packet(static_cast<uint32_t>(Opcodes::AttackData2), std::move(body));
             }
             if (command.code == static_cast<int32_t>(Opcode::AttackData2) &&
                 command.size == static_cast<int32_t>(sizeof(LegacyAttackData2)) &&
@@ -1059,6 +1290,9 @@ namespace LegacyGateway
             legacy.character.objectSerial = npc.objectSerial;
             legacy.character.state = 0; // smCHAR_STATE_NPC
             legacy.character.brood = 0xA0;
+            // SetNextNpcPattern() in the original client forces NPCs to the
+            // normal pattern size before enabling their display.
+            legacy.character.sizeLevel = 1;
             legacy.character.level = 1;
             legacy.character.life[0] = legacy.character.life[1] = 100;
             legacy.character.mana[0] = legacy.character.mana[1] = 100;
@@ -1077,6 +1311,46 @@ namespace LegacyGateway
             legacy.z = npc.z;
             legacy.ay = npc.angleY;
             append(&legacy, sizeof(legacy));
+        }
+        else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::Shop_ItemList))
+        {
+            if (packet.body.size() < sizeof(PacketNpcShopListHeader))
+                return std::nullopt;
+
+            PacketNpcShopListHeader header{};
+            std::memcpy(&header, packet.body.data(), sizeof(header));
+            if (header.npcId <= 0 || header.itemKind < 1 || header.itemKind > 3 ||
+                header.itemCount <= 0 || header.itemCount > 200 ||
+                packet.body.size() != sizeof(header) + static_cast<size_t>(header.itemCount) * sizeof(PacketNpcShopListEntry))
+                return std::nullopt;
+
+            struct LegacyShopHeader
+            {
+                int32_t size, code, itemKind, itemCount;
+                int32_t reserved[4];
+            } legacy{};
+            legacy.code = static_cast<int32_t>(Opcode::ShopItemList);
+            legacy.itemKind = header.itemKind;
+            legacy.itemCount = header.itemCount;
+
+            std::vector<uint8_t> itemData;
+            itemData.reserve(static_cast<size_t>(header.itemCount) * LegacyItemInfoSize);
+            for (int32_t i = 0; i < header.itemCount; ++i) {
+                PacketNpcShopListEntry entry{};
+                const size_t offset = sizeof(header) + static_cast<size_t>(i) * sizeof(entry);
+                std::memcpy(&entry, packet.body.data() + offset, sizeof(entry));
+                if (entry.itemCode <= 0 || entry.buyPrice < 0 || entry.sellPrice < 0 ||
+                    entry.requiredLevel < 1 || !isSafeString(entry.itemName, sizeof(entry.itemName)))
+                    return std::nullopt;
+                auto encoded = encodeLegacyShopItem(entry, header.itemKind);
+                itemData.insert(itemData.end(), encoded.begin(), encoded.end());
+            }
+            const size_t totalSize = sizeof(legacy) + itemData.size();
+            if (totalSize > LegacyPacketCodec::MaxFrameSize)
+                return std::nullopt;
+            legacy.size = static_cast<int32_t>(totalSize);
+            append(&legacy, sizeof(legacy));
+            payload.insert(payload.end(), itemData.begin(), itemData.end());
         }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::OpenNPC))
         {
@@ -1163,16 +1437,33 @@ namespace LegacyGateway
             if (packet.body.size() != sizeof(uint32_t) + 256 ||
                 !isSafeString(reinterpret_cast<const char *>(packet.body.data() + sizeof(uint32_t)), 256))
                 return std::nullopt;
-            struct LegacyChatMessage
+            struct LegacyChatBuffer
             {
                 int32_t size, code;
-                uint32_t ip, objectSerial;
-                char message[256];
+                uint32_t ip;
             } legacy{};
+            const auto messageLength = strnlen_s(reinterpret_cast<const char *>(packet.body.data() + sizeof(uint32_t)), 256);
+            legacy.size = static_cast<int32_t>(sizeof(legacy) + messageLength + 1);
+            legacy.code = static_cast<int32_t>(Opcode::ChatMessage);
+            const auto* message = packet.body.data() + sizeof(uint32_t);
+            std::vector<uint8_t> legacyBytes(static_cast<size_t>(legacy.size), 0);
+            std::memcpy(legacyBytes.data(), &legacy, sizeof(legacy));
+            std::memcpy(legacyBytes.data() + sizeof(legacy), message, messageLength + 1);
+            append(legacyBytes.data(), legacyBytes.size());
+        }
+        else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::UnitStatusMove) ||
+                 packet.header.opcode == static_cast<uint32_t>(Opcodes::PlayData))
+        {
+            if (packet.body.size() != sizeof(int32_t) * 4)
+                return std::nullopt;
+            LegacyPlayData legacy{};
             legacy.size = sizeof(legacy);
-            legacy.code = static_cast<int32_t>(Opcode::ChatMessageLegacy);
+            legacy.code = static_cast<int32_t>(Opcode::PlayData1);
             std::memcpy(&legacy.objectSerial, packet.body.data(), sizeof(legacy.objectSerial));
-            std::memcpy(legacy.message, packet.body.data() + sizeof(uint32_t), sizeof(legacy.message));
+            std::memcpy(&legacy.x, packet.body.data() + 4, sizeof(legacy.x));
+            std::memcpy(&legacy.y, packet.body.data() + 8, sizeof(legacy.y));
+            std::memcpy(&legacy.z, packet.body.data() + 12, sizeof(legacy.z));
+            legacy.autoCharacterCode = legacy.objectSerial;
             append(&legacy, sizeof(legacy));
         }
         else if (packet.header.opcode == static_cast<uint32_t>(Opcodes::RegenChar))

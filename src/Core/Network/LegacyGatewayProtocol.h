@@ -18,6 +18,7 @@ enum class Opcode : int32_t {
     SetBlacklist = 39,
     PlayerInfo = 62,
     GetPlayerInfo = 63,
+    ShopItemList = 69,
     AddNpc = 88,
     TransPlayData = 31,
     ProcessInfo = 106,
@@ -26,18 +27,23 @@ enum class Opcode : int32_t {
     SetUserInfo = 9,
     Version = 13,
     ChatMessage = 22,
+    Position = 23,
     SaveThrowMoney = 71,
     FailConnect = 64,
     CheckIP = 108,
     FunctionResult = 187,
     ServerInfo = 96,
-    EffectLowPet = 136,
+    EffectLowPet = 118,
+    InventoryPosition = 136,
+    InventoryPosition2 = 137,
     AttackData = 36,
+    WarningBlinkAtt = 211,
     AttackDamage = 212,
     AttackResult = 214,
     DispDamage = 215,
     AttackData2 = 216,
     ChatMessageLegacy = 22,
+    WhisperMessage = 27,
     PartyChatMessage = 34,
     CommandUser = 81,
 };
@@ -75,6 +81,7 @@ struct LoginPacket {
 static_assert(sizeof(Command) == 24, "Legacy smTRANS_COMMAND layout changed");
 
 std::optional<Packet> toModernPacket(const std::vector<uint8_t>& payload);
+bool decodeClientAttackData2(std::vector<uint8_t>& payload, uint32_t objectSerial);
 std::optional<Packet> loginToModernPacket(const std::vector<uint8_t>& payload);
 std::optional<std::vector<uint8_t>> toLegacyPayload(const Packet& packet, uint32_t packetKey, int32_t requestCode = 0);
 std::vector<uint8_t> gameServerReadyPayload();

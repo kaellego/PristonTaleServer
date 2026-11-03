@@ -1,3 +1,14 @@
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+SET ANSI_PADDING ON;
+SET ANSI_WARNINGS ON;
+SET CONCAT_NULL_YIELDS_NULL ON;
+SET ARITHABORT ON;
+SET NUMERIC_ROUNDABORT OFF;
+SET NOCOUNT ON;
+SET XACT_ABORT ON;
+GO
+
 IF DB_ID('UserDB') IS NULL CREATE DATABASE UserDB;
 IF DB_ID('GameDB') IS NULL CREATE DATABASE GameDB;
 IF DB_ID('LogDB') IS NULL CREATE DATABASE LogDB;
@@ -22,6 +33,10 @@ CREATE TABLE dbo.CharacterInfo (
     StateVersion int NOT NULL DEFAULT 1,
     StateUpdatedAt datetime2 NOT NULL DEFAULT sysdatetime()
 );
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.CharacterInfo') AND name = 'IX_CharacterInfo_Account_Experience')
+    CREATE INDEX IX_CharacterInfo_Account_Experience
+        ON dbo.CharacterInfo (AccountName, Experience DESC, Name)
+        INCLUDE (StateVersion, StateUpdatedAt);
 IF COL_LENGTH('dbo.CharacterInfo', 'StateVersion') IS NULL ALTER TABLE dbo.CharacterInfo ADD StateVersion int NOT NULL CONSTRAINT DF_CharacterInfo_StateVersion DEFAULT 1;
 IF COL_LENGTH('dbo.CharacterInfo', 'StateUpdatedAt') IS NULL ALTER TABLE dbo.CharacterInfo ADD StateUpdatedAt datetime2 NOT NULL CONSTRAINT DF_CharacterInfo_StateUpdatedAt DEFAULT sysdatetime();
 IF OBJECT_ID('dbo.CharacterInventory', 'U') IS NULL
@@ -86,6 +101,12 @@ IF COL_LENGTH('dbo.CharacterInventory', 'ItemVersion') IS NULL ALTER TABLE dbo.C
 IF COL_LENGTH('dbo.AccountWarehouse', 'ItemSerial') IS NULL ALTER TABLE dbo.AccountWarehouse ADD ItemSerial bigint NOT NULL CONSTRAINT DF_AccountWarehouse_ItemSerial DEFAULT 0;
 IF COL_LENGTH('dbo.AccountWarehouse', 'ItemChecksum') IS NULL ALTER TABLE dbo.AccountWarehouse ADD ItemChecksum int NOT NULL CONSTRAINT DF_AccountWarehouse_ItemChecksum DEFAULT 0;
 IF COL_LENGTH('dbo.AccountWarehouse', 'ItemVersion') IS NULL ALTER TABLE dbo.AccountWarehouse ADD ItemVersion int NOT NULL CONSTRAINT DF_AccountWarehouse_ItemVersion DEFAULT 1;
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.PlayerStateProto') AND name = 'IX_PlayerStateProto_Owner')
+    CREATE INDEX IX_PlayerStateProto_Owner ON dbo.PlayerStateProto (OwnerKey, StateType, ChunkIndex) INCLUDE (StateVersion, StateUpdatedAt);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.CharacterInventory') AND name = 'IX_CharacterInventory_ItemCode')
+    CREATE INDEX IX_CharacterInventory_ItemCode ON dbo.CharacterInventory (ItemCode, CharacterName) INCLUDE (SlotIndex, Quantity, ItemSerial, ItemVersion);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.AccountWarehouse') AND name = 'IX_AccountWarehouse_ItemCode')
+    CREATE INDEX IX_AccountWarehouse_ItemCode ON dbo.AccountWarehouse (ItemCode, AccountName) INCLUDE (SlotIndex, Quantity, ItemSerial, ItemVersion);
 GO
 
 USE GameDB;
@@ -124,6 +145,22 @@ SET LegacyCode = 'BEGINNER', RequiredLevel = 1, EquipmentSlot = 0, JobCodeMask =
 WHERE ItemCode = 1;
 IF OBJECT_ID('dbo.GameMasters', 'U') IS NULL
 CREATE TABLE dbo.GameMasters (ID int IDENTITY PRIMARY KEY, AccountID varchar(32), Password varchar(30), Type int NOT NULL DEFAULT 0, active bit NOT NULL DEFAULT 1);
+IF COL_LENGTH('dbo.GameMasters', 'UserID') IS NULL
+    ALTER TABLE dbo.GameMasters ADD UserID int NULL;
+GO
+-- UserInfo lives in UserDB, so SQL Server cannot enforce a cross-database FK here.
+-- Backfill the stable numeric identity while retaining AccountID during migration.
+UPDATE gm
+   SET gm.UserID = ui.ID
+  FROM dbo.GameMasters AS gm
+  INNER JOIN UserDB.dbo.UserInfo AS ui ON ui.AccountName = gm.AccountID
+ WHERE gm.UserID IS NULL;
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.GameMasters') AND name = 'UX_GameMasters_ActiveAccount')
+    CREATE UNIQUE INDEX UX_GameMasters_ActiveAccount ON dbo.GameMasters (AccountID) WHERE active = 1 AND AccountID IS NOT NULL;
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.GameMasters') AND name = 'UX_GameMasters_ActiveUserID')
+    CREATE UNIQUE INDEX UX_GameMasters_ActiveUserID ON dbo.GameMasters (UserID) WHERE active = 1 AND UserID IS NOT NULL;
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.GameMasters') AND name = 'IX_GameMasters_Account_Active')
+    CREATE INDEX IX_GameMasters_Account_Active ON dbo.GameMasters (AccountID, active) INCLUDE (Type);
 GO
 
 IF OBJECT_ID('dbo.NpcList', 'U') IS NULL
@@ -176,7 +213,8 @@ CREATE TABLE dbo.NpcShopItem (
     CONSTRAINT CK_NpcShopItem_Prices CHECK (BuyPrice >= 0 AND SellPrice >= 0),
     CONSTRAINT CK_NpcShopItem_Quantity CHECK (MaxQuantity > 0 AND (Stock IS NULL OR Stock >= 0))
 );
-CREATE INDEX IX_NpcShopItem_Enabled ON dbo.NpcShopItem (ShopId, Enabled, ItemCode);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.NpcShopItem') AND name = 'IX_NpcShopItem_Enabled')
+    CREATE INDEX IX_NpcShopItem_Enabled ON dbo.NpcShopItem (ShopId, Enabled, ItemCode);
 IF OBJECT_ID('dbo.NpcDrop', 'U') IS NULL
 CREATE TABLE dbo.NpcDrop (
     NpcId int NOT NULL,
@@ -191,11 +229,22 @@ CREATE TABLE dbo.NpcDrop (
     CONSTRAINT CK_NpcDrop_Chance CHECK (DropChancePermille BETWEEN 0 AND 1000),
     CONSTRAINT CK_NpcDrop_Quantity CHECK (MinQuantity > 0 AND MaxQuantity >= MinQuantity)
 );
-CREATE INDEX IX_NpcDrop_Enabled ON dbo.NpcDrop (NpcId, Enabled);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.NpcDrop') AND name = 'IX_NpcDrop_Enabled')
+    CREATE INDEX IX_NpcDrop_Enabled ON dbo.NpcDrop (NpcId, Enabled);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.ItemList') AND name = 'IX_ItemList_LegacyCode')
+    CREATE INDEX IX_ItemList_LegacyCode ON dbo.ItemList (LegacyCode) INCLUDE (ItemName, RequiredLevel, EquipmentSlot, JobCodeMask, Consumable);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.NpcList') AND name = 'IX_NpcList_Enabled')
+    CREATE INDEX IX_NpcList_Enabled ON dbo.NpcList (Enabled, NpcId) INCLUDE (DisplayName, ModelName, EventCode);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.NpcSpawn') AND name = 'IX_NpcSpawn_EnabledMap')
+    CREATE INDEX IX_NpcSpawn_EnabledMap ON dbo.NpcSpawn (Enabled, MapId, NpcId) INCLUDE (SpawnId, X, Y, Z, AngleY);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.NpcShop') AND name = 'IX_NpcShop_EnabledNpc')
+    CREATE INDEX IX_NpcShop_EnabledNpc ON dbo.NpcShop (Enabled, NpcId) INCLUDE (ShopId, ShopName);
 GO
 
 USE LogDB;
 GO
 IF OBJECT_ID('dbo.ServerLog', 'U') IS NULL
 CREATE TABLE dbo.ServerLog (ID bigint IDENTITY PRIMARY KEY, CreatedAt datetime2 NOT NULL DEFAULT sysdatetime(), Message nvarchar(max) NULL);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE object_id = OBJECT_ID('dbo.ServerLog') AND name = 'IX_ServerLog_CreatedAt')
+    CREATE INDEX IX_ServerLog_CreatedAt ON dbo.ServerLog (CreatedAt DESC) INCLUDE (Message);
 GO

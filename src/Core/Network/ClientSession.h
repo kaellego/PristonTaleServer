@@ -25,6 +25,8 @@ public:
 
     void start();
     void send(Packet packet);
+    // Refreshes that announce legacy objects must choose their wire context.
+    void sendLegacyPacket(Packet packet, int32_t requestCode);
     void close();
     boost::asio::ip::tcp::socket& socket();
 
@@ -44,10 +46,16 @@ public:
     const std::string& getCharacterName() const { return m_characterName; }
     void markVerifiedLogin() { ++m_verifiedLoginPackets; }
     uint32_t getVerifiedLoginPackets() const { return m_verifiedLoginPackets; }
+    uint32_t clientObjectSerial() const { return m_clientObjectSerial; }
+    void setClientObjectSerial(uint32_t serial) { m_clientObjectSerial = serial; }
     int getTicket() const { return m_ticket; }
     bool ticketExpired() const { return std::chrono::steady_clock::now() >= m_ticketExpiresAt; }
     void renewTicket(std::chrono::steady_clock::time_point expiresAt) { m_ticketExpiresAt = expiresAt; }
     bool acceptItemOperation(uint32_t opcode, const std::vector<uint8_t>& body);
+    enum class InboundFrameDecision { Accept, Drop, Close };
+    InboundFrameDecision acceptInboundFrame(uint32_t opcode, std::size_t bytes);
+    bool shouldLogKeepAlive();
+    bool shouldLogRateViolation();
     void setNpcContext(int npcId, uint32_t serial) { m_npcId = npcId; m_npcSerial = serial; }
     int npcContextId() const { return m_npcId; }
     uint32_t npcContextSerial() const { return m_npcSerial; }
@@ -72,8 +80,15 @@ private:
     int m_npcId = 0;
     uint32_t m_npcSerial = 0;
     uint32_t m_verifiedLoginPackets = 0;
+    uint32_t m_clientObjectSerial = 0;
     std::mutex m_operationMutex;
     std::unordered_map<uint64_t, std::chrono::steady_clock::time_point> m_recentItemOperations;
+    std::mutex m_rateMutex;
+    std::chrono::steady_clock::time_point m_rateWindowStart{};
+    std::chrono::steady_clock::time_point m_lastKeepAliveLog{};
+    std::chrono::steady_clock::time_point m_lastRateViolationLog{};
+    uint32_t m_inboundFramesInWindow = 0;
+    uint32_t m_keepAlivesInWindow = 0;
 
     // Outros membros...
     boost::asio::ip::tcp::socket m_socket;

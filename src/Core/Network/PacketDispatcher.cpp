@@ -21,6 +21,7 @@
 #include "GameLogic/Services/CharacterService.h"
 #include "GameLogic/Services/InventoryService.h"
 #include "GameLogic/GameWorld.h"
+#include "GameLogic/NpcRepository.h"
 #include "GameLogic/NpcShopRepository.h"
 
 #include <iostream>
@@ -36,6 +37,7 @@ PacketDispatcher::PacketDispatcher(
     CharacterService& characterService,
     InventoryService& inventoryService,
     GameWorld& gameWorld,
+    NpcRepository& npcRepository,
     NpcShopRepository& npcShopRepository
 
 ) :
@@ -48,6 +50,7 @@ PacketDispatcher::PacketDispatcher(
     m_characterService(characterService),
     m_inventoryService(inventoryService),
     m_gameWorld(gameWorld),
+    m_npcRepository(npcRepository),
     m_npcShopRepository(npcShopRepository)
 {
     m_logService.info("Registrando manipuladores de pacotes...");
@@ -62,7 +65,7 @@ void PacketDispatcher::registerHandlers() {
     m_handlers[static_cast<uint32_t>(Opcodes::LegacyConnected)] = m_handlers[static_cast<uint32_t>(Opcodes::KeepAlive)];
     m_handlers[static_cast<uint32_t>(Opcodes::LoginUser)] = std::make_shared<LoginHandler>(m_accountService, m_logService, m_globalState);
     m_handlers[static_cast<uint32_t>(Opcodes::Ping)] = std::make_shared<PingHandler>(m_logService, m_userService, m_globalState);
-    auto characterHandler = std::make_shared<CharacterHandler>(m_characterService, m_gameWorld, m_logService);
+    auto characterHandler = std::make_shared<CharacterHandler>(m_characterService, m_gameWorld, m_userService, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::SelectCharacter)] = characterHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::CreateCharacter)] = characterHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::DeleteCharacter)] = characterHandler;
@@ -82,10 +85,11 @@ void PacketDispatcher::registerHandlers() {
     auto movementHandler = std::make_shared<MovementHandler>(m_gameWorld, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::UnitStatusMove)] = movementHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::PlayData)] = movementHandler;
+    m_handlers[static_cast<uint32_t>(Opcodes::LegacyPosition)] = movementHandler;
     auto combatHandler = std::make_shared<CombatHandler>(m_gameWorld, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::AttackData)] = combatHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::AttackData2)] = combatHandler;
-    m_handlers[static_cast<uint32_t>(Opcodes::ChatMessage)] = std::make_shared<ChatHandler>(m_gameWorld, m_logService);
+    m_handlers[static_cast<uint32_t>(Opcodes::ChatMessage)] = std::make_shared<ChatHandler>(m_gameWorld, m_userService, m_npcRepository, m_logService);
     auto npcHandler = std::make_shared<NpcHandler>(m_gameWorld, m_inventoryService, m_npcShopRepository, m_logService);
     m_handlers[static_cast<uint32_t>(Opcodes::NpcUnitClick)] = npcHandler;
     m_handlers[static_cast<uint32_t>(Opcodes::BuyItemNPCShop)] = npcHandler;
@@ -115,11 +119,15 @@ void PacketDispatcher::dispatch(std::shared_ptr<ClientSession> session, const Pa
 }
 
 bool PacketDispatcher::transferLegacySession(std::shared_ptr<ClientSession> session, const std::string& accountName) {
-    return m_userService.transferSession(accountName, session);
+    if (!m_userService.transferSession(accountName, session)) return false;
+    m_gameWorld.rebindClient(accountName, session);
+    return true;
 }
 
 bool PacketDispatcher::transferLegacySessionByIp(std::shared_ptr<ClientSession> session) {
-    return m_userService.transferSessionByIp(session);
+    if (!m_userService.transferSessionByIp(session)) return false;
+    m_gameWorld.rebindClient(session->getAccountName(), session);
+    return true;
 }
 
 void PacketDispatcher::sessionClosed(std::shared_ptr<ClientSession> session) {

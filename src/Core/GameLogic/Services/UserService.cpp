@@ -70,6 +70,8 @@ bool UserService::transferSession(const std::string &accountName, const std::sha
 
     session->authenticate(source->getAccountId(), accountName, source->getTicket(),
                           std::chrono::steady_clock::now() + std::chrono::minutes(15));
+    session->selectCharacter(source->getCharacterName());
+    session->setClientObjectSerial(source->clientObjectSerial());
     it->second.session = session;
     return true;
 }
@@ -115,8 +117,17 @@ bool UserService::transferSessionByIp(const std::shared_ptr<ClientSession> &sess
 
     session->authenticate(source->getAccountId(), accountName, source->getTicket(),
                           std::chrono::steady_clock::now() + std::chrono::minutes(15));
+    session->selectCharacter(source->getCharacterName());
+    session->setClientObjectSerial(source->clientObjectSerial());
     m_onlineUsers[accountName].session = session;
     return true;
+}
+
+std::shared_ptr<ClientSession> UserService::sessionForAccount(const std::string &accountName) const
+{
+    std::lock_guard<std::mutex> lock(m_usersMutex);
+    const auto it = m_onlineUsers.find(accountName);
+    return it == m_onlineUsers.end() ? nullptr : it->second.session;
 }
 
 bool UserService::banAccount(const std::string &accountName, const std::string &reason)
@@ -156,7 +167,7 @@ bool UserService::isGameMaster(const std::string &accountName) const
         return false;
     try
     {
-        auto db = m_dbPool.createConnection(EDatabaseID::UserDB_Primary);
+        auto db = m_dbPool.createConnection(EDatabaseID::GameDB);
         db->prepare("SELECT TOP 1 Type FROM dbo.GameMasters WHERE AccountID=? AND active=1");
         db->bindParameter(1, accountName);
         db->execute();

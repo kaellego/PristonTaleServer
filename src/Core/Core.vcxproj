@@ -215,6 +215,7 @@
     <ClInclude Include="Utils\picosha2.h" />
     <ClInclude Include="Utils\SafeString.h" />
     <ClInclude Include="Utils\HmacSha256.h" />
+    <ClInclude Include="Utils\PasswordVerifier.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Database\DatabaseDialect.h" />
@@ -268,6 +269,7 @@
     <ClCompile Include="Utils\ini.c" />
     <ClCompile Include="Utils\INIReader.cpp" />
     <ClCompile Include="Utils\HmacSha256.cpp" />
+    <ClCompile Include="Utils\PasswordVerifier.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

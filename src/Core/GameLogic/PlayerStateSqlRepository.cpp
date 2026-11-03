@@ -178,7 +178,9 @@ bool PlayerStateSqlRepository::saveCharacter(const CharacterData& value) const {
         auto db = m_pool.createConnection(EDatabaseID::UserDB_Primary); db->beginTransaction();
         if (!saveBlob(*db, 1, std::string(normalized.szName), PlayerStateProto::encode(normalized))) { db->rollback(); return false; }
         const auto key = sqlOwner(std::string(normalized.szName));
-        db->prepare("UPDATE dbo.CharacterInfo SET Experience=" + std::to_string(normalized.liEXP) + ", StateUpdatedAt=sysdatetime() WHERE Name='" + key + "'");
+        db->prepare("UPDATE dbo.CharacterInfo SET Experience=?, StateUpdatedAt=sysdatetime() WHERE Name=?");
+        db->bindParameter(1, normalized.liEXP);
+        db->bindParameter(2, key);
         db->execute();
         db->commit(); return true;
     } catch (...) { return false; }
@@ -252,7 +254,9 @@ bool PlayerStateSqlRepository::saveCharacterAndInventory(const CharacterData& ch
         const bool ok = saveBlob(*db, 1, name, PlayerStateProto::encode(normalizedCharacter)) &&
                         saveBlob(*db, 2, name, PlayerStateProto::encode(normalizedInventory));
         if (ok) {
-            db->prepare("UPDATE dbo.CharacterInfo SET Experience=" + std::to_string(normalizedCharacter.liEXP) + ", StateUpdatedAt=sysdatetime() WHERE Name='" + name + "'");
+            db->prepare("UPDATE dbo.CharacterInfo SET Experience=?, StateUpdatedAt=sysdatetime() WHERE Name=?");
+            db->bindParameter(1, normalizedCharacter.liEXP);
+            db->bindParameter(2, name);
             db->execute();
             db->commit();
         } else db->rollback();

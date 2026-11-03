@@ -126,6 +126,9 @@
     <ClInclude Include="Utils\HmacSha256.h">
       <Filter>Arquivos de Origem\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Utils\PasswordVerifier.h">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClInclude>
     <ClInclude Include="GameLogic\Handlers\KeepAliveHandler.h">
       <Filter>Arquivos de Origem\GameLogic\Handlers</Filter>
     </ClInclude>
@@ -195,6 +198,9 @@
       <Filter>Arquivos de Origem\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Utils\HmacSha256.cpp">
+      <Filter>Arquivos de Origem\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\PasswordVerifier.cpp">
       <Filter>Arquivos de Origem\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Network\Server.cpp">

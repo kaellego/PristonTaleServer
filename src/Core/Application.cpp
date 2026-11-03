@@ -78,7 +78,8 @@ void Application::buildServices()
         // prevents movement/regen from rebuilding a zeroed character record.
         if (data.szName[0] == '\0')
             std::memcpy(data.szName, name.c_str(), std::min(name.size(), sizeof(data.szName) - 1));
-        m_playerRepository->saveCharacter(data);
+        if (!m_playerRepository->saveCharacter(data))
+            m_logService->error("Falha ao persistir o personagem '{}' apos movimento/desconexao.", name);
     });
     m_npcRepository = std::make_unique<NpcRepository>(*m_dbPool, *m_logService);
     m_npcShopRepository = std::make_unique<NpcShopRepository>(*m_dbPool);
@@ -86,10 +87,10 @@ void Application::buildServices()
     if (loadedNpcs == 0) {
         // Fallback only until GameDB receives real MapNPC coordinates.
         const bool first = m_gameWorld.registerNpc(NpcEntity{3, 0x81000003u, 0, {0.0f, 0.0f, 0.0f}, 0,
-                                          "AcaciaShop", "char\\npc\\TN-005\\TN-005.ini", 0,
+                                          "AcaciaShop", "char\\npc\\TN-005\\TN-005.ase", 0,
                                           100, 100, 0, 0, false, true});
         const bool second = m_gameWorld.registerNpc(NpcEntity{10, 0x8100000Au, 0, {3072.0f, 0.0f, 0.0f}, 0,
-                                          "CaveKeeper", "char\\npc\\TN-001\\TN-001.ini", 0,
+                                          "CaveKeeper", "char\\npc\\TN-001\\TN-001.ase", 0,
                                           100, 100, 0, 0, false, true});
         m_logService->info("Fallback de NPCs registrado no mapa 0: {}", (first ? 1 : 0) + (second ? 1 : 0));
     }
@@ -120,6 +121,7 @@ void Application::buildServices()
         *m_characterService,
         *m_inventoryService,
         m_gameWorld,
+        *m_npcRepository,
         *m_npcShopRepository);
 
     const auto &serverInfo = m_config->getThisServerInfo();

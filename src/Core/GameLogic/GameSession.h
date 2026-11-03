@@ -16,6 +16,7 @@ public:
     const std::string& characterName() const noexcept { return m_characterName; }
     void setEntityId(int id) noexcept { m_entityId = id; }
     int entityId() const noexcept { return m_entityId; }
+    void setClient(std::weak_ptr<ClientSession> client) { std::lock_guard lock(m_mutex); m_client = std::move(client); }
     void setCharacterData(const CharacterData& data) { std::lock_guard lock(m_mutex); m_characterData = data; }
     CharacterData characterData() const { std::lock_guard lock(m_mutex); return m_characterData; }
     void update() { std::lock_guard lock(m_mutex); m_lastUpdate = std::chrono::steady_clock::now(); }

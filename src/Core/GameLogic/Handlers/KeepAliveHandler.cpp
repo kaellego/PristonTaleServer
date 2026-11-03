@@ -9,7 +9,9 @@ void KeepAliveHandler::handle(std::shared_ptr<ClientSession> session, const Pack
 {
     try
     {
-        m_logService.packet("Pacote Keep-Alive (0x0000) recebido do cliente {}", session->socket().remote_endpoint().address().to_string());
+        if (session->shouldLogKeepAlive())
+            m_logService.packet("Keep-Alive recebido do cliente {} (log limitado a cada 5s)",
+                                session->socket().remote_endpoint().address().to_string());
     }
     catch (...)
     {

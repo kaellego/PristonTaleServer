@@ -148,6 +148,29 @@ A implementação atual combina:
 
 ### Catálogo e posicionamento de NPCs
 
+### Atualizacao de NPCs sem reiniciar
+
+Um GM autenticado pode recarregar os spawns habilitados do `GameDB` e reenviar
+os NPCs para as sessoes ativas com:
+
+```text
+/reloadnpcs
+```
+
+Para criar um NPC cadastrado no `NpcList` exatamente na posicao atual do GM:
+
+```text
+/spawnnpc <NpcId>
+```
+
+Exemplo: `/spawnnpc 10000`. O NPC e enviado para os jogadores que estao no
+mesmo mapa; o ID precisa existir e estar habilitado no `GameDB`.
+
+O comando substitui o catalogo em memoria somente depois de a consulta terminar
+e nao aceita coordenadas, modelo ou serial enviados pelo cliente. A atualizacao
+e feita por sessao e por mapa; o cliente pode precisar sair e entrar no mapa
+caso esteja usando um cache de modelo antigo.
+
 Os backups em `ZeroPT-DataBase\DataBase` não possuem `NPCList` nem `MapNPC`. O catálogo disponível está nos arquivos legados do servidor. Para importá-lo:
 
 ```powershell

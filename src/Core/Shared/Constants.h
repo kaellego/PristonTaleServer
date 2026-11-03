@@ -13,6 +13,9 @@ namespace Constants
 
     // --- Configura��es de Rede e Pacotes ---
     constexpr int MAX_PKTSIZ = 0x2000;
+    // Limites por sessao para impedir flooding de frames validos.
+    constexpr uint32_t MAX_INBOUND_FRAMES_PER_SECOND = 240;
+    constexpr uint32_t MAX_KEEPALIVES_PER_SECOND = 8;
     constexpr int PKTHDR_ENCMAX = 0x10;
 
     // --- Configura��es de Jogo ---
@@ -259,6 +262,7 @@ enum class Opcodes : uint32_t
     NetRemoveFinishedQuestData = 0x7F000071,
     NetSendItemData = 0x7F000072,
     NetMimicEvent = 0x7F000073,
+    LegacyPosition = 0x7F000074,
 
     // =================================================================================
     // Login & Sele��o de Personagem

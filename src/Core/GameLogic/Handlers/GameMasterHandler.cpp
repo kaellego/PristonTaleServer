@@ -39,7 +39,8 @@ void GameMasterHandler::handle(std::shared_ptr<ClientSession> session, const Pac
             std::memcpy(data.szName, npc->name.c_str(), npc->name.size());
             std::memcpy(data.szModelName, npc->modelName.c_str(), npc->modelName.size());
             const auto* bytes = reinterpret_cast<const uint8_t*>(&data);
-            session->send(Packet(static_cast<uint32_t>(Opcodes::NpcData), std::vector<uint8_t>(bytes, bytes + sizeof(data))));
+            session->sendLegacyPacket(Packet(static_cast<uint32_t>(Opcodes::NpcData),
+                                             std::vector<uint8_t>(bytes, bytes + sizeof(data))), 0);
         }
         ok = npc.has_value();
     }

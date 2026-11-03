@@ -644,10 +644,22 @@ struct PacketNpcOpen { int32_t npcId; uint32_t objectSerial; int32_t eventCode; 
 // Server-authoritative shop request. The legacy sITEM payload is converted to
 // this compact form; client supplied price/checksum/pointers are discarded.
 struct PacketNpcShopRequest { int32_t itemCode; int32_t quantity; uint32_t npcSerial; };
+// Internal, server-built catalog used to produce the legacy smTRANS_SELL_ITEM
+// response. It never contains client-owned price or pointer fields.
+struct PacketNpcShopListHeader { int32_t npcId; int32_t itemKind; int32_t itemCount; };
+struct PacketNpcShopListEntry {
+    int32_t itemCode;
+    int64_t buyPrice;
+    int64_t sellPrice;
+    int32_t requiredLevel;
+    char itemName[32];
+};
 static_assert(sizeof(PacketNpcData) == 132);
 static_assert(sizeof(PacketNpcClick) == 8);
 static_assert(sizeof(PacketNpcOpen) == 16);
 static_assert(sizeof(PacketNpcShopRequest) == 12);
+static_assert(sizeof(PacketNpcShopListHeader) == 12);
+static_assert(sizeof(PacketNpcShopListEntry) == 56);
 
 // Estrutura para uma definição de item carregada da tabela ItemList do banco de dados.
 struct DefinitionItem {

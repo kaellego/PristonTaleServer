@@ -6,11 +6,13 @@
 #include "Shared/datatypes.h"
 #include "Logging/LogService.h"
 #include "GameLogic/GameWorld.h"
+#include "GameLogic/Services/UserService.h"
 #include "Utils/SafeString.h"
 #include <array>
 #include <cstring>
 #include <cmath>
-CharacterHandler::CharacterHandler(CharacterService &service, GameWorld &world, LogService &logService) : m_service(service), m_world(world), m_logService(logService) {}
+CharacterHandler::CharacterHandler(CharacterService &service, GameWorld &world, UserService& userService, LogService &logService)
+    : m_service(service), m_world(world), m_userService(userService), m_logService(logService) {}
 
 namespace
 {
@@ -64,9 +66,12 @@ namespace
         session->send(Packet(response.header.opcode, std::vector<uint8_t>(body, body + sizeof(response) - sizeof(PacketHeader))));
     }
 
-    std::size_t sendNpcs(const std::shared_ptr<ClientSession>& session, const GameWorld& world, int mapId)
+    std::size_t sendNpcs(const std::shared_ptr<ClientSession>& session, const GameWorld& world,
+                         int mapId, LogService& logService)
     {
         const auto npcs = world.npcsForMap(mapId);
+        logService.debug("Preparando envio legado de {} NPCs para conta='{}', mapa={}",
+                         npcs.size(), session->getAccountName(), mapId);
         for (const auto& npc : npcs) {
             PacketNpcData data{};
             data.npcId = npc.id;
@@ -81,8 +86,14 @@ namespace
             copyFixed(data.szName, npc.name);
             copyFixed(data.szModelName, npc.modelName);
             const auto* bytes = reinterpret_cast<const uint8_t*>(&data);
-            session->send(Packet(static_cast<uint32_t>(Opcodes::NpcData),
-                                 std::vector<uint8_t>(bytes, bytes + sizeof(data))));
+            // NPC announcements must always start with PLAYDATAGROUP. Using
+            // the last client request here can turn this first frame into a
+            // PLAYERINFO response that the legacy client has no slot for yet.
+            session->sendLegacyPacket(Packet(static_cast<uint32_t>(Opcodes::NpcData),
+                                             std::vector<uint8_t>(bytes, bytes + sizeof(data))), 0);
+            logService.debug("NPC anunciado ao cliente: conta='{}' id={} serial=0x{:08x} mapa={} pos=({}, {}, {}) modelo='{}'",
+                             session->getAccountName(), npc.id, npc.objectSerial, npc.mapId,
+                             data.x, data.y, data.z, npc.modelName);
         }
         return npcs.size();
     }
@@ -115,6 +126,16 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
         {
             session->selectCharacter(name);
             m_world.enter(session->getAccountId(), session->getAccountName(), name, *selectedCharacter, session);
+            if (const auto entity = m_world.entityForAccount(session->getAccountName()))
+                session->setClientObjectSerial(entity->objectSerial);
+            if (auto gameSession = m_userService.sessionForAccount(session->getAccountName());
+                gameSession && gameSession != session)
+            {
+                gameSession->selectCharacter(name);
+                m_world.rebindClient(session->getAccountName(), gameSession);
+                if (const auto entity = m_world.entityForAccount(session->getAccountName()))
+                    gameSession->setClientObjectSerial(entity->objectSerial);
+            }
             m_logService.info("Personagem carregado para {}: HP {}/{}, MP {}/{}, STM {}/{}",
                               session->getAccountName(), selectedCharacter->iHP, selectedCharacter->iMaxHP,
                               selectedCharacter->iMP, selectedCharacter->iMaxMP,
@@ -150,7 +171,7 @@ void CharacterHandler::handle(std::shared_ptr<ClientSession> session, const Pack
     session->send(Packet(result.header.opcode, std::move(responseBody)));
     if (success && static_cast<Opcodes>(packet.header.opcode) == Opcodes::SelectCharacter)
     {
-        const auto npcCount = sendNpcs(session, m_world, selectedCharacter->iMapId);
+        const auto npcCount = sendNpcs(session, m_world, selectedCharacter->iMapId, m_logService);
         m_logService.info("NPCs enviados para {}: mapa={}, quantidade={}", session->getAccountName(),
                           selectedCharacter->iMapId, npcCount);
     }

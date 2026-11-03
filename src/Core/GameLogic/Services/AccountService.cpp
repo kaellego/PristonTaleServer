@@ -5,6 +5,7 @@
 #include "Config/ServerConfig.h"
 #include "Network/Packet.h"
 #include "Utils/Crypto.h"
+#include "Utils/PasswordVerifier.h"
 #include "Shared/Constants.h"
 #include "Shared/datatypes.h"
 #include "Utils/Dice.h"
@@ -161,6 +162,10 @@ void AccountService::processLogin(LoginRequest& request) {
 
     SQLUser& sqlUser = *sqlUserOpt;
 
+    const size_t storedPasswordLength = strnlen_s(sqlUser.szPassword, sizeof(sqlUser.szPassword));
+    m_logService.debug("Credencial recebida para '{}': tamanho={}, cadastro={}",
+                       accountName, passwordHashFromClient.size(), storedPasswordLength);
+
     // 2. Validate the request
     Log::LoginResult validationResult = validateRequest(request, sqlUser);
     if (validationResult != Log::LoginResult::Success) {
@@ -171,7 +176,7 @@ void AccountService::processLogin(LoginRequest& request) {
 
     // 3. Validate the password
     
-    if (!Crypto::validatePassword(passwordHashFromClient, std::string(sqlUser.szPassword))) {
+    if (!PasswordVerifier::matches(passwordHashFromClient, std::string(sqlUser.szPassword))) {
         m_logService.warn("Tentativa de login para a conta {} com hash de senha incorreto.", accountName);
         onLoginFailure(request.session, Log::LoginResult::IncorrectPassword, accountName);
         return;

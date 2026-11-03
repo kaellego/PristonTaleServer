@@ -28,6 +28,7 @@ public:
     bool isUserOnline(const std::string& accountName); // <-- Modificado para buscar por nome
     bool transferSession(const std::string& accountName, const std::shared_ptr<ClientSession>& session);
     bool transferSessionByIp(const std::shared_ptr<ClientSession>& session);
+    std::shared_ptr<ClientSession> sessionForAccount(const std::string& accountName) const;
     bool banAccount(const std::string& accountName, const std::string& reason);
     bool isGameMaster(const std::string& accountName) const;
 
@@ -37,5 +38,5 @@ private:
 
     // A chave do mapa agora é o nome da conta (string), que é mais fácil de usar.
     std::map<std::string, UserSession> m_onlineUsers;
-    std::mutex m_usersMutex;
+    mutable std::mutex m_usersMutex;
 };

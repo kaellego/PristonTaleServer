@@ -19,6 +19,7 @@ class UserService;
 class CharacterService;
 class InventoryService;
 class GameWorld;
+class NpcRepository;
 class NpcShopRepository;
 
 class IPacketHandler {
@@ -40,6 +41,7 @@ public:
         CharacterService& characterService,
         InventoryService& inventoryService,
         GameWorld& gameWorld,
+        NpcRepository& npcRepository,
         NpcShopRepository& npcShopRepository
     );
 
@@ -61,6 +63,7 @@ private:
     CharacterService& m_characterService;
     InventoryService& m_inventoryService;
     GameWorld& m_gameWorld;
+    NpcRepository& m_npcRepository;
     NpcShopRepository& m_npcShopRepository;
 
     std::map<uint32_t, std::shared_ptr<IPacketHandler>> m_handlers;
