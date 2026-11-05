@@ -1,4 +1,5 @@
 pub mod legacy;
+pub mod legacy_game_server;
 pub mod legacy_login;
 pub mod legacy_login_server;
 pub mod tcp;

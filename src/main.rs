@@ -7,7 +7,10 @@ mod transport;
 
 use config::ServerConfig;
 use infrastructure::sql::SqlServerConfig;
-use transport::{legacy_login_server::LegacyLoginServer, tcp::TcpServer, ticket::TicketStore};
+use transport::{
+    legacy_game_server::LegacyGameServer, legacy_login_server::LegacyLoginServer, tcp::TcpServer,
+    ticket::TicketStore,
+};
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
@@ -34,15 +37,23 @@ async fn main() -> std::io::Result<()> {
         None
     };
     let tickets = TicketStore::default();
-    let legacy =
-        LegacyLoginServer::bind(("127.0.0.1", config.login_port), sql.clone(), tickets).await?;
-    let server = TcpServer::bind(("127.0.0.1", config.game_port), sql, config.max_users).await?;
+    let legacy = LegacyLoginServer::bind(
+        ("127.0.0.1", config.login_port),
+        sql.clone(),
+        tickets.clone(),
+    )
+    .await?;
+    let game =
+        LegacyGameServer::bind(("127.0.0.1", config.game_port), sql.clone(), tickets).await?;
+    let server =
+        TcpServer::bind(("127.0.0.1", config.game_port + 1), sql, config.max_users).await?;
     tracing::info!(
         login = config.login_port,
         game = config.game_port,
+        experimental = config.game_port + 1,
         "RustPT listeners ativos"
     );
-    tokio::try_join!(legacy.run(), server.run()).map(|_| ())
+    tokio::try_join!(legacy.run(), game.run(), server.run()).map(|_| ())
 }
 
 #[cfg(test)]

@@ -35,6 +35,16 @@ impl TicketStore {
         state.remove(&ticket);
         true
     }
+
+    pub fn validate_account(&self, account: &str, address: &str) -> bool {
+        let ticket = {
+            let state = self.0.lock().expect("ticket store poisoned");
+            state.iter().find_map(|(ticket, (stored, ip, expires))| {
+                (*expires > Instant::now() && stored == account && ip == address).then_some(*ticket)
+            })
+        };
+        ticket.is_some_and(|ticket| self.validate(ticket, account, address))
+    }
 }
 
 #[cfg(test)]
