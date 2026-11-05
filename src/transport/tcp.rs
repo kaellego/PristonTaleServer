@@ -1,6 +1,9 @@
 use std::{io, net::SocketAddr};
 
 use crate::auth::{verify, NONCE_SIZE};
+use crate::domain::MapId;
+use crate::infrastructure::{repositories, sql::SqlServerConfig};
+use crate::transport::legacy::encode_npc_info;
 use tokio::{
     io::{AsyncReadExt, AsyncWriteExt},
     net::{TcpListener, TcpStream},
@@ -10,6 +13,11 @@ const HEADER_SIZE: usize = 8;
 const MAX_FRAME_SIZE: usize = 1024 * 1024;
 const OPCODE_AUTHENTICATE: u32 = 2;
 const OPCODE_AUTH_OK: u32 = 3;
+const OPCODE_ACCOUNT_LOGIN: u32 = 10;
+const OPCODE_MAP_ENTER: u32 = 11;
+const OPCODE_LOGIN_OK: u32 = 12;
+const OPCODE_CHARACTER_LIST: u32 = 13;
+const OPCODE_NPC_INFO: u32 = 20;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Frame {
@@ -19,12 +27,17 @@ pub struct Frame {
 
 pub struct TcpServer {
     listener: TcpListener,
+    sql: Option<SqlServerConfig>,
 }
 
 impl TcpServer {
-    pub async fn bind(address: impl tokio::net::ToSocketAddrs) -> io::Result<Self> {
+    pub async fn bind(
+        address: impl tokio::net::ToSocketAddrs,
+        sql: Option<SqlServerConfig>,
+    ) -> io::Result<Self> {
         Ok(Self {
             listener: TcpListener::bind(address).await?,
+            sql,
         })
     }
 
@@ -45,8 +58,9 @@ impl TcpServer {
         loop {
             let (stream, peer) = self.listener.accept().await?;
             let secret = secret.clone();
+            let sql = self.sql.clone();
             tokio::spawn(async move {
-                if let Err(error) = handle_connection(stream, secret.as_bytes()).await {
+                if let Err(error) = handle_connection(stream, secret.as_bytes(), sql).await {
                     eprintln!("TCP connection {peer} closed: {error}");
                 }
             });
@@ -54,7 +68,11 @@ impl TcpServer {
     }
 }
 
-async fn handle_connection(mut stream: TcpStream, secret: &[u8]) -> io::Result<()> {
+async fn handle_connection(
+    mut stream: TcpStream,
+    secret: &[u8],
+    sql: Option<SqlServerConfig>,
+) -> io::Result<()> {
     let hello = read_frame(&mut stream)
         .await?
         .ok_or_else(|| io::Error::new(io::ErrorKind::UnexpectedEof, "handshake ausente"))?;
@@ -80,6 +98,82 @@ async fn handle_connection(mut stream: TcpStream, secret: &[u8]) -> io::Result<(
             payload: vec![],
         }))
         .await?;
+    if let Some(sql_config) = sql {
+        let login = read_frame(&mut stream)
+            .await?
+            .ok_or_else(|| io::Error::new(io::ErrorKind::UnexpectedEof, "conta ausente"))?;
+        if login.opcode != OPCODE_ACCOUNT_LOGIN
+            || login.payload.is_empty()
+            || login.payload.len() > 32
+        {
+            return Err(io::Error::new(
+                io::ErrorKind::PermissionDenied,
+                "login RustPT invalido",
+            ));
+        }
+        let account_name = std::str::from_utf8(&login.payload)
+            .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "nome de conta invalido"))?;
+        let mut client = sql_config.connect().await.map_err(io::Error::other)?;
+        let account = repositories::find_account(&mut client, account_name)
+            .await
+            .map_err(io::Error::other)?
+            .ok_or_else(|| {
+                io::Error::new(io::ErrorKind::PermissionDenied, "conta nao encontrada")
+            })?;
+        if account.banned {
+            return Err(io::Error::new(
+                io::ErrorKind::PermissionDenied,
+                "conta bloqueada",
+            ));
+        }
+        stream
+            .write_all(&encode_frame(&Frame {
+                opcode: OPCODE_LOGIN_OK,
+                payload: account.id.0.to_le_bytes().to_vec(),
+            }))
+            .await?;
+        let characters = repositories::list_characters(&mut client, account_name)
+            .await
+            .map_err(io::Error::other)?;
+        let mut character_payload = Vec::new();
+        for character in characters {
+            character_payload.extend_from_slice(&(character.name.len() as u16).to_le_bytes());
+            character_payload.extend_from_slice(character.name.as_bytes());
+            character_payload.extend_from_slice(&character.experience.to_le_bytes());
+        }
+        stream
+            .write_all(&encode_frame(&Frame {
+                opcode: OPCODE_CHARACTER_LIST,
+                payload: character_payload,
+            }))
+            .await?;
+        while let Some(frame) = read_frame(&mut stream).await? {
+            if frame.opcode == OPCODE_MAP_ENTER && frame.payload.len() == 4 {
+                let map = MapId(i32::from_le_bytes(frame.payload.try_into().unwrap()));
+                for npc in repositories::list_npcs_for_map(&mut client, map)
+                    .await
+                    .map_err(io::Error::other)?
+                {
+                    if let Some(payload) =
+                        encode_npc_info(&npc, 0x8100_0000u32.wrapping_add(npc.id.0 as u32))
+                    {
+                        stream
+                            .write_all(&encode_frame(&Frame {
+                                opcode: OPCODE_NPC_INFO,
+                                payload,
+                            }))
+                            .await?;
+                    }
+                }
+                continue;
+            }
+            if frame.opcode == 0 {
+                return Err(io::Error::new(io::ErrorKind::InvalidData, "opcode zero"));
+            }
+            stream.write_all(&encode_frame(&frame)).await?;
+        }
+        return Ok(());
+    }
     while let Some(frame) = read_frame(&mut stream).await? {
         // Transport only validates framing. Domain dispatch is intentionally separate.
         if frame.opcode == 0 {
