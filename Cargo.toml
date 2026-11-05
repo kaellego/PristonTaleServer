@@ -11,6 +11,8 @@ unsafe_code = "forbid"
 [dependencies]
 hmac = "0.12"
 sha2 = "0.10"
+tiberius = { version = "0.12", default-features = false, features = ["tds73", "rustls", "sql-browser-tokio"] }
 tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "io-util"] }
+tokio-util = { version = "0.7", features = ["compat"] }
 
 [dev-dependencies]

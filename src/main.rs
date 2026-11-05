@@ -6,11 +6,21 @@ mod infrastructure;
 mod transport;
 
 use config::ServerConfig;
+use infrastructure::sql::SqlServerConfig;
 use transport::tcp::TcpServer;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
     let config = ServerConfig::from_ini_file("../server.ini").unwrap_or_default();
+    if std::env::var("ZEROPT_SQL_HOST").is_ok() {
+        let sql = SqlServerConfig::from_env().map_err(std::io::Error::other)?;
+        let mut client = sql.connect().await.map_err(std::io::Error::other)?;
+        client
+            .simple_query("SELECT 1")
+            .await
+            .map_err(std::io::Error::other)?;
+        println!("SQL Server connection validated");
+    }
     let server = TcpServer::bind(("127.0.0.1", config.login_port)).await?;
     println!(
         "ZeroPT Rust TCP server listening on {}",

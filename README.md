@@ -13,7 +13,7 @@ Esta pasta é a reimplementação incremental do servidor em Rust. O servidor C+
 
 ## Estado atual
 
-O workspace contém tipos de domínio de mapa/NPC, configuração INI e um servidor TCP assíncrono com handshake HMAC-SHA-256. O servidor devolve frames autenticados apenas para validar o transporte; isso não é ainda o protocolo legado nem o protocolo de produção. O encoder legado continua vazio de propósito e não deve ser preenchido com um layout presumido.
+O workspace contém tipos de domínio de mapa/NPC, configuração INI, conexão opcional com SQL Server e um servidor TCP assíncrono com handshake HMAC-SHA-256. O servidor devolve frames autenticados apenas para validar o transporte; isso não é ainda o protocolo legado nem o protocolo de produção. O encoder legado continua vazio de propósito e não deve ser preenchido com um layout presumido.
 
 Quando Rust estiver instalado, execute na raiz desta pasta:
 
@@ -39,3 +39,18 @@ bytes payload
 Esse formato é temporário e não deve ser confundido com um pacote do cliente legado.
 
 O handshake exige um frame `opcode=1` com nonce de 32 bytes, seguido de `opcode=2` com HMAC-SHA-256 do nonce. O servidor só aceita frames de aplicação depois de responder `opcode=3`. O cliente legado não fala esse protocolo.
+
+## SQL Server
+
+A conexão é opcional durante o scaffold e usa somente variáveis externas:
+
+```powershell
+$env:ZEROPT_SQL_HOST = '127.0.0.1'
+$env:ZEROPT_SQL_PORT = '1433'
+$env:ZEROPT_SQL_DATABASE = 'UserDB'
+$env:ZEROPT_SQL_USER = 'sa'
+$env:ZEROPT_SQL_PASSWORD = 'senha-fora-do-repositorio'
+$env:ZEROPT_SQL_TRUST_CERT = '1'
+```
+
+Quando `ZEROPT_SQL_HOST` estiver definido, o servidor valida a conexão com `SELECT 1` antes de abrir o listener. Ainda não existem repositórios de contas/personagens; essa conexão não altera dados.
