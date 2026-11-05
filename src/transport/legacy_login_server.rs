@@ -10,21 +10,25 @@ use tokio::{
 use super::legacy_login::{
     decode_login_packet, encode_fail_connect, encode_server_info, encode_user_info,
 };
+use crate::transport::ticket::TicketStore;
 use crate::{application::services::LoginService, infrastructure::repositories::SqlRepositories};
 
 pub struct LegacyLoginServer {
     listener: TcpListener,
     pool: Option<Pool>,
+    tickets: TicketStore,
 }
 
 impl LegacyLoginServer {
     pub async fn bind(
         address: impl tokio::net::ToSocketAddrs,
         pool: Option<Pool>,
+        tickets: TicketStore,
     ) -> io::Result<Self> {
         Ok(Self {
             listener: TcpListener::bind(address).await?,
             pool,
+            tickets,
         })
     }
 
@@ -32,8 +36,9 @@ impl LegacyLoginServer {
         loop {
             let (stream, _) = self.listener.accept().await?;
             let pool = self.pool.clone();
+            let tickets = self.tickets.clone();
             tokio::spawn(async move {
-                if let Err(error) = handle(stream, pool).await {
+                if let Err(error) = handle(stream, pool, tickets).await {
                     tracing::debug!(%error, "legacy login connection closed");
                 }
             });
@@ -41,7 +46,7 @@ impl LegacyLoginServer {
     }
 }
 
-async fn handle(mut stream: TcpStream, pool: Option<Pool>) -> io::Result<()> {
+async fn handle(mut stream: TcpStream, pool: Option<Pool>, tickets: TicketStore) -> io::Result<()> {
     stream.write_all(&command(13)).await?;
     let payload = read_legacy_frame(&mut stream).await?;
     let login = decode_login_packet(&payload)
@@ -65,8 +70,16 @@ async fn handle(mut stream: TcpStream, pool: Option<Pool>) -> io::Result<()> {
     stream
         .write_all(&encode_user_info(&login.account, &characters))
         .await?;
+    let address = stream.peer_addr()?.ip().to_string();
+    let ticket = tickets.issue(&login.account, &address);
     stream
-        .write_all(&encode_server_info("Beta", "Awell", "127.0.0.1", 5056))
+        .write_all(&encode_server_info(
+            "Beta",
+            "Awell",
+            "127.0.0.1",
+            5056,
+            ticket,
+        ))
         .await?;
     Ok(())
 }

@@ -40,11 +40,18 @@ pub fn encode_fail_connect(code: i32) -> Vec<u8> {
     bytes
 }
 
-pub fn encode_server_info(server_name: &str, name: &str, ip: &str, port: u32) -> Vec<u8> {
+pub fn encode_server_info(
+    server_name: &str,
+    name: &str,
+    ip: &str,
+    port: u32,
+    ticket: i32,
+) -> Vec<u8> {
     let mut bytes = vec![0; LEGACY_SERVER_LIST_SIZE];
     put_i32(&mut bytes, 0, LEGACY_SERVER_LIST_SIZE as i32);
     put_i32(&mut bytes, 4, OP_SERVER_INFO);
     put_fixed(&mut bytes[8..24], server_name);
+    put_i32(&mut bytes, 28, ticket);
     put_i32(&mut bytes, 40, 1);
     let server = 48;
     put_fixed(&mut bytes[server..server + 32], name);
@@ -161,7 +168,7 @@ mod tests {
         }];
         assert_eq!(encode_fail_connect(-2).len(), 24);
         assert_eq!(
-            encode_server_info("Beta", "Awell", "127.0.0.1", 5056).len(),
+            encode_server_info("Beta", "Awell", "127.0.0.1", 5056, 1).len(),
             LEGACY_SERVER_LIST_SIZE
         );
         assert_eq!(

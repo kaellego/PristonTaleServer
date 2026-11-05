@@ -7,7 +7,7 @@ mod transport;
 
 use config::ServerConfig;
 use infrastructure::sql::SqlServerConfig;
-use transport::{legacy_login_server::LegacyLoginServer, tcp::TcpServer};
+use transport::{legacy_login_server::LegacyLoginServer, tcp::TcpServer, ticket::TicketStore};
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
@@ -33,7 +33,9 @@ async fn main() -> std::io::Result<()> {
     } else {
         None
     };
-    let legacy = LegacyLoginServer::bind(("127.0.0.1", config.login_port), sql.clone()).await?;
+    let tickets = TicketStore::default();
+    let legacy =
+        LegacyLoginServer::bind(("127.0.0.1", config.login_port), sql.clone(), tickets).await?;
     let server = TcpServer::bind(("127.0.0.1", config.game_port), sql, config.max_users).await?;
     tracing::info!(
         login = config.login_port,
