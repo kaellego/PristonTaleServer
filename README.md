@@ -22,6 +22,13 @@ cargo test
 cargo run
 ```
 
+Ou use os scripts PowerShell:
+
+```powershell
+.\scripts\build-server.ps1
+.\scripts\start-server.ps1
+```
+
 Defina antes de iniciar:
 
 ```powershell
