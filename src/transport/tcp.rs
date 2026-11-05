@@ -18,6 +18,7 @@ const OPCODE_MAP_ENTER: u32 = 11;
 const OPCODE_LOGIN_OK: u32 = 12;
 const OPCODE_CHARACTER_LIST: u32 = 13;
 const OPCODE_NPC_INFO: u32 = 20;
+const OPCODE_SHOP_BUY: u32 = 30;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Frame {
@@ -148,6 +149,27 @@ async fn handle_connection(
             }))
             .await?;
         while let Some(frame) = read_frame(&mut stream).await? {
+            if frame.opcode == OPCODE_SHOP_BUY && frame.payload.len() == 12 {
+                let npc_id = i32::from_le_bytes(frame.payload[0..4].try_into().unwrap());
+                let item_code = i32::from_le_bytes(frame.payload[4..8].try_into().unwrap());
+                let quantity = i32::from_le_bytes(frame.payload[8..12].try_into().unwrap());
+                let result = repositories::buy_item(
+                    &mut client,
+                    account_name,
+                    crate::domain::NpcId(npc_id),
+                    item_code,
+                    quantity,
+                )
+                .await;
+                let status = if result.is_ok() { 1i32 } else { 0i32 };
+                stream
+                    .write_all(&encode_frame(&Frame {
+                        opcode: OPCODE_SHOP_BUY,
+                        payload: status.to_le_bytes().to_vec(),
+                    }))
+                    .await?;
+                continue;
+            }
             if frame.opcode == OPCODE_MAP_ENTER && frame.payload.len() == 4 {
                 let map = MapId(i32::from_le_bytes(frame.payload.try_into().unwrap()));
                 for npc in repositories::list_npcs_for_map(&mut client, map)
