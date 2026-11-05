@@ -7,7 +7,7 @@ mod transport;
 
 use config::ServerConfig;
 use infrastructure::sql::SqlServerConfig;
-use transport::tcp::TcpServer;
+use transport::{legacy_login_server::LegacyLoginServer, tcp::TcpServer};
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
@@ -33,9 +33,14 @@ async fn main() -> std::io::Result<()> {
     } else {
         None
     };
-    let server = TcpServer::bind(("127.0.0.1", config.login_port), sql, config.max_users).await?;
-    tracing::info!(address = %server.local_addr()?, "RustPT server listening");
-    server.run().await
+    let legacy = LegacyLoginServer::bind(("127.0.0.1", config.login_port), sql.clone()).await?;
+    let server = TcpServer::bind(("127.0.0.1", config.game_port), sql, config.max_users).await?;
+    tracing::info!(
+        login = config.login_port,
+        game = config.game_port,
+        "RustPT listeners ativos"
+    );
+    tokio::try_join!(legacy.run(), server.run()).map(|_| ())
 }
 
 #[cfg(test)]

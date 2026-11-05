@@ -9,6 +9,7 @@ pub struct AccountRecord {
     pub id: AccountId,
     pub name: String,
     pub banned: bool,
+    pub password: String,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -85,7 +86,7 @@ pub async fn find_account(
 ) -> Result<Option<AccountRecord>, tiberius::error::Error> {
     let rows = client
         .query(
-            "SELECT ID, AccountName, BanStatus FROM UserDB.dbo.UserInfo WHERE AccountName = @P1",
+            "SELECT ID, AccountName, BanStatus, Password FROM UserDB.dbo.UserInfo WHERE AccountName = @P1",
             &[&name],
         )
         .await?;
@@ -148,6 +149,7 @@ fn account_row(row: Row) -> AccountRecord {
         id: AccountId(row.get(0).unwrap_or_default()),
         name: row.get::<&str, _>(1).unwrap_or_default().to_owned(),
         banned: row.get::<i32, _>(2).unwrap_or_default() != 0,
+        password: row.get::<&str, _>(3).unwrap_or_default().to_owned(),
     }
 }
 
