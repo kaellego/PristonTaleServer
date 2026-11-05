@@ -52,7 +52,7 @@ pub async fn buy_item(
     }
     client.simple_query("BEGIN TRANSACTION").await?;
     let result: Result<(), Box<dyn std::error::Error + Send + Sync>> = async {
-        let mut price_rows = client.query("SELECT i.BuyPrice, i.MaxQuantity FROM GameDB.dbo.NpcShop s INNER JOIN GameDB.dbo.NpcShopItem i ON i.ShopId = s.ShopId WHERE s.NpcId = @P1 AND s.Enabled = 1 AND i.ItemCode = @P2 AND i.Enabled = 1 AND (i.Stock IS NULL OR i.Stock >= @P3)", &[&npc_id.0, &item_code, &quantity]).await.map_err(boxed)?;
+        let mut price_rows = client.query("SELECT i.BuyPrice, i.MaxQuantity FROM GameDB.dbo.NpcShop s INNER JOIN GameDB.dbo.NpcShopItem i WITH (UPDLOCK, HOLDLOCK) ON i.ShopId = s.ShopId WHERE s.NpcId = @P1 AND s.Enabled = 1 AND i.ItemCode = @P2 AND i.Enabled = 1 AND (i.Stock IS NULL OR i.Stock >= @P3)", &[&npc_id.0, &item_code, &quantity]).await.map_err(boxed)?;
         let row = price_rows.into_first_result().await.map_err(boxed)?.into_iter().next().ok_or_else(|| boxed(ShopError::NotForSale))?;
         let unit_price: i64 = row.get(0).ok_or_else(|| boxed(ShopError::NotForSale))?;
         let max_quantity: i32 = row.get(1).ok_or_else(|| boxed(ShopError::NotForSale))?;
