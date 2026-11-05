@@ -1,39 +1,75 @@
 use crate::{
     domain::{MapId, NpcId, NpcSnapshot},
-    infrastructure::{repositories, sql::SqlClient},
+    infrastructure::repositories::{
+        AccountRecord, AccountRepository, CharacterRecord, CharacterRepository, NpcRepository,
+        ShopRepository,
+    },
 };
 
-pub struct LoginService;
-pub struct MapService;
-pub struct ShopService;
+pub struct LoginService<R> {
+    repositories: R,
+}
+pub struct MapService<R> {
+    repositories: R,
+}
+pub struct ShopService<R> {
+    repositories: R,
+}
 
-impl LoginService {
+impl<R> LoginService<R> {
+    pub fn new(repositories: R) -> Self {
+        Self { repositories }
+    }
+}
+impl<R> MapService<R> {
+    pub fn new(repositories: R) -> Self {
+        Self { repositories }
+    }
+}
+impl<R> ShopService<R> {
+    pub fn new(repositories: R) -> Self {
+        Self { repositories }
+    }
+}
+
+impl<R: AccountRepository + CharacterRepository> LoginService<R> {
+    pub async fn account(
+        &self,
+        name: &str,
+    ) -> Result<Option<AccountRecord>, tiberius::error::Error> {
+        self.repositories.find_account(name).await
+    }
+    pub async fn characters(
+        &self,
+        account: &str,
+    ) -> Result<Vec<CharacterRecord>, tiberius::error::Error> {
+        self.repositories.list_characters(account).await
+    }
     pub async fn character_is_owned(
-        client: &mut SqlClient,
+        &self,
         account: &str,
         character: &str,
     ) -> Result<bool, tiberius::error::Error> {
-        repositories::character_belongs_to_account(client, account, character).await
+        self.repositories
+            .belongs_to_account(account, character)
+            .await
     }
 }
 
-impl MapService {
-    pub async fn npcs(
-        client: &mut SqlClient,
-        map: MapId,
-    ) -> Result<Vec<NpcSnapshot>, tiberius::error::Error> {
-        repositories::list_npcs_for_map(client, map).await
+impl<R: NpcRepository> MapService<R> {
+    pub async fn npcs(&self, map: MapId) -> Result<Vec<NpcSnapshot>, tiberius::error::Error> {
+        self.repositories.list_for_map(map).await
     }
 }
 
-impl ShopService {
+impl<R: ShopRepository> ShopService<R> {
     pub async fn buy(
-        client: &mut SqlClient,
+        &self,
         character: &str,
         npc: NpcId,
         item: i32,
         quantity: i32,
     ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-        repositories::buy_item(client, character, npc, item, quantity).await
+        self.repositories.buy(character, npc, item, quantity).await
     }
 }

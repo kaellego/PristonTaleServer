@@ -1,7 +1,7 @@
 use std::{io, net::SocketAddr};
 
 use crate::auth::{verify, NONCE_SIZE};
-use crate::infrastructure::repositories;
+use crate::infrastructure::repositories::SqlRepositories;
 use crate::transport::legacy::encode_npc_info;
 use crate::{
     application::services::{LoginService, MapService, ShopService},
@@ -133,8 +133,10 @@ async fn handle_connection(
         let character_name = std::str::from_utf8(character_bytes).map_err(|_| {
             io::Error::new(io::ErrorKind::InvalidData, "nome de personagem invalido")
         })?;
-        let mut client = pool.get().await.map_err(io::Error::other)?;
-        let account = repositories::find_account(&mut client, account_name)
+        let repo = SqlRepositories::new(pool.clone());
+        let login_service = LoginService::new(repo.clone());
+        let account = login_service
+            .account(account_name)
             .await
             .map_err(io::Error::other)?
             .ok_or_else(|| {
@@ -146,7 +148,8 @@ async fn handle_connection(
                 "conta bloqueada",
             ));
         }
-        if !LoginService::character_is_owned(&mut client, account_name, character_name)
+        if !login_service
+            .character_is_owned(account_name, character_name)
             .await
             .map_err(io::Error::other)?
         {
@@ -161,7 +164,8 @@ async fn handle_connection(
                 payload: account.id.0.to_le_bytes().to_vec(),
             }))
             .await?;
-        let characters = repositories::list_characters(&mut client, account_name)
+        let characters = login_service
+            .characters(account_name)
             .await
             .map_err(io::Error::other)?;
         let mut character_payload = Vec::new();
@@ -181,14 +185,14 @@ async fn handle_connection(
                 let npc_id = i32::from_le_bytes(frame.payload[0..4].try_into().unwrap());
                 let item_code = i32::from_le_bytes(frame.payload[4..8].try_into().unwrap());
                 let quantity = i32::from_le_bytes(frame.payload[8..12].try_into().unwrap());
-                let result = ShopService::buy(
-                    &mut client,
-                    character_name,
-                    crate::domain::NpcId(npc_id),
-                    item_code,
-                    quantity,
-                )
-                .await;
+                let result = ShopService::new(repo.clone())
+                    .buy(
+                        character_name,
+                        crate::domain::NpcId(npc_id),
+                        item_code,
+                        quantity,
+                    )
+                    .await;
                 let status = if result.is_ok() { 1i32 } else { 0i32 };
                 stream
                     .write_all(&encode_frame(&Frame {
@@ -200,7 +204,8 @@ async fn handle_connection(
             }
             if frame.opcode == OPCODE_MAP_ENTER && frame.payload.len() == 4 {
                 let map = MapId(i32::from_le_bytes(frame.payload.try_into().unwrap()));
-                for npc in MapService::npcs(&mut client, map)
+                for npc in MapService::new(repo.clone())
+                    .npcs(map)
                     .await
                     .map_err(io::Error::other)?
                 {

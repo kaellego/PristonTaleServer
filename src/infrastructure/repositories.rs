@@ -1,5 +1,7 @@
 use crate::domain::{AccountId, CharacterId, MapId, MapPosition, NpcId, NpcSnapshot};
+use async_trait::async_trait;
 use deadpool_tiberius::Client as SqlClient;
+use deadpool_tiberius::Pool;
 use tiberius::Row;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -52,7 +54,7 @@ pub async fn buy_item(
     }
     client.simple_query("BEGIN TRANSACTION").await?;
     let result: Result<(), Box<dyn std::error::Error + Send + Sync>> = async {
-        let mut price_rows = client.query("SELECT i.BuyPrice, i.MaxQuantity FROM GameDB.dbo.NpcShop s INNER JOIN GameDB.dbo.NpcShopItem i WITH (UPDLOCK, HOLDLOCK) ON i.ShopId = s.ShopId WHERE s.NpcId = @P1 AND s.Enabled = 1 AND i.ItemCode = @P2 AND i.Enabled = 1 AND (i.Stock IS NULL OR i.Stock >= @P3)", &[&npc_id.0, &item_code, &quantity]).await.map_err(boxed)?;
+        let price_rows = client.query("SELECT i.BuyPrice, i.MaxQuantity FROM GameDB.dbo.NpcShop s INNER JOIN GameDB.dbo.NpcShopItem i WITH (UPDLOCK, HOLDLOCK) ON i.ShopId = s.ShopId WHERE s.NpcId = @P1 AND s.Enabled = 1 AND i.ItemCode = @P2 AND i.Enabled = 1 AND (i.Stock IS NULL OR i.Stock >= @P3)", &[&npc_id.0, &item_code, &quantity]).await.map_err(boxed)?;
         let row = price_rows.into_first_result().await.map_err(boxed)?.into_iter().next().ok_or_else(|| boxed(ShopError::NotForSale))?;
         let unit_price: i64 = row.get(0).ok_or_else(|| boxed(ShopError::NotForSale))?;
         let max_quantity: i32 = row.get(1).ok_or_else(|| boxed(ShopError::NotForSale))?;
@@ -172,4 +174,121 @@ fn npc_row(row: Row) -> Option<NpcSnapshot> {
         model: row.get::<&str, _>(6)?.to_owned(),
         enabled: row.get::<bool, _>(7)?,
     })
+}
+
+#[async_trait]
+pub trait AccountRepository: Send + Sync {
+    async fn find_account(
+        &self,
+        name: &str,
+    ) -> Result<Option<AccountRecord>, tiberius::error::Error>;
+}
+
+#[async_trait]
+pub trait CharacterRepository: Send + Sync {
+    async fn list_characters(
+        &self,
+        account: &str,
+    ) -> Result<Vec<CharacterRecord>, tiberius::error::Error>;
+    async fn belongs_to_account(
+        &self,
+        account: &str,
+        character: &str,
+    ) -> Result<bool, tiberius::error::Error>;
+}
+
+#[async_trait]
+pub trait NpcRepository: Send + Sync {
+    async fn list_for_map(&self, map: MapId) -> Result<Vec<NpcSnapshot>, tiberius::error::Error>;
+}
+
+#[async_trait]
+pub trait ShopRepository: Send + Sync {
+    async fn buy(
+        &self,
+        character: &str,
+        npc: NpcId,
+        item: i32,
+        quantity: i32,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>>;
+}
+
+#[derive(Clone)]
+pub struct SqlRepositories {
+    pool: Pool,
+}
+
+impl SqlRepositories {
+    pub fn new(pool: Pool) -> Self {
+        Self { pool }
+    }
+}
+
+#[async_trait]
+impl AccountRepository for SqlRepositories {
+    async fn find_account(
+        &self,
+        name: &str,
+    ) -> Result<Option<AccountRecord>, tiberius::error::Error> {
+        let mut client = self
+            .pool
+            .get()
+            .await
+            .map_err(|error| tiberius::error::Error::from(std::io::Error::other(error)))?;
+        find_account(&mut client, name).await
+    }
+}
+
+#[async_trait]
+impl CharacterRepository for SqlRepositories {
+    async fn list_characters(
+        &self,
+        account: &str,
+    ) -> Result<Vec<CharacterRecord>, tiberius::error::Error> {
+        let mut client = self
+            .pool
+            .get()
+            .await
+            .map_err(|error| tiberius::error::Error::from(std::io::Error::other(error)))?;
+        list_characters(&mut client, account).await
+    }
+
+    async fn belongs_to_account(
+        &self,
+        account: &str,
+        character: &str,
+    ) -> Result<bool, tiberius::error::Error> {
+        let mut client = self
+            .pool
+            .get()
+            .await
+            .map_err(|error| tiberius::error::Error::from(std::io::Error::other(error)))?;
+        character_belongs_to_account(&mut client, account, character).await
+    }
+}
+
+#[async_trait]
+impl NpcRepository for SqlRepositories {
+    async fn list_for_map(&self, map: MapId) -> Result<Vec<NpcSnapshot>, tiberius::error::Error> {
+        let mut client = self
+            .pool
+            .get()
+            .await
+            .map_err(|error| tiberius::error::Error::from(std::io::Error::other(error)))?;
+        list_npcs_for_map(&mut client, map).await
+    }
+}
+
+#[async_trait]
+impl ShopRepository for SqlRepositories {
+    async fn buy(
+        &self,
+        character: &str,
+        npc: NpcId,
+        item: i32,
+        quantity: i32,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        let mut client = self.pool.get().await?;
+        buy_item(&mut client, character, npc, item, quantity).await
+    }
 }

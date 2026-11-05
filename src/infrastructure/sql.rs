@@ -3,8 +3,6 @@ use std::env;
 use deadpool_tiberius::{Manager, Pool};
 use tiberius::EncryptionLevel;
 
-pub type SqlClient = deadpool_tiberius::Client;
-
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SqlServerConfig {
     pub host: String,
