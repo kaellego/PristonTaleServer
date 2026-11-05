@@ -5,7 +5,7 @@ use crate::infrastructure::repositories::SqlRepositories;
 use crate::transport::legacy::encode_npc_info;
 use crate::{
     application::services::{LoginService, MapService, ShopService},
-    domain::MapId,
+    domain::{MapId, MapPosition},
 };
 use deadpool_tiberius::Pool;
 use tokio::{
@@ -24,6 +24,8 @@ const OPCODE_LOGIN_OK: u32 = 12;
 const OPCODE_CHARACTER_LIST: u32 = 13;
 const OPCODE_NPC_INFO: u32 = 20;
 const OPCODE_SHOP_BUY: u32 = 30;
+const OPCODE_HEARTBEAT: u32 = 40;
+const OPCODE_MOVE: u32 = 41;
 
 #[derive(Debug, PartialEq, Eq)]
 pub struct Frame {
@@ -190,6 +192,40 @@ async fn handle_connection(
             }))
             .await?;
         while let Some(frame) = read_frame(&mut stream).await? {
+            if frame.opcode == OPCODE_HEARTBEAT {
+                stream
+                    .write_all(&encode_frame(&Frame {
+                        opcode: OPCODE_HEARTBEAT,
+                        payload: frame.payload,
+                    }))
+                    .await?;
+                continue;
+            }
+            if frame.opcode == OPCODE_MOVE && frame.payload.len() == 16 {
+                let map = MapId(i32::from_le_bytes(frame.payload[0..4].try_into().unwrap()));
+                let position = MapPosition::new(
+                    i32::from_le_bytes(frame.payload[4..8].try_into().unwrap()) as f32,
+                    i32::from_le_bytes(frame.payload[8..12].try_into().unwrap()) as f32,
+                    i32::from_le_bytes(frame.payload[12..16].try_into().unwrap()) as f32,
+                );
+                if map.0 < 0 || !position.is_finite() {
+                    return Err(io::Error::new(
+                        io::ErrorKind::InvalidData,
+                        "movimento invalido",
+                    ));
+                }
+                MapService::new(repo.clone())
+                    .save_position(character_name, map, position)
+                    .await
+                    .map_err(io::Error::other)?;
+                stream
+                    .write_all(&encode_frame(&Frame {
+                        opcode: OPCODE_MOVE,
+                        payload: frame.payload,
+                    }))
+                    .await?;
+                continue;
+            }
             if frame.opcode == OPCODE_SHOP_BUY && frame.payload.len() == 12 {
                 let npc_id = i32::from_le_bytes(frame.payload[0..4].try_into().unwrap());
                 let item_code = i32::from_le_bytes(frame.payload[4..8].try_into().unwrap());

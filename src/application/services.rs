@@ -1,5 +1,5 @@
 use crate::{
-    domain::{MapId, NpcId, NpcSnapshot},
+    domain::{MapId, MapPosition, NpcId, NpcSnapshot},
     infrastructure::repositories::{
         AccountRecord, AccountRepository, CharacterRecord, CharacterRepository, NpcRepository,
         ShopRepository,
@@ -59,6 +59,20 @@ impl<R: AccountRepository + CharacterRepository> LoginService<R> {
 impl<R: NpcRepository> MapService<R> {
     pub async fn npcs(&self, map: MapId) -> Result<Vec<NpcSnapshot>, tiberius::error::Error> {
         self.repositories.list_for_map(map).await
+    }
+
+    pub async fn save_position(
+        &self,
+        character: &str,
+        map: MapId,
+        position: MapPosition,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>>
+    where
+        R: CharacterRepository,
+    {
+        self.repositories
+            .save_position(character, map, position)
+            .await
     }
 }
 

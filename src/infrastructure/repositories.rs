@@ -195,6 +195,12 @@ pub trait CharacterRepository: Send + Sync {
         account: &str,
         character: &str,
     ) -> Result<bool, tiberius::error::Error>;
+    async fn save_position(
+        &self,
+        character: &str,
+        map: MapId,
+        position: MapPosition,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>>;
 }
 
 #[async_trait]
@@ -264,6 +270,34 @@ impl CharacterRepository for SqlRepositories {
             .await
             .map_err(|error| tiberius::error::Error::from(std::io::Error::other(error)))?;
         character_belongs_to_account(&mut client, account, character).await
+    }
+
+    async fn save_position(
+        &self,
+        character: &str,
+        map: MapId,
+        position: MapPosition,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        let mut client = self.pool.get().await?;
+        client.simple_query("BEGIN TRANSACTION").await?;
+        let result = client.execute(
+            "UPDATE UserDB.dbo.CharacterInfo SET MapId = @P1, PosX = @P2, PosY = @P3, PosZ = @P4, StateVersion = StateVersion + 1, StateUpdatedAt = sysdatetime() WHERE Name = @P5",
+            &[&map.0, &(position.x as i32), &(position.y as i32), &(position.z as i32), &character],
+        ).await;
+        match result {
+            Ok(result) if result.rows_affected().iter().sum::<u64>() == 1 => {
+                client.simple_query("COMMIT TRANSACTION").await?;
+                Ok(())
+            }
+            Ok(_) => {
+                let _ = client.simple_query("ROLLBACK TRANSACTION").await;
+                Err("personagem nao encontrado".into())
+            }
+            Err(error) => {
+                let _ = client.simple_query("ROLLBACK TRANSACTION").await;
+                Err(error.into())
+            }
+        }
     }
 }
 
