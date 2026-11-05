@@ -1,0 +1,16 @@
+[package]
+name = "zeropt-server"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-only"
+description = "Rust reimplementation workspace for the Priston Tale server"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[dependencies]
+hmac = "0.12"
+sha2 = "0.10"
+tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "io-util"] }
+
+[dev-dependencies]
