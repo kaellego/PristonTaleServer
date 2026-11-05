@@ -17,9 +17,12 @@ async fn main() -> std::io::Result<()> {
     let config = ServerConfig::from_ini_file("../server.ini").unwrap_or_default();
     let sql = if std::env::var("ZEROPT_SQL_HOST").is_ok() {
         let sql = SqlServerConfig::from_env().map_err(std::io::Error::other)?;
-        let pool = sql
-            .pool(config.max_users.min(32) as usize)
-            .map_err(std::io::Error::other)?;
+        let pool_size = std::env::var("ZEROPT_SQL_POOL_SIZE")
+            .ok()
+            .and_then(|value| value.parse::<usize>().ok())
+            .filter(|size| (1..=256).contains(size))
+            .unwrap_or_else(|| config.max_users.min(32) as usize);
+        let pool = sql.pool(pool_size).map_err(std::io::Error::other)?;
         let mut client = pool.get().await.map_err(std::io::Error::other)?;
         client
             .simple_query("SELECT 1")
@@ -30,7 +33,7 @@ async fn main() -> std::io::Result<()> {
     } else {
         None
     };
-    let server = TcpServer::bind(("127.0.0.1", config.login_port), sql).await?;
+    let server = TcpServer::bind(("127.0.0.1", config.login_port), sql, config.max_users).await?;
     tracing::info!(address = %server.local_addr()?, "RustPT server listening");
     server.run().await
 }

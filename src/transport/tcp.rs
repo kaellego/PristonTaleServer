@@ -1,4 +1,4 @@
-use std::{io, net::SocketAddr};
+use std::{io, net::SocketAddr, sync::Arc};
 
 use crate::auth::{verify, NONCE_SIZE};
 use crate::infrastructure::repositories::SqlRepositories;
@@ -11,6 +11,7 @@ use deadpool_tiberius::Pool;
 use tokio::{
     io::{AsyncReadExt, AsyncWriteExt},
     net::{TcpListener, TcpStream},
+    sync::Semaphore,
 };
 
 const HEADER_SIZE: usize = 8;
@@ -33,16 +34,19 @@ pub struct Frame {
 pub struct TcpServer {
     listener: TcpListener,
     sql: Option<Pool>,
+    users: Arc<Semaphore>,
 }
 
 impl TcpServer {
     pub async fn bind(
         address: impl tokio::net::ToSocketAddrs,
         sql: Option<Pool>,
+        max_users: u32,
     ) -> io::Result<Self> {
         Ok(Self {
             listener: TcpListener::bind(address).await?,
             sql,
+            users: Arc::new(Semaphore::new(max_users as usize)),
         })
     }
 
@@ -64,7 +68,12 @@ impl TcpServer {
             let (stream, peer) = self.listener.accept().await?;
             let secret = secret.clone();
             let sql = self.sql.clone();
+            let users = Arc::clone(&self.users);
             tokio::spawn(async move {
+                let _permit = match users.acquire_owned().await {
+                    Ok(permit) => permit,
+                    Err(_) => return,
+                };
                 if let Err(error) = handle_connection(stream, secret.as_bytes(), sql).await {
                     eprintln!("TCP connection {peer} closed: {error}");
                 }

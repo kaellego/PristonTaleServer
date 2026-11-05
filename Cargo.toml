@@ -14,7 +14,7 @@ deadpool-tiberius = { version = "0.1.10", default-features = false, features = [
 hmac = "0.12"
 sha2 = "0.10"
 tiberius = { version = "0.12", default-features = false, features = ["tds73", "rustls", "sql-browser-tokio"] }
-tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "io-util"] }
+tokio = { version = "1", features = ["macros", "net", "rt-multi-thread", "io-util", "sync"] }
 tokio-util = { version = "0.7", features = ["compat"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }

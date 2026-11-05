@@ -64,6 +64,6 @@ Quando `ZEROPT_SQL_HOST` estiver definido, o servidor valida a conexão com `SEL
 
 ## Arquitetura atual
 
-O fluxo usa `LoginService`, `MapService` e `ShopService`, repositórios SQL e um pool SQL Server limitado a 32 conexões. O login exige conta e personagem pertencente à conta; a entrada no mapa carrega NPCs do banco e a compra usa transação SQL.
+O fluxo usa `LoginService`, `MapService` e `ShopService`, repositórios SQL e um pool SQL Server compartilhado. O Tokio usa o runtime multithread; cada cliente é atendido por uma task assíncrona e `MaxUsers` limita as sessões simultâneas. O pool usa até `min(MaxUsers, 32)` conexões por padrão e pode ser ajustado com `ZEROPT_SQL_POOL_SIZE` entre 1 e 256. O login exige conta e personagem pertencente à conta; a entrada no mapa carrega NPCs do banco e a compra usa transação SQL.
 
 SeaORM não foi adicionado. Tiberius permanece para manter controle sobre SQL Server, transações e layouts legados; ORM será reavaliado após testes reais de carga e integração.
