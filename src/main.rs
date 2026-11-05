@@ -15,9 +15,9 @@ async fn main() -> std::io::Result<()> {
         .with_env_filter("rustpt_server=info")
         .init();
     let config = ServerConfig::from_ini_file("../server.ini").unwrap_or_default();
-    let sql = if std::env::var("ZEROPT_SQL_HOST").is_ok() {
+    let sql = if std::env::var("RUSTPT_SQL_HOST").is_ok() {
         let sql = SqlServerConfig::from_env().map_err(std::io::Error::other)?;
-        let pool_size = std::env::var("ZEROPT_SQL_POOL_SIZE")
+        let pool_size = std::env::var("RUSTPT_SQL_POOL_SIZE")
             .ok()
             .and_then(|value| value.parse::<usize>().ok())
             .filter(|size| (1..=256).contains(size))

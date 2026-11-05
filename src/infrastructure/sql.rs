@@ -16,15 +16,15 @@ pub struct SqlServerConfig {
 impl SqlServerConfig {
     pub fn from_env() -> Result<Self, String> {
         Ok(Self {
-            host: required("ZEROPT_SQL_HOST")?,
-            port: env::var("ZEROPT_SQL_PORT")
+            host: required("RUSTPT_SQL_HOST")?,
+            port: env::var("RUSTPT_SQL_PORT")
                 .unwrap_or_else(|_| "1433".into())
                 .parse()
-                .map_err(|_| "ZEROPT_SQL_PORT inválida".to_string())?,
-            database: required("ZEROPT_SQL_DATABASE")?,
-            user: required("ZEROPT_SQL_USER")?,
-            password: required("ZEROPT_SQL_PASSWORD")?,
-            trust_server_certificate: env::var("ZEROPT_SQL_TRUST_CERT").as_deref() == Ok("1"),
+                .map_err(|_| "RUSTPT_SQL_PORT inválida".to_string())?,
+            database: required("RUSTPT_SQL_DATABASE")?,
+            user: required("RUSTPT_SQL_USER")?,
+            password: required("RUSTPT_SQL_PASSWORD")?,
+            trust_server_certificate: env::var("RUSTPT_SQL_TRUST_CERT").as_deref() == Ok("1"),
         })
     }
 
@@ -56,7 +56,7 @@ mod tests {
 
     #[test]
     fn config_requires_external_credentials() {
-        std::env::remove_var("ZEROPT_SQL_HOST");
+        std::env::remove_var("RUSTPT_SQL_HOST");
         assert!(SqlServerConfig::from_env().is_err());
     }
 }

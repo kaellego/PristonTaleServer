@@ -55,13 +55,13 @@ impl TcpServer {
     }
 
     pub async fn run(self) -> io::Result<()> {
-        let secret = std::env::var("ZEROPT_SESSION_SECRET").map_err(|_| {
-            io::Error::new(io::ErrorKind::InvalidInput, "ZEROPT_SESSION_SECRET ausente")
+        let secret = std::env::var("RUSTPT_SESSION_SECRET").map_err(|_| {
+            io::Error::new(io::ErrorKind::InvalidInput, "RUSTPT_SESSION_SECRET ausente")
         })?;
         if secret.len() < 32 {
             return Err(io::Error::new(
                 io::ErrorKind::InvalidInput,
-                "ZEROPT_SESSION_SECRET deve ter 32 caracteres",
+                "RUSTPT_SESSION_SECRET deve ter 32 caracteres",
             ));
         }
         loop {

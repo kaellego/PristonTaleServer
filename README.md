@@ -32,7 +32,7 @@ Ou use os scripts PowerShell:
 Defina antes de iniciar:
 
 ```powershell
-$env:ZEROPT_SESSION_SECRET = 'use-um-segredo-com-pelo-menos-32-caracteres'
+$env:RUSTPT_SESSION_SECRET = 'use-um-segredo-com-pelo-menos-32-caracteres'
 ```
 
 O executável lê `../server.ini` quando iniciado a partir de `rust-server`. Se o arquivo não for encontrado, usa a porta padrão `5055`. O frame interno experimental possui:
@@ -52,18 +52,18 @@ O handshake exige um frame `opcode=1` com nonce de 32 bytes, seguido de `opcode=
 A conexão é opcional durante o scaffold e usa somente variáveis externas:
 
 ```powershell
-$env:ZEROPT_SQL_HOST = '127.0.0.1'
-$env:ZEROPT_SQL_PORT = '1433'
-$env:ZEROPT_SQL_DATABASE = 'UserDB'
-$env:ZEROPT_SQL_USER = 'sa'
-$env:ZEROPT_SQL_PASSWORD = 'senha-fora-do-repositorio'
-$env:ZEROPT_SQL_TRUST_CERT = '1'
+$env:RUSTPT_SQL_HOST = 'localhost'
+$env:RUSTPT_SQL_PORT = '1433'
+$env:RUSTPT_SQL_DATABASE = 'UserDB'
+$env:RUSTPT_SQL_USER = 'sa'
+$env:RUSTPT_SQL_PASSWORD = 'senha-fora-do-repositorio'
+$env:RUSTPT_SQL_TRUST_CERT = '1'
 ```
 
-Quando `ZEROPT_SQL_HOST` estiver definido, o servidor valida a conexão com `SELECT 1` antes de abrir o listener. Ainda não existem repositórios de contas/personagens; essa conexão não altera dados.
+Quando `RUSTPT_SQL_HOST` estiver definido, o servidor valida a conexão com `SELECT 1` antes de abrir o listener. A configuração herdada do C++ usa `localhost`, `sa`, porta `1433` e os bancos `GameDB`, `LogDB` e `UserDB`; o Rust começa conectado ao `UserDB` e as consultas referenciam `GameDB` quando necessário. A senha deve permanecer fora do repositório.
 
 ## Arquitetura atual
 
-O fluxo usa `LoginService`, `MapService` e `ShopService`, repositórios SQL e um pool SQL Server compartilhado. O Tokio usa o runtime multithread; cada cliente é atendido por uma task assíncrona e `MaxUsers` limita as sessões simultâneas. O pool usa até `min(MaxUsers, 32)` conexões por padrão e pode ser ajustado com `ZEROPT_SQL_POOL_SIZE` entre 1 e 256. O login exige conta e personagem pertencente à conta; a entrada no mapa carrega NPCs do banco e a compra usa transação SQL.
+O fluxo usa `LoginService`, `MapService` e `ShopService`, repositórios SQL e um pool SQL Server compartilhado. O Tokio usa o runtime multithread; cada cliente é atendido por uma task assíncrona e `MaxUsers` limita as sessões simultâneas. O pool usa até `min(MaxUsers, 32)` conexões por padrão e pode ser ajustado com `RUSTPT_SQL_POOL_SIZE` entre 1 e 256. O login exige conta e personagem pertencente à conta; a entrada no mapa carrega NPCs do banco e a compra usa transação SQL.
 
 SeaORM não foi adicionado. Tiberius permanece para manter controle sobre SQL Server, transações e layouts legados; ORM será reavaliado após testes reais de carga e integração.
