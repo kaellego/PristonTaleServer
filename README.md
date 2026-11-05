@@ -54,3 +54,9 @@ $env:ZEROPT_SQL_TRUST_CERT = '1'
 ```
 
 Quando `ZEROPT_SQL_HOST` estiver definido, o servidor valida a conexão com `SELECT 1` antes de abrir o listener. Ainda não existem repositórios de contas/personagens; essa conexão não altera dados.
+
+## Arquitetura atual
+
+O fluxo usa `LoginService`, `MapService` e `ShopService`, repositórios SQL e um pool SQL Server limitado a 32 conexões. O login exige conta e personagem pertencente à conta; a entrada no mapa carrega NPCs do banco e a compra usa transação SQL.
+
+SeaORM não foi adicionado. Tiberius permanece para manter controle sobre SQL Server, transações e layouts legados; ORM será reavaliado após testes reais de carga e integração.
