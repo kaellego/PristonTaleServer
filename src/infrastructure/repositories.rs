@@ -233,6 +233,18 @@ pub trait ShopRepository: Send + Sync {
     ) -> Result<(), Box<dyn std::error::Error + Send + Sync>>;
 }
 
+#[async_trait]
+pub trait SecurityRepository: Send + Sync {
+    async fn record_login(
+        &self,
+        account: Option<&str>,
+        ip: &str,
+        device_hash: &str,
+        success: bool,
+        reason: &str,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>>;
+}
+
 #[derive(Clone)]
 pub struct SqlRepositories {
     pool: Pool,
@@ -338,5 +350,24 @@ impl ShopRepository for SqlRepositories {
     ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         let mut client = self.pool.get().await?;
         buy_item(&mut client, character, npc, item, quantity).await
+    }
+}
+
+#[async_trait]
+impl SecurityRepository for SqlRepositories {
+    async fn record_login(
+        &self,
+        account: Option<&str>,
+        ip: &str,
+        device_hash: &str,
+        success: bool,
+        reason: &str,
+    ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        let mut client = self.pool.get().await?;
+        client.execute(
+            "INSERT INTO UserDB.dbo.SecurityLoginAudit (AccountName, IpAddress, DeviceHash, Succeeded, FailureReason) VALUES (@P1, @P2, @P3, @P4, @P5)",
+            &[&account, &ip, &device_hash, &success, &reason],
+        ).await?;
+        Ok(())
     }
 }

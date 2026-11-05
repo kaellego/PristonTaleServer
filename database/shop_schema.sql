@@ -15,4 +15,17 @@ IF COL_LENGTH('dbo.CharacterInfo', 'ClassId') IS NULL
     ALTER TABLE dbo.CharacterInfo ADD ClassId int NOT NULL CONSTRAINT DF_CharacterInfo_ClassId DEFAULT 1;
 IF COL_LENGTH('dbo.CharacterInfo', 'Level') IS NULL
     ALTER TABLE dbo.CharacterInfo ADD Level int NOT NULL CONSTRAINT DF_CharacterInfo_Level DEFAULT 1;
+
+IF OBJECT_ID('dbo.SecurityLoginAudit', 'U') IS NULL
+CREATE TABLE dbo.SecurityLoginAudit (
+    AuditId bigint IDENTITY PRIMARY KEY,
+    AccountName varchar(32) NULL,
+    IpAddress varchar(45) NOT NULL,
+    DeviceHash char(64) NOT NULL,
+    Succeeded bit NOT NULL,
+    FailureReason varchar(64) NOT NULL,
+    CreatedAt datetime2 NOT NULL CONSTRAINT DF_SecurityLoginAudit_CreatedAt DEFAULT sysdatetime()
+);
+CREATE INDEX IX_SecurityLoginAudit_AccountCreated ON dbo.SecurityLoginAudit (AccountName, CreatedAt DESC);
+CREATE INDEX IX_SecurityLoginAudit_IpCreated ON dbo.SecurityLoginAudit (IpAddress, CreatedAt DESC);
 GO

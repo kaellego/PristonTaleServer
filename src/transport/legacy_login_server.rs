@@ -11,7 +11,10 @@ use super::legacy_login::{
     decode_login_packet, encode_fail_connect, encode_server_info, encode_user_info,
 };
 use crate::transport::ticket::TicketStore;
-use crate::{application::services::LoginService, infrastructure::repositories::SqlRepositories};
+use crate::{
+    application::services::LoginService,
+    infrastructure::repositories::{SecurityRepository, SqlRepositories},
+};
 
 pub struct LegacyLoginServer {
     listener: TcpListener,
@@ -51,6 +54,8 @@ async fn handle(mut stream: TcpStream, pool: Option<Pool>, tickets: TicketStore)
     let payload = read_legacy_frame(&mut stream).await?;
     let login = decode_login_packet(&payload)
         .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "login legado invalido"))?;
+    let address = stream.peer_addr()?.ip().to_string();
+    let device_hash = device_hash(&login.hash, &login.mac);
     let pool = pool.ok_or_else(|| io::Error::new(io::ErrorKind::NotConnected, "SQL ausente"))?;
     let repo = SqlRepositories::new(pool);
     let service = LoginService::new(repo.clone());
@@ -60,9 +65,27 @@ async fn handle(mut stream: TcpStream, pool: Option<Pool>, tickets: TicketStore)
         .map_err(io::Error::other)?
         .ok_or_else(|| io::Error::new(io::ErrorKind::PermissionDenied, "conta inexistente"))?;
     if account.banned || !password_matches(&login.password, &account.password) {
+        let _ = repo
+            .record_login(
+                Some(&login.account),
+                &address,
+                &device_hash,
+                false,
+                "invalid_credentials",
+            )
+            .await;
         stream.write_all(&encode_fail_connect(-2)).await?;
         return Ok(());
     }
+    let _ = repo
+        .record_login(
+            Some(&login.account),
+            &address,
+            &device_hash,
+            true,
+            "success",
+        )
+        .await;
     let characters = service
         .characters(&login.account)
         .await
@@ -106,6 +129,18 @@ fn command(code: i32) -> Vec<u8> {
     bytes[0..4].copy_from_slice(&24i32.to_le_bytes());
     bytes[4..8].copy_from_slice(&code.to_le_bytes());
     bytes
+}
+
+fn device_hash(hash: &str, mac: &str) -> String {
+    let mut digest = Sha256::new();
+    digest.update(hash.trim().to_ascii_lowercase().as_bytes());
+    digest.update(b"|");
+    digest.update(mac.trim().to_ascii_lowercase().as_bytes());
+    digest
+        .finalize()
+        .iter()
+        .map(|byte| format!("{byte:02x}"))
+        .collect()
 }
 
 fn password_matches(received: &str, stored: &str) -> bool {
