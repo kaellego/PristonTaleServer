@@ -1,10 +1,9 @@
 use std::env;
 
-use tiberius::{AuthMethod, Client, Config, EncryptionLevel};
-use tokio::net::TcpStream;
-use tokio_util::compat::{Compat, TokioAsyncWriteCompatExt};
+use deadpool_tiberius::{Manager, Pool};
+use tiberius::EncryptionLevel;
 
-pub type SqlClient = Client<Compat<TcpStream>>;
+pub type SqlClient = deadpool_tiberius::Client;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SqlServerConfig {
@@ -31,24 +30,21 @@ impl SqlServerConfig {
         })
     }
 
-    pub async fn connect(&self) -> Result<SqlClient, Box<dyn std::error::Error + Send + Sync>> {
-        let mut config = Config::new();
-        config.host(&self.host);
-        config.port(self.port);
-        config.database(&self.database);
-        config.authentication(AuthMethod::sql_server(&self.user, &self.password));
-        config.encryption(if self.trust_server_certificate {
-            EncryptionLevel::Required
-        } else {
-            EncryptionLevel::NotSupported
-        });
+    pub fn pool(&self, max_size: usize) -> Result<Pool, Box<dyn std::error::Error + Send + Sync>> {
+        let mut manager = Manager::new()
+            .host(&self.host)
+            .port(self.port)
+            .database(&self.database)
+            .basic_authentication(&self.user, &self.password)
+            .encryption(if self.trust_server_certificate {
+                EncryptionLevel::Required
+            } else {
+                EncryptionLevel::NotSupported
+            });
         if self.trust_server_certificate {
-            config.trust_cert();
+            manager = manager.trust_cert();
         }
-
-        let tcp = TcpStream::connect((self.host.as_str(), self.port)).await?;
-        tcp.set_nodelay(true)?;
-        Ok(Client::connect(config, tcp.compat_write()).await?)
+        Ok(manager.max_size(max_size).create_pool()?)
     }
 }
 

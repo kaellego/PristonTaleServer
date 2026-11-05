@@ -11,24 +11,27 @@ use transport::tcp::TcpServer;
 
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
+    tracing_subscriber::fmt()
+        .with_env_filter("rustpt_server=info")
+        .init();
     let config = ServerConfig::from_ini_file("../server.ini").unwrap_or_default();
     let sql = if std::env::var("ZEROPT_SQL_HOST").is_ok() {
         let sql = SqlServerConfig::from_env().map_err(std::io::Error::other)?;
-        let mut client = sql.connect().await.map_err(std::io::Error::other)?;
+        let pool = sql
+            .pool(config.max_users.min(32) as usize)
+            .map_err(std::io::Error::other)?;
+        let mut client = pool.get().await.map_err(std::io::Error::other)?;
         client
             .simple_query("SELECT 1")
             .await
             .map_err(std::io::Error::other)?;
-        println!("SQL Server connection validated");
-        Some(sql)
+        tracing::info!("SQL Server connection validated");
+        Some(pool)
     } else {
         None
     };
     let server = TcpServer::bind(("127.0.0.1", config.login_port), sql).await?;
-    println!(
-        "RustPT Rust TCP server listening on {}",
-        server.local_addr()?
-    );
+    tracing::info!(address = %server.local_addr()?, "RustPT server listening");
     server.run().await
 }
 

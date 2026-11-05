@@ -1,4 +1,5 @@
 use crate::domain::{MapId, NpcSnapshot};
+pub mod services;
 
 pub struct MapEntryService;
 

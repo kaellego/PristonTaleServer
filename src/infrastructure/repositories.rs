@@ -1,5 +1,5 @@
-use super::sql::SqlClient;
 use crate::domain::{AccountId, CharacterId, MapId, MapPosition, NpcId, NpcSnapshot};
+use deadpool_tiberius::Client as SqlClient;
 use tiberius::Row;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -109,6 +109,20 @@ pub async fn list_characters(
         .enumerate()
         .map(|(index, row)| character_row(index, row))
         .collect())
+}
+
+pub async fn character_belongs_to_account(
+    client: &mut SqlClient,
+    account_name: &str,
+    character_name: &str,
+) -> Result<bool, tiberius::error::Error> {
+    let rows = client
+        .query(
+            "SELECT 1 FROM UserDB.dbo.CharacterInfo WHERE AccountName = @P1 AND Name = @P2",
+            &[&account_name, &character_name],
+        )
+        .await?;
+    Ok(!rows.into_first_result().await?.is_empty())
 }
 
 pub async fn list_npcs_for_map(

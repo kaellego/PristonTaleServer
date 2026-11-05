@@ -1,9 +1,13 @@
 use std::{io, net::SocketAddr};
 
 use crate::auth::{verify, NONCE_SIZE};
-use crate::domain::MapId;
-use crate::infrastructure::{repositories, sql::SqlServerConfig};
+use crate::infrastructure::repositories;
 use crate::transport::legacy::encode_npc_info;
+use crate::{
+    application::services::{LoginService, MapService, ShopService},
+    domain::MapId,
+};
+use deadpool_tiberius::Pool;
 use tokio::{
     io::{AsyncReadExt, AsyncWriteExt},
     net::{TcpListener, TcpStream},
@@ -28,13 +32,13 @@ pub struct Frame {
 
 pub struct TcpServer {
     listener: TcpListener,
-    sql: Option<SqlServerConfig>,
+    sql: Option<Pool>,
 }
 
 impl TcpServer {
     pub async fn bind(
         address: impl tokio::net::ToSocketAddrs,
-        sql: Option<SqlServerConfig>,
+        sql: Option<Pool>,
     ) -> io::Result<Self> {
         Ok(Self {
             listener: TcpListener::bind(address).await?,
@@ -72,7 +76,7 @@ impl TcpServer {
 async fn handle_connection(
     mut stream: TcpStream,
     secret: &[u8],
-    sql: Option<SqlServerConfig>,
+    sql: Option<Pool>,
 ) -> io::Result<()> {
     let hello = read_frame(&mut stream)
         .await?
@@ -99,7 +103,7 @@ async fn handle_connection(
             payload: vec![],
         }))
         .await?;
-    if let Some(sql_config) = sql {
+    if let Some(pool) = sql {
         let login = read_frame(&mut stream)
             .await?
             .ok_or_else(|| io::Error::new(io::ErrorKind::UnexpectedEof, "conta ausente"))?;
@@ -112,9 +116,24 @@ async fn handle_connection(
                 "login RustPT invalido",
             ));
         }
-        let account_name = std::str::from_utf8(&login.payload)
+        let separator = login
+            .payload
+            .iter()
+            .position(|byte| *byte == 0)
+            .ok_or_else(|| {
+                io::Error::new(
+                    io::ErrorKind::InvalidData,
+                    "login deve conter conta e personagem",
+                )
+            })?;
+        let (account_bytes, character_bytes) =
+            (&login.payload[..separator], &login.payload[separator + 1..]);
+        let account_name = std::str::from_utf8(account_bytes)
             .map_err(|_| io::Error::new(io::ErrorKind::InvalidData, "nome de conta invalido"))?;
-        let mut client = sql_config.connect().await.map_err(io::Error::other)?;
+        let character_name = std::str::from_utf8(character_bytes).map_err(|_| {
+            io::Error::new(io::ErrorKind::InvalidData, "nome de personagem invalido")
+        })?;
+        let mut client = pool.get().await.map_err(io::Error::other)?;
         let account = repositories::find_account(&mut client, account_name)
             .await
             .map_err(io::Error::other)?
@@ -125,6 +144,15 @@ async fn handle_connection(
             return Err(io::Error::new(
                 io::ErrorKind::PermissionDenied,
                 "conta bloqueada",
+            ));
+        }
+        if !LoginService::character_is_owned(&mut client, account_name, character_name)
+            .await
+            .map_err(io::Error::other)?
+        {
+            return Err(io::Error::new(
+                io::ErrorKind::PermissionDenied,
+                "personagem nao pertence a conta",
             ));
         }
         stream
@@ -153,9 +181,9 @@ async fn handle_connection(
                 let npc_id = i32::from_le_bytes(frame.payload[0..4].try_into().unwrap());
                 let item_code = i32::from_le_bytes(frame.payload[4..8].try_into().unwrap());
                 let quantity = i32::from_le_bytes(frame.payload[8..12].try_into().unwrap());
-                let result = repositories::buy_item(
+                let result = ShopService::buy(
                     &mut client,
-                    account_name,
+                    character_name,
                     crate::domain::NpcId(npc_id),
                     item_code,
                     quantity,
@@ -172,7 +200,7 @@ async fn handle_connection(
             }
             if frame.opcode == OPCODE_MAP_ENTER && frame.payload.len() == 4 {
                 let map = MapId(i32::from_le_bytes(frame.payload.try_into().unwrap()));
-                for npc in repositories::list_npcs_for_map(&mut client, map)
+                for npc in MapService::npcs(&mut client, map)
                     .await
                     .map_err(io::Error::other)?
                 {
