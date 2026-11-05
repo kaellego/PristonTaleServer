@@ -11,4 +11,8 @@ IF COL_LENGTH('dbo.CharacterInfo', 'PosY') IS NULL
     ALTER TABLE dbo.CharacterInfo ADD PosY int NOT NULL CONSTRAINT DF_CharacterInfo_PosY DEFAULT 0;
 IF COL_LENGTH('dbo.CharacterInfo', 'PosZ') IS NULL
     ALTER TABLE dbo.CharacterInfo ADD PosZ int NOT NULL CONSTRAINT DF_CharacterInfo_PosZ DEFAULT 0;
+IF COL_LENGTH('dbo.CharacterInfo', 'ClassId') IS NULL
+    ALTER TABLE dbo.CharacterInfo ADD ClassId int NOT NULL CONSTRAINT DF_CharacterInfo_ClassId DEFAULT 1;
+IF COL_LENGTH('dbo.CharacterInfo', 'Level') IS NULL
+    ALTER TABLE dbo.CharacterInfo ADD Level int NOT NULL CONSTRAINT DF_CharacterInfo_Level DEFAULT 1;
 GO

@@ -68,11 +68,40 @@ pub fn encode_user_info(account: &str, characters: &[CharacterRecord]) -> Vec<u8
     for (index, character) in characters.iter().take(count).enumerate() {
         let offset = 33 + index * CHARACTER_SIZE;
         put_fixed(&mut bytes[offset..offset + 32], &character.name);
-        put_i32(&mut bytes, offset + 32 + 64 + 64, 1);
-        put_i32(&mut bytes, offset + 32 + 64 + 64 + 4, 1);
-        put_i32(&mut bytes, offset + 32 + 64 + 64 + 8, 0);
+        put_fixed(
+            &mut bytes[offset + 32..offset + 96],
+            model_for_class(character.class_id),
+        );
+        put_fixed(
+            &mut bytes[offset + 96..offset + 160],
+            "char\\tmABCD\\tmh-b01.inf",
+        );
+        put_i32(&mut bytes, offset + 160, character.class_id);
+        put_i32(&mut bytes, offset + 164, character.level);
+        put_i32(&mut bytes, offset + 168, 0);
+        put_i32(&mut bytes, offset + 172, 0);
+        put_i32(&mut bytes, offset + 176, character.map.0);
+        put_i32(&mut bytes, offset + 180, character.position.x as i32);
+        put_i32(&mut bytes, offset + 184, character.position.z as i32);
     }
     bytes
+}
+
+fn model_for_class(class_id: i32) -> &'static str {
+    match class_id {
+        1 => "char\\tmABCD\\b001.ini",
+        2 => "char\\tmABCD\\a001.ini",
+        3 => "char\\tmABCD\\d001.ini",
+        4 => "char\\tmABCD\\c001.ini",
+        5 => "char\\tmABCD\\ma001.ini",
+        6 => "char\\tmABCD\\mb001.ini",
+        7 => "char\\tmABCD\\mc001.ini",
+        8 => "char\\tmABCD\\md001.ini",
+        9 => "char\\tmABCD\\e001.ini",
+        10 => "char\\tmABCD\\me001.ini",
+        11 => "char\\tmABCD\\f001.ini",
+        _ => "char\\tmABCD\\b001.ini",
+    }
 }
 
 fn fixed_string(bytes: &[u8]) -> Option<String> {
@@ -125,6 +154,10 @@ mod tests {
             account_name: "test".into(),
             experience: 0,
             state_version: 1,
+            class_id: 1,
+            level: 1,
+            map: crate::domain::MapId(0),
+            position: crate::domain::MapPosition::new(0.0, 0.0, 0.0),
         }];
         assert_eq!(encode_fail_connect(-2).len(), 24);
         assert_eq!(

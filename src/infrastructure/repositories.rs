@@ -12,13 +12,17 @@ pub struct AccountRecord {
     pub password: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct CharacterRecord {
     pub id: CharacterId,
     pub name: String,
     pub account_name: String,
     pub experience: i64,
     pub state_version: i32,
+    pub class_id: i32,
+    pub level: i32,
+    pub map: MapId,
+    pub position: MapPosition,
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -103,7 +107,7 @@ pub async fn list_characters(
     account_name: &str,
 ) -> Result<Vec<CharacterRecord>, tiberius::error::Error> {
     let rows = client
-        .query("SELECT Name, AccountName, Experience, StateVersion FROM UserDB.dbo.CharacterInfo WHERE AccountName = @P1 ORDER BY Experience DESC, Name", &[&account_name])
+        .query("SELECT Name, AccountName, Experience, StateVersion, ClassId, Level, MapId, PosX, PosY, PosZ FROM UserDB.dbo.CharacterInfo WHERE AccountName = @P1 ORDER BY Experience DESC, Name", &[&account_name])
         .await?;
     Ok(rows
         .into_first_result()
@@ -160,6 +164,14 @@ fn character_row(index: usize, row: Row) -> CharacterRecord {
         account_name: row.get::<&str, _>(1).unwrap_or_default().to_owned(),
         experience: row.get(2).unwrap_or_default(),
         state_version: row.get(3).unwrap_or_default(),
+        class_id: row.get(4).unwrap_or(1),
+        level: row.get(5).unwrap_or(1),
+        map: MapId(row.get(6).unwrap_or(0)),
+        position: MapPosition::new(
+            row.get::<i32, _>(7).unwrap_or_default() as f32,
+            row.get::<i32, _>(8).unwrap_or_default() as f32,
+            row.get::<i32, _>(9).unwrap_or_default() as f32,
+        ),
     }
 }
 
