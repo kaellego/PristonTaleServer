@@ -23,7 +23,7 @@ async fn main() -> std::io::Result<()> {
     }
     let server = TcpServer::bind(("127.0.0.1", config.login_port)).await?;
     println!(
-        "ZeroPT Rust TCP server listening on {}",
+        "RustPT Rust TCP server listening on {}",
         server.local_addr()?
     );
     server.run().await
