@@ -26,6 +26,8 @@ CREATE TABLE dbo.SecurityLoginAudit (
     FailureReason varchar(64) NOT NULL,
     CreatedAt datetime2 NOT NULL CONSTRAINT DF_SecurityLoginAudit_CreatedAt DEFAULT sysdatetime()
 );
-CREATE INDEX IX_SecurityLoginAudit_AccountCreated ON dbo.SecurityLoginAudit (AccountName, CreatedAt DESC);
-CREATE INDEX IX_SecurityLoginAudit_IpCreated ON dbo.SecurityLoginAudit (IpAddress, CreatedAt DESC);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_SecurityLoginAudit_AccountCreated' AND object_id = OBJECT_ID('dbo.SecurityLoginAudit'))
+    CREATE INDEX IX_SecurityLoginAudit_AccountCreated ON dbo.SecurityLoginAudit (AccountName, CreatedAt DESC);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_SecurityLoginAudit_IpCreated' AND object_id = OBJECT_ID('dbo.SecurityLoginAudit'))
+    CREATE INDEX IX_SecurityLoginAudit_IpCreated ON dbo.SecurityLoginAudit (IpAddress, CreatedAt DESC);
 GO

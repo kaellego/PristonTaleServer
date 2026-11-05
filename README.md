@@ -13,7 +13,7 @@ Esta pasta é a reimplementação incremental do servidor em Rust. O servidor C+
 
 ## Estado atual
 
-O workspace contém tipos de domínio de mapa/NPC, configuração INI, conexão opcional com SQL Server e um servidor TCP assíncrono com handshake HMAC-SHA-256. O servidor devolve frames autenticados apenas para validar o transporte; isso não é ainda o protocolo legado nem o protocolo de produção. O encoder legado continua vazio de propósito e não deve ser preenchido com um layout presumido.
+O workspace contém tipos de domínio de mapa/NPC, configuração INI, conexão opcional com SQL Server e listeners TCP assíncronos. O protocolo legado já cobre login, ticket entre sockets, seleção de personagem, entrada no mapa, NPCs, consulta de informações, movimento e persistência de posição. O protocolo Rust autenticado continua experimental e separado do cliente original.
 
 Quando Rust estiver instalado, execute na raiz desta pasta:
 
@@ -46,6 +46,12 @@ bytes payload
 Esse formato é temporário e não deve ser confundido com um pacote do cliente legado.
 
 O handshake exige um frame `opcode=1` com nonce de 32 bytes, seguido de `opcode=2` com HMAC-SHA-256 do nonce. O servidor só aceita frames de aplicação depois de responder `opcode=3`. O cliente legado não fala esse protocolo.
+
+## Proteção de login
+
+O login legado registra IP, hash do dispositivo, sucesso ou falha e motivo em `SecurityLoginAudit`. O servidor aplica bloqueio progressivo por conta, IP ou dispositivo: 5 falhas em 5 minutos, 10 em 15 minutos ou 20 em 1 hora. Dispositivos com login válido nos últimos 30 dias são identificados como confiáveis; um dispositivo novo é auditado como `success_new_device`.
+
+MFA interativo não foi ativado no cliente legado porque o layout original não possui um campo confirmado para desafio ou código. Adicionar um desafio sem alterar o protocolo poderia desconectar o cliente ou aceitar uma resposta incompatível. O ponto seguro para MFA é o protocolo Rust experimental ou um pacote legado confirmado.
 
 ## SQL Server
 

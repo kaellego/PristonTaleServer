@@ -235,6 +235,17 @@ pub trait ShopRepository: Send + Sync {
 
 #[async_trait]
 pub trait SecurityRepository: Send + Sync {
+    async fn login_blocked(
+        &self,
+        account: &str,
+        ip: &str,
+        device_hash: &str,
+    ) -> Result<bool, Box<dyn std::error::Error + Send + Sync>>;
+    async fn trusted_device(
+        &self,
+        account: &str,
+        device_hash: &str,
+    ) -> Result<bool, Box<dyn std::error::Error + Send + Sync>>;
     async fn record_login(
         &self,
         account: Option<&str>,
@@ -355,6 +366,37 @@ impl ShopRepository for SqlRepositories {
 
 #[async_trait]
 impl SecurityRepository for SqlRepositories {
+    async fn login_blocked(
+        &self,
+        account: &str,
+        ip: &str,
+        device_hash: &str,
+    ) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
+        let mut client = self.pool.get().await?;
+        let rows = client.query(
+            "SELECT CASE WHEN SUM(CASE WHEN Succeeded = 0 AND CreatedAt >= DATEADD(MINUTE, -5, sysdatetime()) THEN 1 ELSE 0 END) >= 5 OR SUM(CASE WHEN Succeeded = 0 AND CreatedAt >= DATEADD(MINUTE, -15, sysdatetime()) THEN 1 ELSE 0 END) >= 10 OR SUM(CASE WHEN Succeeded = 0 AND CreatedAt >= DATEADD(HOUR, -1, sysdatetime()) THEN 1 ELSE 0 END) >= 20 THEN 1 ELSE 0 END FROM UserDB.dbo.SecurityLoginAudit WHERE (IpAddress = @P1 OR AccountName = @P2 OR DeviceHash = @P3) AND CreatedAt >= DATEADD(HOUR, -1, sysdatetime())",
+            &[&ip, &account, &device_hash],
+        ).await?.into_first_result().await?;
+        Ok(rows
+            .first()
+            .and_then(|row| row.get::<i32, _>(0))
+            .unwrap_or_default()
+            != 0)
+    }
+
+    async fn trusted_device(
+        &self,
+        account: &str,
+        device_hash: &str,
+    ) -> Result<bool, Box<dyn std::error::Error + Send + Sync>> {
+        let mut client = self.pool.get().await?;
+        let rows = client.query(
+            "SELECT TOP (1) 1 FROM UserDB.dbo.SecurityLoginAudit WHERE AccountName = @P1 AND DeviceHash = @P2 AND Succeeded = 1 AND CreatedAt >= DATEADD(DAY, -30, sysdatetime())",
+            &[&account, &device_hash],
+        ).await?.into_first_result().await?;
+        Ok(!rows.is_empty())
+    }
+
     async fn record_login(
         &self,
         account: Option<&str>,

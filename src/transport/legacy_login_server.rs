@@ -59,6 +59,27 @@ async fn handle(mut stream: TcpStream, pool: Option<Pool>, tickets: TicketStore)
     let pool = pool.ok_or_else(|| io::Error::new(io::ErrorKind::NotConnected, "SQL ausente"))?;
     let repo = SqlRepositories::new(pool);
     let service = LoginService::new(repo.clone());
+    if repo
+        .login_blocked(&login.account, &address, &device_hash)
+        .await
+        .map_err(io::Error::other)?
+    {
+        let _ = repo
+            .record_login(
+                Some(&login.account),
+                &address,
+                &device_hash,
+                false,
+                "risk_lockout",
+            )
+            .await;
+        stream.write_all(&encode_fail_connect(-3)).await?;
+        return Ok(());
+    }
+    let trusted = repo
+        .trusted_device(&login.account, &device_hash)
+        .await
+        .map_err(io::Error::other)?;
     let account = service
         .account(&login.account)
         .await
@@ -83,7 +104,11 @@ async fn handle(mut stream: TcpStream, pool: Option<Pool>, tickets: TicketStore)
             &address,
             &device_hash,
             true,
-            "success",
+            if trusted {
+                "success_trusted_device"
+            } else {
+                "success_new_device"
+            },
         )
         .await;
     let characters = service

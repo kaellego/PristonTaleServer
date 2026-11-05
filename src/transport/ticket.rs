@@ -10,6 +10,8 @@ pub struct TicketStore(Arc<Mutex<HashMap<i32, (String, String, Instant)>>>);
 impl TicketStore {
     pub fn issue(&self, account: &str, address: &str) -> i32 {
         let mut state = self.0.lock().expect("ticket store poisoned");
+        let now = Instant::now();
+        state.retain(|_, (_, _, expires)| *expires > now);
         let mut ticket = 1;
         while state.contains_key(&ticket) {
             ticket = ticket.wrapping_add(1).max(1);
@@ -30,6 +32,9 @@ impl TicketStore {
             return false;
         };
         if *expires <= Instant::now() || stored_account != account || stored_address != address {
+            if *expires <= Instant::now() {
+                state.remove(&ticket);
+            }
             return false;
         }
         state.remove(&ticket);
@@ -38,9 +43,11 @@ impl TicketStore {
 
     pub fn validate_account(&self, account: &str, address: &str) -> bool {
         let ticket = {
-            let state = self.0.lock().expect("ticket store poisoned");
-            state.iter().find_map(|(ticket, (stored, ip, expires))| {
-                (*expires > Instant::now() && stored == account && ip == address).then_some(*ticket)
+            let mut state = self.0.lock().expect("ticket store poisoned");
+            let now = Instant::now();
+            state.retain(|_, (_, _, expires)| *expires > now);
+            state.iter().find_map(|(ticket, (stored, ip, _expires))| {
+                (stored == account && ip == address).then_some(*ticket)
             })
         };
         ticket.is_some_and(|ticket| self.validate(ticket, account, address))
