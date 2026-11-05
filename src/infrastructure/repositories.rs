@@ -22,7 +22,7 @@ pub async fn find_account(
     client: &mut SqlClient,
     name: &str,
 ) -> Result<Option<AccountRecord>, tiberius::error::Error> {
-    let mut rows = client
+    let rows = client
         .query(
             "SELECT ID, AccountName, BanStatus FROM UserDB.dbo.UserInfo WHERE AccountName = @P1",
             &[&name],
@@ -40,7 +40,7 @@ pub async fn list_characters(
     client: &mut SqlClient,
     account_name: &str,
 ) -> Result<Vec<CharacterRecord>, tiberius::error::Error> {
-    let mut rows = client
+    let rows = client
         .query("SELECT Name, AccountName, Experience, StateVersion FROM UserDB.dbo.CharacterInfo WHERE AccountName = @P1 ORDER BY Experience DESC, Name", &[&account_name])
         .await?;
     Ok(rows
@@ -56,7 +56,7 @@ pub async fn list_npcs_for_map(
     client: &mut SqlClient,
     map: MapId,
 ) -> Result<Vec<NpcSnapshot>, tiberius::error::Error> {
-    let mut rows = client
+    let rows = client
         .query("SELECT n.NpcId, s.MapId, s.X, s.Y, s.Z, n.DisplayName, n.ModelName, n.Enabled & s.Enabled AS Enabled FROM GameDB.dbo.NpcList n INNER JOIN GameDB.dbo.NpcSpawn s ON s.NpcId = n.NpcId WHERE s.MapId = @P1 AND n.Enabled = 1 AND s.Enabled = 1 AND s.X IS NOT NULL AND s.Y IS NOT NULL AND s.Z IS NOT NULL ORDER BY s.SpawnId", &[&map.0])
         .await?;
     Ok(rows
